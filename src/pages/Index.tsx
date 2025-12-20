@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { FilterSidebar } from '@/components/FilterSidebar';
@@ -6,13 +6,18 @@ import { CreditCardItem } from '@/components/CreditCardItem';
 import { SortSelect } from '@/components/SortSelect';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
-import { creditCards } from '@/data/creditCards';
-import { FilterState } from '@/types/creditCard';
+import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Filter } from 'lucide-react';
+import { Filter, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const [creditCards, setCreditCards] = useState<CreditCard[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
+  
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     maxAnnualFee: null,
@@ -21,6 +26,134 @@ const Index = () => {
     hasWelcomeBonus: false,
     sortBy: 'rating'
   });
+
+  // Fetch credit cards from database
+  useEffect(() => {
+    const fetchCreditCards = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('credit_cards')
+          .select('*')
+          .eq('is_active', true);
+
+        if (error) throw error;
+
+        const mappedCards: CreditCard[] = (data || []).map((card) => ({
+          id: card.id,
+          name: card.name,
+          issuer: card.issuer,
+          image: card.image_url || '',
+          annualFee: Number(card.annual_fee),
+          firstYearFreeAnnualFee: card.first_year_free || false,
+          interestRate: Number(card.interest_rate),
+          cashAdvanceRate: Number(card.cash_advance_rate),
+          rewardsRate: Number(card.rewards_rate),
+          rewardsType: card.rewards_type as 'cashback' | 'points' | 'miles',
+          welcomeBonus: card.welcome_bonus || undefined,
+          welcomeBonusValue: card.welcome_bonus_value ? Number(card.welcome_bonus_value) : undefined,
+          minIncome: card.min_income ? Number(card.min_income) : undefined,
+          features: card.features || [],
+          categories: (card.categories || []) as CardCategory[],
+          affiliateLink: card.affiliate_link,
+          rating: Number(card.rating),
+          lastUpdated: card.updated_at
+        }));
+
+        setCreditCards(mappedCards);
+      } catch (error) {
+        console.error('Error fetching credit cards:', error);
+        toast({
+          title: "Erreur",
+          description: "Impossible de charger les cartes de crédit",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCreditCards();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('credit-cards-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'credit_cards'
+        },
+        (payload) => {
+          console.log('Credit card update received:', payload);
+          
+          if (payload.eventType === 'INSERT' && payload.new.is_active) {
+            const newCard = payload.new;
+            setCreditCards(prev => [...prev, {
+              id: newCard.id,
+              name: newCard.name,
+              issuer: newCard.issuer,
+              image: newCard.image_url || '',
+              annualFee: Number(newCard.annual_fee),
+              firstYearFreeAnnualFee: newCard.first_year_free || false,
+              interestRate: Number(newCard.interest_rate),
+              cashAdvanceRate: Number(newCard.cash_advance_rate),
+              rewardsRate: Number(newCard.rewards_rate),
+              rewardsType: newCard.rewards_type as 'cashback' | 'points' | 'miles',
+              welcomeBonus: newCard.welcome_bonus || undefined,
+              welcomeBonusValue: newCard.welcome_bonus_value ? Number(newCard.welcome_bonus_value) : undefined,
+              minIncome: newCard.min_income ? Number(newCard.min_income) : undefined,
+              features: newCard.features || [],
+              categories: (newCard.categories || []) as CardCategory[],
+              affiliateLink: newCard.affiliate_link,
+              rating: Number(newCard.rating),
+              lastUpdated: newCard.updated_at
+            }]);
+            toast({
+              title: "Nouvelle carte ajoutée",
+              description: `${newCard.name} a été ajoutée`
+            });
+          } else if (payload.eventType === 'UPDATE') {
+            const updatedCard = payload.new;
+            setCreditCards(prev => prev.map(card => 
+              card.id === updatedCard.id 
+                ? {
+                    id: updatedCard.id,
+                    name: updatedCard.name,
+                    issuer: updatedCard.issuer,
+                    image: updatedCard.image_url || '',
+                    annualFee: Number(updatedCard.annual_fee),
+                    firstYearFreeAnnualFee: updatedCard.first_year_free || false,
+                    interestRate: Number(updatedCard.interest_rate),
+                    cashAdvanceRate: Number(updatedCard.cash_advance_rate),
+                    rewardsRate: Number(updatedCard.rewards_rate),
+                    rewardsType: updatedCard.rewards_type as 'cashback' | 'points' | 'miles',
+                    welcomeBonus: updatedCard.welcome_bonus || undefined,
+                    welcomeBonusValue: updatedCard.welcome_bonus_value ? Number(updatedCard.welcome_bonus_value) : undefined,
+                    minIncome: updatedCard.min_income ? Number(updatedCard.min_income) : undefined,
+                    features: updatedCard.features || [],
+                    categories: (updatedCard.categories || []) as CardCategory[],
+                    affiliateLink: updatedCard.affiliate_link,
+                    rating: Number(updatedCard.rating),
+                    lastUpdated: updatedCard.updated_at
+                  }
+                : card
+            ).filter(card => card.id !== updatedCard.id || updatedCard.is_active));
+            toast({
+              title: "Carte mise à jour",
+              description: `${updatedCard.name} a été mise à jour`
+            });
+          } else if (payload.eventType === 'DELETE') {
+            setCreditCards(prev => prev.filter(card => card.id !== payload.old.id));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [toast]);
 
   const filteredCards = useMemo(() => {
     let result = [...creditCards];
@@ -69,7 +202,7 @@ const Index = () => {
     }
 
     return result;
-  }, [filters]);
+  }, [filters, creditCards]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -85,7 +218,7 @@ const Index = () => {
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Utilisez les filtres pour trouver la carte parfaite selon vos besoins. 
-              Tous les taux sont mis à jour régulièrement.
+              Tous les taux sont mis à jour en temps réel.
             </p>
           </div>
 
@@ -120,19 +253,26 @@ const Index = () => {
                 totalCards={filteredCards.length}
               />
 
-              <div className="space-y-4">
-                {filteredCards.map((card) => (
-                  <CreditCardItem key={card.id} card={card} />
-                ))}
+              {isLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                  <span className="ml-2 text-muted-foreground">Chargement des cartes...</span>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {filteredCards.map((card) => (
+                    <CreditCardItem key={card.id} card={card} />
+                  ))}
 
-                {filteredCards.length === 0 && (
-                  <div className="text-center py-12">
-                    <p className="text-muted-foreground">
-                      Aucune carte ne correspond à vos critères. Essayez d'ajuster les filtres.
-                    </p>
-                  </div>
-                )}
-              </div>
+                  {filteredCards.length === 0 && (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground">
+                        Aucune carte ne correspond à vos critères. Essayez d'ajuster les filtres.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

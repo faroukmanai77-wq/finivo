@@ -2,14 +2,15 @@ import { CreditCard } from '@/types/creditCard';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, ExternalLink, Gift, Percent, CreditCard as CreditCardIcon, TrendingUp } from 'lucide-react';
+import { Star, ExternalLink, Gift, CreditCard as CreditCardIcon, Check, TrendingUp } from 'lucide-react';
 import { categoryLabels } from '@/data/creditCards';
 
 interface CreditCardItemProps {
   card: CreditCard;
+  index?: number;
 }
 
-export const CreditCardItem = ({ card }: CreditCardItemProps) => {
+export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('fr-CA', {
       style: 'currency',
@@ -25,22 +26,64 @@ export const CreditCardItem = ({ card }: CreditCardItemProps) => {
     miles: 'Milles'
   };
 
+  const getIssuerGradient = (issuer: string) => {
+    const gradients: Record<string, string> = {
+      'TD': 'from-emerald-600 to-emerald-800',
+      'BMO': 'from-blue-600 to-blue-900',
+      'Desjardins': 'from-green-600 to-green-800',
+      'CIBC': 'from-red-600 to-red-800',
+      'RBC': 'from-blue-700 to-indigo-900',
+      'Tangerine': 'from-orange-500 to-orange-700',
+      'Scotiabank': 'from-red-700 to-red-900',
+    };
+    return gradients[issuer] || 'from-secondary to-secondary/80';
+  };
+
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden">
+    <Card 
+      className="group card-elevated overflow-hidden opacity-0 animate-slide-up"
+      style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
+    >
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row">
           {/* Card Image Section */}
-          <div className="lg:w-64 p-6 bg-gradient-to-br from-secondary/5 to-primary/5 flex items-center justify-center">
-            <div className="relative">
-              <div className="w-48 h-32 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center shadow-xl transform group-hover:scale-105 transition-transform duration-300">
-                <div className="text-center text-secondary-foreground">
-                  <CreditCardIcon className="w-10 h-10 mx-auto mb-2 opacity-80" />
-                  <p className="text-xs font-medium opacity-80">{card.issuer}</p>
+          <div className="lg:w-72 p-6 lg:p-8 bg-gradient-to-br from-muted/30 to-muted/10 flex items-center justify-center relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
+              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
+            </div>
+            
+            <div className="relative z-10">
+              <div className={`w-56 h-36 rounded-2xl bg-gradient-to-br ${getIssuerGradient(card.issuer)} flex flex-col justify-between p-5 shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500`}>
+                {/* Card chip and logo */}
+                <div className="flex justify-between items-start">
+                  <div className="w-10 h-8 bg-gradient-to-br from-amber-300 to-amber-500 rounded-md opacity-90" />
+                  <div className="text-primary-foreground/90 font-bold text-sm tracking-wide">
+                    {card.issuer}
+                  </div>
+                </div>
+                
+                {/* Card number placeholder */}
+                <div className="space-y-1">
+                  <div className="flex gap-3 text-primary-foreground/60 text-xs tracking-widest font-mono">
+                    <span>••••</span>
+                    <span>••••</span>
+                    <span>••••</span>
+                    <span>••••</span>
+                  </div>
+                </div>
+                
+                {/* Card name */}
+                <div className="text-primary-foreground/80 text-xs font-medium truncate">
+                  {card.name.split(' ').slice(0, 3).join(' ')}
                 </div>
               </div>
+              
+              {/* Bonus badge */}
               {card.welcomeBonus && (
-                <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium shadow-md">
-                  <Gift className="w-3 h-3 inline mr-1" />
+                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-accent to-emerald-500 text-accent-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1.5 animate-pulse-slow">
+                  <Gift className="w-3.5 h-3.5" />
                   Bonus
                 </div>
               )}
@@ -48,89 +91,118 @@ export const CreditCardItem = ({ card }: CreditCardItemProps) => {
           </div>
 
           {/* Card Details Section */}
-          <div className="flex-1 p-6">
-            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-xl font-semibold text-foreground">{card.name}</h3>
-                  <div className="flex items-center gap-1 text-amber-500">
+          <div className="flex-1 p-6 lg:p-8">
+            <div className="flex flex-col gap-5">
+              {/* Header */}
+              <div>
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+                    {card.name}
+                  </h3>
+                  <div className="flex items-center gap-1.5 bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full shrink-0">
                     <Star className="w-4 h-4 fill-current" />
-                    <span className="text-sm font-medium">{card.rating}</span>
+                    <span className="text-sm font-bold">{card.rating}</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {card.categories.map((category) => (
-                    <Badge key={category} variant="secondary" className="text-xs">
+                    <Badge 
+                      key={category} 
+                      variant="secondary" 
+                      className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary border-0 hover:bg-primary/20 transition-colors"
+                    >
                       {categoryLabels[category]}
                     </Badge>
                   ))}
                 </div>
 
                 {card.welcomeBonus && (
-                  <div className="bg-primary/10 text-primary px-3 py-2 rounded-lg mb-4 inline-flex items-center gap-2">
-                    <Gift className="w-4 h-4" />
-                    <span className="text-sm font-medium">{card.welcomeBonus}</span>
+                  <div className="bg-gradient-to-r from-accent/10 to-emerald-500/10 border border-accent/20 text-foreground px-4 py-3 rounded-xl mb-4 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
+                      <Gift className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground font-medium">Bonus de bienvenue</p>
+                      <p className="text-sm font-semibold text-foreground">{card.welcomeBonus}</p>
+                    </div>
                   </div>
                 )}
-
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {card.features.slice(0, 3).map((feature, index) => (
-                    <span key={index} className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
               </div>
 
-              {/* Stats Section */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                <div className="text-center p-3 bg-card rounded-lg border border-border/50">
-                  <p className="text-xs text-muted-foreground mb-1">Frais annuels</p>
-                  <p className="text-lg font-bold text-foreground">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="stat-card text-center">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">Frais annuels</p>
+                  <p className="text-xl font-bold">
                     {card.annualFee === 0 ? (
-                      <span className="text-primary">Gratuit</span>
+                      <span className="text-accent">Gratuit</span>
                     ) : (
-                      formatCurrency(card.annualFee)
+                      <span className="text-foreground">{formatCurrency(card.annualFee)}</span>
                     )}
                   </p>
                   {card.firstYearFreeAnnualFee && card.annualFee > 0 && (
-                    <p className="text-xs text-primary">1ère année gratuite</p>
+                    <p className="text-xs text-accent font-medium mt-1">1ère année gratuite</p>
                   )}
                 </div>
 
-                <div className="text-center p-3 bg-card rounded-lg border border-border/50">
-                  <p className="text-xs text-muted-foreground mb-1">Taux d'intérêt</p>
-                  <p className="text-lg font-bold text-foreground">{card.interestRate}%</p>
+                <div className="stat-card text-center">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">Taux d'intérêt</p>
+                  <p className="text-xl font-bold text-foreground">{card.interestRate}%</p>
                 </div>
 
-                <div className="text-center p-3 bg-card rounded-lg border border-border/50">
-                  <p className="text-xs text-muted-foreground mb-1">{rewardsTypeLabel[card.rewardsType]}</p>
-                  <p className="text-lg font-bold text-primary">{card.rewardsRate}%</p>
+                <div className="stat-card text-center">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">{rewardsTypeLabel[card.rewardsType]}</p>
+                  <p className="text-xl font-bold text-primary flex items-center justify-center gap-1">
+                    {card.rewardsRate}%
+                    <TrendingUp className="w-4 h-4" />
+                  </p>
                 </div>
 
-                <div className="text-center p-3 bg-card rounded-lg border border-border/50">
-                  <p className="text-xs text-muted-foreground mb-1">Avance espèces</p>
-                  <p className="text-lg font-bold text-foreground">{card.cashAdvanceRate}%</p>
+                <div className="stat-card text-center">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">Avance espèces</p>
+                  <p className="text-xl font-bold text-foreground">{card.cashAdvanceRate}%</p>
                 </div>
               </div>
-            </div>
 
-            {/* CTA Section */}
-            <div className="flex flex-col sm:flex-row items-center justify-between mt-6 pt-4 border-t border-border/50 gap-4">
-              <p className="text-xs text-muted-foreground">
-                Mis à jour: {new Date(card.lastUpdated).toLocaleDateString('fr-CA')}
-              </p>
-              <div className="flex gap-3">
-                <Button variant="outline" size="sm">
-                  Voir détails
-                </Button>
-                <Button asChild size="sm" className="gap-2">
-                  <a href={card.affiliateLink} target="_blank" rel="noopener noreferrer">
-                    Faire une demande
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </Button>
+              {/* Features */}
+              <div className="flex flex-wrap gap-2">
+                {card.features.slice(0, 4).map((feature, idx) => (
+                  <span key={idx} className="feature-badge">
+                    <Check className="w-3 h-3 text-accent" />
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA Section */}
+              <div className="flex flex-col sm:flex-row items-center justify-between pt-5 border-t border-border/50 gap-4">
+                <p className="text-xs text-muted-foreground">
+                  Mis à jour: {new Date(card.lastUpdated).toLocaleDateString('fr-CA', { 
+                    day: 'numeric', 
+                    month: 'short', 
+                    year: 'numeric' 
+                  })}
+                </p>
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="font-medium hover:bg-muted/50"
+                  >
+                    Voir détails
+                  </Button>
+                  <Button 
+                    asChild 
+                    size="sm" 
+                    className="btn-success font-semibold gap-2"
+                  >
+                    <a href={card.affiliateLink} target="_blank" rel="noopener noreferrer">
+                      Faire une demande
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

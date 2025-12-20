@@ -9,7 +9,7 @@ import { Footer } from '@/components/Footer';
 import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Filter, Loader2 } from 'lucide-react';
+import { Filter, Loader2, CreditCard as CreditCardIcon } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -210,36 +210,45 @@ const Index = () => {
       <Hero />
 
       {/* Comparison Section */}
-      <section id="comparer" className="py-12 lg:py-16">
+      <section id="comparer" className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-foreground mb-3">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <CreditCardIcon className="w-4 h-4" />
+              Comparaison en temps réel
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-foreground mb-4">
               Comparez les meilleures cartes
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               Utilisez les filtres pour trouver la carte parfaite selon vos besoins. 
-              Tous les taux sont mis à jour en temps réel.
+              Tous les taux sont mis à jour automatiquement.
             </p>
           </div>
 
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
-            <aside className="hidden lg:block w-72 flex-shrink-0">
+            <aside className="hidden lg:block w-80 flex-shrink-0">
               <FilterSidebar filters={filters} onFilterChange={setFilters} />
             </aside>
 
             {/* Main Content */}
             <div className="flex-1">
               {/* Mobile Filter Button */}
-              <div className="lg:hidden mb-4">
+              <div className="lg:hidden mb-6">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="outline" className="w-full gap-2">
+                    <Button variant="outline" className="w-full gap-2 h-12 font-semibold">
                       <Filter className="w-4 h-4" />
                       Filtres
+                      {(filters.categories.length > 0 || filters.noAnnualFee || filters.hasWelcomeBonus) && (
+                        <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                          {filters.categories.length + (filters.noAnnualFee ? 1 : 0) + (filters.hasWelcomeBonus ? 1 : 0)}
+                        </span>
+                      )}
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="left" className="w-80 p-0">
+                  <SheetContent side="left" className="w-80 p-0 overflow-y-auto">
                     <div className="p-4">
                       <FilterSidebar filters={filters} onFilterChange={setFilters} />
                     </div>
@@ -254,20 +263,26 @@ const Index = () => {
               />
 
               {isLoading ? (
-                <div className="flex items-center justify-center py-12">
-                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                  <span className="ml-2 text-muted-foreground">Chargement des cartes...</span>
+                <div className="flex flex-col items-center justify-center py-20">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                  </div>
+                  <p className="text-muted-foreground font-medium">Chargement des cartes...</p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {filteredCards.map((card) => (
-                    <CreditCardItem key={card.id} card={card} />
+                <div className="space-y-6">
+                  {filteredCards.map((card, index) => (
+                    <CreditCardItem key={card.id} card={card} index={index} />
                   ))}
 
                   {filteredCards.length === 0 && (
-                    <div className="text-center py-12">
+                    <div className="text-center py-20 card-elevated rounded-2xl">
+                      <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
+                        <CreditCardIcon className="w-8 h-8 text-muted-foreground" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">Aucune carte trouvée</h3>
                       <p className="text-muted-foreground">
-                        Aucune carte ne correspond à vos critères. Essayez d'ajuster les filtres.
+                        Essayez d'ajuster les filtres pour voir plus de résultats.
                       </p>
                     </div>
                   )}

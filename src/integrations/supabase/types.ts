@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      credit_cards: {
+        Row: {
+          affiliate_link: string
+          annual_fee: number
+          cash_advance_rate: number
+          categories: string[]
+          created_at: string
+          features: string[] | null
+          first_year_free: boolean | null
+          id: string
+          image_url: string | null
+          interest_rate: number
+          is_active: boolean | null
+          issuer: string
+          min_income: number | null
+          name: string
+          rating: number
+          rewards_rate: number
+          rewards_type: string
+          updated_at: string
+          welcome_bonus: string | null
+          welcome_bonus_value: number | null
+        }
+        Insert: {
+          affiliate_link: string
+          annual_fee?: number
+          cash_advance_rate: number
+          categories?: string[]
+          created_at?: string
+          features?: string[] | null
+          first_year_free?: boolean | null
+          id?: string
+          image_url?: string | null
+          interest_rate: number
+          is_active?: boolean | null
+          issuer: string
+          min_income?: number | null
+          name: string
+          rating?: number
+          rewards_rate?: number
+          rewards_type: string
+          updated_at?: string
+          welcome_bonus?: string | null
+          welcome_bonus_value?: number | null
+        }
+        Update: {
+          affiliate_link?: string
+          annual_fee?: number
+          cash_advance_rate?: number
+          categories?: string[]
+          created_at?: string
+          features?: string[] | null
+          first_year_free?: boolean | null
+          id?: string
+          image_url?: string | null
+          interest_rate?: number
+          is_active?: boolean | null
+          issuer?: string
+          min_income?: number | null
+          name?: string
+          rating?: number
+          rewards_rate?: number
+          rewards_type?: string
+          updated_at?: string
+          welcome_bonus?: string | null
+          welcome_bonus_value?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

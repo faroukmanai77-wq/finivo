@@ -95,8 +95,12 @@ export default {
 				to: { transform: 'translateX(0)' }
 			},
 			shimmer: {
-				'0%': { backgroundPosition: '-200% 0' },
-				'100%': { backgroundPosition: '200% 0' }
+				'0%': { backgroundPosition: '200% center' },
+				'100%': { backgroundPosition: '-200% center' }
+			},
+			'pulse-glow': {
+				'0%, 100%': { opacity: '0.6' },
+				'50%': { opacity: '1' }
 			}
 		},
 		animation: {
@@ -105,7 +109,8 @@ export default {
 			'fade-in': 'fade-in 0.4s ease-out',
 			'scale-in': 'scale-in 0.2s ease-out',
 			'slide-in-right': 'slide-in-right 0.3s ease-out',
-			shimmer: 'shimmer 2s linear infinite'
+			shimmer: 'shimmer 3s ease-in-out infinite',
+			'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
 		},
 		fontFamily: {
 			sans: ['Plus Jakarta Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],

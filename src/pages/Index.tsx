@@ -5,6 +5,8 @@ import { FilterSidebar } from '@/components/FilterSidebar';
 import { CreditCardItem } from '@/components/CreditCardItem';
 import { SortSelect } from '@/components/SortSelect';
 import { CreditCardSkeleton } from '@/components/CreditCardSkeleton';
+import { CategoriesSection } from '@/components/CategoriesSection';
+import { GuideSection } from '@/components/GuideSection';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
@@ -209,6 +211,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <CategoriesSection />
 
       {/* Comparison Section */}
       <section id="comparer" className="py-16 lg:py-24">
@@ -293,6 +296,7 @@ const Index = () => {
         </div>
       </section>
 
+      <GuideSection />
       <FAQ />
       <Footer />
     </div>

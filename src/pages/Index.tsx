@@ -4,12 +4,13 @@ import { Hero } from '@/components/Hero';
 import { FilterSidebar } from '@/components/FilterSidebar';
 import { CreditCardItem } from '@/components/CreditCardItem';
 import { SortSelect } from '@/components/SortSelect';
+import { CreditCardSkeleton } from '@/components/CreditCardSkeleton';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Filter, Loader2, CreditCard as CreditCardIcon } from 'lucide-react';
+import { Filter, CreditCard as CreditCardIcon } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -263,11 +264,10 @@ const Index = () => {
               />
 
               {isLoading ? (
-                <div className="flex flex-col items-center justify-center py-20">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                  </div>
-                  <p className="text-muted-foreground font-medium">Chargement des cartes...</p>
+                <div className="space-y-6">
+                  {[...Array(3)].map((_, i) => (
+                    <CreditCardSkeleton key={i} />
+                  ))}
                 </div>
               ) : (
                 <div className="space-y-6">

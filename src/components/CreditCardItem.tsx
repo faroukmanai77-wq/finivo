@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import { CreditCard } from '@/types/creditCard';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, ExternalLink, Gift, CreditCard as CreditCardIcon, Check, TrendingUp } from 'lucide-react';
+import { Star, ExternalLink, Gift, Check, TrendingUp } from 'lucide-react';
 import { categoryLabels } from '@/data/creditCards';
 
 interface CreditCardItemProps {
@@ -185,13 +186,15 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
                   })}
                 </p>
                 <div className="flex gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="font-medium hover:bg-muted/50"
-                  >
-                    Voir détails
-                  </Button>
+                  <Link to={`/carte/${card.id}`}>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="font-medium hover:bg-muted/50"
+                    >
+                      Voir détails
+                    </Button>
+                  </Link>
                   <Button 
                     asChild 
                     size="sm" 

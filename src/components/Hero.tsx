@@ -2,8 +2,8 @@ import { Search, TrendingUp, Shield, Sparkles, ChevronDown, Star, Zap } from 'lu
 import { Button } from '@/components/ui/button';
 
 export const Hero = () => {
-  const scrollToCompare = () => {
-    document.getElementById('comparer')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -64,7 +64,7 @@ export const Hero = () => {
               <Button 
                 size="lg" 
                 className="btn-gradient text-lg h-14 px-8 gap-3 font-semibold group"
-                onClick={scrollToCompare}
+                onClick={() => scrollToSection('comparer')}
               >
                 <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Comparer les cartes
@@ -73,6 +73,7 @@ export const Hero = () => {
                 variant="outline" 
                 size="lg" 
                 className="h-14 px-8 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/20 font-semibold gap-2 group"
+                onClick={() => scrollToSection('guide')}
               >
                 <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Comment ça marche

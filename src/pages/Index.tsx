@@ -7,6 +7,7 @@ import { SortSelect } from '@/components/SortSelect';
 import { CreditCardSkeleton } from '@/components/CreditCardSkeleton';
 import { CategoriesSection } from '@/components/CategoriesSection';
 import { GuideSection } from '@/components/GuideSection';
+import { BlogSection } from '@/components/BlogSection';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
@@ -297,6 +298,7 @@ const Index = () => {
       </section>
 
       <GuideSection />
+      <BlogSection />
       <FAQ />
       <Footer />
     </div>

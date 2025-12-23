@@ -11,12 +11,17 @@ export const Header = () => {
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
-              <CreditCard className="w-6 h-6 text-primary-foreground" />
+            <div className="relative w-12 h-12 bg-gradient-to-br from-primary via-primary/80 to-accent rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 group-hover:scale-105 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-2xl" />
+              <CreditCard className="w-6 h-6 text-primary-foreground relative z-10" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
             </div>
-            <div>
-              <span className="font-bold text-xl text-foreground tracking-tight">ComparCartes</span>
-              <span className="hidden sm:block text-xs text-muted-foreground">Québec</span>
+            <div className="flex flex-col">
+              <span className="font-bold text-xl text-foreground tracking-tight leading-tight">ComparCartes</span>
+              <span className="text-xs text-primary font-medium flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                Québec
+              </span>
             </div>
           </a>
 
@@ -26,24 +31,37 @@ export const Header = () => {
               { href: '#comparer', label: 'Comparer' },
               { href: '#categories', label: 'Catégories' },
               { href: '#guide', label: 'Guide' },
+              { href: '/blog', label: 'Blog', isRoute: true },
               { href: '#faq', label: 'FAQ' },
             ].map((link) => (
-              <a 
-                key={link.href}
-                href={link.href} 
-                className="px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all font-medium text-sm"
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <a 
+                  key={link.href}
+                  href={link.href} 
+                  className="px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all font-medium text-sm"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <a 
+                  key={link.href}
+                  href={link.href} 
+                  className="px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all font-medium text-sm"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Button className="btn-gradient font-semibold gap-2 shadow-lg">
-              <Sparkles className="w-4 h-4" />
-              Trouver ma carte
-            </Button>
+            <a href="#comparer">
+              <Button className="btn-gradient font-semibold gap-2 shadow-lg">
+                <Sparkles className="w-4 h-4" />
+                Trouver ma carte
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,6 +85,7 @@ export const Header = () => {
                 { href: '#comparer', label: 'Comparer' },
                 { href: '#categories', label: 'Catégories' },
                 { href: '#guide', label: 'Guide' },
+                { href: '/blog', label: 'Blog', isRoute: true },
                 { href: '#faq', label: 'FAQ' },
               ].map((link) => (
                 <a 
@@ -78,10 +97,12 @@ export const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Button className="btn-gradient font-semibold gap-2 mt-2">
-                <Sparkles className="w-4 h-4" />
-                Trouver ma carte
-              </Button>
+              <a href="#comparer">
+                <Button className="btn-gradient font-semibold gap-2 mt-2 w-full" onClick={() => setIsMenuOpen(false)}>
+                  <Sparkles className="w-4 h-4" />
+                  Trouver ma carte
+                </Button>
+              </a>
             </div>
           </nav>
         )}

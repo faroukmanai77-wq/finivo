@@ -95,7 +95,7 @@ export const GuideSection = () => {
                   <div className="hidden lg:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-border to-transparent" />
                 )}
                 
-                <div className="card-elevated p-6 h-full">
+                <div className="bg-card rounded-xl p-6 h-full shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-5 shadow-lg`}>
                     <Icon className="w-7 h-7 text-primary-foreground" />
                   </div>

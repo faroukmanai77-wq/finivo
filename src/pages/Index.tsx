@@ -31,6 +31,21 @@ const Index = () => {
     sortBy: 'rating'
   });
 
+  // Listen for category filter events from CategoriesSection
+  useEffect(() => {
+    const handleCategoryFilter = (e: CustomEvent<string>) => {
+      setFilters(prev => ({
+        ...prev,
+        categories: [e.detail as CardCategory]
+      }));
+    };
+
+    window.addEventListener('setCategoryFilter', handleCategoryFilter as EventListener);
+    return () => {
+      window.removeEventListener('setCategoryFilter', handleCategoryFilter as EventListener);
+    };
+  }, []);
+
   // Fetch credit cards from database
   useEffect(() => {
     const fetchCreditCards = async () => {

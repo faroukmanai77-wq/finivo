@@ -105,7 +105,7 @@ export const GuideSection = () => {
                   />
                 )}
                 
-                <div className="bg-card rounded-xl p-6 h-full shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300">
+                <div className="bg-card rounded-xl p-6 h-full shadow-[var(--shadow-card)] hover:shadow-[0_8px_30px_-5px_hsl(var(--primary)/0.25),0_0_20px_-5px_hsl(var(--primary)/0.15)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300">
                   <div 
                     className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-5 shadow-lg opacity-0 animate-scale-in`}
                     style={{ 

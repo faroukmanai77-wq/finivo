@@ -50,7 +50,7 @@ export const Header = () => {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-xl text-foreground tracking-tight leading-tight">ComparCartes</span>
+              <span className="font-bold text-xl text-foreground tracking-tight leading-tight">Finivo</span>
               <span className="text-xs text-primary font-medium flex items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-accent rounded-full" />
                 Québec

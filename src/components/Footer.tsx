@@ -11,7 +11,7 @@ export const Footer = () => {
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="font-bold text-xl">ComparCartes</span>
+              <span className="font-bold text-xl">Finivo</span>
             </a>
             <p className="text-secondary-foreground/70 text-sm">
               Le meilleur comparateur de cartes de crédit au Québec. 

@@ -3,124 +3,172 @@ import { BlogPost } from '@/types/blog';
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'Comment choisir sa première carte de crédit au Québec',
+    title: 'Comment choisir sa première carte de crédit au Québec en 2026',
     slug: 'choisir-premiere-carte-credit-quebec',
-    excerpt: 'Découvrez les critères essentiels pour sélectionner votre première carte de crédit et éviter les pièges courants.',
+    excerpt: 'Choisir sa première carte de crédit est une étape importante pour bâtir votre historique financier au Québec. Ce guide vous aide à comprendre les critères essentiels.',
     content: `
 ## Introduction
 
-Choisir sa première carte de crédit peut sembler intimidant, mais avec les bonnes informations, vous pouvez faire un choix éclairé qui correspond à vos besoins financiers.
+Choisir sa première carte de crédit est une étape importante pour bâtir votre historique financier au Québec. Avec des dizaines d'offres, il peut être difficile de savoir par où commencer. Ce guide vous aide à comprendre les critères essentiels et à éviter les pièges classiques en 2026.
 
-## Les critères essentiels
+## Ce qu'il faut vérifier avant de s'inscrire
 
-### 1. Les frais annuels
-Pour une première carte, privilégiez les cartes sans frais annuels. Cela vous permet de profiter des avantages sans coût supplémentaire.
+| Critère | Pourquoi c'est important |
+|---------|--------------------------|
+| Frais annuels | Certaines cartes débutants sont gratuites ; d'autres coûtent 39$+ |
+| Taux d'intérêt (TAC) | Plus le taux est bas, mieux c'est si vous prévoyez un solde |
+| Revenus minimums requis | Certaines cartes exigent 12 000$ ou plus |
+| Programme de récompenses | Remises en argent vs points : dépend de vos dépenses |
+| Protection et assurances | Assurance mobile, location auto, achat… parfois inclus |
 
-### 2. Le taux d'intérêt
-Comprenez que le taux d'intérêt n'est important que si vous ne payez pas votre solde en entier chaque mois.
+## Les meilleures cartes débutant / étudiants (tendances 2026)
 
-### 3. Les récompenses
-Choisissez un programme de récompenses qui correspond à vos habitudes de dépenses.
+*(Sans recommandation personnalisée – informations éducatives)*
+
+- 💳 **Carte Remises Scotia Visa Étudiants** – remises et faible barrière d'entrée
+- 💳 **Carte Visa Classique RBC** – bonne première carte, accessible
+- 💳 **BMO Remises sans frais Mastercard** – facile à obtenir
+- 💳 **TD Cash Back Visa** – récompenses simples
+
+## Les erreurs à éviter
+
+- ❌ S'inscrire à trop de cartes la même année
+- ❌ Ne jamais regarder le contrat de taux promotionnels
+- ❌ Utiliser la limite comme de l'argent supplémentaire
 
 ## Conclusion
 
-Prenez le temps de comparer les options disponibles et n'hésitez pas à utiliser notre comparateur pour trouver la carte idéale.
+Pour une première carte, privilégiez :
+- ➡️ 0$ de frais annuels
+- ➡️ Aucune exigence de revenu trop élevée
+- ➡️ Des récompenses simples (remise en argent)
+
+💡 **Astuce** : Commencez avec une carte accessible, payez toujours le solde complet, puis passez à une carte premium après 12 mois d'historique.
     `,
     coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop',
-    author: 'Marie Tremblay',
-    publishedAt: '2024-01-15',
+    author: 'Finivo',
+    publishedAt: '2026-01-15',
     category: 'guides',
     readTime: 8,
-    tags: ['débutant', 'première carte', 'conseils']
+    tags: ['débutant', 'première carte', 'conseils', '2026']
   },
   {
     id: '2',
-    title: 'Les meilleures cartes cashback en 2024',
+    title: 'Les meilleures cartes cashback au Canada en 2026',
     slug: 'meilleures-cartes-cashback-2024',
-    excerpt: 'Notre analyse complète des cartes offrant les meilleurs taux de remise en argent pour maximiser vos économies.',
+    excerpt: 'En 2026, la compétition sur les cartes cashback s\'intensifie : taux promotionnels, bonus de bienvenue, remises sectorielles. Voici les tendances clés.',
     content: `
-## Les cartes cashback incontournables
+## Ce qui change en 2026
 
-Le cashback reste l'une des formes de récompenses les plus appréciées car il offre une valeur tangible et facile à comprendre.
+- 📌 Bonus de bienvenue plus importants, mais souvent conditionnés à des dépenses minimales
+- 📌 Catégories rotationnelles (épicerie, restaurants, voyages selon le trimestre)
+- 📌 Plus de cartes avec protection mobile incluse
 
-## Notre sélection
+## Catégories populaires
 
-### Carte Tangerine
-Excellente pour les catégories personnalisables avec jusqu'à 2% de remise.
+- 🛒 **Épiceries** (2 à 4% selon la carte)
+- ⛽ **Carburant et transport**
+- 💻 **Abonnements numériques**
+- 🏨 **Voyages et hôtels**
 
-### Carte SimplyCash
-Idéale pour les dépenses quotidiennes avec un taux compétitif sur tous les achats.
+## Exemples de cartes bien positionnées en 2026
 
-## Comment maximiser vos remises
+*(données génériques, à mettre à jour via affiliés une fois inscrit)*
 
-- Utilisez votre carte pour toutes vos dépenses récurrentes
-- Payez votre solde en entier chaque mois
-- Profitez des promotions saisonnières
+| Carte | Points forts |
+|-------|--------------|
+| Scotia Momentum Visa Infinite | Remises élevées sur dépenses courantes |
+| BMO World Elite Cashback | Assurance + cashback sur voyages |
+| Tangerine Mastercard | Choix des catégories |
+| RBC Cash Back Preferred | Promo fréquente en 2026 |
+
+⚠️ **Les conditions changent souvent** : vérifiez toujours les taux et bonus à la date de l'application.
     `,
     coverImage: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&auto=format&fit=crop',
-    author: 'Jean-Pierre Lavoie',
-    publishedAt: '2024-01-10',
+    author: 'Finivo',
+    publishedAt: '2026-01-10',
     category: 'comparatifs',
     readTime: 6,
-    tags: ['cashback', 'comparatif', '2024']
+    tags: ['cashback', 'comparatif', '2026']
   },
   {
     id: '3',
-    title: '5 erreurs à éviter avec votre carte de crédit',
+    title: '5 erreurs à éviter avec votre carte de crédit en 2026',
     slug: '5-erreurs-eviter-carte-credit',
-    excerpt: 'Évitez ces pièges courants qui peuvent nuire à votre santé financière et à votre cote de crédit.',
+    excerpt: 'Beaucoup de problèmes financiers proviennent d\'une mauvaise utilisation du crédit. Voici 5 erreurs fréquentes — et comment les éviter.',
     content: `
 ## Les erreurs les plus fréquentes
 
-### 1. Ne payer que le minimum
-Payer seulement le paiement minimum peut vous coûter des milliers de dollars en intérêts.
+Beaucoup de problèmes financiers proviennent d'une mauvaise utilisation du crédit. Voici 5 erreurs fréquentes — et comment les éviter.
 
-### 2. Utiliser les avances de fonds
-Les avances de fonds ont généralement des taux d'intérêt plus élevés et aucune période de grâce.
+### ❌ Erreur #1 — Payer seulement le minimum
 
-### 3. Ignorer vos relevés
-Vérifiez régulièrement vos relevés pour détecter toute activité frauduleuse.
+➡️ **Solution** : planifier un prélèvement automatique du solde total.
 
-### 4. Maximiser votre limite
-Utiliser plus de 30% de votre limite peut affecter négativement votre cote de crédit.
+### ❌ Erreur #2 — Dépasser 30% de votre limite
 
-### 5. Avoir trop de cartes
-Chaque demande de crédit affecte temporairement votre cote.
+➡️ Peut nuire à votre cote même si vous payez à temps.
+
+### ❌ Erreur #3 — Ouvrir trop de cartes trop vite
+
+➡️ Donne l'impression de risque pour les prêteurs.
+
+### ❌ Erreur #4 — Ignorer les frais à l'étranger
+
+➡️ Certaines cartes facturent 2,5% sur les transactions hors Canada.
+
+### ❌ Erreur #5 — Ne pas comparer les offres
+
+➡️ Chaque carte a un profil : voyages, cashback, étudiant, premium.
+
+## Règle d'or 2026
+
+💡 **Une carte de crédit est un outil, pas une source de financement à long terme.**
     `,
     coverImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop',
-    author: 'Sophie Bergeron',
-    publishedAt: '2024-01-05',
+    author: 'Finivo',
+    publishedAt: '2026-01-05',
     category: 'conseils',
     readTime: 5,
-    tags: ['erreurs', 'conseils', 'cote de crédit']
+    tags: ['erreurs', 'conseils', 'cote de crédit', '2026']
   },
   {
     id: '4',
-    title: 'Nouvelles réglementations sur les cartes de crédit au Canada',
+    title: 'Nouvelles réglementations sur les cartes de crédit au Canada (2026)',
     slug: 'nouvelles-reglementations-cartes-credit-canada',
-    excerpt: 'Les dernières modifications réglementaires qui affectent les consommateurs canadiens.',
+    excerpt: 'Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2026.',
     content: `
-## Changements importants
+## Les changements clés
 
-Le gouvernement canadien a récemment apporté des modifications aux règles entourant les cartes de crédit.
+Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2026.
 
-## Ce qui change
+### 📌 Transparence accrue sur les frais
 
-### Protection accrue
-Les consommateurs bénéficient maintenant d'une meilleure protection contre les frais cachés.
+Les institutions doivent afficher plus clairement les frais totaux annuels dans les formulaires d'adhésion.
 
-### Transparence
-Les émetteurs doivent fournir des informations plus claires sur les coûts totaux.
+### 📌 Limites de hausses de taux
 
-## Impact pour vous
+Les banques doivent donner un préavis plus long avant d'augmenter le taux d'intérêt.
 
-Ces changements visent à mieux protéger les consommateurs et à favoriser une concurrence saine dans le marché.
+### 📌 Protection des jeunes consommateurs
+
+Les règles pour les étudiants sans revenu stable ont été renforcées : approbations plus strictes.
+
+### 📌 Encadrement des bonus promotionnels
+
+Les offres doivent préciser conditions + durée + taux final.
+
+## Ce que ça signifie pour vous
+
+- ✅ Plus facile de comparer
+- ✅ Moins de surprises sur les frais
+- ✅ Bonus plus transparents (mais parfois moins généreux)
     `,
     coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop',
-    author: 'Marc Dubois',
-    publishedAt: '2024-01-01',
+    author: 'Finivo',
+    publishedAt: '2026-01-01',
     category: 'actualites',
     readTime: 4,
-    tags: ['réglementation', 'canada', 'actualités']
+    tags: ['réglementation', 'canada', 'actualités', '2026']
   }
 ];

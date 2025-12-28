@@ -224,27 +224,31 @@ const CardDetail = () => {
             <div className="flex justify-center lg:justify-end">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-[40px] scale-90" />
-                <div 
-                  className={`relative w-80 h-48 rounded-2xl bg-gradient-to-br ${gradient} shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
-                  
-                  <div className="relative h-full flex flex-col justify-between">
-                    <div className="flex justify-between items-start">
-                      <div className="w-12 h-9 rounded-md bg-gradient-to-br from-yellow-300 to-yellow-500 shadow-lg" />
-                      <svg className="w-8 h-8 text-primary-foreground/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M6.5 12c.94-3.46 4.94-6 8.5-6" />
-                        <path d="M6.5 6c2.98-2.5 8.98-2.5 12 0" />
-                        <path d="M6.5 18c2.5-3 5.5-4.5 8.5-4.5" />
-                      </svg>
-                    </div>
+                {card.image_url ? (
+                  <img 
+                    src={card.image_url} 
+                    alt={card.name}
+                    className="relative w-80 h-auto max-h-64 object-contain rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div 
+                    className={`relative w-80 h-48 rounded-2xl bg-gradient-to-br ${gradient} shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
                     
-                    <div>
-                      <p className="text-primary-foreground font-bold text-lg">{card.issuer}</p>
-                      <p className="text-primary-foreground/80 text-sm">{card.name}</p>
+                    <div className="relative h-full flex flex-col justify-between">
+                      <div className="flex justify-between items-start">
+                        <div className="w-12 h-9 rounded-md bg-gradient-to-br from-yellow-300 to-yellow-500 shadow-lg" />
+                        <CreditCardIcon className="w-8 h-8 text-primary-foreground/80" />
+                      </div>
+                      
+                      <div>
+                        <p className="text-primary-foreground font-bold text-lg">{card.issuer}</p>
+                        <p className="text-primary-foreground/80 text-sm">{card.name}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,7 +1,31 @@
 import { CreditCard, Mail, MapPin, Shield, FileText, DollarSign } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category: string) => {
+    // Navigate to home page first if not already there
+    navigate('/');
+    
+    // Wait for navigation, then dispatch filter event and scroll
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('setCategoryFilter', { detail: category }));
+      const comparerSection = document.getElementById('comparer');
+      if (comparerSection) {
+        comparerSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  const categoryLinks = [
+    { label: 'Remise en argent', category: 'cashback' },
+    { label: 'Cartes voyage', category: 'travel' },
+    { label: 'Sans frais annuels', category: 'no-fee' },
+    { label: 'Cartes étudiants', category: 'student' },
+    { label: 'Cartes premium', category: 'premium' },
+  ];
+
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -22,11 +46,16 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Catégories</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Remise en argent</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Cartes voyage</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Sans frais annuels</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Cartes étudiants</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Cartes premium</a></li>
+              {categoryLinks.map((link) => (
+                <li key={link.category}>
+                  <button
+                    onClick={() => handleCategoryClick(link.category)}
+                    className="hover:text-secondary-foreground transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 

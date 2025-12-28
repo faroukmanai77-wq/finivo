@@ -36,6 +36,9 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
       'RBC': 'from-blue-700 to-indigo-900',
       'Tangerine': 'from-orange-500 to-orange-700',
       'Scotiabank': 'from-red-700 to-red-900',
+      'American Express': 'from-blue-400 to-blue-600',
+      'Banque Nationale': 'from-red-600 to-red-800',
+      'Simplii': 'from-red-500 to-red-700',
     };
     return gradients[issuer] || 'from-secondary to-secondary/80';
   };

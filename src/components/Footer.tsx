@@ -10,10 +10,7 @@ export const Footer = () => {
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
               <CreditCard className="w-7 h-7 text-primary" />
-              <div className="flex flex-col">
-                <span className="font-bold text-2xl">Finivo</span>
-                <span className="text-xs text-primary font-medium">Québec</span>
-              </div>
+              <span className="font-bold text-2xl">Finivo</span>
             </Link>
             <p className="text-secondary-foreground/70 text-sm">
               Le meilleur comparateur de cartes de crédit au Québec. 

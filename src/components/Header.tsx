@@ -45,13 +45,7 @@ export const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <CreditCard className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-            <div className="flex flex-col">
-              <span className="font-bold text-2xl text-foreground tracking-tight leading-tight">Finivo</span>
-              <span className="text-xs text-primary font-medium flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                Québec
-              </span>
-            </div>
+            <span className="font-bold text-2xl text-foreground tracking-tight">Finivo</span>
           </Link>
 
           {/* Desktop Navigation */}

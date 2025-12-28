@@ -90,8 +90,8 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm text-secondary-foreground/70">
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <a href="mailto:info@comparcartes.ca" className="hover:text-secondary-foreground transition-colors">
-                  info@comparcartes.ca
+                <a href="mailto:info@finivo.ca" className="hover:text-secondary-foreground transition-colors">
+                  info@finivo.ca
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -105,7 +105,7 @@ export const Footer = () => {
         <div className="border-t border-secondary-foreground/20 mt-10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-secondary-foreground/60">
-              © 2025 ComparCartes. Tous droits réservés.
+              © 2025 Finivo. Tous droits réservés.
             </p>
             <div className="flex gap-6 text-sm text-secondary-foreground/60">
               <Link to="/politique-confidentialite" className="hover:text-secondary-foreground transition-colors">

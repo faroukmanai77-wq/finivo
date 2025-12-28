@@ -7,7 +7,7 @@ const ConditionsUtilisation = () => {
     {
       icon: CheckCircle,
       title: "Acceptation des conditions",
-      content: `En accédant et en utilisant le site Finivo (comparcartes.ca), vous acceptez d'être lié par les présentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site.
+      content: `En accédant et en utilisant le site Finivo (finivo.ca), vous acceptez d'être lié par les présentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site.
 
 Ces conditions sont régies par les lois du Québec et du Canada. Tout litige sera soumis à la compétence exclusive des tribunaux du Québec.`
     },
@@ -137,8 +137,8 @@ Nous vous encourageons à consulter régulièrement cette page pour rester infor
                   n'hésitez pas à nous contacter.
                 </p>
                 <p className="text-foreground font-medium">
-                  <a href="mailto:info@comparcartes.ca" className="text-primary hover:underline">
-                    info@comparcartes.ca
+                  <a href="mailto:info@finivo.ca" className="text-primary hover:underline">
+                    info@finivo.ca
                   </a>
                 </p>
               </div>

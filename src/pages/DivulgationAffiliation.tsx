@@ -162,8 +162,8 @@ En cas de doute, consultez un conseiller financier agréé.`
                   de recommandation, n'hésitez pas à nous contacter.
                 </p>
                 <p className="text-foreground font-medium">
-                  <a href="mailto:info@comparcartes.ca" className="text-primary hover:underline">
-                    info@comparcartes.ca
+                  <a href="mailto:info@finivo.ca" className="text-primary hover:underline">
+                    info@finivo.ca
                   </a>
                 </p>
               </div>

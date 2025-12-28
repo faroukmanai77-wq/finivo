@@ -9,9 +9,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-primary-foreground" />
-              </div>
+              <CreditCard className="w-7 h-7 text-primary -rotate-12" />
               <div className="flex flex-col">
                 <span className="font-bold text-xl">Finivo</span>
                 <span className="text-xs text-primary font-medium">Québec</span>

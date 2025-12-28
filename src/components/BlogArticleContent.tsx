@@ -24,9 +24,9 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
       // H2 headers
       if (line.startsWith('## ')) {
         elements.push(
-          <h2 key={key++} className="text-2xl font-bold text-foreground mt-10 mb-4 flex items-center gap-3">
-            <span className="w-1 h-8 bg-primary rounded-full"></span>
-            {line.replace('## ', '')}
+          <h2 key={key++} className="text-xl sm:text-2xl font-bold text-foreground mt-8 sm:mt-10 mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+            <span className="w-1 h-6 sm:h-8 bg-primary rounded-full shrink-0"></span>
+            <span className="break-words">{line.replace('## ', '')}</span>
           </h2>
         );
         i++;
@@ -40,7 +40,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
         const isPin = headerText.includes('📌');
         
         elements.push(
-          <h3 key={key++} className={`text-xl font-semibold mt-8 mb-3 ${isError ? 'text-destructive' : isPin ? 'text-primary' : 'text-foreground'}`}>
+          <h3 key={key++} className={`text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-2 sm:mb-3 break-words ${isError ? 'text-destructive' : isPin ? 'text-primary' : 'text-foreground'}`}>
             {headerText}
           </h3>
         );
@@ -80,7 +80,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
       // Italic notes
       if (line.startsWith('*(') || line.startsWith('*')) {
         elements.push(
-          <p key={key++} className="text-sm text-muted-foreground italic my-4 pl-4 border-l-2 border-border">
+          <p key={key++} className="text-xs sm:text-sm text-muted-foreground italic my-3 sm:my-4 pl-3 sm:pl-4 border-l-2 border-border">
             {line.replace(/^\*\(?|\)\*$/g, '').replace(/^\*|\*$/g, '')}
           </p>
         );
@@ -90,7 +90,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
 
       // Regular paragraph
       elements.push(
-        <p key={key++} className="text-muted-foreground leading-relaxed my-4">
+        <p key={key++} className="text-sm sm:text-base text-muted-foreground leading-relaxed my-3 sm:my-4">
           {formatInlineStyles(line)}
         </p>
       );
@@ -116,65 +116,80 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
     const rows = lines.slice(2).map(line => line.split('|').filter(cell => cell.trim()));
 
     return (
-      <div key={key} className="my-6 overflow-hidden rounded-xl border border-border">
-        <table className="w-full">
-          <thead className="bg-muted/50">
-            <tr>
-              {headers.map((header, idx) => (
-                <th key={idx} className="px-4 py-3 text-left text-sm font-semibold text-foreground">
-                  {header.trim()}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {rows.map((row, rowIdx) => (
-              <tr key={rowIdx} className="hover:bg-muted/30 transition-colors">
-                {row.map((cell, cellIdx) => (
-                  <td key={cellIdx} className="px-4 py-3 text-sm text-muted-foreground">
+      <div key={key} className="my-4 sm:my-6 -mx-4 sm:mx-0">
+        {/* Mobile: Card layout */}
+        <div className="block sm:hidden space-y-3 px-4">
+          {rows.map((row, rowIdx) => (
+            <div key={rowIdx} className="rounded-xl border border-border bg-card p-4 space-y-2">
+              {row.map((cell, cellIdx) => (
+                <div key={cellIdx} className="flex flex-col">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    {headers[cellIdx]?.trim()}
+                  </span>
+                  <span className="text-sm text-foreground mt-0.5">
                     {formatInlineStyles(cell.trim())}
-                  </td>
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet/Desktop: Table layout */}
+        <div className="hidden sm:block overflow-x-auto rounded-xl border border-border">
+          <table className="w-full min-w-[400px]">
+            <thead className="bg-muted/50">
+              <tr>
+                {headers.map((header, idx) => (
+                  <th key={idx} className="px-3 md:px-4 py-3 text-left text-xs md:text-sm font-semibold text-foreground whitespace-nowrap">
+                    {header.trim()}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {rows.map((row, rowIdx) => (
+                <tr key={rowIdx} className="hover:bg-muted/30 transition-colors">
+                  {row.map((cell, cellIdx) => (
+                    <td key={cellIdx} className="px-3 md:px-4 py-3 text-xs md:text-sm text-muted-foreground">
+                      {formatInlineStyles(cell.trim())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   };
 
   const renderList = (items: string[], key: number): React.ReactNode => {
-    // Determine list type based on content
-    const hasErrors = items.some(item => item.includes('❌'));
-    const hasSuccess = items.some(item => item.includes('✅') || item.includes('➡️'));
-    const hasCards = items.some(item => item.includes('💳'));
-    const hasInfo = items.some(item => item.includes('📌'));
-
     return (
-      <ul key={key} className="my-6 space-y-3">
+      <ul key={key} className="my-4 sm:my-6 space-y-2 sm:space-y-3">
         {items.map((item, idx) => {
           let icon = null;
           let bgClass = 'bg-muted/50';
           let borderClass = 'border-border';
           
           if (item.includes('❌')) {
-            icon = <XCircle className="w-5 h-5 text-destructive shrink-0" />;
+            icon = <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-destructive shrink-0" />;
             bgClass = 'bg-destructive/5';
             borderClass = 'border-destructive/20';
           } else if (item.includes('✅')) {
-            icon = <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />;
+            icon = <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 shrink-0" />;
             bgClass = 'bg-emerald-500/5';
             borderClass = 'border-emerald-500/20';
           } else if (item.includes('➡️')) {
-            icon = <CheckCircle className="w-5 h-5 text-primary shrink-0" />;
+            icon = <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" />;
             bgClass = 'bg-primary/5';
             borderClass = 'border-primary/20';
           } else if (item.includes('💳')) {
-            icon = <CreditCard className="w-5 h-5 text-primary shrink-0" />;
+            icon = <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" />;
             bgClass = 'bg-primary/5';
             borderClass = 'border-primary/20';
           } else if (item.includes('📌')) {
-            icon = <Info className="w-5 h-5 text-blue-500 shrink-0" />;
+            icon = <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 shrink-0" />;
             bgClass = 'bg-blue-500/5';
             borderClass = 'border-blue-500/20';
           } else if (item.match(/^[🛒⛽💻🏨]/)) {
@@ -188,10 +203,10 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
           return (
             <li 
               key={idx} 
-              className={`flex items-start gap-3 p-4 rounded-xl border ${bgClass} ${borderClass} transition-all hover:shadow-sm`}
+              className={`flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl border ${bgClass} ${borderClass} transition-all hover:shadow-sm`}
             >
-              {icon || <span className="text-lg">{item.match(/^[🛒⛽💻🏨]/)?.[0]}</span>}
-              <span className="text-foreground">{formatInlineStyles(cleanText)}</span>
+              {icon || <span className="text-base sm:text-lg shrink-0">{item.match(/^[🛒⛽💻🏨]/)?.[0]}</span>}
+              <span className="text-sm sm:text-base text-foreground break-words">{formatInlineStyles(cleanText)}</span>
             </li>
           );
         })}
@@ -206,13 +221,13 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
 
     if (isTip) {
       return (
-        <div key={key} className="my-6 p-5 rounded-xl bg-primary/10 border border-primary/20 flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-            <Lightbulb className="w-5 h-5 text-primary" />
+        <div key={key} className="my-4 sm:my-6 p-4 sm:p-5 rounded-lg sm:rounded-xl bg-primary/10 border border-primary/20 flex items-start gap-3 sm:gap-4">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+            <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
           </div>
-          <div>
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Astuce</span>
-            <p className="text-foreground mt-1">
+          <div className="min-w-0 flex-1">
+            <span className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wide">Astuce</span>
+            <p className="text-sm sm:text-base text-foreground mt-1 break-words">
               {formatInlineStyles(line.replace(/^💡\s*/, '').replace(/^\*\*Astuce\*\*\s*:\s*/, ''))}
             </p>
           </div>
@@ -222,13 +237,13 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
 
     if (isWarning) {
       return (
-        <div key={key} className="my-6 p-5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
-            <AlertTriangle className="w-5 h-5 text-amber-500" />
+        <div key={key} className="my-4 sm:my-6 p-4 sm:p-5 rounded-lg sm:rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3 sm:gap-4">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
+            <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
           </div>
-          <div>
-            <span className="text-sm font-semibold text-amber-500 uppercase tracking-wide">Attention</span>
-            <p className="text-foreground mt-1">
+          <div className="min-w-0 flex-1">
+            <span className="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">Attention</span>
+            <p className="text-sm sm:text-base text-foreground mt-1 break-words">
               {formatInlineStyles(line.replace(/^⚠️\s*/, ''))}
             </p>
           </div>
@@ -238,8 +253,8 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
 
     if (isSolution) {
       return (
-        <div key={key} className="my-4 p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
-          <p className="text-foreground">
+        <div key={key} className="my-3 sm:my-4 p-3 sm:p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
+          <p className="text-sm sm:text-base text-foreground break-words">
             {formatInlineStyles(line.replace(/^➡️\s*/, ''))}
           </p>
         </div>
@@ -247,7 +262,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
     }
 
     return (
-      <p key={key} className="text-muted-foreground my-4">
+      <p key={key} className="text-sm sm:text-base text-muted-foreground my-3 sm:my-4 break-words">
         {formatInlineStyles(line)}
       </p>
     );

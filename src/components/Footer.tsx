@@ -1,6 +1,5 @@
-import { Mail, MapPin, Shield, FileText, DollarSign } from 'lucide-react';
+import { CreditCard, Mail, MapPin, Shield, FileText, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { LogoFinivo } from '@/components/LogoFinivo';
 
 export const Footer = () => {
   return (
@@ -9,8 +8,14 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link to="/" className="inline-block mb-4 hover:opacity-80 transition-opacity">
-              <LogoFinivo size="md" />
+            <Link to="/" className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <CreditCard className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl">Finivo</span>
+                <span className="text-xs text-primary font-medium">Québec</span>
+              </div>
             </Link>
             <p className="text-secondary-foreground/70 text-sm">
               Le meilleur comparateur de cartes de crédit au Québec. 

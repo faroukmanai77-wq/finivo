@@ -1,73 +1,47 @@
-# Welcome to your Lovable project
+# 💳 Finivo | Comparateur de Cartes de Crédit au Canada
 
-## Project info
+Bienvenue sur le dépôt de **Finivo**, une plateforme moderne et intuitive conçue pour aider les résidents canadiens (et particulièrement québécois) à trouver la carte de crédit idéale selon leurs habitudes de consommation.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**🌐 Site en direct :** [finivo.ca](https://finivo.ca) (ou https://finivo.pages.dev)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 Vision du Projet
+Finivo vise à simplifier le paysage financier complexe du Canada en offrant :
+- **Transparence** : Comparaison claire des frais annuels, taux d'intérêt et bonus.
+- **Précision** : Données à jour sur les "Big Six" banques canadiennes et les néo-banques.
+- **Expérience Utilisateur** : Interface ultra-rapide et responsive adaptée aux mobiles.
 
-**Use Lovable**
+## 🛠️ Technologies Utilisées
+Ce projet est bâti avec les meilleures technologies web actuelles :
+- **Framework** : [React](https://reactjs.org/) avec [Vite](https://vitejs.dev/) pour une performance maximale.
+- **Langage** : [TypeScript](https://www.typescriptlang.org/) pour un code robuste.
+- **Stylisation** : [Tailwind CSS](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/) pour un design professionnel.
+- **Icônes** : [Lucide React](https://lucide.dev/).
+- **Déploiement** : [Cloudflare Pages](https://pages.cloudflare.com/) pour une sécurité et une rapidité de classe entreprise.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 📂 Structure des Données
+Les informations sur les cartes de crédit sont centralisées dans `src/data/creditCards.ts`. Chaque carte suit une interface stricte incluant :
+- Frais annuels, bonus de bienvenue et valeur estimée.
+- Taux d'intérêt et revenus minimums requis.
+- Liens d'affiliation vers les institutions financières officielles.
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🔧 Installation Locale (Pour les développeurs)
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Si vous souhaitez contribuer ou tester le projet localement :
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Cloner le dépôt
+git clone [https://github.com/votre-utilisateur/finivo.git](https://github.com/votre-utilisateur/finivo.git)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Entrer dans le dossier
+cd finivo
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Installer les dépendances
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Lancer le serveur de développement
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

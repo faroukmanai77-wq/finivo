@@ -1,4 +1,5 @@
-import { CreditCard, Mail, Phone, MapPin } from 'lucide-react';
+import { CreditCard, Mail, MapPin, Shield, FileText, DollarSign } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
@@ -31,14 +32,28 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Legal */}
           <div>
-            <h4 className="font-semibold mb-4">Ressources</h4>
-            <ul className="space-y-2 text-sm text-secondary-foreground/70">
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Guide des cartes</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Calculateur de points</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-secondary-foreground transition-colors">FAQ</a></li>
+            <h4 className="font-semibold mb-4">Légal</h4>
+            <ul className="space-y-3 text-sm text-secondary-foreground/70">
+              <li>
+                <Link to="/politique-confidentialite" className="hover:text-secondary-foreground transition-colors flex items-center gap-2">
+                  <Shield className="w-4 h-4" />
+                  Politique de confidentialité
+                </Link>
+              </li>
+              <li>
+                <Link to="/conditions-utilisation" className="hover:text-secondary-foreground transition-colors flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Conditions d'utilisation
+                </Link>
+              </li>
+              <li>
+                <Link to="/divulgation-affiliation" className="hover:text-secondary-foreground transition-colors flex items-center gap-2">
+                  <DollarSign className="w-4 h-4" />
+                  Divulgation d'affiliation
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -66,15 +81,15 @@ export const Footer = () => {
               © 2025 ComparCartes. Tous droits réservés.
             </p>
             <div className="flex gap-6 text-sm text-secondary-foreground/60">
-              <a href="#" className="hover:text-secondary-foreground transition-colors">
-                Politique de confidentialité
-              </a>
-              <a href="#" className="hover:text-secondary-foreground transition-colors">
-                Conditions d'utilisation
-              </a>
-              <a href="#" className="hover:text-secondary-foreground transition-colors">
-                Divulgation d'affiliation
-              </a>
+              <Link to="/politique-confidentialite" className="hover:text-secondary-foreground transition-colors">
+                Confidentialité
+              </Link>
+              <Link to="/conditions-utilisation" className="hover:text-secondary-foreground transition-colors">
+                Conditions
+              </Link>
+              <Link to="/divulgation-affiliation" className="hover:text-secondary-foreground transition-colors">
+                Affiliation
+              </Link>
             </div>
           </div>
           <p className="text-xs text-secondary-foreground/50 mt-4 text-center">

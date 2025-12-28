@@ -186,6 +186,77 @@ export const creditCards: CreditCard[] = [
     affiliateLink: 'https://example.com/cibc-student',
     rating: 4.0,
     lastUpdated: '2025-12-20'
+  },
+  {
+    id: '9',
+    name: 'Carte CobaltMD American Express',
+    issuer: 'American Express',
+    image: '/cards/amex-cobalt.png',
+    annualFee: 155.88, // 12.99$ par mois
+    interestRate: 20.99,
+    cashAdvanceRate: 21.99,
+    rewardsRate: 5,
+    rewardsType: 'points',
+    welcomeBonus: 'Jusqu\'à 30 000 points privilèges',
+    welcomeBonusValue: 300,
+    features: [
+      '5 points par 1$ (Épicerie et Resto)',
+      '2 points par 1$ (Voyages et Transport)',
+      '1 point par 1$ (Tout le reste)',
+      'Assurance voyage incluse'
+    ],
+    categories: ['travel', 'rewards', 'premium'],
+    affiliateLink: 'https://example.com/amex-cobalt',
+    rating: 4.9,
+    lastUpdated: '2025-12-28'
+  },
+  {
+    id: '10',
+    name: 'Carte World Elite Mastercard BNC',
+    issuer: 'Banque Nationale',
+    image: '/cards/bnc-world-elite.png',
+    annualFee: 150,
+    firstYearFreeAnnualFee: true,
+    interestRate: 20.99,
+    cashAdvanceRate: 22.99,
+    rewardsRate: 2,
+    rewardsType: 'points',
+    welcomeBonus: 'Jusqu\'à 35 000 points',
+    welcomeBonusValue: 350,
+    minIncome: 80000,
+    features: [
+      'Accès gratuit Salon Banque Nationale',
+      'Jusqu\'à 150$ de remboursement voyage',
+      'Assurance médicale hors province',
+      'Assurance annulation de voyage'
+    ],
+    categories: ['travel', 'premium', 'rewards'],
+    affiliateLink: 'https://example.com/bnc-world-elite',
+    rating: 4.7,
+    lastUpdated: '2025-12-28'
+  },
+  {
+    id: '11',
+    name: 'Mastercard Simplii Financial',
+    issuer: 'Simplii',
+    image: '/cards/simplii-cashback.png',
+    annualFee: 0,
+    interestRate: 19.99,
+    cashAdvanceRate: 22.99,
+    rewardsRate: 4,
+    rewardsType: 'cashback',
+    welcomeBonus: '10% de remise les 4 premiers mois',
+    welcomeBonusValue: 200,
+    features: [
+      '4% de remise dans les restaurants',
+      '1.5% sur l\'essence et l\'épicerie',
+      'Aucun frais annuel',
+      'Simple et sans paperasse'
+    ],
+    categories: ['cashback', 'no-fee'],
+    affiliateLink: 'https://example.com/simplii',
+    rating: 4.5,
+    lastUpdated: '2025-12-28'
   }
 ];
 

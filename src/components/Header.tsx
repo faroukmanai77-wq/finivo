@@ -2,7 +2,7 @@ import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logoFinivo from '@/assets/logo-finivo.png';
+import { LogoFinivo } from '@/components/LogoFinivo';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,12 +44,8 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <img 
-              src={logoFinivo} 
-              alt="Finivo - Comparateur de cartes de crédit au Québec" 
-              className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-300"
-            />
+          <Link to="/" className="group hover:opacity-80 transition-opacity duration-300">
+            <LogoFinivo size="lg" className="md:h-12" />
           </Link>
 
           {/* Desktop Navigation */}

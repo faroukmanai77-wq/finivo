@@ -44,7 +44,7 @@ const Blog = () => {
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <BookOpen className="w-4 h-4" />
-              Blog ComparCartes
+              Blog Finivo
             </div>
             <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
               Conseils et guides sur les <span className="gradient-text">cartes de crédit</span>

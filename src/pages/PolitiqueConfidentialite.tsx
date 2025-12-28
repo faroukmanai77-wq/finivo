@@ -46,7 +46,7 @@ Nous ne vendons jamais vos renseignements personnels à des tiers.`
 • Droit à la portabilité de vos données
 • Droit de retirer votre consentement
 
-Pour exercer ces droits, contactez-nous à : info@comparcartes.ca`
+Pour exercer ces droits, contactez-nous à : info@finivo.ca`
     },
     {
       icon: Bell,
@@ -129,8 +129,8 @@ Vous pouvez gérer vos préférences de cookies à tout moment via les paramètr
                 </p>
                 <p className="text-foreground font-medium">
                   Responsable de la protection des renseignements personnels<br />
-                  <a href="mailto:info@comparcartes.ca" className="text-primary hover:underline">
-                    info@comparcartes.ca
+                  <a href="mailto:info@finivo.ca" className="text-primary hover:underline">
+                    info@finivo.ca
                   </a>
                 </p>
               </div>

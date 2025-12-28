@@ -139,7 +139,7 @@ export const GuideSection = () => {
             {/* Left side - Content */}
             <div className="p-8 lg:p-12">
               <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-6">
-                Pourquoi utiliser ComparCartes?
+                Pourquoi utiliser Finivo?
               </h3>
               
               <div className="space-y-6 mb-8">

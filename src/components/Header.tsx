@@ -44,9 +44,9 @@ export const Header = () => {
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <CreditCard className="w-8 h-8 text-primary -rotate-12 group-hover:scale-110 transition-transform duration-300" />
+            <CreditCard className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
             <div className="flex flex-col">
-              <span className="font-bold text-xl text-foreground tracking-tight leading-tight">Finivo</span>
+              <span className="font-bold text-2xl text-foreground tracking-tight leading-tight">Finivo</span>
               <span className="text-xs text-primary font-medium flex items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full" />
                 Québec

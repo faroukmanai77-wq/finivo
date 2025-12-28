@@ -1,7 +1,8 @@
-import { CreditCard, Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import logoFinivo from '@/assets/logo-finivo.png';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,19 +44,12 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 bg-gradient-to-br from-primary via-primary/80 to-accent rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 group-hover:scale-105 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-2xl" />
-              <CreditCard className="w-6 h-6 text-primary-foreground relative z-10" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-xl text-foreground tracking-tight leading-tight">Finivo</span>
-              <span className="text-xs text-primary font-medium flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-                Québec
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logoFinivo} 
+              alt="Finivo - Comparateur de cartes de crédit au Québec" 
+              className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-300"
+            />
           </Link>
 
           {/* Desktop Navigation */}

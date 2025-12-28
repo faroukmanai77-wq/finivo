@@ -27,22 +27,6 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
     miles: 'Milles'
   };
 
-  const getIssuerGradient = (issuer: string) => {
-    const gradients: Record<string, string> = {
-      'TD': 'from-emerald-600 to-emerald-800',
-      'BMO': 'from-blue-600 to-blue-900',
-      'Desjardins': 'from-green-600 to-green-800',
-      'CIBC': 'from-red-600 to-red-800',
-      'RBC': 'from-blue-700 to-indigo-900',
-      'Tangerine': 'from-orange-500 to-orange-700',
-      'Scotiabank': 'from-red-700 to-red-900',
-      'American Express': 'from-blue-400 to-blue-600',
-      'Banque Nationale': 'from-red-600 to-red-800',
-      'Simplii': 'from-red-500 to-red-700',
-    };
-    return gradients[issuer] || 'from-secondary to-secondary/80';
-  };
-
   return (
     <Card 
       className="group card-elevated overflow-hidden opacity-0 animate-slide-up"
@@ -59,30 +43,17 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
             </div>
             
             <div className="relative z-10">
-              <div className={`w-56 h-36 rounded-2xl bg-gradient-to-br ${getIssuerGradient(card.issuer)} flex flex-col justify-between p-5 shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500`}>
-                {/* Card chip and logo */}
-                <div className="flex justify-between items-start">
-                  <div className="w-10 h-8 bg-gradient-to-br from-amber-300 to-amber-500 rounded-md opacity-90" />
-                  <div className="text-primary-foreground/90 font-bold text-sm tracking-wide">
-                    {card.issuer}
-                  </div>
+              {card.image ? (
+                <img 
+                  src={card.image} 
+                  alt={card.name}
+                  className="w-56 h-36 object-contain rounded-xl shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500"
+                />
+              ) : (
+                <div className="w-56 h-36 rounded-2xl bg-muted/50 flex items-center justify-center shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500">
+                  <span className="text-muted-foreground text-sm font-medium">{card.issuer}</span>
                 </div>
-                
-                {/* Card number placeholder */}
-                <div className="space-y-1">
-                  <div className="flex gap-3 text-primary-foreground/60 text-xs tracking-widest font-mono">
-                    <span>••••</span>
-                    <span>••••</span>
-                    <span>••••</span>
-                    <span>••••</span>
-                  </div>
-                </div>
-                
-                {/* Card name */}
-                <div className="text-primary-foreground/80 text-xs font-medium truncate">
-                  {card.name.split(' ').slice(0, 3).join(' ')}
-                </div>
-              </div>
+              )}
               
               {/* Bonus badge */}
               {card.welcomeBonus && (

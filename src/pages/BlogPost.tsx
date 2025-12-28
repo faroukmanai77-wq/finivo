@@ -7,6 +7,7 @@ import { blogPosts } from '@/data/blogPosts';
 import { blogCategoryLabels } from '@/types/blog';
 import { ArrowLeft, Calendar, Clock, Share2, User, BookOpen, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { BlogArticleContent } from '@/components/BlogArticleContent';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -135,8 +136,8 @@ const BlogPost = () => {
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <article className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-              <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>').replace(/## /g, '<h2>').replace(/### /g, '<h3>').replace(/<h2>/g, '</p><h2>').replace(/<h3>/g, '</p><h3>').replace(/<\/h2>/g, '</h2><p>').replace(/<\/h3>/g, '</h3><p>') }} />
+            <article>
+              <BlogArticleContent content={post.content} />
             </article>
 
             {/* Tags */}

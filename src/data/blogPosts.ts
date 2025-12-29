@@ -3,13 +3,13 @@ import { BlogPost } from '@/types/blog';
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'Comment choisir sa première carte de crédit au Québec en 2026',
+    title: 'Comment choisir sa première carte de crédit au Québec en 2025',
     slug: 'choisir-premiere-carte-credit-quebec',
     excerpt: 'Choisir sa première carte de crédit est une étape importante pour bâtir votre historique financier au Québec. Ce guide vous aide à comprendre les critères essentiels.',
     content: `
 ## Introduction
 
-Choisir sa première carte de crédit est une étape importante pour bâtir votre historique financier au Québec. Avec des dizaines d'offres, il peut être difficile de savoir par où commencer. Ce guide vous aide à comprendre les critères essentiels et à éviter les pièges classiques en 2026.
+Choisir sa première carte de crédit est une étape importante pour bâtir votre historique financier au Québec. Avec des dizaines d'offres, il peut être difficile de savoir par où commencer. Ce guide vous aide à comprendre les critères essentiels et à éviter les pièges classiques en 2025.
 
 ## Ce qu'il faut vérifier avant de s'inscrire
 
@@ -21,7 +21,7 @@ Choisir sa première carte de crédit est une étape importante pour bâtir votr
 | Programme de récompenses | Remises en argent vs points : dépend de vos dépenses |
 | Protection et assurances | Assurance mobile, location auto, achat… parfois inclus |
 
-## Les meilleures cartes débutant / étudiants (tendances 2026)
+## Les meilleures cartes débutant / étudiants (tendances 2025)
 
 *(Sans recommandation personnalisée – informations éducatives)*
 
@@ -47,18 +47,18 @@ Pour une première carte, privilégiez :
     `,
     coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop',
     author: 'Finivo',
-    publishedAt: '2026-01-15',
+    publishedAt: '2025-12-15',
     category: 'guides',
     readTime: 8,
-    tags: ['débutant', 'première carte', 'conseils', '2026']
+    tags: ['débutant', 'première carte', 'conseils', '2025']
   },
   {
     id: '2',
-    title: 'Les meilleures cartes cashback au Canada en 2026',
+    title: 'Les meilleures cartes cashback au Canada en 2025',
     slug: 'meilleures-cartes-cashback-2024',
-    excerpt: 'En 2026, la compétition sur les cartes cashback s\'intensifie : taux promotionnels, bonus de bienvenue, remises sectorielles. Voici les tendances clés.',
+    excerpt: 'En 2025, la compétition sur les cartes cashback s\'intensifie : taux promotionnels, bonus de bienvenue, remises sectorielles. Voici les tendances clés.',
     content: `
-## Ce qui change en 2026
+## Ce qui change en 2025
 
 - 📌 Bonus de bienvenue plus importants, mais souvent conditionnés à des dépenses minimales
 - 📌 Catégories rotationnelles (épicerie, restaurants, voyages selon le trimestre)
@@ -71,7 +71,7 @@ Pour une première carte, privilégiez :
 - 💻 **Abonnements numériques**
 - 🏨 **Voyages et hôtels**
 
-## Exemples de cartes bien positionnées en 2026
+## Exemples de cartes bien positionnées en 2025
 
 *(données génériques, à mettre à jour via affiliés une fois inscrit)*
 
@@ -80,20 +80,20 @@ Pour une première carte, privilégiez :
 | Scotia Momentum Visa Infinite | Remises élevées sur dépenses courantes |
 | BMO World Elite Cashback | Assurance + cashback sur voyages |
 | Tangerine Mastercard | Choix des catégories |
-| RBC Cash Back Preferred | Promo fréquente en 2026 |
+| RBC Cash Back Preferred | Promo fréquente en 2025 |
 
 ⚠️ **Les conditions changent souvent** : vérifiez toujours les taux et bonus à la date de l'application.
     `,
     coverImage: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&auto=format&fit=crop',
     author: 'Finivo',
-    publishedAt: '2026-01-10',
+    publishedAt: '2025-12-10',
     category: 'comparatifs',
     readTime: 6,
-    tags: ['cashback', 'comparatif', '2026']
+    tags: ['cashback', 'comparatif', '2025']
   },
   {
     id: '3',
-    title: '5 erreurs à éviter avec votre carte de crédit en 2026',
+    title: '5 erreurs à éviter avec votre carte de crédit en 2025',
     slug: '5-erreurs-eviter-carte-credit',
     excerpt: 'Beaucoup de problèmes financiers proviennent d\'une mauvaise utilisation du crédit. Voici 5 erreurs fréquentes — et comment les éviter.',
     content: `
@@ -121,26 +121,26 @@ Beaucoup de problèmes financiers proviennent d'une mauvaise utilisation du cré
 
 ➡️ Chaque carte a un profil : voyages, cashback, étudiant, premium.
 
-## Règle d'or 2026
+## Règle d'or 2025
 
 💡 **Une carte de crédit est un outil, pas une source de financement à long terme.**
     `,
     coverImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop',
     author: 'Finivo',
-    publishedAt: '2026-01-05',
+    publishedAt: '2025-12-05',
     category: 'conseils',
     readTime: 5,
-    tags: ['erreurs', 'conseils', 'cote de crédit', '2026']
+    tags: ['erreurs', 'conseils', 'cote de crédit', '2025']
   },
   {
     id: '4',
-    title: 'Nouvelles réglementations sur les cartes de crédit au Canada (2026)',
+    title: 'Nouvelles réglementations sur les cartes de crédit au Canada (2025)',
     slug: 'nouvelles-reglementations-cartes-credit-canada',
-    excerpt: 'Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2026.',
+    excerpt: 'Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2025.',
     content: `
 ## Les changements clés
 
-Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2026.
+Chaque année, le gouvernement fédéral ajuste les règles liées au crédit. Voici les points majeurs que les consommateurs doivent connaître en 2025.
 
 ### 📌 Transparence accrue sur les frais
 
@@ -166,9 +166,9 @@ Les offres doivent préciser conditions + durée + taux final.
     `,
     coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop',
     author: 'Finivo',
-    publishedAt: '2026-01-01',
+    publishedAt: '2025-12-01',
     category: 'actualites',
     readTime: 4,
-    tags: ['réglementation', 'canada', 'actualités', '2026']
+    tags: ['réglementation', 'canada', 'actualités', '2025']
   }
 ];

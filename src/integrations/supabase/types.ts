@@ -33,6 +33,7 @@ export type Database = {
           rating: number
           rewards_rate: number
           rewards_type: string
+          slug: string
           updated_at: string
           welcome_bonus: string | null
           welcome_bonus_value: number | null
@@ -55,6 +56,7 @@ export type Database = {
           rating?: number
           rewards_rate?: number
           rewards_type: string
+          slug: string
           updated_at?: string
           welcome_bonus?: string | null
           welcome_bonus_value?: number | null
@@ -77,6 +79,7 @@ export type Database = {
           rating?: number
           rewards_rate?: number
           rewards_type?: string
+          slug?: string
           updated_at?: string
           welcome_bonus?: string | null
           welcome_bonus_value?: number | null

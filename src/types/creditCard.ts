@@ -1,5 +1,6 @@
 export interface CreditCard {
   id: string;
+  slug?: string;
   name: string;
   issuer: string;
   image: string;

@@ -10,6 +10,7 @@ import { GuideSection } from '@/components/GuideSection';
 import { BlogSection } from '@/components/BlogSection';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
+import { SEO, generateOrganizationStructuredData } from '@/components/SEO';
 import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -59,6 +60,7 @@ const Index = () => {
 
         const mappedCards: CreditCard[] = (data || []).map((card) => ({
           id: card.id,
+          slug: (card as any).slug || card.id,
           name: card.name,
           issuer: card.issuer,
           image: card.image_url || '',
@@ -110,6 +112,7 @@ const Index = () => {
             const newCard = payload.new;
             setCreditCards(prev => [...prev, {
               id: newCard.id,
+              slug: newCard.slug || newCard.id,
               name: newCard.name,
               issuer: newCard.issuer,
               image: newCard.image_url || '',
@@ -138,6 +141,7 @@ const Index = () => {
               card.id === updatedCard.id 
                 ? {
                     id: updatedCard.id,
+                    slug: updatedCard.slug || updatedCard.id,
                     name: updatedCard.name,
                     issuer: updatedCard.issuer,
                     image: updatedCard.image_url || '',
@@ -225,6 +229,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Comparateur de Cartes de Crédit au Québec 2025"
+        description="Comparez plus de 30 cartes de crédit au Québec. Trouvez la meilleure carte selon vos besoins: remise en argent, voyage, sans frais annuels, étudiants. Comparaison gratuite et indépendante."
+        keywords="comparateur carte de crédit, meilleure carte de crédit Québec, carte de crédit remise en argent, carte de crédit voyage Canada, carte de crédit sans frais, carte de crédit étudiant"
+        url="https://finivo.ca"
+        structuredData={generateOrganizationStructuredData()}
+      />
       <Header />
       <Hero />
       <CategoriesSection />

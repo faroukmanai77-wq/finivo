@@ -155,7 +155,7 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
                   })}
                 </p>
                 <div className="flex gap-3">
-                  <Link to={`/carte/${card.id}`}>
+                  <Link to={`/carte/${card.slug || card.id}`}>
                     <Button 
                       variant="outline" 
                       size="sm"

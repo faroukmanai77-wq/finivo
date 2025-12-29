@@ -5,14 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { blogPosts } from '@/data/blogPosts';
 import { blogCategoryLabels } from '@/types/blog';
-import { ArrowLeft, Calendar, Clock, Share2, User, BookOpen, ArrowRight } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { ArrowLeft, Calendar, Clock, User, BookOpen, ArrowRight } from 'lucide-react';
 import { BlogArticleContent } from '@/components/BlogArticleContent';
+import { SocialShareMenu } from '@/components/SocialShareMenu';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { toast } = useToast();
   
   const post = blogPosts.find(p => p.slug === slug);
 
@@ -43,22 +42,6 @@ const BlogPost = () => {
   const relatedPosts = blogPosts
     .filter(p => p.id !== post.id && p.category === post.category)
     .slice(0, 2);
-
-  const handleShare = async () => {
-    try {
-      await navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: window.location.href
-      });
-    } catch {
-      await navigator.clipboard.writeText(window.location.href);
-      toast({
-        title: "Lien copié",
-        description: "Le lien de l'article a été copié dans le presse-papiers"
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -114,15 +97,7 @@ const BlogPost = () => {
                 <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 {post.readTime} min
               </span>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="gap-1.5 sm:gap-2 h-8 px-2 sm:px-3 text-xs sm:text-sm"
-                onClick={handleShare}
-              >
-                <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Partager</span>
-              </Button>
+              <SocialShareMenu title={post.title} />
             </div>
           </div>
         </div>

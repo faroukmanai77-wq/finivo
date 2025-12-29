@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { SEO, generateCreditCardStructuredData, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -27,6 +28,7 @@ import {
 
 interface CardDetail {
   id: string;
+  slug: string;
   name: string;
   issuer: string;
   image_url: string | null;
@@ -68,20 +70,20 @@ const issuerGradients: Record<string, string> = {
 };
 
 const CardDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [card, setCard] = useState<CardDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCard = async () => {
-      if (!id) return;
+      if (!slug) return;
       
       try {
         const { data, error } = await supabase
           .from('credit_cards')
           .select('*')
-          .eq('id', id)
+          .eq('slug', slug)
           .eq('is_active', true)
           .maybeSingle();
 
@@ -90,7 +92,7 @@ const CardDetail = () => {
         if (!data) {
           setError('Carte non trouvée');
         } else {
-          setCard(data);
+          setCard(data as unknown as CardDetail);
         }
       } catch (err) {
         console.error('Error fetching card:', err);
@@ -101,13 +103,54 @@ const CardDetail = () => {
     };
 
     fetchCard();
-  }, [id]);
+  }, [slug]);
 
   const gradient = card ? (issuerGradients[card.issuer] || issuerGradients.default) : issuerGradients.default;
+
+  // Generate SEO data
+  const generateSeoData = () => {
+    if (!card) return null;
+
+    const categoryLabels = card.categories
+      .map(cat => categoryConfig[cat]?.label)
+      .filter(Boolean)
+      .join(', ');
+
+    const title = `${card.name} - ${card.issuer} | Avis et détails`;
+    const description = `Découvrez la ${card.name} par ${card.issuer}. ${card.annual_fee === 0 ? 'Sans frais annuels.' : `Frais annuels: ${card.annual_fee}$.`} ${card.rewards_rate}% de remise. ${card.welcome_bonus ? `Bonus: ${card.welcome_bonus}.` : ''} Comparez maintenant!`;
+    const keywords = `${card.name}, ${card.issuer}, carte de crédit, ${categoryLabels}, Canada, Québec, ${card.rewards_type === 'cashback' ? 'remise en argent' : card.rewards_type === 'points' ? 'points récompenses' : 'milles aériens'}`;
+
+    return { title, description, keywords };
+  };
+
+  const seoData = generateSeoData();
+
+  const structuredData = card ? {
+    ...generateCreditCardStructuredData({
+      name: card.name,
+      issuer: card.issuer,
+      description: seoData?.description,
+      image: card.image_url || undefined,
+      rating: card.rating,
+      annualFee: card.annual_fee,
+      slug: card.slug,
+    }),
+  } : undefined;
+
+  const breadcrumbData = card ? generateBreadcrumbStructuredData([
+    { name: 'Accueil', url: 'https://finivo.ca' },
+    { name: 'Cartes de crédit', url: 'https://finivo.ca/#comparer' },
+    { name: card.name, url: `https://finivo.ca/carte/${card.slug}` },
+  ]) : undefined;
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO 
+          title="Chargement de la carte..."
+          description="Chargement des détails de la carte de crédit."
+          noindex
+        />
         <Header />
         <div className="container mx-auto px-4 py-12">
           <Skeleton className="h-8 w-32 mb-8" />
@@ -129,6 +172,11 @@ const CardDetail = () => {
   if (error || !card) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO 
+          title="Carte non trouvée"
+          description="La carte de crédit que vous recherchez n'existe pas ou n'est plus disponible."
+          noindex
+        />
         <Header />
         <div className="container mx-auto px-4 py-20">
           <div className="text-center">
@@ -154,6 +202,18 @@ const CardDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={seoData?.title}
+        description={seoData?.description}
+        keywords={seoData?.keywords}
+        image={card.image_url || undefined}
+        url={`https://finivo.ca/carte/${card.slug}`}
+        type="product"
+        structuredData={{ 
+          '@graph': [structuredData, breadcrumbData].filter(Boolean) 
+        }}
+      />
+      
       <Header />
       
       {/* Hero section */}
@@ -164,13 +224,26 @@ const CardDetail = () => {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <Link 
-            to="/#comparer" 
-            className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-secondary-foreground transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Retour aux cartes
-          </Link>
+          {/* Breadcrumb */}
+          <nav aria-label="Fil d'Ariane" className="mb-8">
+            <ol className="flex items-center gap-2 text-sm text-secondary-foreground/70">
+              <li>
+                <Link to="/" className="hover:text-secondary-foreground transition-colors">
+                  Accueil
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link to="/#comparer" className="hover:text-secondary-foreground transition-colors">
+                  Cartes
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-secondary-foreground font-medium truncate max-w-[200px]">
+                {card.name}
+              </li>
+            </ol>
+          </nav>
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Card info */}
@@ -227,12 +300,15 @@ const CardDetail = () => {
                 {card.image_url ? (
                   <img 
                     src={card.image_url} 
-                    alt={card.name}
+                    alt={`Carte de crédit ${card.name} par ${card.issuer}`}
                     className="relative w-80 h-auto max-h-64 object-contain rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                    loading="eager"
                   />
                 ) : (
                   <div 
                     className={`relative w-80 h-48 rounded-2xl bg-gradient-to-br ${gradient} shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500`}
+                    role="img"
+                    aria-label={`Représentation visuelle de la carte ${card.name}`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
                     
@@ -262,7 +338,7 @@ const CardDetail = () => {
             {/* Main content */}
             <div className="lg:col-span-2 space-y-8">
               {/* Key stats */}
-              <div className="card-elevated rounded-2xl p-6">
+              <article className="card-elevated rounded-2xl p-6">
                 <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-primary" />
                   Informations clés
@@ -299,32 +375,32 @@ const CardDetail = () => {
                     <p className="text-xl font-bold text-foreground">{card.cash_advance_rate}%</p>
                   </div>
                 </div>
-              </div>
+              </article>
               
               {/* Features */}
               {card.features && card.features.length > 0 && (
-                <div className="card-elevated rounded-2xl p-6">
+                <article className="card-elevated rounded-2xl p-6">
                   <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                     <Shield className="w-5 h-5 text-primary" />
                     Avantages et caractéristiques
                   </h2>
                   
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <ul className="grid md:grid-cols-2 gap-4">
                     {card.features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3 p-4 rounded-xl bg-muted/20 hover:bg-muted/30 transition-colors">
+                      <li key={index} className="flex items-start gap-3 p-4 rounded-xl bg-muted/20 hover:bg-muted/30 transition-colors">
                         <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Check className="w-4 h-4 text-accent" />
                         </div>
-                        <p className="text-foreground">{feature}</p>
-                      </div>
+                        <span className="text-foreground">{feature}</span>
+                      </li>
                     ))}
-                  </div>
-                </div>
+                  </ul>
+                </article>
               )}
               
               {/* Requirements */}
               {card.min_income && (
-                <div className="card-elevated rounded-2xl p-6">
+                <article className="card-elevated rounded-2xl p-6">
                   <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                     <Info className="w-5 h-5 text-primary" />
                     Conditions d'admissibilité
@@ -339,12 +415,12 @@ const CardDetail = () => {
                       <p className="text-xl font-bold text-foreground">{card.min_income.toLocaleString('fr-CA')} $</p>
                     </div>
                   </div>
-                </div>
+                </article>
               )}
             </div>
             
             {/* Sidebar - CTA */}
-            <div className="lg:col-span-1">
+            <aside className="lg:col-span-1">
               <div className="card-elevated rounded-2xl p-6 sticky top-24">
                 <div className="text-center mb-6">
                   <p className="text-sm text-muted-foreground mb-1">Frais annuels</p>
@@ -369,7 +445,7 @@ const CardDetail = () => {
                 <a 
                   href={card.affiliate_link} 
                   target="_blank" 
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                   className="block"
                 >
                   <Button className="w-full btn-gradient h-14 text-lg font-semibold gap-2">
@@ -389,7 +465,7 @@ const CardDetail = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>

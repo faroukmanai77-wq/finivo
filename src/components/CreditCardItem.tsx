@@ -35,12 +35,7 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row">
           {/* Card Image Section */}
-          <div className="lg:w-72 p-6 lg:p-8 bg-gradient-to-br from-muted/30 to-muted/10 flex items-center justify-center relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
-            </div>
+          <div className="lg:w-72 p-6 lg:p-8 flex items-center justify-center relative overflow-hidden">
             
             <div className="relative z-10">
               {card.image ? (

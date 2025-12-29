@@ -21,7 +21,7 @@ export const creditCards: CreditCard[] = [
       'Protection achats'
     ],
     categories: ['travel', 'premium', 'rewards'],
-    affiliateLink: 'https://example.com/td-aeroplan',
+    affiliateLink: 'https://www.td.com/ca/en/personal-banking/products/credit-cards/airlines/travel/td-aeroplan-visa-infinite/',
     rating: 4.8,
     lastUpdated: '2025-12-20'
   },
@@ -45,7 +45,7 @@ export const creditCards: CreditCard[] = [
       'Protection location auto'
     ],
     categories: ['cashback', 'premium', 'rewards'],
-    affiliateLink: 'https://example.com/bmo-world-elite',
+    affiliateLink: 'https://www.bmo.com/fr-ca/principal/particuliers/cartes-de-credit/carte-mastercard-bmo-remises-world-elite/',
     rating: 4.7,
     lastUpdated: '2025-12-20'
   },
@@ -69,7 +69,7 @@ export const creditCards: CreditCard[] = [
       'Gestion mobile'
     ],
     categories: ['cashback', 'no-fee'],
-    affiliateLink: 'https://example.com/desjardins-remises',
+    affiliateLink: 'https://www.desjardins.com/ca/personal/credit-cards/cash-back/',
     rating: 4.5,
     lastUpdated: '2025-12-20'
   },
@@ -92,7 +92,7 @@ export const creditCards: CreditCard[] = [
       'Apple Pay compatible'
     ],
     categories: ['cashback', 'no-fee'],
-    affiliateLink: 'https://example.com/cibc-dividendes',
+    affiliateLink: 'https://www.cibc.com/fr/personal-banking/credit-cards/all-credit-cards/dividend-visa-card.html',
     rating: 4.3,
     lastUpdated: '2025-12-20'
   },
@@ -117,7 +117,7 @@ export const creditCards: CreditCard[] = [
       'Conciergerie voyage'
     ],
     categories: ['travel', 'rewards', 'premium'],
-    affiliateLink: 'https://example.com/rbc-avion',
+    affiliateLink: 'https://www.rbcroyalbank.com/credit-cards/travel/rbc-avion-visa-infinite.html',
     rating: 4.6,
     lastUpdated: '2025-12-20'
   },
@@ -138,7 +138,7 @@ export const creditCards: CreditCard[] = [
       'Pas de revenu minimum'
     ],
     categories: ['cashback', 'no-fee', 'student'],
-    affiliateLink: 'https://example.com/tangerine',
+    affiliateLink: 'https://www.tangerine.ca/en/products/credit-cards/money-back-credit-card',
     rating: 4.4,
     lastUpdated: '2025-12-20'
   },
@@ -162,7 +162,7 @@ export const creditCards: CreditCard[] = [
       'Assurance mobile'
     ],
     categories: ['cashback', 'premium', 'rewards'],
-    affiliateLink: 'https://example.com/scotiabank-momentum',
+    affiliateLink: 'https://www.scotiabank.com/ca/en/personal/credit-cards/visa/momentum-infinite-card.html',
     rating: 4.7,
     lastUpdated: '2025-12-20'
   },
@@ -183,7 +183,7 @@ export const creditCards: CreditCard[] = [
       'Sans revenu minimum'
     ],
     categories: ['student', 'no-fee'],
-    affiliateLink: 'https://example.com/cibc-student',
+    affiliateLink: 'https://www.cibc.com/fr/personal-banking/credit-cards/all-credit-cards/classic-visa-for-students.html',
     rating: 4.0,
     lastUpdated: '2025-12-20'
   },
@@ -206,7 +206,7 @@ export const creditCards: CreditCard[] = [
       'Assurance voyage incluse'
     ],
     categories: ['travel', 'rewards', 'premium'],
-    affiliateLink: 'https://example.com/amex-cobalt',
+    affiliateLink: 'https://www.americanexpress.com/ca/en/credit-cards/card/cobalt-card/',
     rating: 4.9,
     lastUpdated: '2025-12-28'
   },
@@ -231,7 +231,7 @@ export const creditCards: CreditCard[] = [
       'Assurance annulation de voyage'
     ],
     categories: ['travel', 'premium', 'rewards'],
-    affiliateLink: 'https://example.com/bnc-world-elite',
+    affiliateLink: 'https://www.nbc.ca/personal/credit-cards/rewards/world-elite-mastercard.html',
     rating: 4.7,
     lastUpdated: '2025-12-28'
   },
@@ -254,7 +254,7 @@ export const creditCards: CreditCard[] = [
       'Simple et sans paperasse'
     ],
     categories: ['cashback', 'no-fee'],
-    affiliateLink: 'https://example.com/simplii',
+    affiliateLink: 'https://www.simplii.com/en/credit-cards/cash-back-credit-card.html',
     rating: 4.5,
     lastUpdated: '2025-12-28'
   }

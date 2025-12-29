@@ -29,7 +29,7 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
 
   return (
     <Card 
-      className="group card-elevated overflow-hidden opacity-0 animate-slide-up"
+      className="group card-elevated overflow-hidden opacity-0 animate-slide-up bg-background"
       style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
     >
       <CardContent className="p-0">

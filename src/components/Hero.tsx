@@ -60,41 +60,41 @@ export const Hero = () => {
               bonus de bienvenue, et conseils personnalisés.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 mb-10 sm:mb-12">
               <Button 
                 size="lg" 
-                className="btn-gradient text-lg h-14 px-8 gap-3 font-semibold group"
+                className="btn-gradient text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 gap-2 sm:gap-3 font-semibold group w-full sm:w-auto"
                 onClick={() => scrollToSection('comparer')}
               >
-                <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                 Comparer les cartes
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="h-14 px-8 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/20 font-semibold gap-2 group"
+                className="h-12 sm:h-14 px-6 sm:px-8 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/20 font-semibold gap-2 group w-full sm:w-auto text-base sm:text-lg"
                 onClick={() => scrollToSection('guide')}
               >
-                <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                 Comment ça marche
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-8 lg:gap-12">
-              <div className="opacity-0 animate-scale-in" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-                <p className="text-4xl lg:text-5xl font-extrabold text-secondary-foreground">50+</p>
-                <p className="text-sm text-secondary-foreground/60 font-medium mt-1">Cartes comparées</p>
+            <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-8 lg:gap-12">
+              <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-secondary-foreground">50+</p>
+                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Cartes comparées</p>
               </div>
-              <div className="w-px h-12 bg-secondary-foreground/20" />
-              <div className="opacity-0 animate-scale-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-                <p className="text-4xl lg:text-5xl font-extrabold text-primary">Live</p>
-                <p className="text-sm text-secondary-foreground/60 font-medium mt-1">Taux en temps réel</p>
+              <div className="w-px h-10 sm:h-12 bg-secondary-foreground/20" />
+              <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-primary">Live</p>
+                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Taux en temps réel</p>
               </div>
-              <div className="w-px h-12 bg-secondary-foreground/20" />
-              <div className="opacity-0 animate-scale-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
-                <p className="text-4xl lg:text-5xl font-extrabold text-accent">100%</p>
-                <p className="text-sm text-secondary-foreground/60 font-medium mt-1">Gratuit</p>
+              <div className="w-px h-10 sm:h-12 bg-secondary-foreground/20" />
+              <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-accent">100%</p>
+                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Gratuit</p>
               </div>
             </div>
           </div>

@@ -127,7 +127,7 @@ const Blog = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground">
+                      <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground ml-2">
                         {blogCategoryLabels[post.category]}
                       </Badge>
                     </div>

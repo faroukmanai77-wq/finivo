@@ -86,7 +86,40 @@ const InteretsComposes = () => {
       relatedCategory="investissement"
       featuredCardType="cashback"
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="space-y-8">
+        {/* Section explicative */}
+        <Card className="bg-muted/50">
+          <CardContent className="pt-6">
+            <h2 className="text-lg font-semibold mb-3">Qu'est-ce que les intérêts composés?</h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                Les <strong>intérêts composés</strong> sont souvent appelés « la huitième merveille du monde ». C'est le processus par lequel vos intérêts génèrent eux-mêmes des intérêts, créant un effet boule de neige sur vos placements au fil du temps.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Comment ça fonctionne</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Vos intérêts s'ajoutent au capital</li>
+                    <li>Le nouveau capital génère plus d'intérêts</li>
+                    <li>La croissance s'accélère avec le temps</li>
+                    <li>Plus vous commencez tôt, mieux c'est</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Facteurs clés</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li><strong>Temps</strong> : le facteur le plus puissant</li>
+                    <li><strong>Taux</strong> : même 1% de plus fait une différence</li>
+                    <li><strong>Fréquence</strong> : composition mensuelle &gt; annuelle</li>
+                    <li><strong>Régularité</strong> : les versements réguliers amplifient l'effet</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid lg:grid-cols-2 gap-8">
         {/* Formulaire */}
         <Card>
           <CardHeader>
@@ -278,6 +311,7 @@ const InteretsComposes = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
         </div>
       </div>
     </CalculatorLayout>

@@ -5,13 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Star, ExternalLink, Gift, Check, TrendingUp } from 'lucide-react';
 import { categoryLabels } from '@/data/creditCards';
-
 interface CreditCardItemProps {
   card: CreditCard;
   index?: number;
 }
-
-export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
+export const CreditCardItem = ({
+  card,
+  index = 0
+}: CreditCardItemProps) => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('fr-CA', {
       style: 'currency',
@@ -20,43 +21,30 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
       maximumFractionDigits: 0
     }).format(amount);
   };
-
   const rewardsTypeLabel = {
     cashback: 'Remise',
     points: 'Points',
     miles: 'Milles'
   };
-
-  return (
-    <Card 
-      className="group card-elevated overflow-hidden opacity-0 animate-slide-up bg-background"
-      style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
-    >
+  return <Card className="group card-elevated overflow-hidden opacity-0 animate-slide-up bg-background" style={{
+    animationDelay: `${index * 0.1}s`,
+    animationFillMode: 'forwards'
+  }}>
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row">
           {/* Card Image Section */}
-          <div className="lg:w-72 p-6 lg:p-8 flex items-center justify-center relative overflow-hidden">
+          <div className="lg:w-72 p-6 lg:p-8 flex items-center justify-center relative overflow-hidden bg-primary-foreground">
             
             <div className="relative z-10">
-              {card.image ? (
-                <img 
-                  src={card.image} 
-                  alt={card.name}
-                  className="w-56 h-36 object-contain rounded-xl shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500"
-                />
-              ) : (
-                <div className="w-56 h-36 rounded-2xl bg-muted/50 flex items-center justify-center shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500">
+              {card.image ? <img src={card.image} alt={card.name} className="w-56 h-36 object-contain rounded-xl shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500" /> : <div className="w-56 h-36 rounded-2xl bg-muted/50 flex items-center justify-center shadow-2xl transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-500">
                   <span className="text-muted-foreground text-sm font-medium">{card.issuer}</span>
-                </div>
-              )}
+                </div>}
               
               {/* Bonus badge */}
-              {card.welcomeBonus && (
-                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-accent to-emerald-500 text-accent-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1.5 animate-pulse-slow">
+              {card.welcomeBonus && <div className="absolute -top-3 -right-3 bg-gradient-to-r from-accent to-emerald-500 text-accent-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1.5 animate-pulse-slow">
                   <Gift className="w-3.5 h-3.5" />
                   Bonus
-                </div>
-              )}
+                </div>}
             </div>
           </div>
 
@@ -76,19 +64,12 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
                 </div>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {card.categories.map((category) => (
-                    <Badge 
-                      key={category} 
-                      variant="secondary" 
-                      className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary border-0 hover:bg-primary/20 transition-colors"
-                    >
+                  {card.categories.map(category => <Badge key={category} variant="secondary" className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary border-0 hover:bg-primary/20 transition-colors">
                       {categoryLabels[category]}
-                    </Badge>
-                  ))}
+                    </Badge>)}
                 </div>
 
-                {card.welcomeBonus && (
-                  <div className="bg-gradient-to-r from-accent/10 to-emerald-500/10 border border-accent/20 text-foreground px-4 py-3 rounded-xl mb-4 flex items-center gap-3">
+                {card.welcomeBonus && <div className="bg-gradient-to-r from-accent/10 to-emerald-500/10 border border-accent/20 text-foreground px-4 py-3 rounded-xl mb-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
                       <Gift className="w-5 h-5 text-accent" />
                     </div>
@@ -96,8 +77,7 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
                       <p className="text-xs text-muted-foreground font-medium">Bonus de bienvenue</p>
                       <p className="text-sm font-semibold text-foreground">{card.welcomeBonus}</p>
                     </div>
-                  </div>
-                )}
+                  </div>}
               </div>
 
               {/* Stats Grid */}
@@ -105,15 +85,9 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
                 <div className="stat-card text-center">
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Frais annuels</p>
                   <p className="text-xl font-bold">
-                    {card.annualFee === 0 ? (
-                      <span className="text-accent">Gratuit</span>
-                    ) : (
-                      <span className="text-foreground">{formatCurrency(card.annualFee)}</span>
-                    )}
+                    {card.annualFee === 0 ? <span className="text-accent">Gratuit</span> : <span className="text-foreground">{formatCurrency(card.annualFee)}</span>}
                   </p>
-                  {card.firstYearFreeAnnualFee && card.annualFee > 0 && (
-                    <p className="text-xs text-accent font-medium mt-1">1ère année gratuite</p>
-                  )}
+                  {card.firstYearFreeAnnualFee && card.annualFee > 0 && <p className="text-xs text-accent font-medium mt-1">1ère année gratuite</p>}
                 </div>
 
                 <div className="stat-card text-center">
@@ -137,38 +111,28 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
 
               {/* Features */}
               <div className="flex flex-wrap gap-2">
-                {card.features.slice(0, 4).map((feature, idx) => (
-                  <span key={idx} className="feature-badge">
+                {card.features.slice(0, 4).map((feature, idx) => <span key={idx} className="feature-badge">
                     <Check className="w-3 h-3 text-accent" />
                     {feature}
-                  </span>
-                ))}
+                  </span>)}
               </div>
 
               {/* CTA Section */}
               <div className="flex flex-col sm:flex-row items-center justify-between pt-5 border-t border-border/50 gap-4">
                 <p className="text-xs text-muted-foreground">
-                  Mis à jour: {new Date(card.lastUpdated).toLocaleDateString('fr-CA', { 
-                    day: 'numeric', 
-                    month: 'short', 
-                    year: 'numeric' 
-                  })}
+                  Mis à jour: {new Date(card.lastUpdated).toLocaleDateString('fr-CA', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric'
+                })}
                 </p>
                 <div className="flex gap-3">
                   <Link to={`/carte/${card.slug || card.id}`}>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="font-medium hover:bg-muted/50"
-                    >
+                    <Button variant="outline" size="sm" className="font-medium hover:bg-muted/50">
                       Voir détails
                     </Button>
                   </Link>
-                  <Button 
-                    asChild 
-                    size="sm" 
-                    className="btn-success font-semibold gap-2"
-                  >
+                  <Button asChild size="sm" className="btn-success font-semibold gap-2">
                     <a href={card.affiliateLink} target="_blank" rel="noopener noreferrer">
                       Faire une demande
                       <ExternalLink className="w-4 h-4" />
@@ -180,6 +144,5 @@ export const CreditCardItem = ({ card, index = 0 }: CreditCardItemProps) => {
           </div>
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };

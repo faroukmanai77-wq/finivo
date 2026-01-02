@@ -129,6 +129,38 @@ const EpargneCELIAPP = () => {
       featuredCardType="cashback"
     >
       <div className="space-y-8">
+        {/* Section explicative */}
+        <Card className="bg-muted/50">
+          <CardContent className="pt-6">
+            <h2 className="text-lg font-semibold mb-3">Qu'est-ce que le CELIAPP?</h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                Le <strong>Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP)</strong> est un nouveau régime enregistré qui combine les avantages du REER et du CELI. Il vous permet d'économiser jusqu'à 40 000 $ à l'abri de l'impôt pour l'achat de votre première maison.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Avantages du CELIAPP</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Cotisations déductibles d'impôt (comme le REER)</li>
+                    <li>Retraits non imposables pour achat (comme le CELI)</li>
+                    <li>Maximum de 8 000 $ par année</li>
+                    <li>Plafond à vie de 40 000 $</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Conditions d'admissibilité</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Être âgé de 18 à 71 ans</li>
+                    <li>Être résident canadien</li>
+                    <li>Ne pas avoir été propriétaire dans les 4 dernières années</li>
+                    <li>Utiliser les fonds dans les 15 ans</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Vérification admissibilité */}
         <Card>
           <CardHeader>

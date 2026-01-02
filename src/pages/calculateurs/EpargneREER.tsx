@@ -92,6 +92,38 @@ const EpargneREER = () => {
       featuredCardType="cashback"
     >
       <div className="space-y-8">
+        {/* Section explicative */}
+        <Card className="bg-muted/50">
+          <CardContent className="pt-6">
+            <h2 className="text-lg font-semibold mb-3">Qu'est-ce qu'un REER?</h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                Le <strong>Régime enregistré d'épargne-retraite (REER)</strong> est un compte d'épargne à l'abri de l'impôt conçu pour vous aider à épargner pour la retraite. Les cotisations que vous faites à votre REER sont déductibles de votre revenu imposable, ce qui réduit l'impôt que vous payez cette année-là.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Avantages du REER</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Cotisations déductibles d'impôt</li>
+                    <li>Croissance à l'abri de l'impôt</li>
+                    <li>Report d'impôt jusqu'au retrait</li>
+                    <li>Peut réduire votre taux d'imposition</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Règles importantes</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Limite de cotisation : 18% du revenu (max ~31 560 $ en 2024)</li>
+                    <li>Les droits inutilisés sont reportés</li>
+                    <li>Retraits imposables à votre taux marginal</li>
+                    <li>À convertir en FERR avant 71 ans</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Phase travail */}
           <Card>

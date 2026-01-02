@@ -231,7 +231,7 @@ const CreditCardComparator = () => {
             <span>/</span>
             <span>Comparateurs</span>
             <span>/</span>
-            <span className="text-foreground">Cartes de crédit</span>
+            <span className="text-muted">Cartes de crédit</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -247,14 +247,7 @@ const CreditCardComparator = () => {
                 Trouvez la carte parfaite selon vos besoins. Tous les taux sont mis à jour en temps réel.
               </p>
             </div>
-            <div className="flex gap-3">
-              <Button className="btn-gradient font-semibold gap-2" onClick={() => document.getElementById('cards-list')?.scrollIntoView({
-              behavior: 'smooth'
-            })}>
-                <Sparkles className="w-4 h-4" />
-                Voir les cartes
-              </Button>
-            </div>
+            
           </div>
 
           {/* Category quick filters */}

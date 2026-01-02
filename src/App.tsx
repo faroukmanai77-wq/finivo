@@ -4,8 +4,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import Index from "./pages/Index";
+import Landing from "./pages/Landing";
+import CreditCardComparator from "./pages/CreditCardComparator";
 import CardDetail from "./pages/CardDetail";
+import Calculateurs from "./pages/Calculateurs";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
@@ -23,8 +25,10 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/comparateurs/cartes-de-credit" element={<CreditCardComparator />} />
             <Route path="/carte/:slug" element={<CardDetail />} />
+            <Route path="/calculateurs" element={<Calculateurs />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />

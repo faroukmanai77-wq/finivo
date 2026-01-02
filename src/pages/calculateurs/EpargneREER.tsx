@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PiggyBank } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,6 +9,28 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
+const faqItems = [
+  {
+    question: "Quelle est la limite de cotisation REER pour 2024?",
+    answer: "Pour 2024, la limite de cotisation REER est de 18% de votre revenu gagné de l'année précédente, jusqu'à un maximum de 31 560 $. Vos droits de cotisation inutilisés des années précédentes s'accumulent et sont reportés."
+  },
+  {
+    question: "Quand dois-je cotiser à mon REER?",
+    answer: "Vous pouvez cotiser à votre REER tout au long de l'année et jusqu'au 60e jour de l'année suivante pour que la cotisation soit déductible de vos revenus de l'année précédente. Par exemple, pour l'année d'imposition 2024, vous avez jusqu'au 1er mars 2025."
+  },
+  {
+    question: "REER ou CELI : lequel choisir?",
+    answer: "Le REER est généralement préférable si votre taux d'imposition actuel est plus élevé qu'à la retraite, car il offre une déduction immédiate. Le CELI est avantageux si vous prévoyez un taux d'imposition similaire ou plus élevé à la retraite, ou si vous voulez plus de flexibilité pour les retraits."
+  },
+  {
+    question: "Puis-je retirer de mon REER avant la retraite?",
+    answer: "Oui, mais les retraits sont imposables comme revenu ordinaire. Deux exceptions : le Régime d'accession à la propriété (RAP) permet de retirer jusqu'à 60 000 $ pour une première maison, et le Régime d'encouragement à l'éducation permanente (REEP) permet de retirer jusqu'à 20 000 $ pour les études."
+  },
+  {
+    question: "Que se passe-t-il avec mon REER à 71 ans?",
+    answer: "À la fin de l'année où vous atteignez 71 ans, vous devez convertir votre REER en FERR (Fonds enregistré de revenu de retraite), acheter une rente, ou retirer le solde. Le FERR vous oblige à effectuer des retraits minimums annuels."
+  }
+];
 const EpargneREER = () => {
   const [soldeActuel, setSoldeActuel] = useState(25000);
   const [cotisationAnnuelle, setCotisationAnnuelle] = useState(6000);
@@ -347,6 +370,8 @@ const EpargneREER = () => {
             </div>
           </CardContent>
         </Card>
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>
   );

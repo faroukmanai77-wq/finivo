@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Home, CheckCircle2, XCircle } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,28 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
+const faqItems = [
+  {
+    question: "Quelle est la limite de cotisation annuelle au CELIAPP?",
+    answer: "La limite de cotisation annuelle au CELIAPP est de 8 000 $. Contrairement au REER, vous ne pouvez pas reporter les droits de cotisation inutilisés à l'année suivante, sauf à partir de 2024 où vous pouvez reporter jusqu'à 8 000 $ de droits inutilisés."
+  },
+  {
+    question: "Puis-je avoir un CELIAPP si j'ai été propriétaire il y a 5 ans?",
+    answer: "Oui! Vous êtes admissible si vous n'avez pas été propriétaire d'une habitation au cours de l'année d'ouverture du compte ni au cours des quatre années civiles précédentes. Si vous étiez propriétaire il y a 5 ans ou plus, vous êtes admissible."
+  },
+  {
+    question: "Que se passe-t-il si je n'achète pas de maison?",
+    answer: "Vous avez 15 ans après l'ouverture du compte pour utiliser les fonds. Après ce délai, ou si vous décidez de ne pas acheter, vous pouvez transférer les fonds dans votre REER sans affecter vos droits de cotisation, ou retirer les fonds de façon imposable."
+  },
+  {
+    question: "Puis-je combiner le CELIAPP avec le RAP?",
+    answer: "Oui! Vous pouvez utiliser à la fois le CELIAPP et le Régime d'accession à la propriété (RAP) pour votre mise de fonds. Cela vous donne accès à jusqu'à 100 000 $ (40 000 $ CELIAPP + 60 000 $ RAP) pour votre première propriété."
+  },
+  {
+    question: "Le CELIAPP est-il mieux que le REER pour acheter une maison?",
+    answer: "Pour l'achat d'une première propriété, le CELIAPP est généralement plus avantageux car les retraits sont non imposables, contrairement au RAP où vous devez rembourser votre REER sur 15 ans. Les cotisations CELIAPP sont aussi déductibles d'impôt."
+  }
+];
 const EpargneCELIAPP = () => {
   const [age, setAge] = useState(28);
   const [estResident, setEstResident] = useState(true);
@@ -431,6 +454,8 @@ const EpargneCELIAPP = () => {
             )}
           </>
         )}
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>
   );

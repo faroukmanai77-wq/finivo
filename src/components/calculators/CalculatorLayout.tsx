@@ -66,7 +66,7 @@ export const CalculatorLayout = ({
       <Header />
       
       {/* Hero Section */}
-      <section className="py-10 lg:py-14 bg-[#89a5b8]">
+      <section className="py-10 lg:py-14 bg-secondary">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
@@ -74,7 +74,7 @@ export const CalculatorLayout = ({
             <span>/</span>
             <Link to="/calculateurs" className="hover:text-foreground transition-colors">Calculateurs</Link>
             <span>/</span>
-            <span className="text-foreground">{title}</span>
+            <span className="text-primary-foreground">{title}</span>
           </nav>
 
           <div className="flex items-start gap-6">

@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { blogPosts } from '@/data/blogPosts';
@@ -18,6 +19,11 @@ const BlogPost = () => {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO 
+          title="Article non trouvé | Finivo"
+          description="L'article que vous recherchez n'existe pas ou a été déplacé."
+          noindex
+        />
         <Header />
         <div className="container mx-auto px-4 py-16 sm:py-20 text-center">
           <div className="max-w-md mx-auto">
@@ -43,8 +49,51 @@ const BlogPost = () => {
     .filter(p => p.id !== post.id && p.category === post.category)
     .slice(0, 2);
 
+  const breadcrumbs = [
+    { name: 'Accueil', url: 'https://finivo.ca' },
+    { name: 'Blog', url: 'https://finivo.ca/blog' },
+    { name: post.title, url: `https://finivo.ca/blog/${post.slug}` }
+  ];
+
+  const articleStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage,
+    author: {
+      '@type': 'Person',
+      name: post.author
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Finivo',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://finivo.ca/favicon.png'
+      }
+    },
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://finivo.ca/blog/${post.slug}`
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={`${post.title} | Blog Finivo`}
+        description={post.excerpt}
+        keywords={post.tags.join(', ')}
+        image={post.coverImage}
+        url={`https://finivo.ca/blog/${post.slug}`}
+        type="article"
+        structuredData={{
+          '@graph': [articleStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
+        }}
+      />
       <Header />
       
       {/* Hero */}

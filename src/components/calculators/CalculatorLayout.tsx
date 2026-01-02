@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { SEO } from '@/components/SEO';
+import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { ArrowRight, Calculator } from 'lucide-react';
 import { RecommendedArticles } from './RecommendedArticles';
 import { FeaturedCard } from './FeaturedCard';
@@ -32,6 +32,32 @@ export const CalculatorLayout = ({
   relatedCategory = 'investissement',
   featuredCardType
 }: CalculatorLayoutProps) => {
+  const breadcrumbs = [
+    { name: 'Accueil', url: 'https://finivo.ca' },
+    { name: 'Calculateurs', url: 'https://finivo.ca/calculateurs' },
+    { name: title, url }
+  ];
+
+  const calculatorStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: seoTitle,
+    description: seoDescription,
+    url,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'All',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'CAD'
+    },
+    provider: {
+      '@type': 'Organization',
+      name: 'Finivo',
+      url: 'https://finivo.ca'
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 
@@ -39,6 +65,9 @@ export const CalculatorLayout = ({
         description={seoDescription}
         keywords={seoKeywords}
         url={url}
+        structuredData={{
+          '@graph': [calculatorStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
+        }}
       />
       <Header />
       
@@ -46,7 +75,7 @@ export const CalculatorLayout = ({
       <section className="bg-secondary py-10 lg:py-14">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+          <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <Link to="/calculateurs" className="hover:text-foreground transition-colors">Calculateurs</Link>

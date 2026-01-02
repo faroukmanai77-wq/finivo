@@ -8,6 +8,12 @@ import Landing from "./pages/Landing";
 import CreditCardComparator from "./pages/CreditCardComparator";
 import CardDetail from "./pages/CardDetail";
 import Calculateurs from "./pages/Calculateurs";
+import InteretsComposes from "./pages/calculateurs/InteretsComposes";
+import EpargneREER from "./pages/calculateurs/EpargneREER";
+import EpargneCELIAPP from "./pages/calculateurs/EpargneCELIAPP";
+import ConsolidationDettes from "./pages/calculateurs/ConsolidationDettes";
+import ValeurNette from "./pages/calculateurs/ValeurNette";
+import ImpotCanada from "./pages/calculateurs/ImpotCanada";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
@@ -29,6 +35,12 @@ const App = () => (
             <Route path="/comparateurs/cartes-de-credit" element={<CreditCardComparator />} />
             <Route path="/carte/:slug" element={<CardDetail />} />
             <Route path="/calculateurs" element={<Calculateurs />} />
+            <Route path="/calculateurs/interets-composes" element={<InteretsComposes />} />
+            <Route path="/calculateurs/reer" element={<EpargneREER />} />
+            <Route path="/calculateurs/celiapp" element={<EpargneCELIAPP />} />
+            <Route path="/calculateurs/consolidation-dettes" element={<ConsolidationDettes />} />
+            <Route path="/calculateurs/valeur-nette" element={<ValeurNette />} />
+            <Route path="/calculateurs/impot" element={<ImpotCanada />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />

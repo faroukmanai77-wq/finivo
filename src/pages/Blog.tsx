@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -34,8 +35,20 @@ const Blog = () => {
 
   const categories: BlogCategory[] = ['guides', 'conseils', 'comparatifs', 'actualites'];
 
+  const breadcrumbs = [
+    { name: 'Accueil', url: 'https://finivo.ca' },
+    { name: 'Blog', url: 'https://finivo.ca/blog' }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Blog Finivo - Guides et Conseils sur les Cartes de Crédit au Québec"
+        description="Découvrez nos guides complets, conseils d'experts et actualités sur les cartes de crédit au Canada. Apprenez à maximiser vos récompenses et faire les meilleurs choix financiers."
+        keywords="blog carte de crédit, conseils finances personnelles, guide carte crédit Québec, meilleure carte remise argent, points voyage Canada, actualités finances"
+        url="https://finivo.ca/blog"
+        structuredData={generateBreadcrumbStructuredData(breadcrumbs)}
+      />
       <Header />
       
       {/* Hero Section */}

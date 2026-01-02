@@ -243,7 +243,7 @@ const CreditCardComparator = () => {
               <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-secondary-foreground">
                 Comparez les cartes de crédit au Québec
               </h1>
-              <p className="text-muted-foreground max-w-2xl text-lg">
+              <p className="max-w-2xl text-lg text-muted">
                 Trouvez la carte parfaite selon vos besoins. Tous les taux sont mis à jour en temps réel.
               </p>
             </div>

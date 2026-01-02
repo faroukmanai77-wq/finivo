@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { CreditCard, Plus, Trash2 } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,6 +9,30 @@ import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
+
+const faqItems = [
+  {
+    question: "Qu'est-ce que la consolidation de dettes?",
+    answer: "La consolidation de dettes consiste à regrouper plusieurs dettes (cartes de crédit, prêts personnels, etc.) en un seul prêt avec un taux d'intérêt généralement plus bas. Cela simplifie vos paiements et peut réduire le montant total des intérêts payés."
+  },
+  {
+    question: "Quand devrais-je considérer la consolidation de dettes?",
+    answer: "Considérez la consolidation si vous avez plusieurs dettes à taux d'intérêt élevé, si vous avez du mal à suivre vos paiements multiples, ou si vous pouvez obtenir un taux d'intérêt inférieur à la moyenne de vos dettes actuelles."
+  },
+  {
+    question: "Quelles sont les options de consolidation au Canada?",
+    answer: "Les options incluent : un prêt de consolidation bancaire (5-12%), une marge de crédit hypothécaire (taux hypothécaire + prime), un transfert de solde sur carte de crédit (0-3% promotionnel), ou un prêt personnel d'une coopérative de crédit."
+  },
+  {
+    question: "La consolidation affecte-t-elle ma cote de crédit?",
+    answer: "À court terme, une demande de prêt peut légèrement réduire votre cote. Cependant, à long terme, la consolidation peut améliorer votre cote en réduisant votre ratio d'utilisation du crédit et en vous aidant à effectuer des paiements réguliers."
+  },
+  {
+    question: "Quelle est la différence entre consolidation et faillite?",
+    answer: "La consolidation est un accord volontaire pour rembourser vos dettes intégralement à un taux réduit. La faillite est une procédure légale qui peut éliminer certaines dettes mais a un impact sévère sur votre crédit pendant 6-7 ans."
+  }
+];
+
 interface Dette {
   id: string;
   nom: string;
@@ -280,6 +305,40 @@ const ConsolidationDettes = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Section explicative */}
+        <Card className="bg-muted/50">
+          <CardContent className="pt-6">
+            <h2 className="text-lg font-semibold mb-3">Comprendre la consolidation de dettes</h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                La <strong>consolidation de dettes</strong> est une stratégie qui consiste à regrouper plusieurs dettes en un seul prêt. L'objectif est d'obtenir un taux d'intérêt plus bas et de simplifier la gestion de vos finances.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Avantages</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Un seul paiement mensuel à gérer</li>
+                    <li>Taux d'intérêt potentiellement plus bas</li>
+                    <li>Économies sur les intérêts totaux</li>
+                    <li>Meilleure visibilité sur le remboursement</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Points d'attention</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Évitez d'accumuler de nouvelles dettes</li>
+                    <li>Comparez les frais de dossier</li>
+                    <li>Vérifiez les pénalités de remboursement anticipé</li>
+                    <li>Assurez-vous que le nouveau paiement est abordable</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>;
 };

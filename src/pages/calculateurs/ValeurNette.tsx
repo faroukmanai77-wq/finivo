@@ -1,11 +1,35 @@
 import { useState, useMemo } from 'react';
 import { Wallet, Plus, Trash2 } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+
+const faqItems = [
+  {
+    question: "Qu'est-ce que la valeur nette?",
+    answer: "La valeur nette est la différence entre ce que vous possédez (actifs) et ce que vous devez (passifs). C'est un indicateur clé de votre santé financière qui montre votre richesse réelle à un moment donné."
+  },
+  {
+    question: "Quelle devrait être ma valeur nette selon mon âge?",
+    answer: "Une règle générale suggère que votre valeur nette devrait être égale à votre âge multiplié par votre revenu annuel brut, divisé par 10. Par exemple, à 40 ans avec un revenu de 80 000 $, visez 320 000 $. Ceci est une approximation et varie selon votre situation."
+  },
+  {
+    question: "Devrais-je inclure ma résidence principale dans mes actifs?",
+    answer: "Oui, votre résidence principale est un actif important. Utilisez sa valeur marchande estimée, pas le prix d'achat. N'oubliez pas de soustraire le solde de votre hypothèque dans vos passifs pour refléter votre avoir propre réel."
+  },
+  {
+    question: "Comment puis-je augmenter ma valeur nette?",
+    answer: "Augmentez vos actifs (épargne, investissements, remboursement du capital hypothécaire) et réduisez vos passifs (remboursement des dettes, éviter de nouvelles dettes). L'investissement régulier et la réduction des dettes à taux élevé sont les stratégies les plus efficaces."
+  },
+  {
+    question: "À quelle fréquence devrais-je calculer ma valeur nette?",
+    answer: "Calculez votre valeur nette au moins une fois par an, idéalement au même moment chaque année pour faciliter la comparaison. Un suivi trimestriel peut vous aider à rester motivé et à ajuster votre stratégie financière."
+  }
+];
 
 interface LigneFinanciere {
   id: string;
@@ -164,6 +188,38 @@ const ValeurNette = () => {
       featuredCardType="cashback"
     >
       <div className="space-y-8">
+        {/* Section explicative */}
+        <Card className="bg-muted/50">
+          <CardContent className="pt-6">
+            <h2 className="text-lg font-semibold mb-3">Comprendre votre valeur nette</h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                Votre <strong>valeur nette</strong> représente votre richesse réelle : la différence entre tout ce que vous possédez (actifs) et tout ce que vous devez (passifs). C'est le meilleur indicateur de votre santé financière globale.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Vos actifs incluent</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Comptes bancaires et épargne</li>
+                    <li>Placements (REER, CELI, actions)</li>
+                    <li>Immobilier (valeur marchande)</li>
+                    <li>Véhicules et biens personnels</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">Vos passifs incluent</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Hypothèque (solde restant)</li>
+                    <li>Prêts auto et personnels</li>
+                    <li>Soldes de cartes de crédit</li>
+                    <li>Prêts étudiants</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Résultat principal */}
         <Card className={`${resultats.valeurNette >= 0 ? 'bg-primary' : 'bg-destructive'} text-primary-foreground`}>
           <CardContent className="pt-6">
@@ -466,6 +522,8 @@ const ValeurNette = () => {
             )}
           </div>
         </div>
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>
   );

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Receipt } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,6 +9,29 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
+
+const faqItems = [
+  {
+    question: "Quelle est la différence entre le taux marginal et le taux effectif?",
+    answer: "Le taux marginal est le pourcentage d'impôt que vous payez sur votre prochain dollar gagné. Le taux effectif (ou moyen) est le pourcentage total d'impôt que vous payez sur l'ensemble de vos revenus. Votre taux effectif est toujours inférieur à votre taux marginal."
+  },
+  {
+    question: "Comment puis-je réduire mon impôt à payer?",
+    answer: "Les principales stratégies incluent : cotiser à votre REER ou CELIAPP (déductions), maximiser vos crédits d'impôt (frais médicaux, dons), fractionner le revenu avec votre conjoint, et planifier le moment de vos revenus et déductions."
+  },
+  {
+    question: "Quand dois-je produire ma déclaration d'impôt?",
+    answer: "La date limite est généralement le 30 avril pour les particuliers et le 15 juin pour les travailleurs autonomes (mais les impôts dus doivent être payés avant le 30 avril). Un retard peut entraîner des pénalités et des intérêts."
+  },
+  {
+    question: "Dois-je payer de l'impôt provincial et fédéral?",
+    answer: "Oui, au Canada, vous payez à la fois l'impôt fédéral et l'impôt provincial. Le Québec perçoit son propre impôt provincial (vous devez produire deux déclarations), tandis que les autres provinces ont un système intégré avec le fédéral."
+  },
+  {
+    question: "Qu'est-ce que l'abattement du Québec?",
+    answer: "Les résidents du Québec reçoivent un abattement de 16,5% sur leur impôt fédéral parce que le Québec administre ses propres programmes sociaux. Cet abattement réduit l'impôt fédéral, mais le Québec a ses propres taux d'imposition provinciaux."
+  }
+];
 
 // Tranches d'imposition fédérales 2025
 const TRANCHES_FEDERALES = [
@@ -451,6 +475,8 @@ const ImpotCanada = () => {
             </Table>
           </CardContent>
         </Card>
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>
   );

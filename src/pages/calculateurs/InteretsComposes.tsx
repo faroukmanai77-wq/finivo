@@ -1,14 +1,36 @@
 import { useState, useMemo } from 'react';
 import { TrendingUp } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
+import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
+const faqItems = [
+  {
+    question: "Comment fonctionnent les intérêts composés?",
+    answer: "Les intérêts composés fonctionnent en réinvestissant automatiquement vos gains. Chaque période, les intérêts sont calculés sur le capital initial plus tous les intérêts accumulés précédemment, créant un effet d'accélération exponentielle de votre épargne."
+  },
+  {
+    question: "Quelle est la différence entre intérêts simples et composés?",
+    answer: "Les intérêts simples sont calculés uniquement sur le capital initial, tandis que les intérêts composés sont calculés sur le capital plus les intérêts déjà accumulés. Sur le long terme, cette différence peut représenter des milliers de dollars."
+  },
+  {
+    question: "À quelle fréquence les intérêts devraient-ils être composés?",
+    answer: "Plus la fréquence de composition est élevée, plus vos gains seront importants. La composition mensuelle génère plus de rendement que la composition annuelle. Certains placements offrent même une composition quotidienne."
+  },
+  {
+    question: "Pourquoi commencer à investir tôt est-il si important?",
+    answer: "Le temps est le facteur le plus puissant des intérêts composés. Une personne qui investit 200$/mois de 25 à 35 ans (10 ans) aura souvent plus d'argent à 65 ans qu'une personne qui investit 200$/mois de 35 à 65 ans (30 ans)."
+  },
+  {
+    question: "Quel taux de rendement est réaliste?",
+    answer: "Historiquement, le marché boursier canadien a généré environ 7-8% par année sur le long terme. Un compte d'épargne offre 2-4%, tandis qu'un portefeuille équilibré peut viser 5-6%. Ajustez selon votre profil de risque."
+  }
+];
 const InteretsComposes = () => {
   const [capitalInitial, setCapitalInitial] = useState(10000);
   const [versementRegulier, setVersementRegulier] = useState(200);
@@ -313,6 +335,8 @@ const InteretsComposes = () => {
           </Card>
         </div>
         </div>
+
+        <CalculatorFAQ items={faqItems} />
       </div>
     </CalculatorLayout>
   );

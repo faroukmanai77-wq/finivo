@@ -68,7 +68,7 @@ const Calculateurs = () => {
             <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-secondary-foreground">
               Calculateurs financiers
             </h1>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-lg text-muted">
               Des outils interactifs pour simuler vos investissements, planifier votre épargne 
               et gérer vos dettes efficacement.
             </p>

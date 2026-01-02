@@ -31,11 +31,9 @@ export const Header = () => {
   };
 
   const navLinks = [
-    { href: '#comparer', label: 'Comparer' },
-    { href: '#categories', label: 'Catégories' },
-    { href: '#guide', label: 'Guide' },
+    { href: '/comparateurs/cartes-de-credit', label: 'Comparateur', isRoute: true },
+    { href: '/calculateurs', label: 'Calculateurs', isRoute: true },
     { href: '/blog', label: 'Blog', isRoute: true },
-    { href: '#faq', label: 'FAQ' },
   ];
 
   return (
@@ -65,7 +63,7 @@ export const Header = () => {
           <div className="hidden md:block">
             <Button 
               className="btn-gradient font-semibold gap-2 shadow-lg"
-              onClick={() => handleNavClick('#comparer')}
+              onClick={() => navigate('/comparateurs/cartes-de-credit')}
             >
               <Sparkles className="w-4 h-4" />
               Trouver ma carte
@@ -100,7 +98,7 @@ export const Header = () => {
               ))}
               <Button 
                 className="btn-gradient font-semibold gap-2 mt-2 w-full"
-                onClick={() => handleNavClick('#comparer')}
+                onClick={() => { setIsMenuOpen(false); navigate('/comparateurs/cartes-de-credit'); }}
               >
                 <Sparkles className="w-4 h-4" />
                 Trouver ma carte

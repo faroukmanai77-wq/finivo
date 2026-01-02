@@ -66,7 +66,7 @@ export const CalculatorLayout = ({
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-secondary py-10 lg:py-14">
+      <section className="py-10 lg:py-14 bg-[#89a5b8]">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
@@ -85,7 +85,7 @@ export const CalculatorLayout = ({
               <h1 className="text-2xl lg:text-3xl font-extrabold mb-2 text-secondary-foreground">
                 {title}
               </h1>
-              <p className="text-muted-foreground max-w-2xl">
+              <p className="max-w-2xl text-muted">
                 {description}
               </p>
             </div>

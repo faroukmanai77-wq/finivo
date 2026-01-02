@@ -6,7 +6,6 @@ import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { ArrowRight, Calculator } from 'lucide-react';
 import { RecommendedArticles } from './RecommendedArticles';
 import { FeaturedCard } from './FeaturedCard';
-
 interface CalculatorLayoutProps {
   title: string;
   description: string;
@@ -19,7 +18,6 @@ interface CalculatorLayoutProps {
   relatedCategory?: 'epargne' | 'dettes' | 'cartes' | 'impot' | 'investissement';
   featuredCardType?: 'transfer' | 'cashback' | 'savings';
 }
-
 export const CalculatorLayout = ({
   title,
   description,
@@ -32,12 +30,16 @@ export const CalculatorLayout = ({
   relatedCategory = 'investissement',
   featuredCardType
 }: CalculatorLayoutProps) => {
-  const breadcrumbs = [
-    { name: 'Accueil', url: 'https://finivo.ca' },
-    { name: 'Calculateurs', url: 'https://finivo.ca/calculateurs' },
-    { name: title, url }
-  ];
-
+  const breadcrumbs = [{
+    name: 'Accueil',
+    url: 'https://finivo.ca'
+  }, {
+    name: 'Calculateurs',
+    url: 'https://finivo.ca/calculateurs'
+  }, {
+    name: title,
+    url
+  }];
   const calculatorStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -57,18 +59,10 @@ export const CalculatorLayout = ({
       url: 'https://finivo.ca'
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        url={url}
-        structuredData={{
-          '@graph': [calculatorStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
-        }}
-      />
+  return <div className="min-h-screen bg-background">
+      <SEO title={seoTitle} description={seoDescription} keywords={seoKeywords} url={url} structuredData={{
+      '@graph': [calculatorStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
+    }} />
       <Header />
       
       {/* Hero Section */}
@@ -88,7 +82,7 @@ export const CalculatorLayout = ({
               {icon}
             </div>
             <div>
-              <h1 className="text-2xl lg:text-3xl font-extrabold text-foreground mb-2">
+              <h1 className="text-2xl lg:text-3xl font-extrabold mb-2 text-secondary-foreground">
                 {title}
               </h1>
               <p className="text-muted-foreground max-w-2xl">
@@ -107,11 +101,9 @@ export const CalculatorLayout = ({
           </div>
 
           {/* Featured Product Widget */}
-          {featuredCardType && (
-            <div className="max-w-4xl mx-auto mt-12">
+          {featuredCardType && <div className="max-w-4xl mx-auto mt-12">
               <FeaturedCard type={featuredCardType} />
-            </div>
-          )}
+            </div>}
         </div>
       </section>
 
@@ -123,6 +115,5 @@ export const CalculatorLayout = ({
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };

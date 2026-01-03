@@ -131,13 +131,19 @@ const Landing = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center justify-center gap-8 lg:gap-16">
-              {stats.map((stat, i) => (
-                <div key={i} className="text-center opacity-0 animate-scale-in" style={{ animationDelay: `${0.4 + i * 0.1}s`, animationFillMode: 'forwards' }}>
-                  <p className="text-3xl lg:text-4xl font-extrabold text-secondary-foreground">{stat.value}</p>
-                  <p className="text-sm text-secondary-foreground/60 font-medium mt-1">{stat.label}</p>
-                </div>
-              ))}
+            <div className="mx-auto w-full max-w-md sm:max-w-none">
+              <div className="grid grid-cols-2 gap-6 sm:flex sm:items-center sm:justify-center sm:gap-8 lg:gap-16">
+                {stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="min-w-0 text-center opacity-0 animate-scale-in"
+                    style={{ animationDelay: `${0.4 + i * 0.1}s`, animationFillMode: 'forwards' }}
+                  >
+                    <p className="text-3xl lg:text-4xl font-extrabold text-secondary-foreground">{stat.value}</p>
+                    <p className="text-sm text-secondary-foreground/60 font-medium mt-1 leading-snug">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

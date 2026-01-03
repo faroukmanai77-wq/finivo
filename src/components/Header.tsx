@@ -1,4 +1,4 @@
-import { CreditCard, Menu, X, Sparkles, Calculator, BookOpen, CreditCard as CardIcon } from 'lucide-react';
+import { CreditCard, Menu, X, Sparkles, Calculator, BookOpen, CreditCard as CardIcon, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -46,7 +46,8 @@ export const Header = () => {
   };
 
   const navLinks = [
-    { href: '/comparateurs/cartes-de-credit', label: 'Comparateur', isRoute: true, icon: CardIcon },
+    { href: '/comparateurs/cartes-de-credit', label: 'Cartes de crédit', isRoute: true, icon: CardIcon },
+    { href: '/comparateurs/courtage', label: 'Courtage', isRoute: true, icon: Building2 },
     { href: '/calculateurs', label: 'Calculateurs', isRoute: true, icon: Calculator },
     { href: '/blog', label: 'Blog', isRoute: true, icon: BookOpen },
   ];

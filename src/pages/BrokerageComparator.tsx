@@ -6,11 +6,11 @@ import { BrokerageComparisonTable } from '@/components/BrokerageComparisonTable'
 import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { BrokerageFilterState, BrokerageCategory } from '@/types/brokerage';
-import { brokeragePlatforms } from '@/data/brokeragePlatforms';
+import { useBrokeragePlatforms } from '@/hooks/useBrokeragePlatforms';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Filter, Building2, LayoutGrid, Table2, AlertCircle } from 'lucide-react';
+import { Filter, Building2, LayoutGrid, Table2, AlertCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   Select,
@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/select";
 
 const BrokerageComparator = () => {
+  const { data: platforms = [], isLoading, error } = useBrokeragePlatforms();
+  
   const [filters, setFilters] = useState<BrokerageFilterState>({
     categories: [],
     hasNoFees: false,
@@ -33,7 +35,7 @@ const BrokerageComparator = () => {
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
 
   const filteredPlatforms = useMemo(() => {
-    let result = [...brokeragePlatforms];
+    let result = [...platforms];
 
     // Category filters
     if (filters.categories.includes('zero-commission')) {
@@ -93,7 +95,7 @@ const BrokerageComparator = () => {
     }
 
     return result;
-  }, [filters]);
+  }, [filters, platforms]);
 
   const breadcrumbs = [
     { name: 'Accueil', url: 'https://finivo.ca' },
@@ -250,7 +252,21 @@ const BrokerageComparator = () => {
               </div>
 
               {/* Content */}
-              {viewMode === 'cards' ? (
+              {isLoading ? (
+                <div className="flex items-center justify-center py-20">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                </div>
+              ) : error ? (
+                <div className="text-center py-20 card-elevated rounded-2xl">
+                  <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-4">
+                    <AlertCircle className="w-8 h-8 text-destructive" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Erreur de chargement</h3>
+                  <p className="text-muted-foreground">
+                    Impossible de charger les plateformes. Veuillez réessayer.
+                  </p>
+                </div>
+              ) : viewMode === 'cards' ? (
                 <div className="space-y-6">
                   {filteredPlatforms.map((platform, index) => (
                     <BrokerageItem key={platform.id} platform={platform} index={index} />

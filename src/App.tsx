@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Landing from "./pages/Landing";
 import CreditCardComparator from "./pages/CreditCardComparator";
+import BrokerageComparator from "./pages/BrokerageComparator";
 import CardDetail from "./pages/CardDetail";
 import Calculateurs from "./pages/Calculateurs";
 import InteretsComposes from "./pages/calculateurs/InteretsComposes";
@@ -33,6 +34,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/comparateurs/cartes-de-credit" element={<CreditCardComparator />} />
+            <Route path="/comparateurs/courtage" element={<BrokerageComparator />} />
             <Route path="/carte/:slug" element={<CardDetail />} />
             <Route path="/calculateurs" element={<Calculateurs />} />
             <Route path="/calculateurs/interets-composes" element={<InteretsComposes />} />

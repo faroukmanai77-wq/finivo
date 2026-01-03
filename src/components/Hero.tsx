@@ -81,20 +81,25 @@ export const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-8 lg:gap-12">
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-4 sm:gap-8 lg:gap-12">
               <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
                 <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-secondary-foreground">30+</p>
                 <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Cartes comparées</p>
               </div>
-              <div className="w-px h-10 sm:h-12 bg-secondary-foreground/20" />
+              <div className="hidden sm:block w-px h-12 bg-secondary-foreground/20" />
               <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-primary">Live</p>
-                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Taux en temps réel</p>
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-secondary-foreground">6</p>
+                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Calculateurs</p>
               </div>
-              <div className="w-px h-10 sm:h-12 bg-secondary-foreground/20" />
+              <div className="hidden sm:block w-px h-12 bg-secondary-foreground/20" />
               <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
                 <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-accent">100%</p>
                 <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Gratuit</p>
+              </div>
+              <div className="hidden sm:block w-px h-12 bg-secondary-foreground/20" />
+              <div className="opacity-0 animate-scale-in text-center sm:text-left" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}>
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-primary">Live</p>
+                <p className="text-xs sm:text-sm text-secondary-foreground/60 font-medium mt-1">Données à jour</p>
               </div>
             </div>
           </div>

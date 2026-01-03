@@ -14,6 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
+      brokerage_platforms: {
+        Row: {
+          accounts: string[]
+          affiliate_link: string
+          created_at: string
+          has_crypto: boolean
+          has_french: boolean
+          has_mobile_app: boolean
+          has_options: boolean
+          id: string
+          ideal_for: string
+          is_active: boolean | null
+          level: string
+          logo: string | null
+          markets_access: string[]
+          monthly_fee: string
+          name: string
+          products: string[]
+          rating: number
+          regulation: string[]
+          slug: string
+          strengths: string[]
+          transaction_fee_etf: string
+          transaction_fee_stocks: string
+          type: string
+          updated_at: string
+          weaknesses: string[]
+        }
+        Insert: {
+          accounts?: string[]
+          affiliate_link?: string
+          created_at?: string
+          has_crypto?: boolean
+          has_french?: boolean
+          has_mobile_app?: boolean
+          has_options?: boolean
+          id?: string
+          ideal_for: string
+          is_active?: boolean | null
+          level?: string
+          logo?: string | null
+          markets_access?: string[]
+          monthly_fee: string
+          name: string
+          products?: string[]
+          rating?: number
+          regulation?: string[]
+          slug: string
+          strengths?: string[]
+          transaction_fee_etf: string
+          transaction_fee_stocks: string
+          type?: string
+          updated_at?: string
+          weaknesses?: string[]
+        }
+        Update: {
+          accounts?: string[]
+          affiliate_link?: string
+          created_at?: string
+          has_crypto?: boolean
+          has_french?: boolean
+          has_mobile_app?: boolean
+          has_options?: boolean
+          id?: string
+          ideal_for?: string
+          is_active?: boolean | null
+          level?: string
+          logo?: string | null
+          markets_access?: string[]
+          monthly_fee?: string
+          name?: string
+          products?: string[]
+          rating?: number
+          regulation?: string[]
+          slug?: string
+          strengths?: string[]
+          transaction_fee_etf?: string
+          transaction_fee_stocks?: string
+          type?: string
+          updated_at?: string
+          weaknesses?: string[]
+        }
+        Relationships: []
+      }
       credit_cards: {
         Row: {
           affiliate_link: string

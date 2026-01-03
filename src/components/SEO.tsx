@@ -17,9 +17,9 @@ const DEFAULT_IMAGE = `${BASE_URL}/favicon.png`;
 const SITE_NAME = 'Finivo';
 
 export const SEO = ({
-  title = 'Comparateur de Cartes de Crédit au Québec',
-  description = 'Comparez les meilleures cartes de crédit au Québec. Trouvez la carte parfaite selon vos besoins: remise en argent, voyage, sans frais, étudiant et plus.',
-  keywords = 'carte de crédit, comparateur, Québec, Canada, remise en argent, cashback, points voyage, carte sans frais, meilleure carte de crédit',
+  title = 'Outils financiers gratuits pour les Québécois',
+  description = 'Finivo est votre plateforme d\'outils financiers gratuits au Québec. Comparateur de cartes de crédit, calculateurs financiers (REER, CELIAPP, impôts, intérêts composés) et guides pratiques pour optimiser vos finances.',
+  keywords = 'outils financiers, calculateur REER, calculateur CELIAPP, calculateur impôt, carte de crédit, comparateur, Québec, Canada, finances personnelles, intérêts composés, valeur nette',
   image = DEFAULT_IMAGE,
   url = BASE_URL,
   type = 'website',
@@ -111,7 +111,7 @@ export const generateOrganizationStructuredData = () => ({
   name: 'Finivo',
   url: 'https://finivo.ca',
   logo: 'https://finivo.ca/favicon.png',
-  description: 'Comparateur de cartes de crédit au Québec',
+  description: 'Plateforme d\'outils financiers gratuits au Québec: comparateur de cartes de crédit, calculateurs financiers et guides pratiques.',
   sameAs: [],
 });
 

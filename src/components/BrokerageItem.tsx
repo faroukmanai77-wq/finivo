@@ -42,11 +42,17 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
           {/* Platform Logo Section */}
           <div className="lg:w-72 p-6 lg:p-8 flex items-center justify-center relative overflow-hidden bg-primary-foreground">
             <div className="relative z-10">
-              <div className="w-56 h-36 rounded-2xl bg-gradient-to-br from-muted/30 to-muted/10 flex items-center justify-center shadow-2xl transform group-hover:scale-105 transition-all duration-500 border border-border/20">
-                <div className="text-center p-4">
-                  <Building2 className="w-12 h-12 text-primary mx-auto mb-2" />
-                  <span className="text-lg font-bold text-foreground">{platform.name}</span>
-                </div>
+              <div className="w-56 h-36 rounded-2xl bg-gradient-to-br from-muted/30 to-muted/10 flex items-center justify-center shadow-2xl transform group-hover:scale-105 transition-all duration-500 border border-border/20 p-4">
+                <img 
+                  src={platform.logo} 
+                  alt={`Logo ${platform.name}`} 
+                  className="max-w-full max-h-full object-contain"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = `<div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mx-auto mb-2"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg><span class="text-lg font-bold text-foreground">${platform.name}</span></div>`;
+                  }}
+                />
               </div>
               
               {/* Type badge */}

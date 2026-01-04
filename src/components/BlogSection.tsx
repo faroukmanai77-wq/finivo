@@ -1,12 +1,13 @@
 import { ArrowRight, BookOpen, Calendar, Clock, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { blogPosts } from '@/data/blogPosts';
-import { blogCategoryLabels } from '@/types/blog';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useFeaturedBlogPosts } from '@/hooks/useBlogPosts';
+import { blogCategoryLabels } from '@/types/blogPost';
 import { Link } from 'react-router-dom';
 
 export const BlogSection = () => {
-  const featuredPosts = blogPosts.slice(0, 3);
+  const { data: featuredPosts = [], isLoading } = useFeaturedBlogPosts(3);
 
   return (
     <section id="blog" className="py-16 lg:py-24 bg-muted/30">
@@ -25,55 +26,69 @@ export const BlogSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
-          {featuredPosts.map((post, index) => (
-            <Link 
-              key={post.id} 
-              to={`/blog/${post.slug}`}
-              className={`group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 ${
-                index === 0 ? 'animate-fade-in' : ''
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={post.coverImage} 
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground">
-                    {blogCategoryLabels[post.category]}
-                  </Badge>
+          {isLoading ? (
+            [1, 2, 3].map((i) => (
+              <div key={i} className="card-elevated rounded-2xl overflow-hidden">
+                <Skeleton className="h-48 w-full" />
+                <div className="p-6 space-y-3">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-24" />
                 </div>
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {new Date(post.publishedAt).toLocaleDateString('fr-CA', { 
-                      day: 'numeric', 
-                      month: 'short', 
-                      year: 'numeric' 
-                    })}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {post.readTime} min
-                  </span>
+            ))
+          ) : (
+            featuredPosts.map((post, index) => (
+              <Link 
+                key={post.id} 
+                to={`/blog/${post.slug}`}
+                className={`group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 ${
+                  index === 0 ? 'animate-fade-in' : ''
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground">
+                      {blogCategoryLabels[post.category]}
+                    </Badge>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-muted-foreground line-clamp-2 mb-4">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <User className="w-4 h-4" />
-                  <span>{post.author}</span>
+                <div className="p-6">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(post.published_at).toLocaleDateString('fr-CA', { 
+                        day: 'numeric', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      })}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {post.read_time} min
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground line-clamp-2 mb-4">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <User className="w-4 h-4" />
+                    <span>{post.author}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          )}
         </div>
 
         <div className="text-center">

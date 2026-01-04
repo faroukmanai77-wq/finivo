@@ -4,12 +4,16 @@ export interface BlogPost {
   slug: string;
   excerpt: string;
   content: string;
-  coverImage: string;
+  cover_image_url: string | null;
   author: string;
-  publishedAt: string;
+  published_at: string;
   category: BlogCategory;
-  readTime: number;
+  read_time: number;
   tags: string[];
+  is_active: boolean;
+  is_featured: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export type BlogCategory = 

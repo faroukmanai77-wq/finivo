@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock } from 'lucide-react';
-import { blogPosts } from '@/data/blogPosts';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 
 interface RecommendedArticlesProps {
   category: 'epargne' | 'dettes' | 'cartes' | 'impot' | 'investissement';
 }
 
 export const RecommendedArticles = ({ category }: RecommendedArticlesProps) => {
+  const { data: blogPosts = [] } = useBlogPosts();
+
   // Map category to relevant blog posts
   const getCategoryPosts = () => {
-    const allPosts = blogPosts;
-    
     // Simple matching based on tags/categories
     const categoryKeywords: Record<string, string[]> = {
       epargne: ['épargne', 'reer', 'celiapp', 'investir'],
@@ -23,7 +23,7 @@ export const RecommendedArticles = ({ category }: RecommendedArticlesProps) => {
     const keywords = categoryKeywords[category] || [];
     
     // Filter and score posts based on relevance
-    const scoredPosts = allPosts.map(post => {
+    const scoredPosts = blogPosts.map(post => {
       let score = 0;
       const content = `${post.title} ${post.excerpt} ${post.tags.join(' ')}`.toLowerCase();
       keywords.forEach(keyword => {
@@ -64,7 +64,7 @@ export const RecommendedArticles = ({ category }: RecommendedArticlesProps) => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="w-3 h-3" />
-                <span>{post.readTime} min</span>
+                <span>{post.read_time} min</span>
               </div>
               <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
             </div>

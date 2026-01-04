@@ -22,7 +22,7 @@ const Comparateurs = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-[#97bab0]">
+      <section className="py-12 lg:py-16 bg-[#89a7d2]">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
@@ -31,7 +31,7 @@ const Comparateurs = () => {
           </nav>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-destructive-foreground bg-[#5e876c]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-destructive-foreground bg-secondary">
               <Scale className="w-4 h-4" />
               2 comparateurs
             </div>

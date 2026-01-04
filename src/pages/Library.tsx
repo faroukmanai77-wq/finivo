@@ -111,37 +111,32 @@ const Library = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-secondary py-12 lg:py-16">
+      <section className="py-12 lg:py-16 bg-[#e5eabe]">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
-            <span className="text-muted">Bibliothèque</span>
+            <span className="text-muted-foreground">Bibliothèque</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#a9ae47] text-muted">
                 <BookOpen className="w-4 h-4" />
                 Bibliothèque
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-secondary-foreground">
+              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-secondary">
                 Bibliothèque Finance & Liberté Financière
               </h1>
-              <p className="max-w-2xl text-lg text-muted">
+              <p className="max-w-2xl text-lg text-muted-foreground">
                 Les meilleurs livres pour améliorer votre relation à l'argent, investir intelligemment et bâtir votre liberté financière.
               </p>
             </div>
           </div>
 
           {/* Affiliate Disclosure */}
-          <div className="mt-6 flex items-start gap-3 bg-amber-50 dark:bg-amber-950/20 border rounded-xl p-4 max-w-2xl border-muted-foreground text-muted-foreground">
-            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-muted-foreground" />
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              Certains liens peuvent être affiliés. Voir notre <Link to="/divulgation-affiliation" className="underline hover:no-underline">divulgation d'affiliation</Link>.
-            </p>
-          </div>
+          
 
           {/* Search Bar */}
           <div className="mt-8 max-w-xl">

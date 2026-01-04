@@ -1,4 +1,4 @@
-import { CreditCard, Menu, X, Calculator, BookOpen, Scale, Library } from 'lucide-react';
+import { Wallet, Menu, X, Calculator, BookOpen, Scale, Library } from 'lucide-react';
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -60,7 +60,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <CreditCard className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+            <Wallet className="w-7 h-7 sm:w-8 sm:h-8 text-[hsl(217,91%,30%)] group-hover:scale-110 transition-transform duration-300" />
             <span className="font-bold text-xl sm:text-2xl text-foreground tracking-tight">Finivo</span>
           </Link>
 

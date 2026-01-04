@@ -61,7 +61,7 @@ const Calculateurs = () => {
           </nav>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary-foreground bg-secondary">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary-foreground bg-[#bf69b0]">
               <Calculator className="w-4 h-4 text-secondary-foreground" />
               6 outils gratuits
             </div>

@@ -223,7 +223,7 @@ const CreditCardComparator = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-secondary py-12 lg:py-16">
+      <section className="py-12 lg:py-16 bg-primary-foreground">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
@@ -236,14 +236,14 @@ const CreditCardComparator = () => {
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#90b292] text-primary-foreground">
                 <CreditCardIcon className="w-4 h-4" />
-                Comparateur 2025
+                Comparateur de cartes de crédit     
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-secondary-foreground">
+              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-left text-popover-foreground">
                 Comparez les cartes de crédit au Québec
               </h1>
-              <p className="max-w-2xl text-lg text-muted">
+              <p className="max-w-2xl text-lg text-secondary">
                 Trouvez la carte parfaite selon vos besoins. Tous les taux sont mis à jour en temps réel.
               </p>
             </div>

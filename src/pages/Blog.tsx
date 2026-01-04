@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { blogCategoryLabels, BlogCategory } from '@/types/blogPost';
-import { BookOpen, Calendar, Clock, Search, User, ArrowRight } from 'lucide-react';
+import { BookOpen, Calendar, Clock, User, ArrowRight } from 'lucide-react';
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | null>(null);
@@ -56,10 +56,7 @@ const Blog = () => {
             </p>
 
             {/* Search */}
-            <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input type="text" placeholder="Rechercher un article..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-12 h-12 rounded-full border-border/50 bg-card" />
-            </div>
+            
           </div>
         </div>
       </section>

@@ -18,6 +18,8 @@ import ValeurNette from "./pages/calculateurs/ValeurNette";
 import ImpotCanada from "./pages/calculateurs/ImpotCanada";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Library from "./pages/Library";
+import BookDetail from "./pages/BookDetail";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsUtilisation from "./pages/ConditionsUtilisation";
 import DivulgationAffiliation from "./pages/DivulgationAffiliation";
@@ -47,6 +49,8 @@ const App = () => (
             <Route path="/calculateurs/impot" element={<ImpotCanada />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/bibliotheque" element={<Library />} />
+            <Route path="/bibliotheque/:slug" element={<BookDetail />} />
             <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
             <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
             <Route path="/divulgation-affiliation" element={<DivulgationAffiliation />} />

@@ -14,6 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      books: {
+        Row: {
+          affiliate_link: string
+          affiliate_platform: string | null
+          author: string
+          category: string
+          cover_image_url: string | null
+          created_at: string
+          full_description: string | null
+          id: string
+          is_active: boolean | null
+          is_featured: boolean
+          language: string
+          level: string
+          quote: string | null
+          rating: number | null
+          reader_profile: string | null
+          short_description: string
+          slug: string
+          sub_categories: string[]
+          themes: string[]
+          title: string
+          updated_at: string
+          why_read_this_book: string | null
+        }
+        Insert: {
+          affiliate_link?: string
+          affiliate_platform?: string | null
+          author: string
+          category: string
+          cover_image_url?: string | null
+          created_at?: string
+          full_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean
+          language?: string
+          level?: string
+          quote?: string | null
+          rating?: number | null
+          reader_profile?: string | null
+          short_description: string
+          slug: string
+          sub_categories?: string[]
+          themes?: string[]
+          title: string
+          updated_at?: string
+          why_read_this_book?: string | null
+        }
+        Update: {
+          affiliate_link?: string
+          affiliate_platform?: string | null
+          author?: string
+          category?: string
+          cover_image_url?: string | null
+          created_at?: string
+          full_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean
+          language?: string
+          level?: string
+          quote?: string | null
+          rating?: number | null
+          reader_profile?: string | null
+          short_description?: string
+          slug?: string
+          sub_categories?: string[]
+          themes?: string[]
+          title?: string
+          updated_at?: string
+          why_read_this_book?: string | null
+        }
+        Relationships: []
+      }
       brokerage_platforms: {
         Row: {
           accounts: string[]

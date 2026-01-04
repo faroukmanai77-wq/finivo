@@ -1,5 +1,5 @@
-import { CreditCard, Menu, X, Sparkles, Calculator, BookOpen, Scale, Library } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { CreditCard, Menu, X, Calculator, BookOpen, Scale, Library } from 'lucide-react';
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -81,16 +81,6 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Button 
-              className="btn-gradient font-semibold gap-2 shadow-lg"
-              onClick={() => navigate('/comparateurs/cartes-de-credit')}
-            >
-              <Sparkles className="w-4 h-4" />
-              Trouver ma carte
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -143,15 +133,6 @@ export const Header = () => {
               );
             })}
             
-            <div className="h-px bg-border my-2" />
-            
-            <Button 
-              className="btn-gradient font-semibold gap-2 w-full py-6 text-base rounded-xl active:scale-[0.98]"
-              onClick={() => { setIsMenuOpen(false); navigate('/comparateurs/cartes-de-credit'); }}
-            >
-              <Sparkles className="w-5 h-5" />
-              Trouver ma carte idéale
-            </Button>
           </div>
         </div>
       </nav>

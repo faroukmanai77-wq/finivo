@@ -17,7 +17,11 @@ import {
   Star,
   Shield,
   Zap,
-  CheckCircle
+  CheckCircle,
+  Building2,
+  Library,
+  Users,
+  Target
 } from 'lucide-react';
 
 const Landing = () => {
@@ -31,12 +35,28 @@ const Landing = () => {
       features: ['Remises en argent', 'Cartes voyage', 'Sans frais annuels']
     },
     {
+      icon: Building2,
+      title: 'Comparateur de Courtage',
+      description: 'Trouvez la meilleure plateforme pour investir au Canada : Wealthsimple, Questrade et plus.',
+      href: '/comparateurs/courtage',
+      color: 'bg-chart-4/10 text-chart-4',
+      features: ['Zéro commission', 'CELI & REER', 'ETF & Actions']
+    },
+    {
       icon: Calculator,
       title: 'Calculateurs Financiers',
       description: 'Planifiez votre avenir financier avec nos outils interactifs et gratuits.',
       href: '/calculateurs',
       color: 'bg-accent/10 text-accent',
       features: ['Intérêts composés', 'REER & CELIAPP', 'Consolidation de dettes']
+    },
+    {
+      icon: Library,
+      title: 'Bibliothèque',
+      description: 'Les meilleurs livres pour améliorer votre relation à l\'argent et investir intelligemment.',
+      href: '/bibliotheque',
+      color: 'bg-warning/10 text-warning',
+      features: ['Finance personnelle', 'Investissement', 'Mindset']
     },
     {
       icon: BookOpen,
@@ -58,63 +78,85 @@ const Landing = () => {
   ];
 
   const stats = [
-    { value: '30+', label: 'Cartes comparées' },
+    { value: '30+', label: 'Cartes de crédit' },
+    { value: '10+', label: 'Courtiers en ligne' },
+    { value: '20+', label: 'Livres recommandés' },
     { value: '6', label: 'Calculateurs' },
-    { value: '100%', label: 'Gratuit' },
-    { value: 'Live', label: 'Données à jour' }
+  ];
+
+  const quickLinks = [
+    { icon: CreditCard, label: 'Cartes de crédit', href: '/comparateurs/cartes-de-credit' },
+    { icon: Building2, label: 'Plateformes de courtage', href: '/comparateurs/courtage' },
+    { icon: Library, label: 'Bibliothèque', href: '/bibliotheque' },
+    { icon: Calculator, label: 'Calculateurs', href: '/calculateurs' },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Finivo - Outils Financiers et Comparateur de Cartes de Crédit au Québec"
-        description="Finivo : votre plateforme financière complète au Québec. Comparateur de cartes de crédit, calculateurs d'épargne REER/CELIAPP, consolidation de dettes et plus encore. Gratuit et indépendant."
-        keywords="finivo, comparateur carte crédit québec, calculateur REER, CELIAPP, consolidation dettes, outils financiers gratuits, finances personnelles canada"
+        title="Finivo | Comparateur Cartes de Crédit, Courtage & Outils Financiers Québec 2025"
+        description="Comparez les meilleures cartes de crédit et plateformes de courtage au Québec. Calculateurs REER, CELIAPP, impôts + bibliothèque de livres finance. 100% gratuit et indépendant."
+        keywords="comparateur carte crédit québec, meilleur courtier canada, wealthsimple questrade comparatif, calculateur REER CELIAPP, outils financiers gratuits, finances personnelles québec, livres investissement, liberté financière canada"
         url="https://finivo.ca"
         structuredData={generateOrganizationStructuredData()}
       />
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[85vh] flex items-center" style={{ background: 'var(--gradient-hero)' }}>
+      <section className="relative overflow-hidden min-h-[90vh] flex items-center" style={{ background: 'var(--gradient-hero)' }}>
         {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-warning/10 rounded-full blur-[80px] animate-pulse-slow" style={{ animationDelay: '2.5s' }} />
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
             backgroundSize: '60px 60px'
           }} />
         </div>
 
-        <div className="container mx-auto px-4 py-20 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold mb-8 border border-primary/30">
+        <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
+          <div className="text-center max-w-5xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/30">
               <Sparkles className="w-4 h-4" />
-              Plateforme financière complète pour le Québec
+              Plateforme financière #1 au Québec
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] mb-6 text-secondary-foreground">
-              Vos finances,
+              Comparez, calculez,
               <span className="block mt-2 bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
-                simplifiées
+                atteignez la liberté financière
               </span>
             </h1>
             
-            <p className="text-lg lg:text-xl text-secondary-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Comparez les cartes de crédit, planifiez votre épargne et optimisez vos finances 
-              avec nos outils gratuits et indépendants.
+            <p className="text-lg lg:text-xl text-secondary-foreground/70 mb-8 max-w-3xl mx-auto leading-relaxed">
+              La plateforme complète pour les Québécois : comparez les <strong className="text-secondary-foreground">cartes de crédit</strong> et <strong className="text-secondary-foreground">plateformes de courtage</strong>, 
+              planifiez votre épargne avec nos <strong className="text-secondary-foreground">calculateurs REER/CELIAPP</strong>, et découvrez les meilleurs <strong className="text-secondary-foreground">livres sur la finance</strong>.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            {/* Quick Links */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {quickLinks.map((link, i) => (
+                <Link
+                  key={i}
+                  to={link.href}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-foreground/10 hover:bg-secondary-foreground/20 border border-secondary-foreground/20 text-secondary-foreground text-sm font-medium transition-all hover:scale-105"
+                >
+                  <link.icon className="w-4 h-4" />
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button 
                 asChild
                 size="lg" 
                 className="btn-gradient text-lg h-14 px-8 gap-3 font-semibold group"
               >
-                <Link to="/comparateurs/cartes-de-credit">
-                  <CreditCard className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Comparer les cartes
+                <Link to="/comparateurs">
+                  <Scale className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  Voir les comparateurs
                 </Link>
               </Button>
               <Button 
@@ -125,24 +167,44 @@ const Landing = () => {
               >
                 <Link to="/calculateurs">
                   <Calculator className="w-5 h-5" />
-                  Voir les calculateurs
+                  Utiliser les calculateurs
                 </Link>
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="mx-auto w-full max-w-md sm:max-w-none">
-              <div className="grid grid-cols-2 gap-6 sm:flex sm:items-center sm:justify-center sm:gap-8 lg:gap-16">
+            <div className="mx-auto w-full max-w-2xl">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {stats.map((stat, i) => (
                   <div
                     key={i}
-                    className="min-w-0 text-center opacity-0 animate-scale-in"
+                    className="bg-secondary-foreground/5 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/10 opacity-0 animate-scale-in"
                     style={{ animationDelay: `${0.4 + i * 0.1}s`, animationFillMode: 'forwards' }}
                   >
-                    <p className="text-3xl lg:text-4xl font-extrabold text-secondary-foreground">{stat.value}</p>
-                    <p className="text-sm text-secondary-foreground/60 font-medium mt-1 leading-snug">{stat.label}</p>
+                    <p className="text-2xl lg:text-3xl font-extrabold text-secondary-foreground">{stat.value}</p>
+                    <p className="text-xs text-secondary-foreground/60 font-medium mt-1">{stat.label}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Trust badges */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-secondary-foreground/50 text-sm">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4" />
+                <span>100% indépendant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4" />
+                <span>Données à jour</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>Gratuit pour tous</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Target className="w-4 h-4" />
+                <span>Fait au Québec</span>
               </div>
             </div>
           </div>
@@ -150,7 +212,7 @@ const Landing = () => {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-secondary-foreground/40">
-          <span className="text-xs font-medium">Découvrir</span>
+          <span className="text-xs font-medium">Découvrir nos outils</span>
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
@@ -167,7 +229,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {pillars.map((pillar, index) => (
               <Link 
                 key={index}

@@ -9,7 +9,7 @@ import { BookFilterState, BookCategory, BookLevel, BookLanguage } from '@/types/
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Filter, BookOpen, Search, AlertCircle, Loader2 } from 'lucide-react';
+import { Filter, BookOpen, AlertCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const Library = () => {
@@ -140,23 +140,12 @@ const Library = () => {
 
           {/* Search Bar */}
           <div className="mt-8 max-w-xl">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input type="text" placeholder="Rechercher par titre ou auteur..." value={filters.search} onChange={e => setFilters({
-              ...filters,
-              search: e.target.value
-            })} className="pl-12 h-12 text-base" />
-            </div>
+            
           </div>
 
           {/* Category quick filters */}
           <div className="flex flex-wrap gap-2 mt-6">
-            {categories.map(cat => <button key={cat.id} onClick={() => setFilters(prev => ({
-            ...prev,
-            categories: prev.categories.includes(cat.id) ? prev.categories.filter(c => c !== cat.id) : [...prev.categories, cat.id]
-          }))} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filters.categories.includes(cat.id) ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'}`}>
-                {cat.icon} {cat.label}
-              </button>)}
+            {categories.map(cat => {})}
           </div>
         </div>
       </section>

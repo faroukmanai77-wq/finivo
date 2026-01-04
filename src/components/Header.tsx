@@ -67,7 +67,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <CreditCard className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform duration-300 bg-primary border-primary-foreground text-primary-foreground" />
+            <CreditCard className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform duration-300 border-primary-foreground bg-primary text-primary-foreground" />
             <span className="font-bold text-xl sm:text-2xl text-foreground tracking-tight">Finivo</span>
           </Link>
 

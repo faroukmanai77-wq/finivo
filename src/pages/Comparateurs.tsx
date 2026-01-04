@@ -35,10 +35,10 @@ const Comparateurs = () => {
               <Scale className="w-4 h-4" />
               2 comparateurs
             </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-secondary">
+            <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-sidebar-foreground">
               Comparateurs financiers
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-secondary">
               Des outils de comparaison pour vous aider à choisir les meilleurs produits financiers 
               adaptés à vos besoins.
             </p>

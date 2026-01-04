@@ -31,7 +31,7 @@ const Comparateurs = () => {
           </nav>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-accent/10 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-secondary">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-destructive-foreground bg-[#5e876c]">
               <Scale className="w-4 h-4" />
               2 comparateurs
             </div>

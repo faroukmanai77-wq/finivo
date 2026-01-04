@@ -27,7 +27,7 @@ const Comparateurs = () => {
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
-            <span className="text-muted">Comparateurs</span>
+            <span className="text-primary">Comparateurs</span>
           </nav>
 
           <div className="text-center max-w-3xl mx-auto">

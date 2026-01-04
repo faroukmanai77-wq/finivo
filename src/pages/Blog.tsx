@@ -6,13 +6,16 @@ import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { blogPosts } from '@/data/blogPosts';
-import { blogCategoryLabels, BlogCategory } from '@/types/blog';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { blogCategoryLabels, BlogCategory } from '@/types/blogPost';
 import { BookOpen, Calendar, Clock, Search, User, ArrowRight } from 'lucide-react';
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | null>(null);
+
+  const { data: blogPosts = [], isLoading } = useBlogPosts();
 
   const filteredPosts = useMemo(() => {
     let result = [...blogPosts];
@@ -31,7 +34,7 @@ const Blog = () => {
     }
 
     return result;
-  }, [searchQuery, selectedCategory]);
+  }, [blogPosts, searchQuery, selectedCategory]);
 
   const categories: BlogCategory[] = ['guides', 'conseils', 'comparatifs', 'actualites'];
 
@@ -111,7 +114,21 @@ const Blog = () => {
       {/* Articles Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          {filteredPosts.length > 0 ? (
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="card-elevated rounded-2xl overflow-hidden">
+                  <Skeleton className="h-48 w-full" />
+                  <div className="p-6 space-y-3">
+                    <Skeleton className="h-4 w-32" />
+                    <Skeleton className="h-6 w-full" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-24" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : filteredPosts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post, index) => (
                 <Link 
@@ -122,7 +139,7 @@ const Blog = () => {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img 
-                      src={post.coverImage} 
+                      src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -136,7 +153,7 @@ const Blog = () => {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {new Date(post.publishedAt).toLocaleDateString('fr-CA', { 
+                        {new Date(post.published_at).toLocaleDateString('fr-CA', { 
                           day: 'numeric', 
                           month: 'short', 
                           year: 'numeric' 
@@ -144,7 +161,7 @@ const Blog = () => {
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {post.readTime} min
+                        {post.read_time} min
                       </span>
                     </div>
                     <h2 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">

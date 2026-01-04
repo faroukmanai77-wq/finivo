@@ -4,8 +4,9 @@ import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { blogPosts } from '@/data/blogPosts';
-import { blogCategoryLabels } from '@/types/blog';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useBlogPost, useRelatedBlogPosts } from '@/hooks/useBlogPosts';
+import { blogCategoryLabels } from '@/types/blogPost';
 import { ArrowLeft, Calendar, Clock, User, BookOpen, ArrowRight } from 'lucide-react';
 import { BlogArticleContent } from '@/components/BlogArticleContent';
 import { SocialShareMenu } from '@/components/SocialShareMenu';
@@ -14,7 +15,25 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   
-  const post = blogPosts.find(p => p.slug === slug);
+  const { data: post, isLoading } = useBlogPost(slug || '');
+  const { data: relatedPosts = [] } = useRelatedBlogPosts(post?.category || 'conseils', slug || '', 2);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-6 w-2/3" />
+            <Skeleton className="h-96 w-full rounded-2xl" />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -45,10 +64,6 @@ const BlogPost = () => {
     );
   }
 
-  const relatedPosts = blogPosts
-    .filter(p => p.id !== post.id && p.category === post.category)
-    .slice(0, 2);
-
   const breadcrumbs = [
     { name: 'Accueil', url: 'https://finivo.ca' },
     { name: 'Blog', url: 'https://finivo.ca/blog' },
@@ -60,7 +75,7 @@ const BlogPost = () => {
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: post.coverImage,
+    image: post.cover_image_url,
     author: {
       '@type': 'Person',
       name: post.author
@@ -73,8 +88,8 @@ const BlogPost = () => {
         url: 'https://finivo.ca/favicon.png'
       }
     },
-    datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    datePublished: post.published_at,
+    dateModified: post.updated_at,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `https://finivo.ca/blog/${post.slug}`
@@ -87,7 +102,7 @@ const BlogPost = () => {
         title={`${post.title} | Blog Finivo`}
         description={post.excerpt}
         keywords={post.tags.join(', ')}
-        image={post.coverImage}
+        image={post.cover_image_url || undefined}
         url={`https://finivo.ca/blog/${post.slug}`}
         type="article"
         structuredData={{
@@ -128,14 +143,14 @@ const BlogPost = () => {
               <span className="flex items-center gap-1.5 sm:gap-2">
                 <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="hidden xs:inline">
-                  {new Date(post.publishedAt).toLocaleDateString('fr-CA', { 
+                  {new Date(post.published_at).toLocaleDateString('fr-CA', { 
                     day: 'numeric', 
                     month: 'long', 
                     year: 'numeric' 
                   })}
                 </span>
                 <span className="xs:hidden">
-                  {new Date(post.publishedAt).toLocaleDateString('fr-CA', { 
+                  {new Date(post.published_at).toLocaleDateString('fr-CA', { 
                     day: 'numeric', 
                     month: 'short', 
                     year: 'numeric' 
@@ -144,7 +159,7 @@ const BlogPost = () => {
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2">
                 <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                {post.readTime} min
+                {post.read_time} min
               </span>
               <SocialShareMenu title={post.title} />
             </div>
@@ -157,7 +172,7 @@ const BlogPost = () => {
         <div className="max-w-4xl mx-auto">
           <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl">
             <img 
-              src={post.coverImage} 
+              src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
               alt={post.title}
               className="w-full h-48 sm:h-64 lg:h-96 object-cover"
             />
@@ -216,7 +231,7 @@ const BlogPost = () => {
                   >
                     <div className="relative h-32 sm:h-40 overflow-hidden">
                       <img 
-                        src={relatedPost.coverImage} 
+                        src={relatedPost.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
                         alt={relatedPost.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />

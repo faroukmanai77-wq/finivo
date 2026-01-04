@@ -111,13 +111,13 @@ const Library = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-[#89a7d2]">
+      <section className="py-12 lg:py-16 bg-secondary-foreground">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
-            <span className="text-primary-foreground">Bibliothèque</span>
+            <span className="text-primary">Bibliothèque</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">

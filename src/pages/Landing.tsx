@@ -176,7 +176,7 @@ const Landing = () => {
 
             {/* Trust badges */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-secondary-foreground/50 text-sm">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-primary">
                 <Shield className="w-4 h-4" />
                 <span>100% indépendant</span>
               </div>
@@ -189,7 +189,7 @@ const Landing = () => {
                 <span>Gratuit pour tous</span>
               </div>
               <div className="flex items-center gap-2">
-                <Target className="w-4 h-4" />
+                <Target className="w-4 h-4 text-sidebar-primary" />
                 <span>Fait au Québec</span>
               </div>
             </div>

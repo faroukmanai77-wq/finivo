@@ -122,7 +122,7 @@ const Library = () => {
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-muted bg-secondary">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-muted bg-[#2d8f8b]">
                 <BookOpen className="w-4 h-4" />
                 Bibliothèque
               </div>

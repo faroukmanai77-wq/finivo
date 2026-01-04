@@ -22,7 +22,7 @@ const Comparateurs = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-[#89a7d2]">
+      <section className="py-12 lg:py-16 bg-secondary-foreground">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>

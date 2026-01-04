@@ -1,4 +1,4 @@
-import { CreditCard, Menu, X, Sparkles, Calculator, BookOpen, Scale } from 'lucide-react';
+import { CreditCard, Menu, X, Sparkles, Calculator, BookOpen, Scale, Library } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -48,6 +48,7 @@ export const Header = () => {
   const navLinks = [
     { href: '/comparateurs', label: 'Comparateurs', isRoute: true, icon: Scale },
     { href: '/calculateurs', label: 'Calculateurs', isRoute: true, icon: Calculator },
+    { href: '/bibliotheque', label: 'Bibliothèque', isRoute: true, icon: Library },
     { href: '/blog', label: 'Blog', isRoute: true, icon: BookOpen },
   ];
 

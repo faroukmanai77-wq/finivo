@@ -126,10 +126,10 @@ const Library = () => {
                 <BookOpen className="w-4 h-4" />
                 Bibliothèque
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-secondary">
+              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-sidebar-foreground">
                 Bibliothèque Finance & Liberté Financière
               </h1>
-              <p className="max-w-2xl text-lg text-muted-foreground">
+              <p className="max-w-2xl text-lg text-secondary">
                 Les meilleurs livres pour améliorer votre relation à l'argent, investir intelligemment et bâtir votre liberté financière.
               </p>
             </div>

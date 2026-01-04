@@ -10,55 +10,41 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { blogCategoryLabels, BlogCategory } from '@/types/blogPost';
 import { BookOpen, Calendar, Clock, Search, User, ArrowRight } from 'lucide-react';
-
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | null>(null);
-
-  const { data: blogPosts = [], isLoading } = useBlogPosts();
-
+  const {
+    data: blogPosts = [],
+    isLoading
+  } = useBlogPosts();
   const filteredPosts = useMemo(() => {
     let result = [...blogPosts];
-
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(post => 
-        post.title.toLowerCase().includes(query) ||
-        post.excerpt.toLowerCase().includes(query) ||
-        post.tags.some(tag => tag.toLowerCase().includes(query))
-      );
+      result = result.filter(post => post.title.toLowerCase().includes(query) || post.excerpt.toLowerCase().includes(query) || post.tags.some(tag => tag.toLowerCase().includes(query)));
     }
-
     if (selectedCategory) {
       result = result.filter(post => post.category === selectedCategory);
     }
-
     return result;
   }, [blogPosts, searchQuery, selectedCategory]);
-
   const categories: BlogCategory[] = ['guides', 'conseils', 'comparatifs', 'actualites'];
-
-  const breadcrumbs = [
-    { name: 'Accueil', url: 'https://finivo.ca' },
-    { name: 'Blog', url: 'https://finivo.ca/blog' }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Blog Finivo - Guides et Conseils sur les Cartes de Crédit au Québec"
-        description="Découvrez nos guides complets, conseils d'experts et actualités sur les cartes de crédit au Canada. Apprenez à maximiser vos récompenses et faire les meilleurs choix financiers."
-        keywords="blog carte de crédit, conseils finances personnelles, guide carte crédit Québec, meilleure carte remise argent, points voyage Canada, actualités finances"
-        url="https://finivo.ca/blog"
-        structuredData={generateBreadcrumbStructuredData(breadcrumbs)}
-      />
+  const breadcrumbs = [{
+    name: 'Accueil',
+    url: 'https://finivo.ca'
+  }, {
+    name: 'Blog',
+    url: 'https://finivo.ca/blog'
+  }];
+  return <div className="min-h-screen bg-background">
+      <SEO title="Blog Finivo - Guides et Conseils sur les Cartes de Crédit au Québec" description="Découvrez nos guides complets, conseils d'experts et actualités sur les cartes de crédit au Canada. Apprenez à maximiser vos récompenses et faire les meilleurs choix financiers." keywords="blog carte de crédit, conseils finances personnelles, guide carte crédit Québec, meilleure carte remise argent, points voyage Canada, actualités finances" url="https://finivo.ca/blog" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
       <Header />
       
       {/* Hero Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary-foreground bg-[#e88411]">
               <BookOpen className="w-4 h-4" />
               Blog Finivo
             </div>
@@ -72,13 +58,7 @@ const Blog = () => {
             {/* Search */}
             <div className="relative max-w-md mx-auto">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input 
-                type="text"
-                placeholder="Rechercher un article..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-12 rounded-full border-border/50 bg-card"
-              />
+              <Input type="text" placeholder="Rechercher un article..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-12 h-12 rounded-full border-border/50 bg-card" />
             </div>
           </div>
         </div>
@@ -88,25 +68,12 @@ const Blog = () => {
       <section className="py-8 border-b border-border/50">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button
-              variant={selectedCategory === null ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedCategory(null)}
-              className="rounded-full"
-            >
+            <Button variant={selectedCategory === null ? 'default' : 'outline'} size="sm" onClick={() => setSelectedCategory(null)} className="rounded-full">
               Tous
             </Button>
-            {categories.map(category => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedCategory(category)}
-                className="rounded-full"
-              >
+            {categories.map(category => <Button key={category} variant={selectedCategory === category ? 'default' : 'outline'} size="sm" onClick={() => setSelectedCategory(category)} className="rounded-full">
                 {blogCategoryLabels[category]}
-              </Button>
-            ))}
+              </Button>)}
           </div>
         </div>
       </section>
@@ -114,10 +81,8 @@ const Blog = () => {
       {/* Articles Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          {isLoading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="card-elevated rounded-2xl overflow-hidden">
+          {isLoading ? <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="card-elevated rounded-2xl overflow-hidden">
                   <Skeleton className="h-48 w-full" />
                   <div className="p-6 space-y-3">
                     <Skeleton className="h-4 w-32" />
@@ -125,24 +90,13 @@ const Blog = () => {
                     <Skeleton className="h-4 w-full" />
                     <Skeleton className="h-4 w-24" />
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : filteredPosts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <Link 
-                  key={post.id} 
-                  to={`/blog/${post.slug}`}
-                  className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
+                </div>)}
+            </div> : filteredPosts.length > 0 ? <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post, index) => <Link key={post.id} to={`/blog/${post.slug}`} className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in" style={{
+            animationDelay: `${index * 50}ms`
+          }}>
                   <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    <img src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     <div className="absolute top-4 left-4">
                       <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground ml-2">
                         {blogCategoryLabels[post.category]}
@@ -153,11 +107,11 @@ const Blog = () => {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {new Date(post.published_at).toLocaleDateString('fr-CA', { 
-                          day: 'numeric', 
-                          month: 'short', 
-                          year: 'numeric' 
-                        })}
+                        {new Date(post.published_at).toLocaleDateString('fr-CA', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                  })}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
@@ -180,11 +134,8 @@ const Blog = () => {
                       </span>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 card-elevated rounded-2xl">
+                </Link>)}
+            </div> : <div className="text-center py-20 card-elevated rounded-2xl">
               <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="w-8 h-8 text-muted-foreground" />
               </div>
@@ -192,14 +143,11 @@ const Blog = () => {
               <p className="text-muted-foreground">
                 Essayez de modifier votre recherche ou les filtres.
               </p>
-            </div>
-          )}
+            </div>}
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;

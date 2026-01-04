@@ -65,7 +65,7 @@ const Calculateurs = () => {
               <Calculator className="w-4 h-4 text-secondary-foreground" />
               6 outils gratuits
             </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-secondary">
+            <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
               Calculateurs financiers
             </h1>
             <p className="text-lg text-secondary">

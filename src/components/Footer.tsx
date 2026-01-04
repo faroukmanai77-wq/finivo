@@ -1,4 +1,4 @@
-import { Wallet, Mail, MapPin, Shield, FileText, DollarSign } from 'lucide-react';
+import { Mail, MapPin, Shield, FileText, DollarSign, CreditCard } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 export const Footer = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
-              <Wallet className="w-7 h-7 text-primary" />
+              <CreditCard className="w-7 h-7 text-[#f7f7f7]" />
               <span className="font-bold text-2xl">Finivo</span>
             </Link>
             <p className="text-secondary-foreground/70 text-sm">

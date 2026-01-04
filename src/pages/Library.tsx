@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { cn } from '@/lib/utils';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
@@ -145,7 +146,25 @@ const Library = () => {
 
           {/* Category quick filters */}
           <div className="flex flex-wrap gap-2 mt-6">
-            {categories.map(cat => {})}
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setFilters(prev => ({ 
+                  ...prev, 
+                  categories: prev.categories.includes(cat.id) 
+                    ? prev.categories.filter(c => c !== cat.id) 
+                    : [...prev.categories, cat.id]
+                }))}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all",
+                  filters.categories.includes(cat.id)
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                )}
+              >
+                {cat.icon} {cat.label}
+              </button>
+            ))}
           </div>
         </div>
       </section>

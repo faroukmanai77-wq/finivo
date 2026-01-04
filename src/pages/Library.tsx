@@ -117,12 +117,12 @@ const Library = () => {
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
-            <span className="text-muted-foreground">Bibliothèque</span>
+            <span className="text-primary-foreground">Bibliothèque</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#a9ae47] text-muted">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-muted bg-[#acaf74]">
                 <BookOpen className="w-4 h-4" />
                 Bibliothèque
               </div>

@@ -203,7 +203,7 @@ const ImpotCanada = () => {
   return (
     <CalculatorLayout
       title="Calculatrice d'impôt sur le revenu"
-      description="Obtenez une estimation rapide de votre revenu après impôt, avec votre remboursement ou votre solde d'impôt à payer pour 2025."
+      description="Obtenez une estimation rapide de votre revenu après impôt, avec votre remboursement ou votre solde d'impôt à payer."
       icon={<Receipt className="w-8 h-8 text-primary" />}
       seoTitle="Calculatrice d'impôt Canada & Québec 2025 | Finivo"
       seoDescription="Calculez votre impôt fédéral et provincial au Canada. Estimez votre revenu net, votre taux d'imposition effectif et marginal pour 2025."

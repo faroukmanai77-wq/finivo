@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,7 +30,7 @@ All colors MUST be HSL.
     --muted: 214 32% 91%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 142 76% 36%;
+    --accent: 142 50% 59%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -42,7 +44,7 @@ All colors MUST be HSL.
 
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
-    
+
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
@@ -106,7 +108,7 @@ All colors MUST be HSL.
 
     --success: 142 76% 46%;
     --success-foreground: 222 47% 11%;
-    
+
     --warning: 38 92% 50%;
     --warning-foreground: 222 47% 11%;
 
@@ -149,7 +151,7 @@ All colors MUST be HSL.
   .card-elevated {
     @apply bg-card rounded-xl border border-border/50 shadow-[var(--shadow-card)] transition-all duration-300;
   }
-  
+
   .card-elevated:hover {
     @apply shadow-[var(--shadow-card-hover)] -translate-y-1;
   }

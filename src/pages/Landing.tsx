@@ -3,7 +3,7 @@ import { Footer } from '@/components/Footer';
 import { SEO, generateOrganizationStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { CreditCard, Calculator, BookOpen, ArrowRight, TrendingUp, PiggyBank, Scale, Receipt, Sparkles, ChevronDown, Star, Shield, Zap, CheckCircle, Building2, Library, Users, Target, Wallet } from 'lucide-react';
+import { CreditCard, Calculator, BookOpen, ArrowRight, TrendingUp, PiggyBank, Scale, Receipt, Sparkles, ChevronDown, Star, Shield, Zap, CheckCircle, Building2, Library, Users, Target, Wallet, Home } from 'lucide-react';
 const Landing = () => {
   const pillars = [{
     icon: CreditCard,
@@ -69,6 +69,10 @@ const Landing = () => {
     icon: Wallet,
     name: 'Budget mensuel',
     href: '/calculateurs/budget'
+  }, {
+    icon: Home,
+    name: 'Hypothèque',
+    href: '/calculateurs/hypotheque'
   }];
   const stats = [{
     value: '30+',
@@ -80,7 +84,7 @@ const Landing = () => {
     value: '20+',
     label: 'Livres recommandés'
   }, {
-    value: '7',
+    value: '8',
     label: 'Calculateurs'
   }];
   const quickLinks = [{

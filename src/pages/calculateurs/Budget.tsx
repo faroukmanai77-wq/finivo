@@ -172,56 +172,163 @@ const Budget = () => {
   }, [depensesFixes, depensesVariables, totalDepenses]);
 
   const handlePrint = () => {
-    window.print();
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Budget Mensuel - Finivo</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 20px; color: #333; }
+          h1 { color: #1a1a2e; border-bottom: 2px solid #4f46e5; padding-bottom: 10px; }
+          h2 { color: #4f46e5; margin-top: 20px; font-size: 16px; }
+          table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+          th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #eee; }
+          th { background: #f8f9fa; font-weight: 600; }
+          .amount { text-align: right; font-family: monospace; }
+          .total-row { background: #f0f0f0; font-weight: bold; }
+          .summary { margin-top: 30px; padding: 20px; border: 2px solid ${solde >= 0 ? '#22c55e' : '#ef4444'}; border-radius: 8px; }
+          .summary h2 { color: ${solde >= 0 ? '#22c55e' : '#ef4444'}; margin-top: 0; }
+          .positive { color: #22c55e; }
+          .negative { color: #ef4444; }
+          .footer { margin-top: 30px; text-align: center; color: #888; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <h1>Budget Mensuel - Finivo</h1>
+        <p>Date: ${new Date().toLocaleDateString('fr-CA')}</p>
+        
+        <h2>💰 Revenus mensuels</h2>
+        <table>
+          <tr><th>Description</th><th class="amount">Montant</th></tr>
+          ${revenus.filter(r => r.value > 0).map(r => `<tr><td>${r.label}</td><td class="amount">${r.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
+          <tr class="total-row"><td>Total des revenus</td><td class="amount positive">${totalRevenus.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+        </table>
+
+        <h2>🏠 Dépenses fixes mensuelles</h2>
+        <table>
+          <tr><th>Description</th><th class="amount">Montant</th></tr>
+          ${depensesFixes.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${d.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
+          <tr class="total-row"><td>Total des dépenses fixes</td><td class="amount">${totalDepensesFixes.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+        </table>
+
+        <h2>🛒 Dépenses variables mensuelles</h2>
+        <table>
+          <tr><th>Description</th><th class="amount">Montant</th></tr>
+          ${depensesVariables.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${d.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
+          <tr class="total-row"><td>Total des dépenses variables</td><td class="amount">${totalDepensesVariables.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+        </table>
+
+        <div class="summary">
+          <h2>${solde >= 0 ? '✅' : '⚠️'} Résumé du budget</h2>
+          <table>
+            <tr><td>Total des revenus</td><td class="amount positive">${totalRevenus.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+            <tr><td>Total des dépenses</td><td class="amount negative">${totalDepenses.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+            <tr class="total-row"><td>Solde mensuel</td><td class="amount ${solde >= 0 ? 'positive' : 'negative'}">${solde.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+          </table>
+          ${solde >= 0 
+            ? '<p style="color: #22c55e;">Félicitations! Votre budget est équilibré.</p>' 
+            : '<p style="color: #ef4444;">Attention: Vos dépenses dépassent vos revenus.</p>'}
+        </div>
+
+        <div class="footer">
+          <p>Généré par Finivo.ca - ${new Date().toLocaleDateString('fr-CA')}</p>
+        </div>
+      </body>
+      </html>
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
+    }
   };
 
   const handleExportExcel = () => {
-    const data: any[] = [];
-    
-    // En-tête
-    data.push(['CALCULATEUR DE BUDGET MENSUEL - FINIVO']);
-    data.push(['Date:', new Date().toLocaleDateString('fr-CA')]);
-    data.push([]);
+    // Feuille Résumé
+    const summaryData: any[][] = [
+      ['BUDGET MENSUEL - FINIVO'],
+      [''],
+      ['Date de création:', new Date().toLocaleDateString('fr-CA')],
+      [''],
+      ['RÉSUMÉ FINANCIER'],
+      ['', 'Montant', '% du revenu'],
+      ['Total des revenus', totalRevenus, '100%'],
+      ['Dépenses fixes', totalDepensesFixes, totalRevenus > 0 ? `${((totalDepensesFixes / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      ['Dépenses variables', totalDepensesVariables, totalRevenus > 0 ? `${((totalDepensesVariables / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      ['Total des dépenses', totalDepenses, totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [''],
+      ['SOLDE MENSUEL', solde, totalRevenus > 0 ? `${((solde / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [''],
+      ['Statut:', solde >= 0 ? 'Budget équilibré ✓' : 'Déficit budgétaire ⚠'],
+    ];
 
-    // Revenus
-    data.push(['REVENUS MENSUELS']);
+    // Feuille Détails
+    const detailsData: any[][] = [
+      ['DÉTAILS DU BUDGET MENSUEL'],
+      [''],
+      ['REVENUS MENSUELS'],
+      ['Catégorie', 'Montant'],
+    ];
     revenus.forEach(item => {
-      if (item.value > 0) {
-        data.push([item.label, item.value]);
-      }
+      detailsData.push([item.label, item.value]);
     });
-    data.push(['Total des revenus', totalRevenus]);
-    data.push([]);
-
-    // Dépenses fixes
-    data.push(['DÉPENSES FIXES MENSUELLES']);
+    detailsData.push(['TOTAL REVENUS', totalRevenus]);
+    detailsData.push(['']);
+    
+    detailsData.push(['DÉPENSES FIXES MENSUELLES']);
+    detailsData.push(['Catégorie', 'Montant']);
     depensesFixes.forEach(item => {
-      if (item.value > 0) {
-        data.push([item.label, item.value]);
-      }
+      detailsData.push([item.label, item.value]);
     });
-    data.push(['Total des dépenses fixes', totalDepensesFixes]);
-    data.push([]);
-
-    // Dépenses variables
-    data.push(['DÉPENSES VARIABLES MENSUELLES']);
+    detailsData.push(['TOTAL DÉPENSES FIXES', totalDepensesFixes]);
+    detailsData.push(['']);
+    
+    detailsData.push(['DÉPENSES VARIABLES MENSUELLES']);
+    detailsData.push(['Catégorie', 'Montant']);
     depensesVariables.forEach(item => {
-      if (item.value > 0) {
-        data.push([item.label, item.value]);
-      }
+      detailsData.push([item.label, item.value]);
     });
-    data.push(['Total des dépenses variables', totalDepensesVariables]);
-    data.push([]);
+    detailsData.push(['TOTAL DÉPENSES VARIABLES', totalDepensesVariables]);
 
-    // Résumé
-    data.push(['RÉSUMÉ']);
-    data.push(['Total des revenus', totalRevenus]);
-    data.push(['Total des dépenses', totalDepenses]);
-    data.push(['Solde mensuel', solde]);
+    // Feuille Répartition
+    const repartitionData: any[][] = [
+      ['RÉPARTITION DES DÉPENSES PAR CATÉGORIE'],
+      [''],
+      ['Catégorie', 'Montant', '% des dépenses', '% du revenu'],
+    ];
+    pieChartData.forEach(cat => {
+      repartitionData.push([
+        cat.name,
+        cat.value,
+        totalDepenses > 0 ? `${((cat.value / totalDepenses) * 100).toFixed(1)}%` : '0%',
+        totalRevenus > 0 ? `${((cat.value / totalRevenus) * 100).toFixed(1)}%` : '0%'
+      ]);
+    });
+    repartitionData.push(['']);
+    repartitionData.push(['TOTAL', totalDepenses, '100%', totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%']);
 
-    const ws = XLSX.utils.aoa_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Budget');
+    
+    // Créer les feuilles avec styles
+    const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
+    const wsDetails = XLSX.utils.aoa_to_sheet(detailsData);
+    const wsRepartition = XLSX.utils.aoa_to_sheet(repartitionData);
+    
+    // Définir les largeurs de colonnes
+    wsSummary['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }];
+    wsDetails['!cols'] = [{ wch: 45 }, { wch: 15 }];
+    wsRepartition['!cols'] = [{ wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
+    
+    XLSX.utils.book_append_sheet(wb, wsSummary, 'Résumé');
+    XLSX.utils.book_append_sheet(wb, wsDetails, 'Détails');
+    XLSX.utils.book_append_sheet(wb, wsRepartition, 'Répartition');
+    
     XLSX.writeFile(wb, `budget-mensuel-finivo-${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 

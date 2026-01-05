@@ -62,7 +62,7 @@ const Calculateurs = () => {
     popular: true
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Calculateurs Financiers Gratuits | REER, CELIAPP, Dettes, Impôt | Finivo" description="Outils de calcul financier gratuits pour le Québec : intérêts composés, REER, CELIAPP, consolidation de dettes, valeur nette et impôt. Planifiez votre avenir financier." keywords="calculateur financier, calculateur REER, calculateur CELIAPP, consolidation dettes, calculateur impot quebec, valeur nette, intérêts composés" url="https://finivo.ca/calculateurs" />
+      <SEO title="8 Calculateurs Financiers Gratuits Québec 2025 | REER, CELIAPP, Hypothèque, Budget | Finivo" description="Planifiez vos finances avec nos 8 calculateurs gratuits : intérêts composés, épargne REER et CELIAPP, hypothèque avec assurance SCHL, budget mensuel, consolidation de dettes, valeur nette et impôts Canada/Québec. Outils interactifs pour les Québécois." keywords="calculateur financier gratuit, calculateur REER québec, calculateur CELIAPP, calculateur hypothèque SCHL, budget mensuel, consolidation dettes, valeur nette, impôt québec canada, intérêts composés, planification financière" url="https://finivo.ca/calculateurs" />
       <Header />
       
       {/* Hero Section */}

@@ -219,7 +219,7 @@ const CreditCardComparator = () => {
     icon: '📉'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Comparateur de Cartes de Crédit au Québec 2025 | Finivo" description="Comparez plus de 30 cartes de crédit au Québec. Trouvez la meilleure carte selon vos besoins: remise en argent, voyage, sans frais annuels, étudiants. Comparaison gratuite et indépendante." keywords="comparateur carte de crédit, meilleure carte de crédit Québec, carte de crédit remise en argent, carte de crédit voyage Canada, carte de crédit sans frais, carte de crédit étudiant" url="https://finivo.ca/comparateurs/cartes-de-credit" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+      <SEO title="Comparateur de 30+ Cartes de Crédit Québec 2025 | Meilleurs Taux & Remises | Finivo" description="Comparez gratuitement plus de 30 cartes de crédit au Québec : remises en argent jusqu'à 5%, cartes voyage avec points Aéroplan, cartes sans frais annuels et cartes étudiants. Filtrez par émetteur, taux d'intérêt et bonus de bienvenue. Comparaison 100% indépendante mise à jour en temps réel." keywords="comparateur carte crédit québec, meilleure carte crédit remise argent, carte crédit sans frais annuels, carte crédit voyage aéroplan, carte crédit étudiant, amex cobalt, tangerine, bmo, rbc, td, scotia" url="https://finivo.ca/comparateurs/cartes-de-credit" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
       <Header />
       
       {/* Hero Section */}

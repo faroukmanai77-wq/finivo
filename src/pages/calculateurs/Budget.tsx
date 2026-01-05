@@ -255,12 +255,14 @@ const Budget = () => {
             <div className="relative w-32">
               <Input
                 id={item.id}
-                type="number"
-                min="0"
-                step="0.01"
+                type="text"
+                inputMode="decimal"
                 value={item.value || ''}
-                onChange={(e) => updateItem(items, setItems, item.id, parseFloat(e.target.value) || 0)}
-                className="pr-8 text-right"
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
+                  updateItem(items, setItems, item.id, parseFloat(value) || 0);
+                }}
+                className="pr-8 text-right [appearance:textfield]"
                 placeholder="0"
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>

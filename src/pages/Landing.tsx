@@ -101,49 +101,52 @@ const Landing = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center" style={{
-      background: 'var(--gradient-hero)'
-    }}>
-        {/* Animated background */}
+      <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-muted/30">
+        {/* Subtle background pattern */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-pulse-slow" style={{
-          animationDelay: '1.5s'
-        }} />
-          <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-warning/10 rounded-full blur-[80px] animate-pulse-slow" style={{
-          animationDelay: '2.5s'
-        }} />
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px]" />
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--foreground)) 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }} />
         </div>
 
         <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
           <div className="text-center max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/30">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/20">
               <Sparkles className="w-4 h-4" />
               Plateforme financière 
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] mb-6 text-secondary-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] mb-6 text-foreground">
               Comparez, calculez,
-              <span className="block mt-2 bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
+              <span className="block mt-2 bg-gradient-to-r from-primary via-chart-4 to-accent bg-clip-text text-transparent">
                 atteignez la liberté financière
               </span>
             </h1>
             
-            <p className="text-lg lg:text-xl text-secondary-foreground/70 mb-8 max-w-3xl mx-auto leading-relaxed">
-              La plateforme complète pour les Québécois : comparez les <strong className="text-secondary-foreground">cartes de crédit</strong> et <strong className="text-secondary-foreground">plateformes de courtage</strong>, 
-              planifiez votre épargne avec nos <strong className="text-secondary-foreground">calculateurs REER/CELIAPP</strong>, et découvrez les meilleurs <strong className="text-secondary-foreground">livres sur la finance</strong>.
+            <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+              La plateforme complète pour les Québécois : comparez les <strong className="text-foreground">cartes de crédit</strong> et <strong className="text-foreground">plateformes de courtage</strong>, 
+              planifiez votre épargne avec nos <strong className="text-foreground">calculateurs REER/CELIAPP</strong>, et découvrez les meilleurs <strong className="text-foreground">livres sur la finance</strong>.
             </p>
 
-            {/* Quick Links */}
+            {/* Quick Links - Pastel colors */}
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {quickLinks.map((link, i) => <Link key={i} to={link.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-foreground/10 hover:bg-secondary-foreground/20 border border-secondary-foreground/20 text-secondary-foreground text-sm font-medium transition-all hover:scale-105">
-                  <link.icon className="w-4 h-4" />
-                  {link.label}
-                </Link>)}
+              {quickLinks.map((link, i) => {
+                const pastelColors = [
+                  'bg-primary/15 text-primary border-primary/20 hover:bg-primary/25',
+                  'bg-chart-4/15 text-chart-4 border-chart-4/20 hover:bg-chart-4/25',
+                  'bg-warning/15 text-warning border-warning/20 hover:bg-warning/25',
+                  'bg-accent/15 text-accent border-accent/20 hover:bg-accent/25'
+                ];
+                return (
+                  <Link key={i} to={link.href} className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${pastelColors[i % pastelColors.length]} border text-sm font-medium transition-all hover:scale-105`}>
+                    <link.icon className="w-4 h-4" />
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -153,7 +156,7 @@ const Landing = () => {
                   Voir les comparateurs
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-14 px-8 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/20 font-semibold gap-3 text-lg">
+              <Button asChild variant="outline" size="lg" className="h-14 px-8 bg-card border-border text-foreground hover:bg-muted font-semibold gap-3 text-lg">
                 <Link to="/calculateurs">
                   <Calculator className="w-5 h-5" />
                   Utiliser les calculateurs
@@ -161,35 +164,51 @@ const Landing = () => {
               </Button>
             </div>
 
-            {/* Stats */}
+            {/* Stats - Pastel colored cards */}
             <div className="mx-auto w-full max-w-2xl">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {stats.map((stat, i) => <div key={i} className="bg-secondary-foreground/5 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/10 opacity-0 animate-scale-in" style={{
-                animationDelay: `${0.4 + i * 0.1}s`,
-                animationFillMode: 'forwards'
-              }}>
-                    <p className="text-2xl lg:text-3xl font-extrabold text-secondary-foreground">{stat.value}</p>
-                    <p className="text-xs text-secondary-foreground/60 font-medium mt-1">{stat.label}</p>
-                  </div>)}
+                {stats.map((stat, i) => {
+                  const pastelBgs = [
+                    'bg-primary/10 border-primary/20',
+                    'bg-chart-4/10 border-chart-4/20',
+                    'bg-warning/10 border-warning/20',
+                    'bg-success/10 border-success/20'
+                  ];
+                  const textColors = [
+                    'text-primary',
+                    'text-chart-4',
+                    'text-warning',
+                    'text-success'
+                  ];
+                  return (
+                    <div key={i} className={`${pastelBgs[i]} rounded-xl p-4 border opacity-0 animate-scale-in`} style={{
+                      animationDelay: `${0.4 + i * 0.1}s`,
+                      animationFillMode: 'forwards'
+                    }}>
+                      <p className={`text-2xl lg:text-3xl font-extrabold ${textColors[i]}`}>{stat.value}</p>
+                      <p className="text-xs text-muted-foreground font-medium mt-1">{stat.label}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             {/* Trust badges */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-secondary-foreground/50 text-sm">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-muted-foreground text-sm">
               <div className="flex items-center gap-2 text-primary">
                 <Shield className="w-4 h-4" />
                 <span>100% indépendant</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-chart-4">
                 <Zap className="w-4 h-4" />
                 <span>Données à jour</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-warning">
                 <Users className="w-4 h-4" />
                 <span>Gratuit pour tous</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-sidebar-primary" />
+              <div className="flex items-center gap-2 text-success">
+                <Target className="w-4 h-4" />
                 <span>Fait au Québec</span>
               </div>
             </div>
@@ -197,7 +216,7 @@ const Landing = () => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-secondary-foreground/40">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-muted-foreground">
           <span className="text-xs font-medium">Découvrir nos outils</span>
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>

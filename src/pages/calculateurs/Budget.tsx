@@ -1,8 +1,8 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
+import { BudgetInputSection } from '@/components/calculators/BudgetInputSection';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign, AlertTriangle, CheckCircle, PieChart } from 'lucide-react';
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
@@ -74,14 +74,17 @@ const Budget = () => {
     { id: 'autres_variables', label: 'Autres dépenses', value: 0 },
   ]);
 
-  const updateItem = (
-    items: BudgetItem[],
-    setItems: React.Dispatch<React.SetStateAction<BudgetItem[]>>,
-    id: string,
-    value: number
-  ) => {
-    setItems(items.map(item => item.id === id ? { ...item, value } : item));
-  };
+  const handleRevenusChange = useCallback((id: string, value: number) => {
+    setRevenus(prev => prev.map(item => item.id === id ? { ...item, value } : item));
+  }, []);
+
+  const handleDepensesFixesChange = useCallback((id: string, value: number) => {
+    setDepensesFixes(prev => prev.map(item => item.id === id ? { ...item, value } : item));
+  }, []);
+
+  const handleDepensesVariablesChange = useCallback((id: string, value: number) => {
+    setDepensesVariables(prev => prev.map(item => item.id === id ? { ...item, value } : item));
+  }, []);
 
   const totalRevenus = revenus.reduce((sum, item) => sum + item.value, 0);
   const totalDepensesFixes = depensesFixes.reduce((sum, item) => sum + item.value, 0);
@@ -228,50 +231,6 @@ const Budget = () => {
     setDepensesVariables(depensesVariables.map(item => ({ ...item, value: 0 })));
   };
 
-  const BudgetInputSection = ({ 
-    title, 
-    items, 
-    setItems, 
-    icon 
-  }: { 
-    title: string; 
-    items: BudgetItem[]; 
-    setItems: React.Dispatch<React.SetStateAction<BudgetItem[]>>;
-    icon: React.ReactNode;
-  }) => (
-    <Card className="print:shadow-none print:border">
-      <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-3 text-lg">
-          {icon}
-          {title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        {items.map(item => (
-          <div key={item.id} className="flex items-center gap-3">
-            <label htmlFor={item.id} className="flex-1 text-sm text-muted-foreground">
-              {item.label}
-            </label>
-            <div className="relative w-32">
-              <Input
-                id={item.id}
-                type="text"
-                inputMode="decimal"
-                value={item.value || ''}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
-                  updateItem(items, setItems, item.id, parseFloat(value) || 0);
-                }}
-                className="pr-8 text-right [appearance:textfield]"
-                placeholder="0"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-            </div>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
-  );
 
   const faqItems = [
     {
@@ -328,7 +287,7 @@ const Budget = () => {
         <BudgetInputSection
           title="Revenus mensuels"
           items={revenus}
-          setItems={setRevenus}
+          onItemChange={handleRevenusChange}
           icon={<TrendingUp className="w-5 h-5 text-success" />}
         />
 
@@ -336,7 +295,7 @@ const Budget = () => {
         <BudgetInputSection
           title="Dépenses fixes mensuelles"
           items={depensesFixes}
-          setItems={setDepensesFixes}
+          onItemChange={handleDepensesFixesChange}
           icon={<DollarSign className="w-5 h-5 text-warning" />}
         />
 
@@ -344,7 +303,7 @@ const Budget = () => {
         <BudgetInputSection
           title="Dépenses variables mensuelles"
           items={depensesVariables}
-          setItems={setDepensesVariables}
+          onItemChange={handleDepensesVariablesChange}
           icon={<TrendingDown className="w-5 h-5 text-destructive" />}
         />
 

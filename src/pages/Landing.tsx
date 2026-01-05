@@ -105,7 +105,7 @@ const Landing = () => {
     href: '/calculateurs'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Finivo | Comparateur Cartes de Crédit, Courtage & Outils Financiers Québec 2025" description="Comparez les meilleures cartes de crédit et plateformes de courtage au Québec. Calculateurs REER, CELIAPP, impôts + bibliothèque de livres finance. 100% gratuit et indépendant." keywords="comparateur carte crédit québec, meilleur courtier canada, wealthsimple questrade comparatif, calculateur REER CELIAPP, outils financiers gratuits, finances personnelles québec, livres investissement, liberté financière canada" url="https://finivo.ca" structuredData={generateOrganizationStructuredData()} />
+      <SEO title="Finivo | Outils Financiers Gratuits pour Québécois - Comparateurs & Calculateurs 2025" description="Finivo est LA plateforme québécoise d'outils financiers 100% gratuits. Comparez 30+ cartes de crédit et 10+ courtiers en ligne. Utilisez nos 8 calculateurs (REER, CELIAPP, hypothèque, budget, impôts). Découvrez notre bibliothèque de 20+ livres sur la finance personnelle. Indépendant et sans frais." keywords="finivo, outils financiers gratuits québec, comparateur carte crédit québec, meilleur courtier canada, calculateur REER CELIAPP, calculateur hypothèque québec, budget mensuel, impôt québec canada, finances personnelles, liberté financière" url="https://finivo.ca" structuredData={generateOrganizationStructuredData()} />
       <Header />
       
       {/* Hero Section */}

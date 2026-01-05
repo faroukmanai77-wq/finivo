@@ -125,7 +125,7 @@ const BrokerageComparator = () => {
     icon: '🍁'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Comparateur de Plateformes de Courtage au Canada 2025 | Finivo" description="Comparez les meilleures plateformes de courtage en ligne au Canada. Wealthsimple, Questrade, IBKR, Disnat et plus. Trouvez le courtier idéal pour investir: CELI, REER, ETF, actions, options." keywords="comparateur courtage, meilleur courtier Canada, plateforme investissement Québec, Wealthsimple Trade, Questrade, IBKR, courtier en ligne, CELI, REER" url="https://finivo.ca/comparateurs/courtage" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+      <SEO title="Comparateur de 10+ Courtiers en Ligne Canada 2025 | Wealthsimple, Questrade, IBKR | Finivo" description="Comparez gratuitement les meilleures plateformes de courtage au Canada : Wealthsimple Trade (0$ commission), Questrade, Interactive Brokers, Disnat et les banques (TD, RBC, BMO). Trouvez le courtier idéal pour votre CELI, REER, CELIAPP. Comparez frais, produits (ETF, actions, crypto, options) et fonctionnalités." keywords="comparateur courtier canada, wealthsimple vs questrade, meilleur courtier CELI REER, plateforme investissement québec, courtier zéro commission, interactive brokers canada, disnat, courtier crypto canada" url="https://finivo.ca/comparateurs/courtage" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
       <Header />
       
       {/* Hero Section */}

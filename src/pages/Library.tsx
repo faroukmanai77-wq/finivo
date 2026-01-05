@@ -108,7 +108,7 @@ const Library = () => {
   }];
   const activeFiltersCount = filters.categories.length + filters.levels.length + filters.languages.length;
   return <div className="min-h-screen bg-background">
-      <SEO title="Bibliothèque Finance & Liberté Financière | Finivo" description="Découvrez les meilleurs livres pour améliorer votre relation à l'argent, investir intelligemment et bâtir votre liberté financière. Sélection de livres en français et en anglais." keywords="livres finance personnelle, livres investissement, liberté financière, meilleurs livres argent, livres budget, livres REER CELI" url="https://finivo.ca/bibliotheque" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+      <SEO title="20+ Meilleurs Livres Finance Personnelle & Investissement 2025 | Bibliothèque Finivo" description="Découvrez notre sélection de 20+ livres essentiels pour maîtriser vos finances : Père Riche Père Pauvre, L'investisseur intelligent, La semaine de 4 heures et plus. Livres en français et anglais classés par niveau (débutant à expert). Parfaits pour apprendre à investir, budgéter et atteindre la liberté financière." keywords="meilleurs livres finance personnelle, livres investissement débutant, père riche père pauvre, liberté financière, livres budget épargne, livres REER CELI, warren buffett, robert kiyosaki" url="https://finivo.ca/bibliotheque" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
       <Header />
       
       {/* Hero Section */}

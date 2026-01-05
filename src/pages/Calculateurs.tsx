@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO } from '@/components/SEO';
-import { Calculator, TrendingUp, PiggyBank, Scale, Receipt, Building, ArrowRight, Sparkles } from 'lucide-react';
+import { Calculator, TrendingUp, PiggyBank, Scale, Receipt, Building, ArrowRight, Sparkles, Wallet } from 'lucide-react';
 const Calculateurs = () => {
   const calculators = [{
     icon: TrendingUp,
@@ -46,6 +46,13 @@ const Calculateurs = () => {
     href: '/calculateurs/impot',
     color: 'bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400',
     popular: false
+  }, {
+    icon: Wallet,
+    title: 'Budget mensuel',
+    description: 'Planifiez votre budget en détaillant vos revenus et dépenses. Imprimez ou exportez en Excel.',
+    href: '/calculateurs/budget',
+    color: 'bg-primary/10 text-primary',
+    popular: true
   }];
   return <div className="min-h-screen bg-background">
       <SEO title="Calculateurs Financiers Gratuits | REER, CELIAPP, Dettes, Impôt | Finivo" description="Outils de calcul financier gratuits pour le Québec : intérêts composés, REER, CELIAPP, consolidation de dettes, valeur nette et impôt. Planifiez votre avenir financier." keywords="calculateur financier, calculateur REER, calculateur CELIAPP, consolidation dettes, calculateur impot quebec, valeur nette, intérêts composés" url="https://finivo.ca/calculateurs" />
@@ -63,7 +70,7 @@ const Calculateurs = () => {
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary-foreground bg-[#bf69b0]">
               <Calculator className="w-4 h-4 text-secondary-foreground" />
-              6 outils gratuits
+              7 outils gratuits
             </div>
             <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
               Calculateurs financiers

@@ -16,6 +16,7 @@ import EpargneCELIAPP from "./pages/calculateurs/EpargneCELIAPP";
 import ConsolidationDettes from "./pages/calculateurs/ConsolidationDettes";
 import ValeurNette from "./pages/calculateurs/ValeurNette";
 import ImpotCanada from "./pages/calculateurs/ImpotCanada";
+import Budget from "./pages/calculateurs/Budget";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Library from "./pages/Library";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/calculateurs/consolidation-dettes" element={<ConsolidationDettes />} />
             <Route path="/calculateurs/valeur-nette" element={<ValeurNette />} />
             <Route path="/calculateurs/impot" element={<ImpotCanada />} />
+            <Route path="/calculateurs/budget" element={<Budget />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/bibliotheque" element={<Library />} />

@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign, AlertTriangle, CheckCircle, PieChart } from 'lucide-react';
+import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import * as XLSX from 'xlsx';
 
 interface BudgetItem {
@@ -87,6 +88,85 @@ const Budget = () => {
   const totalDepensesVariables = depensesVariables.reduce((sum, item) => sum + item.value, 0);
   const totalDepenses = totalDepensesFixes + totalDepensesVariables;
   const solde = totalRevenus - totalDepenses;
+
+  // Données pour le graphique circulaire
+  const CHART_COLORS = [
+    'hsl(var(--primary))',
+    'hsl(var(--accent))',
+    'hsl(var(--warning))',
+    'hsl(var(--success))',
+    'hsl(var(--destructive))',
+    'hsl(var(--chart-1))',
+    'hsl(var(--chart-2))',
+    'hsl(var(--chart-3))',
+    'hsl(var(--chart-4))',
+    'hsl(var(--chart-5))',
+  ];
+
+  const pieChartData = useMemo(() => {
+    const categories = [
+      { name: 'Logement', value: (depensesFixes.find(d => d.id === 'loyer')?.value || 0) },
+      { name: 'Transport', value: 
+        (depensesFixes.find(d => d.id === 'emprunt_auto')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'assurance_auto')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'essence')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'transport')?.value || 0)
+      },
+      { name: 'Alimentation', value: 
+        (depensesVariables.find(d => d.id === 'alimentation_epicerie')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_depanneur')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_restaurant')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_travail')?.value || 0)
+      },
+      { name: 'Assurances', value: 
+        (depensesFixes.find(d => d.id === 'assurance_vie')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'assurance_habitation')?.value || 0)
+      },
+      { name: 'Services', value: 
+        (depensesFixes.find(d => d.id === 'electricite')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'cable')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'telephone')?.value || 0)
+      },
+      { name: 'Dettes', value: 
+        (depensesFixes.find(d => d.id === 'emprunt_carte')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'emprunt_marge')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'emprunts_autres')?.value || 0)
+      },
+      { name: 'Épargne', value: (depensesFixes.find(d => d.id === 'epargne')?.value || 0) },
+      { name: 'Loisirs', value: 
+        (depensesVariables.find(d => d.id === 'loisirs')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'sports')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'abonnements')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'vacances')?.value || 0)
+      },
+      { name: 'Autres', value: 
+        totalDepenses - 
+        (depensesFixes.find(d => d.id === 'loyer')?.value || 0) -
+        ((depensesFixes.find(d => d.id === 'emprunt_auto')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'assurance_auto')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'essence')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'transport')?.value || 0)) -
+        ((depensesVariables.find(d => d.id === 'alimentation_epicerie')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_depanneur')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_restaurant')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'alimentation_travail')?.value || 0)) -
+        ((depensesFixes.find(d => d.id === 'assurance_vie')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'assurance_habitation')?.value || 0)) -
+        ((depensesFixes.find(d => d.id === 'electricite')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'cable')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'telephone')?.value || 0)) -
+        ((depensesFixes.find(d => d.id === 'emprunt_carte')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'emprunt_marge')?.value || 0) +
+        (depensesFixes.find(d => d.id === 'emprunts_autres')?.value || 0)) -
+        (depensesFixes.find(d => d.id === 'epargne')?.value || 0) -
+        ((depensesVariables.find(d => d.id === 'loisirs')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'sports')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'abonnements')?.value || 0) +
+        (depensesVariables.find(d => d.id === 'vacances')?.value || 0))
+      },
+    ];
+    return categories.filter(cat => cat.value > 0);
+  }, [depensesFixes, depensesVariables, totalDepenses]);
 
   const handlePrint = () => {
     window.print();
@@ -265,6 +345,49 @@ const Budget = () => {
           setItems={setDepensesVariables}
           icon={<TrendingDown className="w-5 h-5 text-destructive" />}
         />
+
+        {/* Graphique de répartition */}
+        {pieChartData.length > 0 && (
+          <Card className="print:shadow-none print:border">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-3 text-lg">
+                <PieChart className="w-5 h-5 text-primary" />
+                Répartition des dépenses
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RechartsPieChart>
+                    <Pie
+                      data={pieChartData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                      outerRadius={120}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {pieChartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip 
+                      formatter={(value: number) => value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}
+                      contentStyle={{ 
+                        backgroundColor: 'hsl(var(--card))', 
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px'
+                      }}
+                    />
+                    <Legend />
+                  </RechartsPieChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Résumé */}
         <Card className={`border-2 ${solde >= 0 ? 'border-success/50 bg-success/5' : 'border-destructive/50 bg-destructive/5'} print:border print:bg-transparent`}>

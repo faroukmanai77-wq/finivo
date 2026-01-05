@@ -1,7 +1,6 @@
 import { Menu, X, Calculator, BookOpen, Scale, Library, CreditCard } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ThemeToggle } from './ThemeToggle';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,17 +77,12 @@ export const Header = () => {
             {navLinks.map(link => <button key={link.href} onClick={() => handleNavClick(link.href, link.isRoute)} className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${isActive(link.href) ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'}`}>
                 {link.label}
               </button>)}
-            <ThemeToggle />
           </nav>
 
-
-          {/* Mobile Theme Toggle & Menu Button */}
-          <div className="md:hidden flex items-center gap-1">
-            <ThemeToggle />
-            <button className="p-2.5 hover:bg-muted/50 rounded-xl transition-colors active:scale-95" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}>
-              {isMenuOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button className="md:hidden p-2.5 hover:bg-muted/50 rounded-xl transition-colors active:scale-95" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}>
+            {isMenuOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
+          </button>
         </div>
       </div>
 

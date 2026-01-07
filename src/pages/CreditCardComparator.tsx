@@ -223,7 +223,7 @@ const CreditCardComparator = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-primary-foreground">
+      <section className="py-12 lg:py-16 bg-secondary-foreground">
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
@@ -231,12 +231,12 @@ const CreditCardComparator = () => {
             <span>/</span>
             <span>Comparateurs</span>
             <span>/</span>
-            <span className="text-muted">Cartes de crédit</span>
+            <span className="text-primary">Cartes de crédit</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#90b292] text-primary-foreground">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
                 <CreditCardIcon className="w-4 h-4" />
                 Comparateur de cartes de crédit     
               </div>

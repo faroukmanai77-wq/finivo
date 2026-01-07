@@ -77,8 +77,8 @@ const Calculateurs = () => {
 
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             <div className="text-center lg:text-left max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary bg-[#28bd4d]/20">
-                <Calculator className="w-4 h-4 text-green-500" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary bg-primary/15">
+                <Calculator className="w-4 h-4" />
                 8 outils gratuits
               </div>
               <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
@@ -89,7 +89,7 @@ const Calculateurs = () => {
                 et gérer vos dettes efficacement.
               </p>
             </div>
-            <div className="w-48 h-48 lg:w-64 lg:h-64 flex-shrink-0">
+            <div className="w-56 h-56 lg:w-80 lg:h-80 flex-shrink-0">
               <img 
                 src={AbacusIllustration} 
                 alt="Illustration calculateurs" 

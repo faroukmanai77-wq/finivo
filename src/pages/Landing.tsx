@@ -3,7 +3,10 @@ import { Footer } from '@/components/Footer';
 import { SEO, generateOrganizationStructuredData } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { CreditCard, Calculator, BookOpen, ArrowRight, TrendingUp, PiggyBank, Scale, Receipt, Sparkles, ChevronDown, Star, Shield, Zap, CheckCircle, Building2, Library, Users, Target, Wallet, Home } from 'lucide-react';
+import { CreditCard, Calculator, BookOpen, ArrowRight, TrendingUp, PiggyBank, Scale, Receipt, Star, Shield, Zap, CheckCircle, Building2, Library, Users, Target, Wallet, Home } from 'lucide-react';
+import DigitalSavingsIllustration from '@/assets/illustrations/digital-savings.svg';
+import GrowthGraphIllustration from '@/assets/illustrations/growth-graph.svg';
+import CardsIllustration from '@/assets/illustrations/cards.svg';
 const Landing = () => {
   const pillars = [{
     icon: CreditCard,
@@ -108,106 +111,138 @@ const Landing = () => {
       <SEO title="Finivo | Outils Financiers Gratuits pour Québécois - Comparateurs & Calculateurs 2025" description="Finivo est LA plateforme québécoise d'outils financiers 100% gratuits. Comparez 30+ cartes de crédit et 10+ courtiers en ligne. Utilisez nos 8 calculateurs (REER, CELIAPP, hypothèque, budget, impôts). Découvrez notre bibliothèque de 20+ livres sur la finance personnelle. Indépendant et sans frais." keywords="finivo, outils financiers gratuits québec, comparateur carte crédit québec, meilleur courtier canada, calculateur REER CELIAPP, calculateur hypothèque québec, budget mensuel, impôt québec canada, finances personnelles, liberté financière" url="https://finivo.ca" structuredData={generateOrganizationStructuredData()} />
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center" style={{
-      background: 'var(--gradient-hero)'
-    }}>
-        {/* Animated background */}
+      {/* Hero Section - MindMarket Style */}
+      <section className="relative overflow-hidden section-cream">
+        {/* Decorative background shapes */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-pulse-slow" style={{
-          animationDelay: '1.5s'
-        }} />
-          <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-warning/10 rounded-full blur-[80px] animate-pulse-slow" style={{
-          animationDelay: '2.5s'
-        }} />
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
-        }} />
+          {/* Large blob on the right */}
+          <div className="absolute -right-20 top-0 w-[60%] h-full bg-gradient-to-bl from-primary/20 via-accent/10 to-transparent rounded-l-[100px]" />
+          {/* Small decorative circles */}
+          <div className="absolute top-20 left-[10%] w-16 h-16 bg-accent/20 rounded-full blur-sm animate-float" />
+          <div className="absolute top-40 left-[20%] w-8 h-8 bg-warning/30 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-[15%] w-12 h-12 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-32 right-[40%] w-6 h-6 bg-success/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
         </div>
 
-        <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
-          <div className="text-center max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/30">
-              <Sparkles className="w-4 h-4" />
-              Plateforme financière 
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] mb-6 text-secondary-foreground">
-              Comparez, calculez,
-              <span className="block mt-2 bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
-                atteignez la liberté financière
-              </span>
-            </h1>
-            
-            <p className="text-lg lg:text-xl text-secondary-foreground/70 mb-8 max-w-3xl mx-auto leading-relaxed">
-              La plateforme complète pour les Québécois : comparez les <strong className="text-secondary-foreground">cartes de crédit</strong> et <strong className="text-secondary-foreground">plateformes de courtage</strong>, 
-              planifiez votre épargne avec nos <strong className="text-secondary-foreground">calculateurs REER/CELIAPP</strong>, et découvrez les meilleurs <strong className="text-secondary-foreground">livres sur la finance</strong>.
-            </p>
+        <div className="container mx-auto px-4 py-16 lg:py-24 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            {/* Left content */}
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 bg-primary/15 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Star className="w-4 h-4 fill-primary" />
+                Plateforme financière gratuite
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
+                Comparez, calculez,
+                <span className="block mt-2 text-primary">
+                  et prospérez
+                </span>
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                La plateforme complète pour les Québécois : comparez les <strong className="text-foreground">cartes de crédit</strong> et <strong className="text-foreground">plateformes de courtage</strong>, 
+                planifiez avec nos <strong className="text-foreground">calculateurs</strong>, et découvrez les meilleurs <strong className="text-foreground">livres sur la finance</strong>.
+              </p>
 
-            {/* Quick Links */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {quickLinks.map((link, i) => <Link key={i} to={link.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-foreground/10 hover:bg-secondary-foreground/20 border border-secondary-foreground/20 text-secondary-foreground text-sm font-medium transition-all hover:scale-105">
-                  <link.icon className="w-4 h-4" />
-                  {link.label}
-                </Link>)}
-            </div>
+              {/* Quick Links Pills */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {quickLinks.map((link, i) => (
+                  <Link 
+                    key={i} 
+                    to={link.href} 
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/5 text-foreground text-sm font-medium transition-all hover:scale-105 shadow-sm"
+                  >
+                    <link.icon className="w-4 h-4 text-primary" />
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button asChild size="lg" className="btn-gradient text-lg h-14 px-8 gap-3 font-semibold group">
-                <Link to="/comparateurs">
-                  <Scale className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Voir les comparateurs
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="h-14 px-8 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/20 font-semibold gap-3 text-lg">
-                <Link to="/calculateurs">
-                  <Calculator className="w-5 h-5" />
-                  Utiliser les calculateurs
-                </Link>
-              </Button>
-            </div>
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Button asChild size="lg" className="btn-gradient text-lg h-14 px-8 gap-3 font-semibold group rounded-full">
+                  <Link to="/comparateurs">
+                    <Scale className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    Voir les comparateurs
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="h-14 px-8 border-2 border-foreground/20 text-foreground hover:bg-foreground/5 font-semibold gap-3 text-lg rounded-full">
+                  <Link to="/calculateurs">
+                    <Calculator className="w-5 h-5" />
+                    Calculateurs
+                  </Link>
+                </Button>
+              </div>
 
-            {/* Stats */}
-            <div className="mx-auto w-full max-w-2xl">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {stats.map((stat, i) => <div key={i} className="bg-secondary-foreground/5 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/10 opacity-0 animate-scale-in" style={{
-                animationDelay: `${0.4 + i * 0.1}s`,
-                animationFillMode: 'forwards'
-              }}>
-                    <p className="text-2xl lg:text-3xl font-extrabold text-secondary-foreground">{stat.value}</p>
-                    <p className="text-xs text-secondary-foreground/60 font-medium mt-1">{stat.label}</p>
-                  </div>)}
+              {/* Stats Row */}
+              <div className="flex flex-wrap items-center gap-6 text-sm">
+                {stats.map((stat, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="text-2xl font-extrabold text-primary">{stat.value}</span>
+                    <span className="text-muted-foreground">{stat.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Trust badges */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-secondary-foreground/50 text-sm">
-              <div className="flex items-center gap-2 text-primary">
-                <Shield className="w-4 h-4" />
-                <span>100% indépendant</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4" />
-                <span>Données à jour</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4" />
-                <span>Gratuit pour tous</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-sidebar-primary" />
-                <span>Fait au Québec</span>
+            {/* Right illustration */}
+            <div className="relative hidden lg:flex items-center justify-center">
+              <div className="relative w-full max-w-lg">
+                {/* Main illustration */}
+                <img 
+                  src={DigitalSavingsIllustration} 
+                  alt="Économies et finances personnelles" 
+                  className="w-full h-auto drop-shadow-2xl animate-float"
+                />
+                
+                {/* Floating decorative cards */}
+                <div className="absolute -left-8 top-1/4 bg-card rounded-2xl p-4 shadow-lg border border-border animate-float" style={{ animationDelay: '0.5s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-success" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Rendement</p>
+                      <p className="font-bold text-foreground">+12.5%</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute -right-4 bottom-1/4 bg-card rounded-2xl p-4 shadow-lg border border-border animate-float" style={{ animationDelay: '1.5s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                      <PiggyBank className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Épargne CELIAPP</p>
+                      <p className="font-bold text-foreground">8 000$/an</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-secondary-foreground/40">
-          <span className="text-xs font-medium">Découvrir nos outils</span>
-          <ChevronDown className="w-5 h-5 animate-bounce" />
+          {/* Trust badges */}
+          <div className="mt-16 pt-8 border-t border-border/50 flex flex-wrap items-center justify-center gap-8 text-muted-foreground text-sm">
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-primary" />
+              <span>100% indépendant</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-accent" />
+              <span>Données à jour</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-success" />
+              <span>Gratuit pour tous</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Target className="w-5 h-5 text-warning" />
+              <span>Fait au Québec 🇨🇦</span>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -71,7 +71,8 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)',
   			xl: 'calc(var(--radius) + 4px)',
-  			'2xl': 'calc(var(--radius) + 8px)'
+  			'2xl': 'calc(var(--radius) + 8px)',
+  			'3xl': 'calc(var(--radius) + 16px)'
   		},
   		keyframes: {
   			'accordion-down': {
@@ -133,6 +134,22 @@ export default {
   				'50%': {
   					opacity: '1'
   				}
+  			},
+  			float: {
+  				'0%, 100%': {
+  					transform: 'translateY(0px)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-10px)'
+  				}
+  			},
+  			'bounce-gentle': {
+  				'0%, 100%': {
+  					transform: 'translateY(0)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-5px)'
+  				}
   			}
   		},
   		animation: {
@@ -142,7 +159,10 @@ export default {
   			'scale-in': 'scale-in 0.2s ease-out',
   			'slide-in-right': 'slide-in-right 0.3s ease-out',
   			shimmer: 'shimmer 3s ease-in-out infinite',
-  			'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
+  			'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+  			float: 'float 6s ease-in-out infinite',
+  			'float-slow': 'float 8s ease-in-out infinite',
+  			'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite'
   		},
   		fontFamily: {
   			sans: [
@@ -183,10 +203,11 @@ export default {
   			]
   		},
   		boxShadow: {
-  			card: '0 1px 3px hsl(0 0% 0% / 0.04), 0 4px 12px hsl(0 0% 0% / 0.06)',
-  			'card-hover': '0 4px 16px hsl(0 0% 0% / 0.08), 0 8px 32px hsl(0 0% 0% / 0.08)',
-  			glow: '0 0 20px hsl(217 91% 60% / 0.15)',
-  			'glow-lg': '0 0 40px hsl(217 91% 60% / 0.2)'
+  			card: '0 1px 3px hsl(220 20% 15% / 0.04), 0 4px 12px hsl(220 20% 15% / 0.06)',
+  			'card-hover': '0 4px 16px hsl(220 20% 15% / 0.08), 0 8px 32px hsl(220 20% 15% / 0.08)',
+  			glow: '0 0 20px hsl(135 65% 45% / 0.15)',
+  			'glow-lg': '0 0 40px hsl(135 65% 45% / 0.2)',
+  			'glow-accent': '0 0 20px hsl(12 85% 62% / 0.15)'
   		}
   	}
   },

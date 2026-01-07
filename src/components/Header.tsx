@@ -1,8 +1,8 @@
-import { Menu, X, Calculator, BookOpen, Scale, Library, Sparkles } from 'lucide-react';
+import { Menu, X, Calculator, BookOpen, Scale, Library } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import logoFinivo from '@/assets/logo-finivo.png';
+import { FinivoLogoWithText } from './FinivoLogo';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,11 +73,8 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 py-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center group-hover:scale-105 transition-transform shadow-md">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="font-extrabold text-xl text-foreground tracking-tight">Finivo</span>
+          <Link to="/" className="group hover:opacity-90 transition-opacity">
+            <FinivoLogoWithText size="md" />
           </Link>
 
           {/* Desktop Navigation */}

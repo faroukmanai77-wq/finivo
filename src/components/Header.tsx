@@ -58,7 +58,6 @@ export const Header = () => {
   const navLinks = [
     { href: '/comparateurs', label: 'Comparateurs', isRoute: true, icon: Scale },
     { href: '/calculateurs', label: 'Calculateurs', isRoute: true, icon: Calculator },
-    { href: '/bibliotheque', label: 'Bibliothèque', isRoute: true, icon: Library },
     { href: '/blog', label: 'Blog', isRoute: true, icon: BookOpen }
   ];
 
@@ -97,11 +96,11 @@ export const Header = () => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button 
-              onClick={() => navigate('/comparateurs/cartes-de-credit')}
+              onClick={() => navigate('/bibliotheque')}
               className="btn-gradient rounded-full font-semibold gap-2"
             >
-              <Scale className="w-4 h-4" />
-              Comparer maintenant
+              <Library className="w-4 h-4" />
+              Bibliothèque
             </Button>
           </div>
 
@@ -153,12 +152,12 @@ export const Header = () => {
               <Button 
                 onClick={() => {
                   setIsMenuOpen(false);
-                  navigate('/comparateurs/cartes-de-credit');
+                  navigate('/bibliotheque');
                 }}
                 className="w-full btn-gradient rounded-xl font-semibold gap-2"
               >
-                <Scale className="w-4 h-4" />
-                Comparer maintenant
+                <Library className="w-4 h-4" />
+                Bibliothèque
               </Button>
             </div>
           </div>

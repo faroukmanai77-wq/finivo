@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO } from '@/components/SEO';
 import { Calculator, TrendingUp, PiggyBank, Scale, Receipt, Building, ArrowRight, Sparkles, Wallet, Home } from 'lucide-react';
+import AbacusIllustration from '@/assets/illustrations/abacus.gif';
 const Calculateurs = () => {
   const calculators = [{
     icon: TrendingUp,
@@ -74,18 +75,27 @@ const Calculateurs = () => {
             <span className="text-primary">Calculateurs</span>
           </nav>
 
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary bg-[#28bd4d]/20">
-              <Calculator className="w-4 h-4 text-green-500" />
-              8 outils gratuits
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+            <div className="text-center lg:text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary bg-[#28bd4d]/20">
+                <Calculator className="w-4 h-4 text-green-500" />
+                8 outils gratuits
+              </div>
+              <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
+                Calculateurs financiers
+              </h1>
+              <p className="text-lg text-secondary">
+                Des outils interactifs pour simuler vos investissements, planifier votre épargne 
+                et gérer vos dettes efficacement.
+              </p>
             </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
-              Calculateurs financiers
-            </h1>
-            <p className="text-lg text-secondary">
-              Des outils interactifs pour simuler vos investissements, planifier votre épargne 
-              et gérer vos dettes efficacement.
-            </p>
+            <div className="w-48 h-48 lg:w-64 lg:h-64 flex-shrink-0">
+              <img 
+                src={AbacusIllustration} 
+                alt="Illustration calculateurs" 
+                className="w-full h-full object-contain drop-shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>

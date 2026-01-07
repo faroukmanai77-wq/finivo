@@ -76,7 +76,7 @@ const Calculateurs = () => {
 
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.47] text-primary">
-              <Calculator className="w-4 h-4 text-success-foreground" />
+              <Calculator className="w-4 h-4 text-green-500" />
               8 outils gratuits
             </div>
             <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">

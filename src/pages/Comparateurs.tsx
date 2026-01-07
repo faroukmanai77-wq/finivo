@@ -5,6 +5,7 @@ import { SEO } from '@/components/SEO';
 import { CreditCard, Building2, ArrowRight, Scale } from 'lucide-react';
 import CardsIllustration from '@/assets/illustrations/cards.svg';
 import MarketTrendsIllustration from '@/assets/illustrations/market-trends.svg';
+import CryptoWealthIllustration from '@/assets/illustrations/crypto-wealth.gif';
 const Comparateurs = () => {
   const comparators = [{
     icon: CreditCard,
@@ -43,19 +44,28 @@ const Comparateurs = () => {
             <span className="text-primary">Comparateurs</span>
           </nav>
 
-          <div className="text-center max-w-3xl mx-auto text-primary">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-primary/15 text-primary">
-              <Scale className="w-4 h-4" />
-              2 comparateurs disponibles
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+            <div className="text-center lg:text-left max-w-2xl text-primary">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-primary/15 text-primary">
+                <Scale className="w-4 h-4" />
+                2 comparateurs disponibles
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground">
+                Comparateurs 
+                <span className="text-primary"> financiers</span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Des outils de comparaison gratuits pour vous aider à choisir les meilleurs produits financiers 
+                adaptés à vos besoins.
+              </p>
             </div>
-            <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground">
-              Comparateurs 
-              <span className="text-[#020303]"> financiers</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Des outils de comparaison gratuits pour vous aider à choisir les meilleurs produits financiers 
-              adaptés à vos besoins.
-            </p>
+            <div className="w-48 h-48 lg:w-64 lg:h-64 flex-shrink-0">
+              <img 
+                src={CryptoWealthIllustration} 
+                alt="Illustration finance" 
+                className="w-full h-full object-contain drop-shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -1,8 +1,13 @@
+# Finivo - Robots.txt
+# https://finivo.ca
+
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Twitterbot
 Allow: /
@@ -10,7 +15,16 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
 User-agent: *
 Allow: /
 
+# Sitemaps
 Sitemap: https://finivo.ca/sitemap.xml
+
+# Block admin/private paths (if any)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/

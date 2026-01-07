@@ -62,38 +62,63 @@ const Calculateurs = () => {
     color: 'bg-chart-4/10 text-chart-4',
     popular: true
   }];
+  
+  // Structured data for SEO - SoftwareApplication type for calculators
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Calculateurs Financiers Finivo',
+    description: '8 calculateurs financiers gratuits pour les Québécois : REER, CELIAPP, hypothèque, budget, intérêts composés et plus.',
+    url: 'https://finivo.ca/calculateurs',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'CAD'
+    },
+    featureList: calculators.map(c => c.title).join(', ')
+  };
+
   return <div className="min-h-screen bg-background">
-      <SEO title="8 Calculateurs Financiers Gratuits Québec 2025 | REER, CELIAPP, Hypothèque, Budget | Finivo" description="Planifiez vos finances avec nos 8 calculateurs gratuits : intérêts composés, épargne REER et CELIAPP, hypothèque avec assurance SCHL, budget mensuel, consolidation de dettes, valeur nette et impôts Canada/Québec. Outils interactifs pour les Québécois." keywords="calculateur financier gratuit, calculateur REER québec, calculateur CELIAPP, calculateur hypothèque SCHL, budget mensuel, consolidation dettes, valeur nette, impôt québec canada, intérêts composés, planification financière" url="https://finivo.ca/calculateurs" />
+      <SEO 
+        title="8 Calculateurs Financiers Gratuits Québec 2025 | REER, CELIAPP, Hypothèque, Budget | Finivo" 
+        description="Planifiez vos finances avec nos 8 calculateurs gratuits : intérêts composés, épargne REER et CELIAPP, hypothèque avec assurance SCHL, budget mensuel, consolidation de dettes, valeur nette et impôts Canada/Québec. Outils interactifs pour les Québécois." 
+        keywords="calculateur financier gratuit, calculateur REER québec, calculateur CELIAPP 2025, calculateur hypothèque SCHL, budget mensuel excel, consolidation dettes, valeur nette, impôt québec canada, intérêts composés, planification financière" 
+        url="https://finivo.ca/calculateurs"
+        structuredData={structuredData}
+      />
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-secondary-foreground">
+      <section className="py-10 md:py-12 lg:py-16 bg-secondary-foreground">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+          <nav className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground mb-4 md:mb-6" aria-label="Fil d'Ariane">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-primary">Calculateurs</span>
           </nav>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8 lg:gap-16">
             <div className="text-center lg:text-left max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary bg-primary/15">
-                <Calculator className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4 text-primary bg-primary/15">
+                <Calculator className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 8 outils gratuits
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-popover-foreground">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 md:mb-4 text-popover-foreground leading-tight">
                 Calculateurs financiers
               </h1>
-              <p className="text-lg text-secondary">
+              <p className="text-base md:text-lg text-secondary">
                 Des outils interactifs pour simuler vos investissements, planifier votre épargne 
                 et gérer vos dettes efficacement.
               </p>
             </div>
-            <div className="w-56 h-56 lg:w-80 lg:h-80 flex-shrink-0">
+            <div className="w-40 h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 flex-shrink-0">
               <img 
                 src={AbacusIllustration} 
-                alt="Illustration calculateurs" 
+                alt="Illustration calculateurs financiers" 
                 className="w-full h-full object-contain drop-shadow-lg"
+                loading="eager"
               />
             </div>
           </div>

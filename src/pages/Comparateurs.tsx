@@ -22,12 +22,45 @@ const Comparateurs = () => {
     color: 'bg-accent/10 text-accent',
     illustration: MarketTrendsIllustration
   }];
+  
+  // Structured data for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Comparateurs Financiers - Cartes de Crédit et Courtage',
+    description: 'Comparez gratuitement les meilleures cartes de crédit et plateformes de courtage au Canada.',
+    url: 'https://finivo.ca/comparateurs',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Comparateur de cartes de crédit',
+          url: 'https://finivo.ca/comparateurs/cartes-de-credit'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Comparateur de plateformes de courtage',
+          url: 'https://finivo.ca/comparateurs/courtage'
+        }
+      ]
+    }
+  };
+
   return <div className="min-h-screen bg-background">
-      <SEO title="Comparateurs Financiers | Cartes de Crédit & Courtage | Finivo" description="Comparez les meilleures cartes de crédit et plateformes de courtage au Canada. Outils de comparaison gratuits pour faire les meilleurs choix financiers." keywords="comparateur cartes de crédit, comparateur courtage, courtier en ligne canada, meilleure carte de crédit" url="https://finivo.ca/comparateurs" />
+      <SEO 
+        title="Comparateurs Financiers Gratuits Canada 2025 | Cartes de Crédit & Courtage | Finivo" 
+        description="Comparez gratuitement les meilleures cartes de crédit et plateformes de courtage au Canada. Outils de comparaison indépendants pour faire les meilleurs choix financiers en 2025." 
+        keywords="comparateur cartes de crédit canada, comparateur courtage en ligne, meilleure carte de crédit québec 2025, courtier en ligne canada, comparer cartes remises, wealthsimple vs questrade" 
+        url="https://finivo.ca/comparateurs"
+        structuredData={structuredData}
+      />
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 section-cream relative overflow-hidden">
+      <section className="py-10 md:py-12 lg:py-16 section-cream relative overflow-hidden">
         {/* Decorative shapes */}
         <div className="absolute top-20 right-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-float" />
         <div className="absolute bottom-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-float" style={{
@@ -38,31 +71,32 @@ const Comparateurs = () => {
       }} />
         
         <div className="container mx-auto px-4 relative z-10">
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+          <nav className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground mb-4 md:mb-6" aria-label="Fil d'Ariane">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-primary">Comparateurs</span>
           </nav>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8 lg:gap-16">
             <div className="text-center lg:text-left max-w-2xl text-primary">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-primary/15 text-primary">
-                <Scale className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4 bg-primary/15 text-primary">
+                <Scale className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 2 comparateurs disponibles
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-foreground">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 md:mb-4 text-foreground leading-tight">
                 Comparateurs financiers
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-base md:text-lg text-muted-foreground">
                 Des outils de comparaison gratuits pour vous aider à choisir les meilleurs produits financiers 
                 adaptés à vos besoins.
               </p>
             </div>
-            <div className="w-56 h-56 lg:w-80 lg:h-80 flex-shrink-0">
+            <div className="w-40 h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 flex-shrink-0">
               <img 
                 src={CryptoWealthIllustration} 
-                alt="Illustration finance" 
+                alt="Illustration comparateur financier" 
                 className="w-full h-full object-contain drop-shadow-lg"
+                loading="eager"
               />
             </div>
           </div>

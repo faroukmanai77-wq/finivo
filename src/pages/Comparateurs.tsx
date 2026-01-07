@@ -27,7 +27,7 @@ const Comparateurs = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 section-cream relative overflow-hidden">
+      <section className="py-12 lg:py-16 section-cream relative overflow-hidden">
         {/* Decorative shapes */}
         <div className="absolute top-20 right-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-float" />
         <div className="absolute bottom-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-float" style={{
@@ -38,7 +38,7 @@ const Comparateurs = () => {
       }} />
         
         <div className="container mx-auto px-4 relative z-10">
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-primary">Comparateurs</span>
@@ -46,20 +46,19 @@ const Comparateurs = () => {
 
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             <div className="text-center lg:text-left max-w-2xl text-primary">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-primary/15 text-primary">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-primary/15 text-primary">
                 <Scale className="w-4 h-4" />
                 2 comparateurs disponibles
               </div>
-              <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground">
-                Comparateurs 
-                <span className="text-primary"> financiers</span>
+              <h1 className="text-3xl lg:text-4xl font-extrabold mb-4 text-foreground">
+                Comparateurs financiers
               </h1>
               <p className="text-lg text-muted-foreground">
                 Des outils de comparaison gratuits pour vous aider à choisir les meilleurs produits financiers 
                 adaptés à vos besoins.
               </p>
             </div>
-            <div className="w-48 h-48 lg:w-64 lg:h-64 flex-shrink-0">
+            <div className="w-56 h-56 lg:w-80 lg:h-80 flex-shrink-0">
               <img 
                 src={CryptoWealthIllustration} 
                 alt="Illustration finance" 

@@ -164,44 +164,43 @@ export default {
   			'float-slow': 'float 8s ease-in-out infinite',
   			'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite'
   		},
-  		fontFamily: {
-  			sans: [
-  				'Plus Jakarta Sans',
-  				'ui-sans-serif',
-  				'system-ui',
-  				'sans-serif',
-  				'Apple Color Emoji',
-  				'Segoe UI Emoji',
-  				'Segoe UI Symbol',
-  				'Noto Color Emoji'
-  			],
-  			display: [
-  				'Plus Jakarta Sans',
-  				'Inter',
-  				'ui-sans-serif',
-  				'system-ui',
-  				'sans-serif'
-  			],
-  			mono: [
-  				'Space Mono',
-  				'ui-monospace',
-  				'SFMono-Regular',
-  				'Menlo',
-  				'Monaco',
-  				'Consolas',
-  				'Liberation Mono',
-  				'Courier New',
-  				'monospace'
-  			],
-  			serif: [
-  				'ui-serif',
-  				'Georgia',
-  				'Cambria',
-  				'Times New Roman',
-  				'Times',
-  				'serif'
-  			]
-  		},
+		fontFamily: {
+			sans: [
+				'Plus Jakarta Sans',
+				'ui-sans-serif',
+				'system-ui',
+				'sans-serif',
+				'Apple Color Emoji',
+				'Segoe UI Emoji',
+				'Segoe UI Symbol',
+				'Noto Color Emoji'
+			],
+			display: [
+				'DM Serif Display',
+				'Georgia',
+				'ui-serif',
+				'serif'
+			],
+			mono: [
+				'ui-monospace',
+				'SFMono-Regular',
+				'Menlo',
+				'Monaco',
+				'Consolas',
+				'Liberation Mono',
+				'Courier New',
+				'monospace'
+			],
+			serif: [
+				'DM Serif Display',
+				'Georgia',
+				'ui-serif',
+				'Cambria',
+				'Times New Roman',
+				'Times',
+				'serif'
+			]
+		},
   		boxShadow: {
   			card: '0 1px 3px hsl(220 20% 15% / 0.04), 0 4px 12px hsl(220 20% 15% / 0.06)',
   			'card-hover': '0 4px 16px hsl(220 20% 15% / 0.08), 0 8px 32px hsl(220 20% 15% / 0.08)',

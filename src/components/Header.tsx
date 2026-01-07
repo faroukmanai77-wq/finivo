@@ -97,7 +97,7 @@ export const Header = () => {
           <div className="hidden md:block">
             <Button 
               onClick={() => navigate('/bibliotheque')}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full font-semibold gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+              className="bg-warning hover:bg-warning/90 text-warning-foreground rounded-full font-semibold gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
             >
               <Library className="w-4 h-4" />
               Bibliothèque
@@ -154,7 +154,7 @@ export const Header = () => {
                   setIsMenuOpen(false);
                   navigate('/bibliotheque');
                 }}
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-xl font-semibold gap-2 shadow-lg"
+                className="w-full bg-warning hover:bg-warning/90 text-warning-foreground rounded-xl font-semibold gap-2 shadow-lg"
               >
                 <Library className="w-4 h-4" />
                 Bibliothèque

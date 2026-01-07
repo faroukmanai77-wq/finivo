@@ -247,74 +247,121 @@ const Landing = () => {
       </section>
 
       {/* Three Pillars Section */}
-      <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-foreground mb-4">
-              Tout pour gérer vos finances
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Une suite complète d'outils pour prendre le contrôle de votre santé financière.
-            </p>
+      <section className="py-20 lg:py-28 relative overflow-hidden">
+        {/* Decorative background */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <Star className="w-4 h-4 fill-primary" />
+                Outils complets
+              </div>
+              <h2 className="text-3xl lg:text-5xl font-extrabold text-foreground mb-4">
+                Tout pour gérer 
+                <span className="text-primary"> vos finances</span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Une suite complète d'outils pour prendre le contrôle de votre santé financière et atteindre vos objectifs.
+              </p>
+            </div>
+            <div className="hidden lg:flex justify-center">
+              <img 
+                src={CardsIllustration} 
+                alt="Cartes de crédit illustration" 
+                className="w-full max-w-sm drop-shadow-xl animate-float"
+              />
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {pillars.map((pillar, index) => <Link key={index} to={pillar.href} className="group card-elevated rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className={`w-16 h-16 rounded-2xl ${pillar.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <pillar.icon className="w-8 h-8" />
+            {pillars.map((pillar, index) => (
+              <Link 
+                key={index} 
+                to={pillar.href} 
+                className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className={`w-14 h-14 rounded-2xl ${pillar.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                  <pillar.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{pillar.title}</h3>
-                <p className="text-muted-foreground mb-6">{pillar.description}</p>
-                <ul className="space-y-2 mb-6">
-                  {pillar.features.map((feature, i) => <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle className="w-4 h-4 text-success" />
+                <h3 className="text-lg font-bold text-foreground mb-2">{pillar.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{pillar.description}</p>
+                <ul className="space-y-1.5 mb-5">
+                  {pillar.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <CheckCircle className="w-3.5 h-3.5 text-success flex-shrink-0" />
                       {feature}
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
-                <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
                   Explorer
                   <ArrowRight className="w-4 h-4" />
                 </div>
-              </Link>)}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Calculators Preview Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <Calculator className="w-4 h-4" />
-              Calculateurs financiers
+      <section className="py-20 lg:py-28 section-cream relative overflow-hidden">
+        {/* Decorative shapes */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-warning/20 rounded-full animate-float" />
+        <div className="absolute bottom-20 right-10 w-16 h-16 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/4 w-12 h-12 bg-accent/20 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Illustration */}
+            <div className="hidden lg:flex justify-center order-2 lg:order-1">
+              <img 
+                src={GrowthGraphIllustration} 
+                alt="Graphique de croissance financière" 
+                className="w-full max-w-md drop-shadow-xl animate-float"
+              />
             </div>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-foreground mb-4">
-              Planifiez votre avenir financier
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Des outils interactifs pour simuler vos investissements, votre épargne et vos dettes.
-            </p>
-          </div>
+            
+            {/* Right - Content */}
+            <div className="order-1 lg:order-2">
+              <div className="inline-flex items-center gap-2 bg-accent/15 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <Calculator className="w-4 h-4" />
+                Calculateurs financiers
+              </div>
+              <h2 className="text-3xl lg:text-5xl font-extrabold text-foreground mb-4">
+                Planifiez votre 
+                <span className="text-accent"> avenir financier</span>
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+                Des outils interactifs pour simuler vos investissements, votre épargne et optimiser vos finances.
+              </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {calculators.map((calc, index) => <Link key={index} to={calc.href} className="flex items-center gap-4 p-4 bg-card rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <calc.icon className="w-6 h-6 text-primary" />
-                </div>
-                <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                  {calc.name}
-                </span>
-                <ArrowRight className="w-4 h-4 text-muted-foreground ml-auto group-hover:text-primary group-hover:translate-x-1 transition-all" />
-              </Link>)}
-          </div>
+              <div className="grid sm:grid-cols-2 gap-3 mb-8">
+                {calculators.slice(0, 6).map((calc, index) => (
+                  <Link 
+                    key={index} 
+                    to={calc.href} 
+                    className="flex items-center gap-3 p-3 bg-card rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                      <calc.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <span className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
+                      {calc.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
 
-          <div className="text-center mt-10">
-            <Button asChild size="lg" className="btn-gradient font-semibold gap-2">
-              <Link to="/calculateurs">
-                Voir tous les calculateurs
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
+              <Button asChild size="lg" className="btn-gradient font-semibold gap-2 rounded-full">
+                <Link to="/calculateurs">
+                  Voir tous les calculateurs
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

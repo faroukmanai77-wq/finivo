@@ -9,9 +9,9 @@ interface FinivoLogoProps {
 
 export const FinivoLogo = ({ className, size = 'md' }: FinivoLogoProps) => {
   const sizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12'
+    sm: 'w-10 h-10',
+    md: 'w-12 h-12',
+    lg: 'w-14 h-14'
   };
 
   return (
@@ -41,7 +41,7 @@ export const FinivoLogoWithText = ({
   };
 
   return (
-    <div className={cn('flex items-center gap-1.5', className)}>
+    <div className={cn('flex items-center gap-1', className)}>
       <FinivoLogo size={size} />
       <span className={cn('font-extrabold tracking-tight', textSizes[size], textColors[variant])}>
         Finivo

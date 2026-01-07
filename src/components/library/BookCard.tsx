@@ -19,7 +19,7 @@ const levelColors: Record<string, string> = {
 export const BookCard = ({ book, index = 0 }: BookCardProps) => {
   return (
     <Card 
-      className="card-elevated overflow-hidden group animate-slide-up"
+      className="card-elevated overflow-hidden group animate-slide-up hover:shadow-2xl hover:-translate-y-1 hover:border-primary/30 transition-all duration-300"
       style={{ animationDelay: `${index * 0.05}s` }}
     >
       <CardContent className="p-0">

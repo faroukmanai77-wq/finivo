@@ -13,7 +13,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://finivo.ca';
-const DEFAULT_IMAGE = `${BASE_URL}/favicon.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'Finivo';
 
 export const SEO = ({

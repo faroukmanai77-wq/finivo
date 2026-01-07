@@ -130,19 +130,19 @@ const BrokerageComparator = () => {
       
       {/* Hero Section */}
       <section className="py-12 lg:py-16 bg-secondary-foreground">
-        <div className="container mx-auto px-4 bg-primary-foreground">
+        <div className="container mx-auto px-4 bg-secondary-foreground">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span>Comparateurs</span>
             <span>/</span>
-            <span className="text-muted">Plateformes de courtage</span>
+            <span className="text-primary">Plateformes de courtage</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-primary-foreground bg-[#7168ac]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
                 <Building2 className="w-4 h-4" />
                 Comparateur de plateformes de courtage en ligne     
               </div>

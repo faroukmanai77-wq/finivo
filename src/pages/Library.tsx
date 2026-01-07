@@ -13,6 +13,8 @@ import { Input } from '@/components/ui/input';
 import { Filter, BookOpen, AlertCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import WealthBuildingIllustration from '@/assets/illustrations/wealth-building.svg';
+
 const Library = () => {
   const {
     data: books = [],
@@ -107,51 +109,77 @@ const Library = () => {
     icon: '🧠'
   }];
   const activeFiltersCount = filters.categories.length + filters.levels.length + filters.languages.length;
-  return <div className="min-h-screen bg-background">
-      <SEO title="20+ Meilleurs Livres Finance Personnelle & Investissement 2025 | Bibliothèque Finivo" description="Découvrez notre sélection de 20+ livres essentiels pour maîtriser vos finances : Père Riche Père Pauvre, L'investisseur intelligent, La semaine de 4 heures et plus. Livres en français et anglais classés par niveau (débutant à expert). Parfaits pour apprendre à investir, budgéter et atteindre la liberté financière." keywords="meilleurs livres finance personnelle, livres investissement débutant, père riche père pauvre, liberté financière, livres budget épargne, livres REER CELI, warren buffett, robert kiyosaki" url="https://finivo.ca/bibliotheque" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+  return (
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="20+ Meilleurs Livres Finance Personnelle & Investissement 2025 | Bibliothèque Finivo" 
+        description="Découvrez notre sélection de 20+ livres essentiels pour maîtriser vos finances : Père Riche Père Pauvre, L'investisseur intelligent, La semaine de 4 heures et plus. Livres en français et anglais classés par niveau (débutant à expert). Parfaits pour apprendre à investir, budgéter et atteindre la liberté financière." 
+        keywords="meilleurs livres finance personnelle, livres investissement débutant, père riche père pauvre, liberté financière, livres budget épargne, livres REER CELI, warren buffett, robert kiyosaki" 
+        url="https://finivo.ca/bibliotheque" 
+        structuredData={generateBreadcrumbStructuredData(breadcrumbs)} 
+      />
       <Header />
       
       {/* Hero Section */}
-      <section className="py-12 lg:py-16 bg-secondary-foreground">
-        <div className="container mx-auto px-4">
+      <section className="py-16 lg:py-24 section-cream relative overflow-hidden">
+        {/* Decorative shapes */}
+        <div className="absolute top-20 right-20 w-24 h-24 bg-warning/20 rounded-full blur-2xl animate-float" />
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-primary">Bibliothèque</span>
           </nav>
 
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 text-muted bg-[#2d8f8b]">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-warning/15 text-warning">
                 <BookOpen className="w-4 h-4" />
                 Bibliothèque
               </div>
-              <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-sidebar-foreground">
-                Bibliothèque Finance & Liberté Financière
+              <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground">
+                Bibliothèque Finance & 
+                <span className="text-warning"> Liberté Financière</span>
               </h1>
-              <p className="max-w-2xl text-lg text-secondary">
+              <p className="max-w-xl text-lg text-muted-foreground mb-8">
                 Les meilleurs livres pour améliorer votre relation à l'argent, investir intelligemment et bâtir votre liberté financière.
               </p>
+
+              {/* Category quick filters */}
+              <div className="flex flex-wrap gap-2">
+                {categories.map(cat => (
+                  <button 
+                    key={cat.id} 
+                    onClick={() => setFilters(prev => ({
+                      ...prev,
+                      categories: prev.categories.includes(cat.id) 
+                        ? prev.categories.filter(c => c !== cat.id) 
+                        : [...prev.categories, cat.id]
+                    }))} 
+                    className={cn(
+                      "px-4 py-2 rounded-full text-sm font-medium transition-all",
+                      filters.categories.includes(cat.id) 
+                        ? "bg-primary text-primary-foreground" 
+                        : "bg-card border border-border hover:border-primary/50 text-muted-foreground"
+                    )}
+                  >
+                    {cat.icon} {cat.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Affiliate Disclosure */}
-          
-
-          {/* Search Bar */}
-          <div className="mt-8 max-w-xl">
-            
-          </div>
-
-          {/* Category quick filters */}
-          <div className="flex-wrap gap-2 mt-6 flex items-start justify-center">
-            {categories.map(cat => <button key={cat.id} onClick={() => setFilters(prev => ({
-            ...prev,
-            categories: prev.categories.includes(cat.id) ? prev.categories.filter(c => c !== cat.id) : [...prev.categories, cat.id]
-          }))} className={cn("px-4 py-2 rounded-full text-sm font-medium transition-all", filters.categories.includes(cat.id) ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80 text-muted-foreground")}>
-                {cat.icon} {cat.label}
-              </button>)}
+            {/* Illustration */}
+            <div className="hidden lg:flex justify-center">
+              <img 
+                src={WealthBuildingIllustration} 
+                alt="Construction de richesse" 
+                className="w-full max-w-md drop-shadow-xl animate-float"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -238,6 +266,8 @@ const Library = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Library;

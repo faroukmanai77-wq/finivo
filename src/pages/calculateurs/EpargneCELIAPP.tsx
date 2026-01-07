@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import InvestmentPathIllustration from '@/assets/illustrations/investment-path.svg';
 
 const faqItems = [
   {
@@ -150,6 +151,7 @@ const EpargneCELIAPP = () => {
       url="https://finivo.ca/calculateurs/epargne-celiapp"
       relatedCategory="epargne"
       featuredCardType="cashback"
+      illustration={InvestmentPathIllustration}
     >
       <div className="space-y-8">
         {/* Section explicative */}

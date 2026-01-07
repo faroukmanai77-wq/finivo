@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import InvestmentPathIllustration from '@/assets/illustrations/investment-path.svg';
 
 const faqItems = [
   {
@@ -113,6 +114,7 @@ const EpargneREER = () => {
       url="https://finivo.ca/calculateurs/epargne-reer"
       relatedCategory="epargne"
       featuredCardType="cashback"
+      illustration={InvestmentPathIllustration}
     >
       <div className="space-y-8">
         {/* Section explicative */}

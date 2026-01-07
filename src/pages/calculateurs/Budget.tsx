@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign, AlertTriangle, CheckCircle, PieChart } from 'lucide-react';
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import * as XLSX from 'xlsx';
+import SmartBudgetingIllustration from '@/assets/illustrations/smart-budgeting.svg';
 
 interface BudgetItem {
   id: string;
@@ -373,6 +374,7 @@ const Budget = () => {
       url="https://finivo.ca/calculateurs/budget"
       relatedCategory="epargne"
       featuredCardType="cashback"
+      illustration={SmartBudgetingIllustration}
     >
       <div ref={printRef} className="space-y-6">
         {/* Action Buttons */}

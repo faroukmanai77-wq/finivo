@@ -41,7 +41,7 @@ export const FinivoLogoWithText = ({
   };
 
   return (
-    <div className={cn('flex items-center gap-0.5', className)}>
+    <div className={cn('flex items-center gap-0', className)}>
       <FinivoLogo size={size} />
       <span className={cn('font-extrabold tracking-tight', textSizes[size], textColors[variant])}>
         Finivo

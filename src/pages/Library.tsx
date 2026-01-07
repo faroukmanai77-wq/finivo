@@ -121,30 +121,30 @@ const Library = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 section-cream relative overflow-hidden">
+      <section className="py-10 md:py-12 lg:py-16 section-cream relative overflow-hidden">
         {/* Decorative shapes */}
         <div className="absolute top-20 right-20 w-24 h-24 bg-warning/20 rounded-full blur-2xl animate-float" />
         <div className="absolute bottom-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+          <nav className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground mb-4 md:mb-6" aria-label="Fil d'Ariane">
             <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-primary">Bibliothèque</span>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-warning/15 text-warning">
-                <BookOpen className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-4 md:mb-6 bg-warning/15 text-warning">
+                <BookOpen className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 Bibliothèque
               </div>
-              <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 md:mb-4 text-foreground leading-tight">
                 Bibliothèque Finance & 
                 <span className="text-warning"> Liberté Financière</span>
               </h1>
-              <p className="max-w-xl text-lg text-muted-foreground mb-8">
+              <p className="max-w-xl text-base md:text-lg text-muted-foreground mb-6 md:mb-8">
                 Les meilleurs livres pour améliorer votre relation à l'argent, investir intelligemment et bâtir votre liberté financière.
               </p>
 
@@ -160,7 +160,7 @@ const Library = () => {
                         : [...prev.categories, cat.id]
                     }))} 
                     className={cn(
-                      "px-4 py-2 rounded-full text-sm font-medium transition-all",
+                      "px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all",
                       filters.categories.includes(cat.id) 
                         ? "bg-primary text-primary-foreground" 
                         : "bg-card border border-border hover:border-primary/50 text-muted-foreground"
@@ -178,6 +178,7 @@ const Library = () => {
                 src={WealthBuildingIllustration} 
                 alt="Construction de richesse" 
                 className="w-full max-w-md drop-shadow-xl animate-float"
+                loading="eager"
               />
             </div>
           </div>

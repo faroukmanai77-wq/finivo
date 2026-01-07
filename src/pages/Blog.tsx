@@ -48,8 +48,7 @@ const Blog = () => {
               <BookOpen className="w-4 h-4" />
               Blog Finivo
             </div>
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
-              Conseils et guides sur les <span className="gradient-text">cartes de crédit</span>
+            <h1 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">Conseils et guides  ​<span className="gradient-text">​</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Tout ce que vous devez savoir pour faire les meilleurs choix financiers au Québec.

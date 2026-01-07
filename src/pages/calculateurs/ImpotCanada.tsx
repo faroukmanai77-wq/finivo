@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 const faqItems = [
   {
@@ -42,6 +42,9 @@ const TRANCHES_FEDERALES = [
   { min: 253414, max: Infinity, taux: 0.33 },
 ];
 
+// Montant personnel de base fédéral 2025
+const MONTANT_PERSONNEL_FEDERAL = 16129;
+
 // Tranches d'imposition provinciales 2025
 const TRANCHES_PROVINCIALES: Record<string, Array<{min: number; max: number; taux: number}>> = {
   QC: [
@@ -73,6 +76,82 @@ const TRANCHES_PROVINCIALES: Record<string, Array<{min: number; max: number; tau
     { min: 237230, max: 355845, taux: 0.14 },
     { min: 355845, max: Infinity, taux: 0.15 },
   ],
+  SK: [
+    { min: 0, max: 53463, taux: 0.105 },
+    { min: 53463, max: 152750, taux: 0.125 },
+    { min: 152750, max: Infinity, taux: 0.145 },
+  ],
+  MB: [
+    { min: 0, max: 47564, taux: 0.108 },
+    { min: 47564, max: 101200, taux: 0.1275 },
+    { min: 101200, max: Infinity, taux: 0.174 },
+  ],
+  NB: [
+    { min: 0, max: 49958, taux: 0.094 },
+    { min: 49958, max: 99916, taux: 0.14 },
+    { min: 99916, max: 185064, taux: 0.16 },
+    { min: 185064, max: Infinity, taux: 0.195 },
+  ],
+  NS: [
+    { min: 0, max: 29590, taux: 0.0879 },
+    { min: 29590, max: 59180, taux: 0.1495 },
+    { min: 59180, max: 93000, taux: 0.1667 },
+    { min: 93000, max: 150000, taux: 0.175 },
+    { min: 150000, max: Infinity, taux: 0.21 },
+  ],
+  PE: [
+    { min: 0, max: 32656, taux: 0.098 },
+    { min: 32656, max: 64313, taux: 0.138 },
+    { min: 64313, max: 105000, taux: 0.167 },
+    { min: 105000, max: 140000, taux: 0.1837 },
+    { min: 140000, max: Infinity, taux: 0.1887 },
+  ],
+  NL: [
+    { min: 0, max: 44192, taux: 0.087 },
+    { min: 44192, max: 88382, taux: 0.145 },
+    { min: 88382, max: 157792, taux: 0.158 },
+    { min: 157792, max: 220910, taux: 0.178 },
+    { min: 220910, max: 282214, taux: 0.198 },
+    { min: 282214, max: 564429, taux: 0.208 },
+    { min: 564429, max: 1129858, taux: 0.213 },
+    { min: 1129858, max: Infinity, taux: 0.218 },
+  ],
+  YT: [
+    { min: 0, max: 57375, taux: 0.064 },
+    { min: 57375, max: 114750, taux: 0.09 },
+    { min: 114750, max: 177882, taux: 0.109 },
+    { min: 177882, max: 500000, taux: 0.128 },
+    { min: 500000, max: Infinity, taux: 0.15 },
+  ],
+  NT: [
+    { min: 0, max: 50597, taux: 0.059 },
+    { min: 50597, max: 101198, taux: 0.086 },
+    { min: 101198, max: 164525, taux: 0.122 },
+    { min: 164525, max: Infinity, taux: 0.1405 },
+  ],
+  NU: [
+    { min: 0, max: 53268, taux: 0.04 },
+    { min: 53268, max: 106537, taux: 0.07 },
+    { min: 106537, max: 173205, taux: 0.09 },
+    { min: 173205, max: Infinity, taux: 0.115 },
+  ],
+};
+
+// Montants personnels de base provinciaux 2025
+const MONTANT_PERSONNEL_PROVINCIAL: Record<string, number> = {
+  QC: 18571,
+  ON: 12399,
+  BC: 12932,
+  AB: 22323,
+  SK: 18491,
+  MB: 15780,
+  NB: 13396,
+  NS: 8744,
+  PE: 14250,
+  NL: 10818,
+  YT: 16129,
+  NT: 17842,
+  NU: 18767,
 };
 
 const PROVINCES = [
@@ -80,7 +159,52 @@ const PROVINCES = [
   { code: 'ON', nom: 'Ontario' },
   { code: 'BC', nom: 'Colombie-Britannique' },
   { code: 'AB', nom: 'Alberta' },
+  { code: 'SK', nom: 'Saskatchewan' },
+  { code: 'MB', nom: 'Manitoba' },
+  { code: 'NB', nom: 'Nouveau-Brunswick' },
+  { code: 'NS', nom: 'Nouvelle-Écosse' },
+  { code: 'PE', nom: 'Île-du-Prince-Édouard' },
+  { code: 'NL', nom: 'Terre-Neuve-et-Labrador' },
+  { code: 'YT', nom: 'Yukon' },
+  { code: 'NT', nom: 'Territoires du Nord-Ouest' },
+  { code: 'NU', nom: 'Nunavut' },
 ];
+
+// Constantes pour les cotisations sociales 2025
+const COTISATIONS_2025 = {
+  // RRQ/QPP 2025
+  RRQ_MAX_PENSIONABLE: 71300,
+  RRQ_EXEMPTION: 3500,
+  RRQ_TAUX_EMPLOYE: 0.0640, // 6.40%
+  RRQ_TAUX_AUTONOME: 0.1280, // 12.80% (employé + employeur)
+  
+  // RRQ2 (bonification) 2025
+  RRQ2_MAX: 81200,
+  RRQ2_TAUX_EMPLOYE: 0.04, // 4%
+  RRQ2_TAUX_AUTONOME: 0.08, // 8%
+  
+  // CPP (hors Québec)
+  CPP_MAX_PENSIONABLE: 71300,
+  CPP_EXEMPTION: 3500,
+  CPP_TAUX_EMPLOYE: 0.0595, // 5.95%
+  CPP_TAUX_AUTONOME: 0.1190, // 11.90%
+  
+  // CPP2 2025
+  CPP2_MAX: 81200,
+  CPP2_TAUX_EMPLOYE: 0.04,
+  CPP2_TAUX_AUTONOME: 0.08,
+  
+  // RQAP (Québec seulement) 2025
+  RQAP_MAX: 98000,
+  RQAP_TAUX_EMPLOYE: 0.00494,
+  RQAP_TAUX_AUTONOME: 0.00878,
+  
+  // AE 2025
+  AE_MAX: 65700,
+  AE_TAUX_EMPLOYE: 0.0132, // 1.32%
+  AE_TAUX_EMPLOYE_QC: 0.0104, // 1.04% pour Québec (réduction)
+  AE_TAUX_AUTONOME: 0, // Les travailleurs autonomes ne paient pas l'AE obligatoirement
+};
 
 const ImpotCanada = () => {
   const [province, setProvince] = useState('QC');
@@ -90,8 +214,6 @@ const ImpotCanada = () => {
   const [cotisationReer, setCotisationReer] = useState(0);
   const [cotisationCeliapp, setCotisationCeliapp] = useState(0);
   const [donsCharite, setDonsCharite] = useState(0);
-  const [fraisMedicaux, setFraisMedicaux] = useState(0);
-  const [fraisGardeEnfants, setFraisGardeEnfants] = useState(0);
   const [interetsPretEtudiant, setInteretsPretEtudiant] = useState(0);
 
   const calculerImpot = (revenuImposable: number, tranches: Array<{min: number; max: number; taux: number}>) => {
@@ -106,46 +228,115 @@ const ImpotCanada = () => {
   };
 
   const resultats = useMemo(() => {
+    const isQuebec = province === 'QC';
     const revenuBrut = revenuEmploi + revenuAutonome + revenuPlacement;
     
     // Déductions
     const totalDeductions = cotisationReer + cotisationCeliapp;
     const revenuImposable = Math.max(0, revenuBrut - totalDeductions);
     
-    // Calcul impôt fédéral
+    // Calcul impôt fédéral brut
     const impotFederalBrut = calculerImpot(revenuImposable, TRANCHES_FEDERALES);
+    
+    // Crédit personnel de base fédéral
+    const creditPersonnelFederal = MONTANT_PERSONNEL_FEDERAL * 0.15;
+    
+    // Crédits d'impôt fédéraux
+    const creditDons = donsCharite > 0 ? (Math.min(donsCharite, 200) * 0.15 + Math.max(0, donsCharite - 200) * 0.29) : 0;
+    const creditInteretsPret = interetsPretEtudiant * 0.15;
+    const totalCreditsFederal = creditPersonnelFederal + creditDons + creditInteretsPret;
+    
+    let impotFederal = Math.max(0, impotFederalBrut - totalCreditsFederal);
+    
+    // Abattement du Québec (16.5% de réduction sur l'impôt fédéral)
+    if (isQuebec) {
+      impotFederal = impotFederal * (1 - 0.165);
+    }
     
     // Calcul impôt provincial
     const tranchesProvince = TRANCHES_PROVINCIALES[province] || TRANCHES_PROVINCIALES.QC;
     const impotProvincialBrut = calculerImpot(revenuImposable, tranchesProvince);
     
-    // Crédits d'impôt (simplifiés)
-    const creditPersonnelFederal = 15705 * 0.15; // Montant personnel de base fédéral
-    const creditDons = donsCharite * 0.15; // Simplifié
-    const creditInteretsPret = interetsPretEtudiant * 0.15;
-    const totalCreditsFederal = creditPersonnelFederal + creditDons + creditInteretsPret;
-    
-    const impotFederal = Math.max(0, impotFederalBrut - totalCreditsFederal);
-    
-    // Crédit provincial simplifié
-    let creditPersonnelProvincial = 0;
-    if (province === 'QC') {
-      creditPersonnelProvincial = 18056 * 0.14;
-    } else {
-      creditPersonnelProvincial = 12000 * 0.05; // Approximation
-    }
+    // Crédit personnel provincial
+    const montantPersonnelProv = MONTANT_PERSONNEL_PROVINCIAL[province] || 12000;
+    const tauxBaseProvincial = tranchesProvince[0].taux;
+    const creditPersonnelProvincial = montantPersonnelProv * tauxBaseProvincial;
     
     const impotProvincial = Math.max(0, impotProvincialBrut - creditPersonnelProvincial);
     
-    // Cotisations sociales (Québec)
-    const cotisationRQAP = province === 'QC' ? Math.min(revenuEmploi, 98000) * 0.00494 : 0;
-    const cotisationAE = Math.min(revenuEmploi, 65700) * 0.0132;
-    const cotisationRRQ = Math.min(Math.max(revenuEmploi - 3500, 0), 71300) * 0.0640;
+    // Cotisations sociales
+    let cotisationRRQ_RPC = 0;
+    let cotisationRRQ2_RPC2 = 0;
+    let cotisationRQAP = 0;
+    let cotisationAE = 0;
     
-    const totalCotisations = cotisationRQAP + cotisationAE + cotisationRRQ;
+    // Revenus d'emploi
+    if (revenuEmploi > 0) {
+      if (isQuebec) {
+        // RRQ (base)
+        const revenuRRQ = Math.min(Math.max(revenuEmploi - COTISATIONS_2025.RRQ_EXEMPTION, 0), COTISATIONS_2025.RRQ_MAX_PENSIONABLE - COTISATIONS_2025.RRQ_EXEMPTION);
+        cotisationRRQ_RPC = revenuRRQ * COTISATIONS_2025.RRQ_TAUX_EMPLOYE;
+        
+        // RRQ2 (bonification)
+        if (revenuEmploi > COTISATIONS_2025.RRQ_MAX_PENSIONABLE) {
+          const revenuRRQ2 = Math.min(revenuEmploi, COTISATIONS_2025.RRQ2_MAX) - COTISATIONS_2025.RRQ_MAX_PENSIONABLE;
+          cotisationRRQ2_RPC2 = revenuRRQ2 * COTISATIONS_2025.RRQ2_TAUX_EMPLOYE;
+        }
+        
+        // RQAP
+        cotisationRQAP = Math.min(revenuEmploi, COTISATIONS_2025.RQAP_MAX) * COTISATIONS_2025.RQAP_TAUX_EMPLOYE;
+        
+        // AE (taux réduit pour Québec)
+        cotisationAE = Math.min(revenuEmploi, COTISATIONS_2025.AE_MAX) * COTISATIONS_2025.AE_TAUX_EMPLOYE_QC;
+      } else {
+        // CPP
+        const revenuCPP = Math.min(Math.max(revenuEmploi - COTISATIONS_2025.CPP_EXEMPTION, 0), COTISATIONS_2025.CPP_MAX_PENSIONABLE - COTISATIONS_2025.CPP_EXEMPTION);
+        cotisationRRQ_RPC = revenuCPP * COTISATIONS_2025.CPP_TAUX_EMPLOYE;
+        
+        // CPP2
+        if (revenuEmploi > COTISATIONS_2025.CPP_MAX_PENSIONABLE) {
+          const revenuCPP2 = Math.min(revenuEmploi, COTISATIONS_2025.CPP2_MAX) - COTISATIONS_2025.CPP_MAX_PENSIONABLE;
+          cotisationRRQ2_RPC2 = revenuCPP2 * COTISATIONS_2025.CPP2_TAUX_EMPLOYE;
+        }
+        
+        // AE
+        cotisationAE = Math.min(revenuEmploi, COTISATIONS_2025.AE_MAX) * COTISATIONS_2025.AE_TAUX_EMPLOYE;
+      }
+    }
+    
+    // Revenus de travail autonome (double cotisation RRQ/CPP)
+    if (revenuAutonome > 0) {
+      if (isQuebec) {
+        // RRQ (autonome paie les deux parts)
+        const revenuRRQ = Math.min(Math.max(revenuAutonome - COTISATIONS_2025.RRQ_EXEMPTION, 0), COTISATIONS_2025.RRQ_MAX_PENSIONABLE - COTISATIONS_2025.RRQ_EXEMPTION);
+        cotisationRRQ_RPC += revenuRRQ * COTISATIONS_2025.RRQ_TAUX_AUTONOME;
+        
+        // RRQ2 autonome
+        if (revenuAutonome > COTISATIONS_2025.RRQ_MAX_PENSIONABLE) {
+          const revenuRRQ2 = Math.min(revenuAutonome, COTISATIONS_2025.RRQ2_MAX) - COTISATIONS_2025.RRQ_MAX_PENSIONABLE;
+          cotisationRRQ2_RPC2 += revenuRRQ2 * COTISATIONS_2025.RRQ2_TAUX_AUTONOME;
+        }
+        
+        // RQAP autonome
+        cotisationRQAP += Math.min(revenuAutonome, COTISATIONS_2025.RQAP_MAX) * COTISATIONS_2025.RQAP_TAUX_AUTONOME;
+      } else {
+        // CPP autonome
+        const revenuCPP = Math.min(Math.max(revenuAutonome - COTISATIONS_2025.CPP_EXEMPTION, 0), COTISATIONS_2025.CPP_MAX_PENSIONABLE - COTISATIONS_2025.CPP_EXEMPTION);
+        cotisationRRQ_RPC += revenuCPP * COTISATIONS_2025.CPP_TAUX_AUTONOME;
+        
+        // CPP2 autonome
+        if (revenuAutonome > COTISATIONS_2025.CPP_MAX_PENSIONABLE) {
+          const revenuCPP2 = Math.min(revenuAutonome, COTISATIONS_2025.CPP2_MAX) - COTISATIONS_2025.CPP_MAX_PENSIONABLE;
+          cotisationRRQ2_RPC2 += revenuCPP2 * COTISATIONS_2025.CPP2_TAUX_AUTONOME;
+        }
+      }
+    }
+    
+    const totalCotisations = cotisationRRQ_RPC + cotisationRRQ2_RPC2 + cotisationRQAP + cotisationAE;
     
     const impotTotal = impotFederal + impotProvincial;
-    const revenuNet = revenuBrut - impotTotal - totalCotisations;
+    const totalRetenues = impotTotal + totalCotisations;
+    const revenuNet = revenuBrut - totalRetenues;
     
     const tauxEffectif = revenuBrut > 0 ? (impotTotal / revenuBrut) * 100 : 0;
     
@@ -155,6 +346,10 @@ const ImpotCanada = () => {
       if (revenuImposable > tranche.min) {
         tauxMarginalFederal = tranche.taux;
       }
+    }
+    // Appliquer l'abattement du Québec au taux marginal fédéral
+    if (isQuebec) {
+      tauxMarginalFederal = tauxMarginalFederal * (1 - 0.165);
     }
     
     let tauxMarginalProvincial = tranchesProvince[0].taux;
@@ -179,13 +374,18 @@ const ImpotCanada = () => {
       impotFederal: Math.round(impotFederal),
       impotProvincial: Math.round(impotProvincial),
       impotTotal: Math.round(impotTotal),
+      cotisationRRQ_RPC: Math.round(cotisationRRQ_RPC + cotisationRRQ2_RPC2),
+      cotisationRQAP: Math.round(cotisationRQAP),
+      cotisationAE: Math.round(cotisationAE),
       totalCotisations: Math.round(totalCotisations),
+      totalRetenues: Math.round(totalRetenues),
       revenuNet: Math.round(revenuNet),
-      tauxEffectif: tauxEffectif.toFixed(1),
-      tauxMarginal: tauxMarginal.toFixed(1),
+      tauxEffectif: tauxEffectif.toFixed(2),
+      tauxMarginal: tauxMarginal.toFixed(2),
       donneesRepartition,
+      isQuebec,
     };
-  }, [province, revenuEmploi, revenuAutonome, revenuPlacement, cotisationReer, cotisationCeliapp, donsCharite, fraisMedicaux, fraisGardeEnfants, interetsPretEtudiant]);
+  }, [province, revenuEmploi, revenuAutonome, revenuPlacement, cotisationReer, cotisationCeliapp, donsCharite, interetsPretEtudiant]);
 
   const formatMontant = (montant: number) => {
     return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
@@ -193,22 +393,15 @@ const ImpotCanada = () => {
 
   const COLORS = ['hsl(var(--primary))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))'];
 
-  const tranchesAffichage = province === 'QC' 
-    ? TRANCHES_FEDERALES.map((tf, i) => ({
-        federal: tf,
-        provincial: TRANCHES_PROVINCIALES.QC[i] || { min: 0, max: 0, taux: 0 }
-      }))
-    : TRANCHES_FEDERALES.map((tf) => ({ federal: tf, provincial: null }));
-
   return (
     <CalculatorLayout
-      title="Calculatrice d'impôt sur le revenu"
+      title="Calculatrice d'impôt sur le revenu du Canada 2025"
       description="Obtenez une estimation rapide de votre revenu après impôt, avec votre remboursement ou votre solde d'impôt à payer."
       icon={<Receipt className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice d'impôt Canada & Québec 2025 | Finivo"
-      seoDescription="Calculez votre impôt fédéral et provincial au Canada. Estimez votre revenu net, votre taux d'imposition effectif et marginal pour 2025."
-      seoKeywords="impôt, calculatrice, Canada, Québec, taux d'imposition, revenu net, déclaration"
-      url="https://finivo.ca/calculateurs/impot-canada"
+      seoTitle="Calculatrice d'impôt Canada 2025 - Toutes les provinces | Finivo"
+      seoDescription="Calculez votre impôt fédéral et provincial pour toutes les provinces canadiennes. Estimez votre revenu net, votre taux d'imposition effectif et marginal pour 2025."
+      seoKeywords="impôt, calculatrice, Canada, Québec, Ontario, Alberta, taux d'imposition, revenu net, déclaration 2025"
+      url="https://finivo.ca/calculateurs/impot"
       relatedCategory="impot"
       featuredCardType="cashback"
     >
@@ -265,6 +458,9 @@ const ImpotCanada = () => {
                   />
                   <span className="text-muted-foreground">$</span>
                 </div>
+                <p className="text-xs text-muted-foreground">
+                  Les travailleurs autonomes paient les cotisations RRQ/RPC de l'employé et de l'employeur.
+                </p>
               </div>
 
               <div className="space-y-3">
@@ -288,25 +484,12 @@ const ImpotCanada = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-3">
-                <Label>Cotisations REER</Label>
+                <Label>Cotisations REER et CELIAPP</Label>
                 <div className="flex items-center gap-3">
                   <Input
                     type="number"
                     value={cotisationReer}
                     onChange={(e) => setCotisationReer(Number(e.target.value))}
-                    className="w-32"
-                  />
-                  <span className="text-muted-foreground">$</span>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label>Cotisations CELIAPP</Label>
-                <div className="flex items-center gap-3">
-                  <Input
-                    type="number"
-                    value={cotisationCeliapp}
-                    onChange={(e) => setCotisationCeliapp(Number(e.target.value))}
                     className="w-32"
                   />
                   <span className="text-muted-foreground">$</span>
@@ -355,16 +538,16 @@ const ImpotCanada = () => {
                 <p className="text-xl font-semibold">{formatMontant(resultats.revenuBrut)}</p>
               </div>
               <div className="text-center">
-                <p className="text-sm opacity-80">Impôts totaux</p>
-                <p className="text-xl font-semibold">{formatMontant(resultats.impotTotal)}</p>
+                <p className="text-sm opacity-80">Total des retenues</p>
+                <p className="text-xl font-semibold">{formatMontant(resultats.totalRetenues)}</p>
               </div>
               <div className="text-center">
                 <p className="text-sm opacity-80">Taux d'imposition moyen</p>
-                <p className="text-xl font-semibold">{resultats.tauxEffectif}%</p>
+                <p className="text-xl font-semibold">{resultats.tauxEffectif} %</p>
               </div>
               <div className="text-center">
                 <p className="text-sm opacity-80">Taux d'imposition marginal</p>
-                <p className="text-xl font-semibold">{resultats.tauxMarginal}%</p>
+                <p className="text-xl font-semibold">{resultats.tauxMarginal} %</p>
               </div>
             </div>
           </CardContent>
@@ -385,7 +568,7 @@ const ImpotCanada = () => {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell>Revenu brut</TableCell>
+                  <TableCell>Revenu total</TableCell>
                   <TableCell className="text-right">{formatMontant(resultats.revenuBrut)}</TableCell>
                 </TableRow>
                 <TableRow>
@@ -393,7 +576,10 @@ const ImpotCanada = () => {
                   <TableCell className="text-right">{formatMontant(resultats.revenuImposable)}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Impôt fédéral</TableCell>
+                  <TableCell>
+                    Impôt fédéral
+                    {resultats.isQuebec && <span className="text-xs text-muted-foreground ml-1">(après abattement 16,5%)</span>}
+                  </TableCell>
                   <TableCell className="text-right">{formatMontant(resultats.impotFederal)}</TableCell>
                 </TableRow>
                 <TableRow>
@@ -401,15 +587,25 @@ const ImpotCanada = () => {
                   <TableCell className="text-right">{formatMontant(resultats.impotProvincial)}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Cotisations sociales (RRQ, AE, RQAP)</TableCell>
-                  <TableCell className="text-right">{formatMontant(resultats.totalCotisations)}</TableCell>
+                  <TableCell>Cotisations {resultats.isQuebec ? 'RRQ' : 'RPC/CPP'}</TableCell>
+                  <TableCell className="text-right">{formatMontant(resultats.cotisationRRQ_RPC)}</TableCell>
                 </TableRow>
-                <TableRow className="font-bold">
+                {resultats.isQuebec && (
+                  <TableRow>
+                    <TableCell>Cotisations RQAP</TableCell>
+                    <TableCell className="text-right">{formatMontant(resultats.cotisationRQAP)}</TableCell>
+                  </TableRow>
+                )}
+                <TableRow>
+                  <TableCell>Cotisations AE</TableCell>
+                  <TableCell className="text-right">{formatMontant(resultats.cotisationAE)}</TableCell>
+                </TableRow>
+                <TableRow className="font-bold border-t-2">
                   <TableCell>Total des retenues</TableCell>
-                  <TableCell className="text-right">{formatMontant(resultats.impotTotal + resultats.totalCotisations)}</TableCell>
+                  <TableCell className="text-right">{formatMontant(resultats.totalRetenues)}</TableCell>
                 </TableRow>
                 <TableRow className="font-bold text-primary">
-                  <TableCell>Revenu net</TableCell>
+                  <TableCell>Revenu après impôt</TableCell>
                   <TableCell className="text-right">{formatMontant(resultats.revenuNet)}</TableCell>
                 </TableRow>
               </TableBody>
@@ -417,62 +613,34 @@ const ImpotCanada = () => {
           </CardContent>
         </Card>
 
-        {/* Graphique */}
+        {/* Graphique de répartition */}
         <Card>
           <CardHeader>
             <CardTitle>Répartition de votre revenu</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-72">
+            <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={resultats.donneesRepartition}
-                    dataKey="value"
-                    nameKey="name"
                     cx="50%"
                     cy="50%"
+                    labelLine={false}
                     outerRadius={100}
-                    label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, value, percent }) => `${name}: ${formatMontant(value)} (${(percent * 100).toFixed(0)}%)`}
                   >
-                    {resultats.donneesRepartition.map((_, index) => (
+                    {resultats.donneesRepartition.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <Tooltip formatter={(value: number) => formatMontant(value)} />
+                  <Legend />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Tranches d'imposition */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Tranches d'imposition du Canada 2025</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Tranche d'imposition fédérale</TableHead>
-                  <TableHead className="text-right">Taux d'imposition fédéraux</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {TRANCHES_FEDERALES.map((tranche, index) => (
-                  <TableRow key={index}>
-                    <TableCell>
-                      {tranche.max === Infinity 
-                        ? `Plus de ${formatMontant(tranche.min)}`
-                        : `${formatMontant(tranche.min)} à ${formatMontant(tranche.max)}`
-                      }
-                    </TableCell>
-                    <TableCell className="text-right">{(tranche.taux * 100).toFixed(1)}%</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
           </CardContent>
         </Card>
 

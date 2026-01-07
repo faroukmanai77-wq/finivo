@@ -18,7 +18,7 @@ export const FinivoLogo = ({ className, size = 'md' }: FinivoLogoProps) => {
     <img 
       src={logoSvg} 
       alt="Finivo Logo" 
-      className={cn(sizes[size], className)}
+      className={cn(sizes[size], 'transition-transform duration-200 hover:scale-110', className)}
     />
   );
 };

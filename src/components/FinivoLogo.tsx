@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import logoSvg from '@/assets/logo.svg';
+import logoPng from '@/assets/logo.png';
 
 interface FinivoLogoProps {
   className?: string;
@@ -16,7 +16,7 @@ export const FinivoLogo = ({ className, size = 'md' }: FinivoLogoProps) => {
 
   return (
     <img 
-      src={logoSvg} 
+      src={logoPng} 
       alt="Finivo Logo" 
       className={cn(sizes[size], 'transition-transform duration-200 hover:scale-110', className)}
     />

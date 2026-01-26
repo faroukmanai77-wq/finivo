@@ -1,0 +1,152 @@
+{
+  "common": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "comparators": "Comparateurs",
+    "calculators": "Calculateurs",
+    "library": "Bibliothèque",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "notFound": "Page non trouvée",
+    "backToHome": "Retour à l'accueil",
+    "learnMore": "En savoir plus",
+    "viewAll": "Voir tout",
+    "readMore": "Lire la suite",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "all": "Tous",
+    "apply": "Appliquer",
+    "reset": "Réinitialiser",
+    "close": "Fermer",
+    "share": "Partager",
+    "copyLink": "Copier le lien",
+    "copied": "Copié!",
+    "min": "min",
+    "articles": "articles",
+    "article": "article",
+    "found": "trouvé",
+    "page": "Page",
+    "of": "sur"
+  },
+  "nav": {
+    "creditCards": "Cartes de crédit",
+    "brokerages": "Courtiers",
+    "books": "Livres",
+    "budget": "Budget",
+    "mortgage": "Hypothèque",
+    "compound": "Intérêts composés",
+    "rrsp": "REER",
+    "fhsa": "CELIAPP",
+    "tax": "Impôts",
+    "netWorth": "Valeur nette",
+    "debtConsolidation": "Consolidation de dettes"
+  },
+  "hero": {
+    "badge": "Comparateur #1 au Canada",
+    "title": "Trouvez la carte de crédit",
+    "titleHighlight": "parfaite pour vous",
+    "subtitle": "Comparez les meilleures cartes de crédit au Canada. Remises, récompenses, voyages - trouvez celle qui correspond à votre style de vie.",
+    "cta": "Comparer les cartes",
+    "ctaSecondary": "Voir les calculateurs"
+  },
+  "blog": {
+    "title": "Conseils et guides",
+    "subtitle": "Tout ce que vous devez savoir pour faire les meilleurs choix financiers au Canada.",
+    "searchPlaceholder": "Rechercher un article...",
+    "noResults": "Aucun article trouvé",
+    "noResultsSubtitle": "Essayez de modifier votre recherche ou les filtres.",
+    "readTime": "min de lecture",
+    "by": "Par"
+  },
+  "categories": {
+    "guides": "Guides",
+    "conseils": "Conseils",
+    "comparatifs": "Comparatifs",
+    "actualites": "Actualités"
+  },
+  "creditCards": {
+    "title": "Comparateur de cartes de crédit",
+    "subtitle": "Trouvez la carte parfaite parmi les meilleures offres au Canada",
+    "annualFee": "Frais annuels",
+    "interestRate": "Taux d'intérêt",
+    "welcomeBonus": "Bonus de bienvenue",
+    "rewardsRate": "Taux de remises",
+    "apply": "Demander cette carte",
+    "compare": "Comparer",
+    "features": "Caractéristiques",
+    "noCards": "Aucune carte trouvée",
+    "filters": {
+      "issuer": "Émetteur",
+      "category": "Catégorie",
+      "rewardsType": "Type de récompenses",
+      "annualFee": "Frais annuels",
+      "noFee": "Sans frais",
+      "withFee": "Avec frais"
+    }
+  },
+  "brokerages": {
+    "title": "Comparateur de courtiers",
+    "subtitle": "Trouvez le meilleur courtier pour investir au Canada",
+    "transactionFee": "Frais de transaction",
+    "monthlyFee": "Frais mensuels",
+    "accounts": "Comptes disponibles",
+    "products": "Produits",
+    "openAccount": "Ouvrir un compte",
+    "strengths": "Points forts",
+    "weaknesses": "Points faibles"
+  },
+  "calculators": {
+    "title": "Calculateurs financiers",
+    "subtitle": "Outils gratuits pour planifier vos finances",
+    "budget": {
+      "title": "Calculateur de budget",
+      "description": "Gérez vos revenus et dépenses mensuels"
+    },
+    "mortgage": {
+      "title": "Calculateur hypothécaire",
+      "description": "Estimez vos paiements hypothécaires"
+    },
+    "compound": {
+      "title": "Intérêts composés",
+      "description": "Calculez la croissance de vos investissements"
+    },
+    "rrsp": {
+      "title": "Calculateur REER",
+      "description": "Planifiez votre épargne-retraite"
+    },
+    "fhsa": {
+      "title": "Calculateur CELIAPP",
+      "description": "Épargne pour votre première maison"
+    },
+    "tax": {
+      "title": "Calculateur d'impôts",
+      "description": "Estimez vos impôts fédéraux et provinciaux"
+    },
+    "netWorth": {
+      "title": "Valeur nette",
+      "description": "Calculez votre patrimoine total"
+    },
+    "debtConsolidation": {
+      "title": "Consolidation de dettes",
+      "description": "Optimisez le remboursement de vos dettes"
+    }
+  },
+  "footer": {
+    "description": "Votre guide pour les meilleures décisions financières au Canada.",
+    "comparators": "Comparateurs",
+    "calculators": "Calculateurs",
+    "resources": "Ressources",
+    "legal": "Légal",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "affiliation": "Divulgation d'affiliation",
+    "copyright": "© {{year}} Finivo. Tous droits réservés."
+  },
+  "seo": {
+    "homeTitle": "Finivo | Comparateur de cartes de crédit et outils financiers Canada",
+    "homeDescription": "Comparez les meilleures cartes de crédit, courtiers et utilisez nos calculateurs financiers gratuits. Le guide #1 pour vos finances au Canada.",
+    "blogTitle": "Blog Finivo | Guides Finances, Investissement & Conseils Canada",
+    "blogDescription": "Découvrez nos guides complets sur les finances personnelles au Canada : REER, CELIAPP, CELI, investissement, immobilier, hypothèques, impôts, cartes de crédit."
+  }
+}

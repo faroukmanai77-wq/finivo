@@ -1,0 +1,152 @@
+{
+  "common": {
+    "home": "Home",
+    "blog": "Blog",
+    "comparators": "Comparators",
+    "calculators": "Calculators",
+    "library": "Library",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Page not found",
+    "backToHome": "Back to home",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "readMore": "Read more",
+    "previous": "Previous",
+    "next": "Next",
+    "all": "All",
+    "apply": "Apply",
+    "reset": "Reset",
+    "close": "Close",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied!",
+    "min": "min",
+    "articles": "articles",
+    "article": "article",
+    "found": "found",
+    "page": "Page",
+    "of": "of"
+  },
+  "nav": {
+    "creditCards": "Credit Cards",
+    "brokerages": "Brokerages",
+    "books": "Books",
+    "budget": "Budget",
+    "mortgage": "Mortgage",
+    "compound": "Compound Interest",
+    "rrsp": "RRSP",
+    "fhsa": "FHSA",
+    "tax": "Taxes",
+    "netWorth": "Net Worth",
+    "debtConsolidation": "Debt Consolidation"
+  },
+  "hero": {
+    "badge": "#1 Comparator in Canada",
+    "title": "Find the perfect",
+    "titleHighlight": "credit card for you",
+    "subtitle": "Compare the best credit cards in Canada. Cash back, rewards, travel - find the one that fits your lifestyle.",
+    "cta": "Compare cards",
+    "ctaSecondary": "View calculators"
+  },
+  "blog": {
+    "title": "Tips and Guides",
+    "subtitle": "Everything you need to know to make the best financial decisions in Canada.",
+    "searchPlaceholder": "Search for an article...",
+    "noResults": "No articles found",
+    "noResultsSubtitle": "Try modifying your search or filters.",
+    "readTime": "min read",
+    "by": "By"
+  },
+  "categories": {
+    "guides": "Guides",
+    "conseils": "Tips",
+    "comparatifs": "Comparisons",
+    "actualites": "News"
+  },
+  "creditCards": {
+    "title": "Credit Card Comparator",
+    "subtitle": "Find the perfect card among the best offers in Canada",
+    "annualFee": "Annual fee",
+    "interestRate": "Interest rate",
+    "welcomeBonus": "Welcome bonus",
+    "rewardsRate": "Rewards rate",
+    "apply": "Apply for this card",
+    "compare": "Compare",
+    "features": "Features",
+    "noCards": "No cards found",
+    "filters": {
+      "issuer": "Issuer",
+      "category": "Category",
+      "rewardsType": "Rewards type",
+      "annualFee": "Annual fee",
+      "noFee": "No fee",
+      "withFee": "With fee"
+    }
+  },
+  "brokerages": {
+    "title": "Brokerage Comparator",
+    "subtitle": "Find the best broker to invest in Canada",
+    "transactionFee": "Transaction fee",
+    "monthlyFee": "Monthly fee",
+    "accounts": "Available accounts",
+    "products": "Products",
+    "openAccount": "Open account",
+    "strengths": "Strengths",
+    "weaknesses": "Weaknesses"
+  },
+  "calculators": {
+    "title": "Financial Calculators",
+    "subtitle": "Free tools to plan your finances",
+    "budget": {
+      "title": "Budget Calculator",
+      "description": "Manage your monthly income and expenses"
+    },
+    "mortgage": {
+      "title": "Mortgage Calculator",
+      "description": "Estimate your mortgage payments"
+    },
+    "compound": {
+      "title": "Compound Interest",
+      "description": "Calculate your investment growth"
+    },
+    "rrsp": {
+      "title": "RRSP Calculator",
+      "description": "Plan your retirement savings"
+    },
+    "fhsa": {
+      "title": "FHSA Calculator",
+      "description": "Save for your first home"
+    },
+    "tax": {
+      "title": "Tax Calculator",
+      "description": "Estimate your federal and provincial taxes"
+    },
+    "netWorth": {
+      "title": "Net Worth",
+      "description": "Calculate your total wealth"
+    },
+    "debtConsolidation": {
+      "title": "Debt Consolidation",
+      "description": "Optimize your debt repayment"
+    }
+  },
+  "footer": {
+    "description": "Your guide to the best financial decisions in Canada.",
+    "comparators": "Comparators",
+    "calculators": "Calculators",
+    "resources": "Resources",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "affiliation": "Affiliate Disclosure",
+    "copyright": "© {{year}} Finivo. All rights reserved."
+  },
+  "seo": {
+    "homeTitle": "Finivo | Credit Card Comparator and Financial Tools Canada",
+    "homeDescription": "Compare the best credit cards, brokerages and use our free financial calculators. The #1 guide for your finances in Canada.",
+    "blogTitle": "Finivo Blog | Finance Guides, Investment & Tips Canada",
+    "blogDescription": "Discover our comprehensive guides on personal finance in Canada: RRSP, FHSA, TFSA, investing, real estate, mortgages, taxes, credit cards."
+  }
+}

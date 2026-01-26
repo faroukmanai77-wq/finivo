@@ -156,6 +156,10 @@
   "blogPage": {
     "badge": "Finivo Blog"
   },
+  "blogContent": {
+    "tip": "Tip",
+    "warning": "Warning"
+  },
   "categories": {
     "guides": "Guides",
     "conseils": "Tips",

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useBlogPost, useRelatedBlogPosts } from '@/hooks/useBlogPosts';
-import { blogCategoryLabels } from '@/types/blogPost';
+import { BlogCategory } from '@/types/blogPost';
 import { ArrowLeft, Calendar, Clock, User, BookOpen, ArrowRight } from 'lucide-react';
 import { BlogArticleContent } from '@/components/BlogArticleContent';
 import { SocialShareMenu } from '@/components/SocialShareMenu';
@@ -21,6 +21,14 @@ const BlogPost = () => {
   
   const { data: post, isLoading } = useBlogPost(slug || '');
   const { data: relatedPosts = [] } = useRelatedBlogPosts(post?.category || 'conseils', slug || '', 2);
+
+  // i18n category labels
+  const categoryLabels: Record<BlogCategory, string> = {
+    guides: t('categories.guides'),
+    conseils: t('categories.conseils'),
+    comparatifs: t('categories.comparatifs'),
+    actualites: t('categories.actualites')
+  };
 
   if (isLoading) {
     return (
@@ -128,7 +136,7 @@ const BlogPost = () => {
             </button>
 
             <Badge variant="secondary" className="mb-3 sm:mb-4 text-xs sm:text-sm">
-              {blogCategoryLabels[post.category]}
+              {categoryLabels[post.category]}
             </Badge>
 
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-foreground mb-4 sm:mb-6 leading-tight">

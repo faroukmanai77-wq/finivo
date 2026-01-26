@@ -1,68 +1,29 @@
+import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Shield, Lock, Eye, UserCheck, Database, Bell } from 'lucide-react';
+import { SEO } from '@/components/SEO';
+import { Shield, Lock, Eye, UserCheck, Database, Bell, LucideIcon } from 'lucide-react';
 
 const PolitiqueConfidentialite = () => {
-  const sections = [
-    {
-      icon: Eye,
-      title: "Collecte de renseignements personnels",
-      content: `Conformément à la Loi 25 sur la protection des renseignements personnels dans le secteur privé du Québec, nous collectons uniquement les renseignements nécessaires à la fourniture de nos services de comparaison de cartes de crédit.
+  const { t } = useTranslation();
 
-Les renseignements que nous pouvons collecter incluent :
-• Informations de navigation (pages visitées, durée des visites)
-• Adresse IP et données de localisation approximative
-• Informations fournies volontairement via nos formulaires
-• Préférences de navigation et cookies techniques`
-    },
-    {
-      icon: Database,
-      title: "Utilisation des renseignements",
-      content: `Vos renseignements personnels sont utilisés exclusivement pour :
-• Améliorer votre expérience de navigation sur notre plateforme
-• Personnaliser les recommandations de cartes de crédit
-• Analyser l'utilisation de notre site pour l'améliorer
-• Communiquer avec vous si vous nous contactez
-• Respecter nos obligations légales
+  const sectionIcons: Record<string, LucideIcon> = {
+    collection: Eye,
+    usage: Database,
+    protection: Lock,
+    rights: UserCheck,
+    cookies: Bell
+  };
 
-Nous ne vendons jamais vos renseignements personnels à des tiers.`
-    },
-    {
-      icon: Lock,
-      title: "Protection des données",
-      content: `Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos renseignements personnels contre tout accès, utilisation ou divulgation non autorisés :
-• Chiffrement SSL/TLS pour toutes les communications
-• Accès limité aux données personnelles
-• Surveillance continue de nos systèmes
-• Formation de notre personnel sur la protection des données`
-    },
-    {
-      icon: UserCheck,
-      title: "Vos droits (Loi 25)",
-      content: `En vertu de la Loi 25 du Québec, vous disposez des droits suivants :
-• Droit d'accès à vos renseignements personnels
-• Droit de rectification de vos données
-• Droit à l'effacement de vos données
-• Droit à la portabilité de vos données
-• Droit de retirer votre consentement
-
-Pour exercer ces droits, contactez-nous à : info@finivo.ca`
-    },
-    {
-      icon: Bell,
-      title: "Cookies et technologies similaires",
-      content: `Nous utilisons des cookies pour :
-• Assurer le bon fonctionnement du site
-• Mémoriser vos préférences
-• Analyser le trafic (cookies analytiques)
-• Améliorer nos services
-
-Vous pouvez gérer vos préférences de cookies à tout moment via les paramètres de votre navigateur.`
-    }
-  ];
+  const sectionKeys = ['collection', 'usage', 'protection', 'rights', 'cookies'] as const;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO 
+        title={t('legal.privacy.title')}
+        description={t('legal.privacy.subtitle')}
+        path="/politique-confidentialite"
+      />
       <Header />
       
       <main className="flex-1">
@@ -79,14 +40,13 @@ Vous pouvez gérer vos préférences de cookies à tout moment via les paramètr
                 <Shield className="w-10 h-10 text-primary-foreground" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-                Politique de confidentialité
+                {t('legal.privacy.title')}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Votre vie privée est notre priorité. Cette politique explique comment nous collectons, 
-                utilisons et protégeons vos renseignements personnels conformément à la Loi 25 du Québec.
+                {t('legal.privacy.subtitle')}
               </p>
               <p className="text-sm text-muted-foreground mt-4">
-                Dernière mise à jour : Décembre 2025
+                {t('legal.privacy.lastUpdated')}
               </p>
             </div>
           </div>
@@ -96,39 +56,41 @@ Vous pouvez gérer vos préférences de cookies à tout moment via les paramètr
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto space-y-8">
-              {sections.map((section, index) => (
-                <div 
-                  key={section.title}
-                  className="bg-card rounded-2xl border border-border/50 p-8 shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <section.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-xl font-semibold text-foreground mb-4">
-                        {section.title}
-                      </h2>
-                      <div className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                        {section.content}
+              {sectionKeys.map((key, index) => {
+                const Icon = sectionIcons[key];
+                return (
+                  <div 
+                    key={key}
+                    className="bg-card rounded-2xl border border-border/50 p-8 shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                        <Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h2 className="text-xl font-semibold text-foreground mb-4">
+                          {t(`legal.privacy.sections.${key}.title`)}
+                        </h2>
+                        <div className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                          {t(`legal.privacy.sections.${key}.content`)}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {/* Contact Section */}
               <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl border border-border/50 p-8 text-center">
                 <h2 className="text-xl font-semibold text-foreground mb-4">
-                  Questions ou préoccupations ?
+                  {t('legal.privacy.contact.title')}
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Si vous avez des questions concernant notre politique de confidentialité ou souhaitez exercer vos droits, 
-                  n'hésitez pas à nous contacter.
+                  {t('legal.privacy.contact.description')}
                 </p>
                 <p className="text-foreground font-medium">
-                  Responsable de la protection des renseignements personnels<br />
+                  {t('legal.privacy.contact.officer')}<br />
                   <a href="mailto:info@finivo.ca" className="text-primary hover:underline">
                     info@finivo.ca
                   </a>

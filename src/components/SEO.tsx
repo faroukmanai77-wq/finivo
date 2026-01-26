@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface SEOProps {
   title?: string;
@@ -10,6 +11,7 @@ interface SEOProps {
   noindex?: boolean;
   canonicalUrl?: string;
   structuredData?: object;
+  path?: string; // Path without language prefix for hreflang generation
 }
 
 const BASE_URL = 'https://finivo.ca';
@@ -26,9 +28,19 @@ export const SEO = ({
   noindex = false,
   canonicalUrl,
   structuredData,
+  path,
 }: SEOProps) => {
+  const { currentLanguage, getPathWithoutLanguage } = useLanguage();
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const canonical = canonicalUrl || url;
+  
+  // Generate hreflang URLs
+  const cleanPath = path || (url ? getPathWithoutLanguage(new URL(url, BASE_URL).pathname) : '/');
+  const frUrl = `${BASE_URL}/fr${cleanPath === '/' ? '/' : cleanPath}`;
+  const enUrl = `${BASE_URL}/en${cleanPath === '/' ? '/' : cleanPath}`;
+  
+  // Set og:locale based on current language
+  const ogLocale = currentLanguage === 'en' ? 'en_CA' : 'fr_CA';
 
   return (
     <Helmet>
@@ -41,6 +53,11 @@ export const SEO = ({
       {/* Canonical URL */}
       <link rel="canonical" href={canonical} />
       
+      {/* Hreflang Tags for Multilingual SEO */}
+      <link rel="alternate" hrefLang="fr" href={frUrl} />
+      <link rel="alternate" hrefLang="en" href={enUrl} />
+      <link rel="alternate" hrefLang="x-default" href={frUrl} />
+      
       {/* Robots */}
       {noindex && <meta name="robots" content="noindex, nofollow" />}
       
@@ -51,7 +68,8 @@ export const SEO = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:locale" content="fr_CA" />
+      <meta property="og:locale" content={ogLocale} />
+      <meta property="og:locale:alternate" content={currentLanguage === 'en' ? 'fr_CA' : 'en_CA'} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

@@ -910,5 +910,113 @@
       "description": "Compare over 30 credit cards in Canada for free in 2026: cash back up to 5%, travel cards with Aeroplan points, no annual fee cards and student cards.",
       "keywords": "credit card comparator canada 2026, best cashback credit card, no annual fee credit card, travel credit card aeroplan"
     }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "Your privacy is our priority. This policy explains how we collect, use and protect your personal information in compliance with Quebec's Law 25.",
+      "lastUpdated": "Last updated: December 2025",
+      "sections": {
+        "collection": {
+          "title": "Collection of Personal Information",
+          "content": "In accordance with Quebec's Law 25 on the protection of personal information in the private sector, we only collect information necessary to provide our credit card comparison services.\n\nThe information we may collect includes:\n• Browsing information (pages visited, duration of visits)\n• IP address and approximate location data\n• Information voluntarily provided through our forms\n• Browsing preferences and technical cookies"
+        },
+        "usage": {
+          "title": "Use of Information",
+          "content": "Your personal information is used exclusively for:\n• Improving your browsing experience on our platform\n• Personalizing credit card recommendations\n• Analyzing site usage for improvement\n• Communicating with you if you contact us\n• Complying with our legal obligations\n\nWe never sell your personal information to third parties."
+        },
+        "protection": {
+          "title": "Data Protection",
+          "content": "We implement appropriate security measures to protect your personal information from unauthorized access, use or disclosure:\n• SSL/TLS encryption for all communications\n• Limited access to personal data\n• Continuous monitoring of our systems\n• Staff training on data protection"
+        },
+        "rights": {
+          "title": "Your Rights (Law 25)",
+          "content": "Under Quebec's Law 25, you have the following rights:\n• Right of access to your personal information\n• Right to rectification of your data\n• Right to erasure of your data\n• Right to data portability\n• Right to withdraw your consent\n\nTo exercise these rights, contact us at: info@finivo.ca"
+        },
+        "cookies": {
+          "title": "Cookies and Similar Technologies",
+          "content": "We use cookies to:\n• Ensure proper site functionality\n• Remember your preferences\n• Analyze traffic (analytics cookies)\n• Improve our services\n\nYou can manage your cookie preferences at any time through your browser settings."
+        }
+      },
+      "contact": {
+        "title": "Questions or Concerns?",
+        "description": "If you have any questions regarding our privacy policy or wish to exercise your rights, please contact us.",
+        "officer": "Personal Information Protection Officer"
+      }
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "subtitle": "Please read these terms carefully before using our credit card comparison service.",
+      "lastUpdated": "Last updated: December 2025",
+      "sections": {
+        "acceptance": {
+          "title": "Acceptance of Terms",
+          "content": "By accessing and using the Finivo website (finivo.ca), you agree to be bound by these terms of use. If you do not accept these terms, please do not use our site.\n\nThese terms are governed by the laws of Quebec and Canada. Any dispute will be subject to the exclusive jurisdiction of Quebec courts."
+        },
+        "services": {
+          "title": "Nature of Services",
+          "content": "Finivo is a credit card comparison service for Canadian consumers, particularly those in Quebec.\n\nOur services include:\n• Objective credit card comparison\n• Information on financial product features\n• Calculation and simulation tools\n• Educational content on personal finance\n\nWe are not a licensed financial advisor and our information does not constitute personalized financial advice."
+        },
+        "liability": {
+          "title": "Limitation of Liability",
+          "content": "The information on our site is provided for informational purposes only:\n• Rates, fees and conditions may change without notice\n• We strive to maintain accurate information, but do not guarantee completeness\n• Always consult the issuer's official website before applying\n• We are not responsible for decisions made based on our information\n\nYour eligibility for a credit card depends on the issuer's assessment."
+        },
+        "prohibited": {
+          "title": "Prohibited Uses",
+          "content": "You agree not to:\n• Use our site for illegal or fraudulent purposes\n• Attempt to access unauthorized areas of the site\n• Reproduce, duplicate or copy our content without permission\n• Use robots, scrapers or automated tools\n• Transmit viruses or malicious code\n• Impersonate another person\n\nAny violation may result in suspension of your access."
+        },
+        "ip": {
+          "title": "Intellectual Property",
+          "content": "All content on the Finivo site is protected by Canadian copyright laws:\n• Texts, graphics, logos and images\n• Site design and layout\n• Calculation tools and features\n• Product database\n\nUnauthorized use of our content is strictly prohibited. Card issuer trademarks belong to their respective owners."
+        },
+        "modifications": {
+          "title": "Modification of Terms",
+          "content": "We reserve the right to modify these terms at any time. Modifications take effect upon publication on the site.\n\nYour continued use of the site after publication of modifications constitutes your acceptance of the new terms.\n\nWe encourage you to regularly check this page for updates."
+        }
+      },
+      "contact": {
+        "title": "Questions?",
+        "description": "If you have any questions regarding these terms of use, please contact us."
+      }
+    },
+    "affiliate": {
+      "title": "Affiliate Disclosure",
+      "subtitle": "Transparency is at the heart of our mission. Learn how we fund our free service and how this may affect our recommendations.",
+      "lastUpdated": "Last updated: December 2025",
+      "notice": {
+        "title": "Important Notice",
+        "content": "This site may receive compensation when you click on links to financial products and/or apply for credit cards. This does not influence our editorial evaluation of products, but may affect the display order and products we choose to feature."
+      },
+      "sections": {
+        "business": {
+          "title": "Our Business Model",
+          "content": "Finivo is a free credit card comparison service. We generate revenue through affiliate partnerships with credit card issuers.\n\nWhen you click on a link to a credit card and are approved for that card, we may receive compensation from the issuer. This compensation allows us to maintain our free service and continue to offer quality comparison tools."
+        },
+        "impact": {
+          "title": "Impact on Our Recommendations",
+          "content": "We are committed to complete transparency regarding our affiliate relationships:\n• Compensation received may influence card display order\n• Some featured cards may be paid partners\n• We do not offer all cards available on the Canadian market\n\nHowever, our product evaluations and descriptions remain objective and based on actual card features."
+        },
+        "objectivity": {
+          "title": "Our Commitment to Objectivity",
+          "content": "Despite our affiliate relationships, we are committed to:\n• Providing accurate and up-to-date information on each card\n• Presenting both advantages AND disadvantages of each product\n• Allowing comparisons based on your real needs\n• Never recommending an unsuitable product for financial reasons\n• Regularly updating our evaluations\n\nYour trust is our absolute priority."
+        },
+        "compensation": {
+          "title": "Types of Compensation",
+          "content": "We may receive different types of compensation:\n• Fixed commission per application approval\n• Commission based on first purchase amounts\n• Payment for featured placement\n• Bonuses for certain promotions\n\nThese compensations come from card issuers, never from users. Our services remain completely free for you."
+        },
+        "unchanged": {
+          "title": "What Never Changes",
+          "content": "Regardless of our relationship with issuers:\n• Displayed interest rates are always accurate\n• Annual fees are clearly indicated\n• Benefits and conditions are faithfully reported\n• Your applications go directly to issuers\n• We never share your data with unauthorized third parties\n\nWe believe transparent service builds trust and leads to better decisions for our users."
+        },
+        "howToChoose": {
+          "title": "How to Choose the Right Card",
+          "content": "Our advice: don't rely solely on display order. Use our filters and comparison tools to find the card that truly matches your needs:\n• Evaluate your spending habits\n• Consider annual fees vs. benefits\n• Check interest rates if you plan to carry a balance\n• Read the conditions on the issuer's site\n\nWhen in doubt, consult a licensed financial advisor."
+        }
+      },
+      "contact": {
+        "title": "Questions About Our Partnerships?",
+        "description": "If you have any questions regarding our affiliate relationships or recommendation methods, please contact us."
+      }
+    }
   }
 }

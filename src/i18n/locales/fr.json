@@ -31,9 +31,12 @@
     "explore": "Explorer",
     "startNow": "Commencer maintenant",
     "viewComparators": "Voir les comparateurs",
-    "viewAllCalculators": "Voir tous les calculateurs"
+    "viewAllCalculators": "Voir tous les calculateurs",
+    "filters": "Filtres"
   },
   "nav": {
+    "home": "Accueil",
+    "comparators": "Comparateurs",
     "creditCards": "Cartes de crédit",
     "brokerages": "Courtiers",
     "books": "Livres",
@@ -237,7 +240,10 @@
     }
   },
   "creditCards": {
-    "title": "Comparateur de cartes de crédit",
+    "title": "Cartes de crédit",
+    "comparator": "Comparateur de cartes de crédit",
+    "heroTitle": "Comparez les cartes de crédit au Québec",
+    "heroDescription": "Trouvez la carte parfaite selon vos besoins. Tous les taux sont mis à jour en temps réel.",
     "subtitle": "Trouvez la carte parfaite parmi les meilleures offres au Canada",
     "annualFee": "Frais annuels",
     "interestRate": "Taux d'intérêt",
@@ -247,6 +253,16 @@
     "compare": "Comparer",
     "features": "Caractéristiques",
     "noCards": "Aucune carte trouvée",
+    "noResults": "Aucune carte trouvée",
+    "adjustFilters": "Essayez d'ajuster les filtres pour voir plus de résultats.",
+    "categories": {
+      "cashback": "Remises en argent",
+      "travel": "Voyage",
+      "noFee": "Sans frais",
+      "student": "Étudiants",
+      "premium": "Premium",
+      "lowInterest": "Faible taux"
+    },
     "filters": {
       "issuer": "Émetteur",
       "category": "Catégorie",
@@ -331,6 +347,11 @@
     "homeTitle": "Finivo | Outils Financiers Gratuits Canada 2026 - Comparateurs & Calculateurs",
     "homeDescription": "Finivo est LA plateforme canadienne d'outils financiers 100% gratuits en 2026. Comparez 30+ cartes de crédit et 10+ courtiers en ligne. Utilisez nos 8 calculateurs (REER, CELIAPP, CELI, hypothèque, budget, impôts). Découvrez notre bibliothèque de 20+ livres sur la finance personnelle et investissement. Indépendant et sans frais.",
     "blogTitle": "Blog Finivo | Guides Finances, Investissement & Conseils Canada",
-    "blogDescription": "Découvrez nos guides complets sur les finances personnelles au Canada : REER, CELIAPP, CELI, investissement, immobilier, hypothèques, impôts, cartes de crédit."
+    "blogDescription": "Découvrez nos guides complets sur les finances personnelles au Canada : REER, CELIAPP, CELI, investissement, immobilier, hypothèques, impôts, cartes de crédit.",
+    "creditCards": {
+      "title": "Comparateur de 30+ Cartes de Crédit Québec 2026 | Meilleurs Taux & Remises | Finivo",
+      "description": "Comparez gratuitement plus de 30 cartes de crédit au Québec en 2026 : remises en argent jusqu'à 5%, cartes voyage avec points Aéroplan, cartes sans frais annuels et cartes étudiants.",
+      "keywords": "comparateur carte crédit québec 2026, meilleure carte crédit remise argent, carte crédit sans frais annuels, carte crédit voyage aéroplan"
+    }
   }
 }

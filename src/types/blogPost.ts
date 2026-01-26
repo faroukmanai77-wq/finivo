@@ -22,6 +22,8 @@ export type BlogCategory =
   | 'actualites'
   | 'guides';
 
+// Note: This is kept for backwards compatibility but should use i18n in components
+// Use t('categories.guides'), t('categories.conseils'), etc. in components instead
 export const blogCategoryLabels: Record<BlogCategory, string> = {
   conseils: 'Conseils',
   comparatifs: 'Comparatifs',

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Lightbulb, AlertTriangle, CheckCircle, XCircle, CreditCard, Info } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface BlogArticleContentProps {
   content: string;
 }
 
 export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content }) => {
+  const { t } = useTranslation();
+  
   const parseContent = (text: string) => {
     const lines = text.trim().split('\n');
     const elements: React.ReactNode[] = [];
@@ -226,9 +229,9 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
             <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
           </div>
           <div className="min-w-0 flex-1">
-            <span className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wide">Astuce</span>
+            <span className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wide">{t('blogContent.tip')}</span>
             <p className="text-sm sm:text-base text-foreground mt-1 break-words">
-              {formatInlineStyles(line.replace(/^💡\s*/, '').replace(/^\*\*Astuce\*\*\s*:\s*/, ''))}
+              {formatInlineStyles(line.replace(/^💡\s*/, '').replace(/^\*\*(Astuce|Tip)\*\*\s*:\s*/i, ''))}
             </p>
           </div>
         </div>
@@ -242,7 +245,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content 
             <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
           </div>
           <div className="min-w-0 flex-1">
-            <span className="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">Attention</span>
+            <span className="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">{t('blogContent.warning')}</span>
             <p className="text-sm sm:text-base text-foreground mt-1 break-words">
               {formatInlineStyles(line.replace(/^⚠️\s*/, ''))}
             </p>

@@ -126,9 +126,9 @@ const Hypotheque = () => {
       title="Calculateur d'hypothèque"
       description="Estimez vos paiements hypothécaires mensuels, le coût total de votre prêt et visualisez l'amortissement de votre hypothèque."
       icon={<Home className="w-8 h-8 text-primary" />}
-      seoTitle="Calculateur Hypothèque Gratuit | Paiement Mensuel Maison | Finivo"
-      seoDescription="Calculez vos paiements hypothécaires au Québec. Estimez le coût total, l'assurance SCHL et visualisez l'amortissement. Outil gratuit pour planifier l'achat de votre maison."
-      seoKeywords="calculateur hypothèque, paiement hypothécaire, calculateur maison, prêt immobilier québec, assurance SCHL, amortissement hypothèque"
+      seoTitle="Calculateur Hypothèque Gratuit 2026 | Paiement Mensuel Maison Québec | Finivo"
+      seoDescription="Calculez vos paiements hypothécaires au Québec en 2026. Estimez le coût total, l'assurance SCHL, les taux actuels et visualisez l'amortissement. Outil gratuit pour planifier l'achat de votre maison."
+      seoKeywords="calculateur hypothèque 2026, paiement hypothécaire québec, calculateur maison, prêt immobilier québec, assurance SCHL, amortissement hypothèque, taux hypothécaire 2026"
       url="https://finivo.ca/calculateurs/hypotheque"
       relatedCategory="epargne"
       featuredCardType="cashback"

@@ -12,8 +12,8 @@ import InvestmentPathIllustration from '@/assets/illustrations/investment-path.s
 
 const faqItems = [
   {
-    question: "Quelle est la limite de cotisation REER pour 2024?",
-    answer: "Pour 2024, la limite de cotisation REER est de 18% de votre revenu gagné de l'année précédente, jusqu'à un maximum de 31 560 $. Vos droits de cotisation inutilisés des années précédentes s'accumulent et sont reportés."
+    question: "Quelle est la limite de cotisation REER pour 2026?",
+    answer: "Pour 2026, la limite de cotisation REER est de 18% de votre revenu gagné de l'année précédente, jusqu'à un maximum de 32 490 $. Vos droits de cotisation inutilisés des années précédentes s'accumulent et sont reportés."
   },
   {
     question: "Quand dois-je cotiser à mon REER?",
@@ -108,9 +108,9 @@ const EpargneREER = () => {
       title="Calculatrice d'épargne REER"
       description="Déterminez quelle sera la valeur de votre régime enregistré d'épargne-retraite (REER) quand vous prendrez votre retraite, et le revenu annuel que vous en tirerez."
       icon={<PiggyBank className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice REER - Épargne-retraite | Finivo"
-      seoDescription="Calculez la valeur future de votre REER et estimez votre revenu de retraite. Planifiez votre épargne-retraite avec notre calculatrice REER."
-      seoKeywords="REER, épargne-retraite, calculatrice, retraite, investissement, placement"
+      seoTitle="Calculatrice REER 2026 - Épargne-retraite Québec | Finivo"
+      seoDescription="Calculez la valeur future de votre REER en 2026 et estimez votre revenu de retraite. Planifiez votre épargne-retraite avec notre calculatrice REER gratuite. Plafond 2026 : 32 490$."
+      seoKeywords="REER 2026, épargne-retraite québec, calculatrice REER gratuit, retraite investissement, plafond cotisation REER, RAP 60000"
       url="https://finivo.ca/calculateurs/epargne-reer"
       relatedCategory="epargne"
       featuredCardType="cashback"

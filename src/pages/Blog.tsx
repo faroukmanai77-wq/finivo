@@ -37,7 +37,7 @@ const Blog = () => {
     url: 'https://finivo.ca/blog'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Blog Finivo | Guides Finances Personnelles & Cartes de Crédit Québec 2025" description="Découvrez nos guides complets sur les finances personnelles au Québec : conseils pour choisir sa carte de crédit, maximiser ses remises en argent, éviter les erreurs courantes, comprendre les réglementations canadiennes. Articles rédigés par des experts pour les Québécois." keywords="blog finances personnelles québec, guide carte crédit, conseils épargne REER CELIAPP, erreurs carte crédit, maximiser remises argent, points voyage canada, actualités finances 2025" url="https://finivo.ca/blog" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+      <SEO title="Blog Finivo | Guides Finances, Investissement, Immobilier & Impôts Québec 2026" description="Découvrez nos 25+ guides complets sur les finances personnelles au Québec en 2026 : REER, CELIAPP, CELI, investissement, immobilier, hypothèques, impôts, cartes de crédit. Articles rédigés par des experts pour les Québécois qui veulent prendre contrôle de leurs finances." keywords="blog finances personnelles québec 2026, guide REER CELIAPP CELI, investissement débutant, immobilier québec 2026, impôts québec, carte crédit remises, hypothèque taux, épargne placements, FNB ETF tout-en-un" url="https://finivo.ca/blog" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
       <Header />
       
       {/* Hero Section */}

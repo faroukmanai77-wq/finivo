@@ -40,7 +40,7 @@ const EpargneCELIAPP = () => {
   const [premierAchat, setPremierAchat] = useState(true);
   const [anneeOuverture, setAnneeOuverture] = useState(2024);
   const [moisDebut, setMoisDebut] = useState('janvier');
-  const [anneeDebut, setAnneeDebut] = useState(2025);
+  const [anneeDebut, setAnneeDebut] = useState(2026);
   const [moisAchat, setMoisAchat] = useState('janvier');
   const [anneeAchat, setAnneeAchat] = useState(2028);
   const [cotisationAnnuelle, setCotisationAnnuelle] = useState(8000);
@@ -145,9 +145,9 @@ const EpargneCELIAPP = () => {
       title="Calculatrice d'épargne CELIAPP"
       description="Calculez vos économies potentielles avec le Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP)."
       icon={<Home className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice CELIAPP - Épargne première propriété | Finivo"
-      seoDescription="Calculez combien vous pouvez économiser avec le CELIAPP pour l'achat de votre première maison. Vérifiez votre admissibilité et planifiez votre épargne."
-      seoKeywords="CELIAPP, première maison, épargne, achat propriété, calculatrice, libre d'impôt"
+      seoTitle="Calculatrice CELIAPP 2026 - Épargne première propriété | Finivo"
+      seoDescription="Calculez combien vous pouvez économiser avec le CELIAPP en 2026 pour l'achat de votre première maison. Vérifiez votre admissibilité et planifiez votre épargne jusqu'à 40 000$."
+      seoKeywords="CELIAPP 2026, première maison québec, épargne libre impôt, achat propriété, calculatrice CELIAPP, mise de fonds"
       url="https://finivo.ca/calculateurs/epargne-celiapp"
       relatedCategory="epargne"
       featuredCardType="cashback"

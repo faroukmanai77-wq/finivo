@@ -1,4 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { BudgetInputSection } from '@/components/calculators/BudgetInputSection';
@@ -8,6 +9,7 @@ import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign,
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import * as XLSX from 'xlsx';
 import SmartBudgetingIllustration from '@/assets/illustrations/smart-budgeting.svg';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface BudgetItem {
   id: string;
@@ -15,64 +17,61 @@ interface BudgetItem {
   value: number;
 }
 
-interface BudgetSection {
-  title: string;
-  items: BudgetItem[];
-}
-
 const Budget = () => {
+  const { t, i18n } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const printRef = useRef<HTMLDivElement>(null);
 
   // Revenus mensuels
   const [revenus, setRevenus] = useState<BudgetItem[]>([
-    { id: 'salaire_net', label: 'Salaire net', value: 0 },
-    { id: 'placements', label: 'Placements (intérêts, dividendes)', value: 0 },
-    { id: 'pension_alimentaire', label: 'Pension alimentaire reçue', value: 0 },
-    { id: 'prestations', label: 'Prestations gouvernementales', value: 0 },
-    { id: 'rentes', label: 'Rentes', value: 0 },
-    { id: 'autres_revenus', label: 'Autres revenus (locatif, pourboires, etc.)', value: 0 },
+    { id: 'salaire_net', label: t('calculators.budget.incomeItems.netSalary'), value: 0 },
+    { id: 'placements', label: t('calculators.budget.incomeItems.investments'), value: 0 },
+    { id: 'pension_alimentaire', label: t('calculators.budget.incomeItems.alimonyReceived'), value: 0 },
+    { id: 'prestations', label: t('calculators.budget.incomeItems.benefits'), value: 0 },
+    { id: 'rentes', label: t('calculators.budget.incomeItems.pensions'), value: 0 },
+    { id: 'autres_revenus', label: t('calculators.budget.incomeItems.otherIncome'), value: 0 },
   ]);
 
   // Dépenses fixes mensuelles
   const [depensesFixes, setDepensesFixes] = useState<BudgetItem[]>([
-    { id: 'loyer', label: 'Loyer / Hypothèque', value: 0 },
-    { id: 'electricite', label: 'Électricité / Chauffage', value: 0 },
-    { id: 'cable', label: 'Câble / Canaux spécialisés', value: 0 },
-    { id: 'telephone', label: 'Téléphone / Internet / Cellulaire', value: 0 },
-    { id: 'taxes', label: 'Taxes municipales, scolaires, etc.', value: 0 },
-    { id: 'assurance_vie', label: 'Assurance vie / Invalidité', value: 0 },
-    { id: 'assurance_habitation', label: 'Assurance habitation', value: 0 },
-    { id: 'assurance_auto', label: 'Assurance automobile / Immatriculation / Permis', value: 0 },
-    { id: 'emprunt_auto', label: 'Emprunt automobile', value: 0 },
-    { id: 'emprunt_carte', label: 'Emprunt (cartes de crédit)', value: 0 },
-    { id: 'emprunt_marge', label: 'Emprunt (marge de crédit)', value: 0 },
-    { id: 'emprunts_autres', label: 'Emprunts autres', value: 0 },
-    { id: 'garderie', label: 'Garderie', value: 0 },
-    { id: 'frais_bancaires', label: 'Frais de services bancaires', value: 0 },
-    { id: 'epargne', label: 'Épargne (REER, CELI, CELIAPP, etc.)', value: 0 },
-    { id: 'autres_fixes', label: 'Autres (pension versée, etc.)', value: 0 },
+    { id: 'loyer', label: t('calculators.budget.fixedExpenseItems.rentMortgage'), value: 0 },
+    { id: 'electricite', label: t('calculators.budget.fixedExpenseItems.electricity'), value: 0 },
+    { id: 'cable', label: t('calculators.budget.fixedExpenseItems.cable'), value: 0 },
+    { id: 'telephone', label: t('calculators.budget.fixedExpenseItems.phone'), value: 0 },
+    { id: 'taxes', label: t('calculators.budget.fixedExpenseItems.taxes'), value: 0 },
+    { id: 'assurance_vie', label: t('calculators.budget.fixedExpenseItems.lifeInsurance'), value: 0 },
+    { id: 'assurance_habitation', label: t('calculators.budget.fixedExpenseItems.homeInsurance'), value: 0 },
+    { id: 'assurance_auto', label: t('calculators.budget.fixedExpenseItems.autoInsurance'), value: 0 },
+    { id: 'emprunt_auto', label: t('calculators.budget.fixedExpenseItems.autoLoan'), value: 0 },
+    { id: 'emprunt_carte', label: t('calculators.budget.fixedExpenseItems.creditCardDebt'), value: 0 },
+    { id: 'emprunt_marge', label: t('calculators.budget.fixedExpenseItems.lineOfCredit'), value: 0 },
+    { id: 'emprunts_autres', label: t('calculators.budget.fixedExpenseItems.otherLoans'), value: 0 },
+    { id: 'garderie', label: t('calculators.budget.fixedExpenseItems.daycare'), value: 0 },
+    { id: 'frais_bancaires', label: t('calculators.budget.fixedExpenseItems.bankFees'), value: 0 },
+    { id: 'epargne', label: t('calculators.budget.fixedExpenseItems.savings'), value: 0 },
+    { id: 'autres_fixes', label: t('calculators.budget.fixedExpenseItems.otherFixed'), value: 0 },
   ]);
 
   // Dépenses variables mensuelles
   const [depensesVariables, setDepensesVariables] = useState<BudgetItem[]>([
-    { id: 'alimentation_epicerie', label: 'Alimentation (épicerie)', value: 0 },
-    { id: 'alimentation_depanneur', label: 'Alimentation (dépanneur)', value: 0 },
-    { id: 'alimentation_restaurant', label: 'Alimentation (restaurant / livraison)', value: 0 },
-    { id: 'alimentation_travail', label: 'Alimentation (repas école / travail)', value: 0 },
-    { id: 'tabac', label: 'Tabac / Alcool / Cannabis', value: 0 },
-    { id: 'vetements', label: 'Vêtements, accessoires et chaussures', value: 0 },
-    { id: 'transport', label: 'Transport en commun / Taxi / Covoiturage', value: 0 },
-    { id: 'essence', label: 'Essence et entretien auto', value: 0 },
-    { id: 'sante', label: 'Santé / Beauté / Hygiène', value: 0 },
-    { id: 'loisirs', label: 'Loisirs et sorties', value: 0 },
-    { id: 'animaux', label: 'Achat et soins des animaux', value: 0 },
-    { id: 'maison', label: 'Maison (entretien / articles divers)', value: 0 },
-    { id: 'abonnements', label: 'Abonnements (streaming, magazines, etc.)', value: 0 },
-    { id: 'sports', label: 'Sports / Gym / Clubs', value: 0 },
-    { id: 'argent_poche', label: 'Argent de poche / Loterie', value: 0 },
-    { id: 'cadeaux', label: 'Cadeaux / Dons', value: 0 },
-    { id: 'vacances', label: 'Vacances / Voyages', value: 0 },
-    { id: 'autres_variables', label: 'Autres dépenses', value: 0 },
+    { id: 'alimentation_epicerie', label: t('calculators.budget.variableExpenseItems.groceries'), value: 0 },
+    { id: 'alimentation_depanneur', label: t('calculators.budget.variableExpenseItems.convenience'), value: 0 },
+    { id: 'alimentation_restaurant', label: t('calculators.budget.variableExpenseItems.restaurant'), value: 0 },
+    { id: 'alimentation_travail', label: t('calculators.budget.variableExpenseItems.workMeals'), value: 0 },
+    { id: 'tabac', label: t('calculators.budget.variableExpenseItems.tobacco'), value: 0 },
+    { id: 'vetements', label: t('calculators.budget.variableExpenseItems.clothing'), value: 0 },
+    { id: 'transport', label: t('calculators.budget.variableExpenseItems.transit'), value: 0 },
+    { id: 'essence', label: t('calculators.budget.variableExpenseItems.gas'), value: 0 },
+    { id: 'sante', label: t('calculators.budget.variableExpenseItems.health'), value: 0 },
+    { id: 'loisirs', label: t('calculators.budget.variableExpenseItems.leisure'), value: 0 },
+    { id: 'animaux', label: t('calculators.budget.variableExpenseItems.pets'), value: 0 },
+    { id: 'maison', label: t('calculators.budget.variableExpenseItems.home'), value: 0 },
+    { id: 'abonnements', label: t('calculators.budget.variableExpenseItems.subscriptions'), value: 0 },
+    { id: 'sports', label: t('calculators.budget.variableExpenseItems.sports'), value: 0 },
+    { id: 'argent_poche', label: t('calculators.budget.variableExpenseItems.pocketMoney'), value: 0 },
+    { id: 'cadeaux', label: t('calculators.budget.variableExpenseItems.gifts'), value: 0 },
+    { id: 'vacances', label: t('calculators.budget.variableExpenseItems.vacation'), value: 0 },
+    { id: 'autres_variables', label: t('calculators.budget.variableExpenseItems.otherVariable'), value: 0 },
   ]);
 
   const handleRevenusChange = useCallback((id: string, value: number) => {
@@ -109,41 +108,41 @@ const Budget = () => {
 
   const pieChartData = useMemo(() => {
     const categories = [
-      { name: 'Logement', value: (depensesFixes.find(d => d.id === 'loyer')?.value || 0) },
-      { name: 'Transport', value: 
+      { name: t('calculators.budget.chartCategories.housing'), value: (depensesFixes.find(d => d.id === 'loyer')?.value || 0) },
+      { name: t('calculators.budget.chartCategories.transport'), value: 
         (depensesFixes.find(d => d.id === 'emprunt_auto')?.value || 0) +
         (depensesFixes.find(d => d.id === 'assurance_auto')?.value || 0) +
         (depensesVariables.find(d => d.id === 'essence')?.value || 0) +
         (depensesVariables.find(d => d.id === 'transport')?.value || 0)
       },
-      { name: 'Alimentation', value: 
+      { name: t('calculators.budget.chartCategories.food'), value: 
         (depensesVariables.find(d => d.id === 'alimentation_epicerie')?.value || 0) +
         (depensesVariables.find(d => d.id === 'alimentation_depanneur')?.value || 0) +
         (depensesVariables.find(d => d.id === 'alimentation_restaurant')?.value || 0) +
         (depensesVariables.find(d => d.id === 'alimentation_travail')?.value || 0)
       },
-      { name: 'Assurances', value: 
+      { name: t('calculators.budget.chartCategories.insurance'), value: 
         (depensesFixes.find(d => d.id === 'assurance_vie')?.value || 0) +
         (depensesFixes.find(d => d.id === 'assurance_habitation')?.value || 0)
       },
-      { name: 'Services', value: 
+      { name: t('calculators.budget.chartCategories.services'), value: 
         (depensesFixes.find(d => d.id === 'electricite')?.value || 0) +
         (depensesFixes.find(d => d.id === 'cable')?.value || 0) +
         (depensesFixes.find(d => d.id === 'telephone')?.value || 0)
       },
-      { name: 'Dettes', value: 
+      { name: t('calculators.budget.chartCategories.debt'), value: 
         (depensesFixes.find(d => d.id === 'emprunt_carte')?.value || 0) +
         (depensesFixes.find(d => d.id === 'emprunt_marge')?.value || 0) +
         (depensesFixes.find(d => d.id === 'emprunts_autres')?.value || 0)
       },
-      { name: 'Épargne', value: (depensesFixes.find(d => d.id === 'epargne')?.value || 0) },
-      { name: 'Loisirs', value: 
+      { name: t('calculators.budget.chartCategories.savings'), value: (depensesFixes.find(d => d.id === 'epargne')?.value || 0) },
+      { name: t('calculators.budget.chartCategories.leisure'), value: 
         (depensesVariables.find(d => d.id === 'loisirs')?.value || 0) +
         (depensesVariables.find(d => d.id === 'sports')?.value || 0) +
         (depensesVariables.find(d => d.id === 'abonnements')?.value || 0) +
         (depensesVariables.find(d => d.id === 'vacances')?.value || 0)
       },
-      { name: 'Autres', value: 
+      { name: t('calculators.budget.chartCategories.other'), value: 
         totalDepenses - 
         (depensesFixes.find(d => d.id === 'loyer')?.value || 0) -
         ((depensesFixes.find(d => d.id === 'emprunt_auto')?.value || 0) +
@@ -170,14 +169,18 @@ const Budget = () => {
       },
     ];
     return categories.filter(cat => cat.value > 0);
-  }, [depensesFixes, depensesVariables, totalDepenses]);
+  }, [depensesFixes, depensesVariables, totalDepenses, t]);
+
+  const formatCurrency = (value: number) => {
+    return value.toLocaleString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD' });
+  };
 
   const handlePrint = () => {
     const printContent = `
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Budget Mensuel - Finivo</title>
+        <title>${t('calculators.budget.title')} - Finivo</title>
         <style>
           body { font-family: Arial, sans-serif; padding: 20px; color: #333; }
           h1 { color: #1a1a2e; border-bottom: 2px solid #4f46e5; padding-bottom: 10px; }
@@ -195,44 +198,44 @@ const Budget = () => {
         </style>
       </head>
       <body>
-        <h1>Budget Mensuel - Finivo</h1>
-        <p>Date: ${new Date().toLocaleDateString('fr-CA')}</p>
+        <h1>${t('calculators.budget.title')} - Finivo</h1>
+        <p>Date: ${new Date().toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA')}</p>
         
-        <h2>💰 Revenus mensuels</h2>
+        <h2>💰 ${t('calculators.budget.sections.income')}</h2>
         <table>
-          <tr><th>Description</th><th class="amount">Montant</th></tr>
-          ${revenus.filter(r => r.value > 0).map(r => `<tr><td>${r.label}</td><td class="amount">${r.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
-          <tr class="total-row"><td>Total des revenus</td><td class="amount positive">${totalRevenus.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+          <tr><th>Description</th><th class="amount">${t('calculators.common.total')}</th></tr>
+          ${revenus.filter(r => r.value > 0).map(r => `<tr><td>${r.label}</td><td class="amount">${formatCurrency(r.value)}</td></tr>`).join('')}
+          <tr class="total-row"><td>${t('calculators.budget.summary.totalIncome')}</td><td class="amount positive">${formatCurrency(totalRevenus)}</td></tr>
         </table>
 
-        <h2>🏠 Dépenses fixes mensuelles</h2>
+        <h2>🏠 ${t('calculators.budget.sections.fixedExpenses')}</h2>
         <table>
-          <tr><th>Description</th><th class="amount">Montant</th></tr>
-          ${depensesFixes.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${d.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
-          <tr class="total-row"><td>Total des dépenses fixes</td><td class="amount">${totalDepensesFixes.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+          <tr><th>Description</th><th class="amount">${t('calculators.common.total')}</th></tr>
+          ${depensesFixes.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${formatCurrency(d.value)}</td></tr>`).join('')}
+          <tr class="total-row"><td>${t('calculators.budget.summary.totalFixedExpenses')}</td><td class="amount">${formatCurrency(totalDepensesFixes)}</td></tr>
         </table>
 
-        <h2>🛒 Dépenses variables mensuelles</h2>
+        <h2>🛒 ${t('calculators.budget.sections.variableExpenses')}</h2>
         <table>
-          <tr><th>Description</th><th class="amount">Montant</th></tr>
-          ${depensesVariables.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${d.value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>`).join('')}
-          <tr class="total-row"><td>Total des dépenses variables</td><td class="amount">${totalDepensesVariables.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+          <tr><th>Description</th><th class="amount">${t('calculators.common.total')}</th></tr>
+          ${depensesVariables.filter(d => d.value > 0).map(d => `<tr><td>${d.label}</td><td class="amount">${formatCurrency(d.value)}</td></tr>`).join('')}
+          <tr class="total-row"><td>${t('calculators.budget.summary.totalVariableExpenses')}</td><td class="amount">${formatCurrency(totalDepensesVariables)}</td></tr>
         </table>
 
         <div class="summary">
-          <h2>${solde >= 0 ? '✅' : '⚠️'} Résumé du budget</h2>
+          <h2>${solde >= 0 ? '✅' : '⚠️'} ${t('calculators.budget.summary.title')}</h2>
           <table>
-            <tr><td>Total des revenus</td><td class="amount positive">${totalRevenus.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
-            <tr><td>Total des dépenses</td><td class="amount negative">${totalDepenses.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
-            <tr class="total-row"><td>Solde mensuel</td><td class="amount ${solde >= 0 ? 'positive' : 'negative'}">${solde.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</td></tr>
+            <tr><td>${t('calculators.budget.summary.totalIncome')}</td><td class="amount positive">${formatCurrency(totalRevenus)}</td></tr>
+            <tr><td>${t('calculators.budget.summary.totalExpenses')}</td><td class="amount negative">${formatCurrency(totalDepenses)}</td></tr>
+            <tr class="total-row"><td>${t('calculators.budget.summary.monthlyBalance')}</td><td class="amount ${solde >= 0 ? 'positive' : 'negative'}">${formatCurrency(solde)}</td></tr>
           </table>
           ${solde >= 0 
-            ? '<p style="color: #22c55e;">Félicitations! Votre budget est équilibré.</p>' 
-            : '<p style="color: #ef4444;">Attention: Vos dépenses dépassent vos revenus.</p>'}
+            ? `<p style="color: #22c55e;">${t('calculators.budget.summary.balanced')}</p>` 
+            : `<p style="color: #ef4444;">${t('calculators.budget.summary.deficit')}</p>`}
         </div>
 
         <div class="footer">
-          <p>Généré par Finivo.ca - ${new Date().toLocaleDateString('fr-CA')}</p>
+          <p>Finivo.ca - ${new Date().toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA')}</p>
         </div>
       </body>
       </html>
@@ -251,57 +254,54 @@ const Budget = () => {
   };
 
   const handleExportExcel = () => {
-    // Feuille Résumé
     const summaryData: any[][] = [
-      ['BUDGET MENSUEL - FINIVO'],
+      [t('calculators.budget.title').toUpperCase() + ' - FINIVO'],
       [''],
-      ['Date de création:', new Date().toLocaleDateString('fr-CA')],
+      ['Date:', new Date().toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA')],
       [''],
-      ['RÉSUMÉ FINANCIER'],
-      ['', 'Montant', '% du revenu'],
-      ['Total des revenus', totalRevenus, '100%'],
-      ['Dépenses fixes', totalDepensesFixes, totalRevenus > 0 ? `${((totalDepensesFixes / totalRevenus) * 100).toFixed(1)}%` : '0%'],
-      ['Dépenses variables', totalDepensesVariables, totalRevenus > 0 ? `${((totalDepensesVariables / totalRevenus) * 100).toFixed(1)}%` : '0%'],
-      ['Total des dépenses', totalDepenses, totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [t('calculators.budget.summary.title').toUpperCase()],
+      ['', t('calculators.common.total'), '% '],
+      [t('calculators.budget.summary.totalIncome'), totalRevenus, '100%'],
+      [t('calculators.budget.sections.fixedExpenses'), totalDepensesFixes, totalRevenus > 0 ? `${((totalDepensesFixes / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [t('calculators.budget.sections.variableExpenses'), totalDepensesVariables, totalRevenus > 0 ? `${((totalDepensesVariables / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [t('calculators.budget.summary.totalExpenses'), totalDepenses, totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%'],
       [''],
-      ['SOLDE MENSUEL', solde, totalRevenus > 0 ? `${((solde / totalRevenus) * 100).toFixed(1)}%` : '0%'],
+      [t('calculators.budget.summary.monthlyBalance').toUpperCase(), solde, totalRevenus > 0 ? `${((solde / totalRevenus) * 100).toFixed(1)}%` : '0%'],
       [''],
-      ['Statut:', solde >= 0 ? 'Budget équilibré ✓' : 'Déficit budgétaire ⚠'],
+      ['Status:', solde >= 0 ? t('calculators.budget.summary.balanced') : t('calculators.budget.summary.deficit')],
     ];
 
-    // Feuille Détails
     const detailsData: any[][] = [
-      ['DÉTAILS DU BUDGET MENSUEL'],
+      [t('calculators.budget.title').toUpperCase()],
       [''],
-      ['REVENUS MENSUELS'],
-      ['Catégorie', 'Montant'],
+      [t('calculators.budget.sections.income').toUpperCase()],
+      ['Description', t('calculators.common.total')],
     ];
     revenus.forEach(item => {
       detailsData.push([item.label, item.value]);
     });
-    detailsData.push(['TOTAL REVENUS', totalRevenus]);
+    detailsData.push([t('calculators.budget.summary.totalIncome').toUpperCase(), totalRevenus]);
     detailsData.push(['']);
     
-    detailsData.push(['DÉPENSES FIXES MENSUELLES']);
-    detailsData.push(['Catégorie', 'Montant']);
+    detailsData.push([t('calculators.budget.sections.fixedExpenses').toUpperCase()]);
+    detailsData.push(['Description', t('calculators.common.total')]);
     depensesFixes.forEach(item => {
       detailsData.push([item.label, item.value]);
     });
-    detailsData.push(['TOTAL DÉPENSES FIXES', totalDepensesFixes]);
+    detailsData.push([t('calculators.budget.summary.totalFixedExpenses').toUpperCase(), totalDepensesFixes]);
     detailsData.push(['']);
     
-    detailsData.push(['DÉPENSES VARIABLES MENSUELLES']);
-    detailsData.push(['Catégorie', 'Montant']);
+    detailsData.push([t('calculators.budget.sections.variableExpenses').toUpperCase()]);
+    detailsData.push(['Description', t('calculators.common.total')]);
     depensesVariables.forEach(item => {
       detailsData.push([item.label, item.value]);
     });
-    detailsData.push(['TOTAL DÉPENSES VARIABLES', totalDepensesVariables]);
+    detailsData.push([t('calculators.budget.summary.totalVariableExpenses').toUpperCase(), totalDepensesVariables]);
 
-    // Feuille Répartition
     const repartitionData: any[][] = [
-      ['RÉPARTITION DES DÉPENSES PAR CATÉGORIE'],
+      [t('calculators.budget.summary.chartTitle').toUpperCase()],
       [''],
-      ['Catégorie', 'Montant', '% des dépenses', '% du revenu'],
+      ['Category', t('calculators.common.total'), '% Expenses', '% Income'],
     ];
     pieChartData.forEach(cat => {
       repartitionData.push([
@@ -312,25 +312,23 @@ const Budget = () => {
       ]);
     });
     repartitionData.push(['']);
-    repartitionData.push(['TOTAL', totalDepenses, '100%', totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%']);
+    repartitionData.push([t('calculators.common.total').toUpperCase(), totalDepenses, '100%', totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%']);
 
     const wb = XLSX.utils.book_new();
     
-    // Créer les feuilles avec styles
     const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
     const wsDetails = XLSX.utils.aoa_to_sheet(detailsData);
     const wsRepartition = XLSX.utils.aoa_to_sheet(repartitionData);
     
-    // Définir les largeurs de colonnes
     wsSummary['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }];
     wsDetails['!cols'] = [{ wch: 45 }, { wch: 15 }];
     wsRepartition['!cols'] = [{ wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
     
-    XLSX.utils.book_append_sheet(wb, wsSummary, 'Résumé');
-    XLSX.utils.book_append_sheet(wb, wsDetails, 'Détails');
-    XLSX.utils.book_append_sheet(wb, wsRepartition, 'Répartition');
+    XLSX.utils.book_append_sheet(wb, wsSummary, t('calculators.budget.summary.title'));
+    XLSX.utils.book_append_sheet(wb, wsDetails, 'Details');
+    XLSX.utils.book_append_sheet(wb, wsRepartition, 'Distribution');
     
-    XLSX.writeFile(wb, `budget-mensuel-finivo-${new Date().toISOString().split('T')[0]}.xlsx`);
+    XLSX.writeFile(wb, `budget-${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const handleReset = () => {
@@ -339,38 +337,29 @@ const Budget = () => {
     setDepensesVariables(depensesVariables.map(item => ({ ...item, value: 0 })));
   };
 
-
   const faqItems = [
     {
-      question: "Comment utiliser ce calculateur de budget?",
-      answer: "Entrez vos revenus mensuels nets dans la première section, puis vos dépenses fixes (loyer, assurances, etc.) et variables (épicerie, loisirs, etc.). Le calculateur affichera automatiquement votre solde mensuel."
+      question: t('calculators.budget.faq.q1'),
+      answer: t('calculators.budget.faq.a1')
     },
     {
-      question: "Quelle est la différence entre dépenses fixes et variables?",
-      answer: "Les dépenses fixes sont des montants récurrents qui ne changent pas d'un mois à l'autre (loyer, assurances, abonnements). Les dépenses variables fluctuent selon vos habitudes (épicerie, essence, sorties)."
+      question: t('calculators.budget.faq.q2'),
+      answer: t('calculators.budget.faq.a2')
     },
     {
-      question: "Comment exporter mon budget en Excel?",
-      answer: "Cliquez sur le bouton 'Exporter Excel' pour télécharger votre budget au format .xlsx. Ce fichier peut être ouvert avec Microsoft Excel, Google Sheets ou LibreOffice Calc."
-    },
-    {
-      question: "Comment améliorer mon solde mensuel?",
-      answer: "Analysez vos dépenses variables pour identifier les postes où vous pouvez réduire. Établissez des objectifs d'épargne et automatisez vos virements. Considérez aussi d'augmenter vos revenus avec un travail d'appoint."
-    },
-    {
-      question: "Dois-je inclure mes économies comme dépense?",
-      answer: "Oui! L'épargne (REER, CELI, CELIAPP) devrait être traitée comme une dépense fixe pour vous assurer de la prioriser. Le principe 'payez-vous en premier' est une excellente habitude financière."
+      question: t('calculators.budget.faq.q3'),
+      answer: t('calculators.budget.faq.a3')
     }
   ];
 
   return (
     <CalculatorLayout
-      title="Calculateur de budget mensuel"
-      description="Planifiez votre budget mensuel en détaillant vos revenus et dépenses. Imprimez ou exportez en Excel pour suivre votre situation financière."
+      title={t('calculators.budget.title')}
+      description={t('calculators.budget.description')}
       icon={<Wallet className="w-8 h-8 text-primary" />}
-      seoTitle="Calculateur de Budget Mensuel Gratuit | Planifier ses finances | Finivo"
-      seoDescription="Calculez votre budget mensuel gratuitement. Entrez vos revenus et dépenses, visualisez votre solde, imprimez ou exportez en Excel. Outil complet pour gérer vos finances personnelles au Québec."
-      seoKeywords="calculateur budget, budget mensuel, planification financière, gestion budget, finances personnelles, budget quebec, calculateur dépenses"
+      seoTitle={t('calculators.budget.seo.title')}
+      seoDescription={t('calculators.budget.seo.description')}
+      seoKeywords={t('calculators.budget.seo.keywords')}
       url="https://finivo.ca/calculateurs/budget"
       relatedCategory="epargne"
       featuredCardType="cashback"
@@ -380,21 +369,21 @@ const Budget = () => {
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-3 justify-end print:hidden">
           <Button variant="outline" onClick={handleReset}>
-            Réinitialiser
+            {t('calculators.common.reset')}
           </Button>
           <Button variant="outline" onClick={handlePrint} className="gap-2">
             <Printer className="w-4 h-4" />
-            Imprimer
+            {t('calculators.common.print')}
           </Button>
           <Button onClick={handleExportExcel} className="gap-2">
             <FileSpreadsheet className="w-4 h-4" />
-            Exporter Excel
+            {t('calculators.common.export')}
           </Button>
         </div>
 
         {/* Revenus */}
         <BudgetInputSection
-          title="Revenus mensuels"
+          title={t('calculators.budget.sections.income')}
           items={revenus}
           onItemChange={handleRevenusChange}
           icon={<TrendingUp className="w-5 h-5 text-success" />}
@@ -402,7 +391,7 @@ const Budget = () => {
 
         {/* Dépenses fixes */}
         <BudgetInputSection
-          title="Dépenses fixes mensuelles"
+          title={t('calculators.budget.sections.fixedExpenses')}
           items={depensesFixes}
           onItemChange={handleDepensesFixesChange}
           icon={<DollarSign className="w-5 h-5 text-warning" />}
@@ -410,7 +399,7 @@ const Budget = () => {
 
         {/* Dépenses variables */}
         <BudgetInputSection
-          title="Dépenses variables mensuelles"
+          title={t('calculators.budget.sections.variableExpenses')}
           items={depensesVariables}
           onItemChange={handleDepensesVariablesChange}
           icon={<TrendingDown className="w-5 h-5 text-destructive" />}
@@ -422,7 +411,7 @@ const Budget = () => {
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-3 text-lg">
                 <PieChart className="w-5 h-5 text-primary" />
-                Répartition des dépenses
+                {t('calculators.budget.summary.chartTitle')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -444,7 +433,7 @@ const Budget = () => {
                       ))}
                     </Pie>
                     <Tooltip 
-                      formatter={(value: number) => value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}
+                      formatter={(value: number) => formatCurrency(value)}
                       contentStyle={{ 
                         backgroundColor: 'hsl(var(--card))', 
                         border: '1px solid hsl(var(--border))',
@@ -468,56 +457,45 @@ const Budget = () => {
               ) : (
                 <AlertTriangle className="w-6 h-6 text-destructive" />
               )}
-              Résumé du budget
+              {t('calculators.budget.summary.title')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b">
-                  <span className="text-muted-foreground">Total des revenus</span>
-                  <span className="font-semibold text-success">{totalRevenus.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</span>
+                  <span className="text-muted-foreground">{t('calculators.budget.summary.totalIncome')}</span>
+                  <span className="font-semibold text-success">{formatCurrency(totalRevenus)}</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b">
-                  <span className="text-muted-foreground">Dépenses fixes</span>
-                  <span className="font-medium text-foreground">{totalDepensesFixes.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</span>
+                  <span className="text-muted-foreground">{t('calculators.budget.sections.fixedExpenses')}</span>
+                  <span className="font-medium text-foreground">{formatCurrency(totalDepensesFixes)}</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b">
-                  <span className="text-muted-foreground">Dépenses variables</span>
-                  <span className="font-medium text-foreground">{totalDepensesVariables.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</span>
+                  <span className="text-muted-foreground">{t('calculators.budget.sections.variableExpenses')}</span>
+                  <span className="font-medium text-foreground">{formatCurrency(totalDepensesVariables)}</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b">
-                  <span className="text-muted-foreground">Total des dépenses</span>
-                  <span className="font-semibold text-destructive">{totalDepenses.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}</span>
+                  <span className="text-muted-foreground">{t('calculators.budget.summary.totalExpenses')}</span>
+                  <span className="font-semibold text-destructive">{formatCurrency(totalDepenses)}</span>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center p-6 rounded-xl bg-background">
-                <span className="text-sm text-muted-foreground mb-2">Solde mensuel</span>
+                <span className="text-sm text-muted-foreground mb-2">{t('calculators.budget.summary.monthlyBalance')}</span>
                 <span className={`text-3xl font-bold ${solde >= 0 ? 'text-success' : 'text-destructive'}`}>
-                  {solde.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })}
+                  {formatCurrency(solde)}
                 </span>
                 <span className="text-xs text-muted-foreground mt-2">
-                  {solde >= 0 ? 'Félicitations! Votre budget est équilibré.' : 'Attention! Vos dépenses dépassent vos revenus.'}
+                  {solde >= 0 ? t('calculators.budget.summary.balanced') : t('calculators.budget.summary.deficit')}
                 </span>
               </div>
-            </div>
-
-            {/* Conseils */}
-            <div className="mt-6 p-4 rounded-lg bg-muted/50 print:bg-transparent print:border">
-              <h4 className="font-semibold mb-2">💡 Conseils</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Visez à épargner au moins 10-20% de vos revenus</li>
-                <li>• Les dépenses de logement ne devraient pas dépasser 30% de vos revenus</li>
-                <li>• Constituez un fonds d'urgence de 3 à 6 mois de dépenses</li>
-                <li>• Révisez votre budget chaque mois pour l'ajuster</li>
-              </ul>
             </div>
           </CardContent>
         </Card>
 
         {/* Print Footer */}
         <div className="hidden print:block text-center text-sm text-muted-foreground mt-8 pt-4 border-t">
-          <p>Généré par Finivo.ca - {new Date().toLocaleDateString('fr-CA')}</p>
+          <p>Finivo.ca - {new Date().toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA')}</p>
         </div>
       </div>
 

@@ -425,38 +425,452 @@
   "calculators": {
     "title": "Financial Calculators",
     "subtitle": "Free tools to plan your finances",
+    "common": {
+      "faq": "Frequently Asked Questions",
+      "years": "years",
+      "year": "year",
+      "months": "months",
+      "perMonth": "per month",
+      "perYear": "per year",
+      "total": "Total",
+      "reset": "Reset",
+      "print": "Print",
+      "export": "Export Excel",
+      "add": "Add"
+    },
     "budget": {
-      "title": "Budget Calculator",
-      "description": "Manage your monthly income and expenses"
+      "title": "Monthly Budget Calculator",
+      "description": "Plan your budget by detailing your monthly income and expenses. Print or export to Excel.",
+      "seo": {
+        "title": "Free Monthly Budget Calculator 2026 | Printable & Excel | Finivo",
+        "description": "Plan your monthly budget for free in 2026. Detail income and expenses, visualize with charts, print or export to Excel.",
+        "keywords": "monthly budget calculator, personal budget, finance management, excel budget, financial planning"
+      },
+      "sections": {
+        "income": "Monthly Income",
+        "fixedExpenses": "Fixed Monthly Expenses",
+        "variableExpenses": "Variable Monthly Expenses"
+      },
+      "incomeItems": {
+        "netSalary": "Net salary",
+        "investments": "Investments (interest, dividends)",
+        "alimonyReceived": "Alimony received",
+        "benefits": "Government benefits",
+        "pensions": "Pensions",
+        "otherIncome": "Other income (rental, tips, etc.)"
+      },
+      "fixedExpenseItems": {
+        "rentMortgage": "Rent / Mortgage",
+        "electricity": "Electricity / Heating",
+        "cable": "Cable / Specialty channels",
+        "phone": "Phone / Internet / Cell",
+        "taxes": "Municipal, school taxes, etc.",
+        "lifeInsurance": "Life / Disability insurance",
+        "homeInsurance": "Home insurance",
+        "autoInsurance": "Auto insurance / Registration / License",
+        "autoLoan": "Auto loan",
+        "creditCardDebt": "Credit card debt",
+        "lineOfCredit": "Line of credit",
+        "otherLoans": "Other loans",
+        "daycare": "Daycare",
+        "bankFees": "Bank service fees",
+        "savings": "Savings (RRSP, TFSA, FHSA, etc.)",
+        "otherFixed": "Other (alimony paid, etc.)"
+      },
+      "variableExpenseItems": {
+        "groceries": "Food (groceries)",
+        "convenience": "Food (convenience store)",
+        "restaurant": "Food (restaurant / delivery)",
+        "workMeals": "Food (school / work meals)",
+        "tobacco": "Tobacco / Alcohol / Cannabis",
+        "clothing": "Clothing, accessories and shoes",
+        "transit": "Public transit / Taxi / Carpool",
+        "gas": "Gas and auto maintenance",
+        "health": "Health / Beauty / Hygiene",
+        "leisure": "Leisure and outings",
+        "pets": "Pet care and supplies",
+        "home": "Home (maintenance / misc. items)",
+        "subscriptions": "Subscriptions (streaming, magazines, etc.)",
+        "sports": "Sports / Gym / Clubs",
+        "pocketMoney": "Pocket money / Lottery",
+        "gifts": "Gifts / Donations",
+        "vacation": "Vacation / Travel",
+        "otherVariable": "Other expenses"
+      },
+      "summary": {
+        "title": "Your Budget Summary",
+        "totalIncome": "Total income",
+        "totalFixedExpenses": "Total fixed expenses",
+        "totalVariableExpenses": "Total variable expenses",
+        "totalExpenses": "Total expenses",
+        "monthlyBalance": "Monthly balance",
+        "balanced": "Congratulations! Your budget is balanced.",
+        "deficit": "Warning: Your expenses exceed your income.",
+        "chartTitle": "Expense Distribution"
+      },
+      "chartCategories": {
+        "housing": "Housing",
+        "transport": "Transport",
+        "food": "Food",
+        "insurance": "Insurance",
+        "services": "Services",
+        "debt": "Debt",
+        "savings": "Savings",
+        "leisure": "Leisure",
+        "other": "Other"
+      },
+      "faq": {
+        "q1": "How do I use this budget calculator?",
+        "a1": "Enter your net monthly income in the first section, then your fixed expenses (rent, insurance, etc.) and variable expenses (groceries, leisure, etc.). The calculator will automatically display your monthly balance.",
+        "q2": "What is the difference between fixed and variable expenses?",
+        "a2": "Fixed expenses are recurring amounts that don't change from month to month (rent, insurance, subscriptions). Variable expenses fluctuate based on your habits (groceries, gas, outings).",
+        "q3": "How do I export my budget to Excel?",
+        "a3": "Click the 'Export Excel' button to download a file containing three sheets: Summary, Details, and Category Distribution."
+      }
     },
     "mortgage": {
       "title": "Mortgage Calculator",
-      "description": "Estimate your mortgage payments"
+      "description": "Estimate your monthly mortgage payments, total loan cost and visualize your mortgage amortization.",
+      "seo": {
+        "title": "Free Mortgage Calculator 2026 | Monthly Payment Canada | Finivo",
+        "description": "Calculate your mortgage payments in Canada in 2026. Estimate total cost, CMHC insurance, current rates and visualize amortization.",
+        "keywords": "mortgage calculator 2026, mortgage payment canada, home calculator, real estate loan canada, CMHC insurance"
+      },
+      "params": "Mortgage Parameters",
+      "propertyPrice": "Property price",
+      "downPayment": "Down payment",
+      "ofPrice": "of price",
+      "interestRate": "Annual interest rate",
+      "amortization": "Amortization period",
+      "paymentFrequency": "Payment frequency",
+      "frequencies": {
+        "monthly": "Monthly",
+        "biweekly": "Bi-weekly",
+        "weekly": "Weekly"
+      },
+      "schlAlert": {
+        "title": "Mortgage Insurance Required (CMHC)",
+        "message": "Your down payment is less than 20%. Insurance of {{amount}} will be added to your mortgage."
+      },
+      "results": {
+        "payment": "Payment",
+        "amountBorrowed": "Amount borrowed",
+        "totalInterest": "Total interest",
+        "totalCost": "Total cost"
+      },
+      "chart": {
+        "title": "Mortgage Balance Evolution",
+        "remainingBalance": "Remaining balance",
+        "principalPaid": "Principal paid"
+      },
+      "summary": {
+        "title": "Your Mortgage Summary",
+        "propertyPrice": "Property price",
+        "downPayment": "Down payment",
+        "mortgageAmount": "Mortgage amount",
+        "schlInsurance": "CMHC Insurance",
+        "totalFinanced": "Total amount financed",
+        "totalInterestYears": "Total interest over {{years}} years",
+        "totalPayments": "Total payments"
+      },
+      "faq": {
+        "q1": "What is mortgage loan insurance (CMHC)?",
+        "a1": "Mortgage loan insurance is required in Canada if your down payment is less than 20%. It protects the lender in case of default.",
+        "q2": "What is the minimum down payment to buy a house?",
+        "a2": "In Canada, the minimum down payment is 5% for properties up to $500,000. Between $500,000 and $1 million, it's 5% on the first $500,000 and 10% on the rest.",
+        "q3": "What is the difference between fixed and variable rates?",
+        "a3": "A fixed rate stays constant during the entire term. A variable rate fluctuates with the Bank of Canada's key rate.",
+        "q4": "What is amortization?",
+        "a4": "Amortization is the total time planned to repay the mortgage. The maximum is 25 years with CMHC insurance, or 30 years without.",
+        "q5": "How can I reduce my mortgage payments?",
+        "a5": "You can increase your down payment, choose a longer amortization, shop rates between lenders, or opt for accelerated payments."
+      }
     },
     "compound": {
-      "title": "Compound Interest",
-      "description": "Calculate your investment growth"
+      "title": "Compound Interest Calculator",
+      "description": "Calculate how much an investment can earn you over time through compound interest.",
+      "seo": {
+        "title": "Compound Interest Calculator | Finivo",
+        "description": "Calculate your investment growth with our compound interest calculator. Visualize the impact of time and regular contributions.",
+        "keywords": "compound interest, calculator, investment, savings, returns"
+      },
+      "whatIs": "What is compound interest?",
+      "explanation": "Compound interest is often called 'the eighth wonder of the world.' It's the process by which your interest earns interest, creating a snowball effect on your investments over time.",
+      "howItWorks": "How it works",
+      "keyFactors": "Key factors",
+      "params": "Calculation Parameters",
+      "initialInvestment": "Initial investment",
+      "regularContributions": "Regular contributions",
+      "annualReturnRate": "Annual return rate",
+      "interestCalculation": "Interest calculation",
+      "investmentHorizon": "Investment horizon",
+      "frequency": {
+        "monthly": "Once per month",
+        "yearly": "Once per year",
+        "perMonth": "Per month",
+        "perYear": "Per year"
+      },
+      "results": {
+        "finalValue": "Final value of your investment",
+        "totalContributions": "Total contributions",
+        "interestEarned": "Interest earned",
+        "chartTitle": "Growth of your investment"
+      },
+      "faq": {
+        "q1": "How does compound interest work?",
+        "a1": "Compound interest works by automatically reinvesting your earnings. Each period, interest is calculated on the initial capital plus all previously accumulated interest.",
+        "q2": "What is the difference between simple and compound interest?",
+        "a2": "Simple interest is calculated only on the initial capital, while compound interest is calculated on the capital plus already accumulated interest.",
+        "q3": "How often should interest be compounded?",
+        "a3": "The higher the compounding frequency, the greater your gains. Monthly compounding generates more returns than annual compounding.",
+        "q4": "Why is starting to invest early so important?",
+        "a4": "Time is the most powerful factor of compound interest. Someone who invests early can accumulate more than someone who invests longer but starts late.",
+        "q5": "What return rate is realistic?",
+        "a5": "Historically, the Canadian stock market has generated about 7-8% per year long-term. A savings account offers 2-4%, a balanced portfolio 5-6%."
+      }
     },
     "rrsp": {
-      "title": "RRSP Calculator",
-      "description": "Plan your retirement savings"
+      "title": "RRSP Savings Calculator",
+      "description": "Determine what your Registered Retirement Savings Plan (RRSP) will be worth when you retire, and the annual income you'll draw from it.",
+      "seo": {
+        "title": "RRSP Calculator 2026 - Retirement Savings Canada | Finivo",
+        "description": "Calculate the future value of your RRSP in 2026 and estimate your retirement income. Plan your retirement savings with our free RRSP calculator.",
+        "keywords": "RRSP 2026, retirement savings canada, free RRSP calculator, retirement investment, RRSP contribution limit"
+      },
+      "whatIs": "What is an RRSP?",
+      "explanation": "The Registered Retirement Savings Plan (RRSP) is a tax-sheltered savings account designed to help you save for retirement. Contributions to your RRSP are deductible from your taxable income.",
+      "advantages": "RRSP Advantages",
+      "rules": "Important Rules",
+      "whileWorking": "While Working",
+      "workingExplanation": "While still working, you can take more risks when investing because your salary can offset losses.",
+      "atRetirement": "In Retirement",
+      "retirementExplanation": "Once retired, you can take fewer risks when investing because your salary can no longer offset losses.",
+      "currentValue": "Current value of your RRSP",
+      "annualReturn": "Annual return rate while working",
+      "contributionAmount": "Contribution amount and frequency",
+      "currentAge": "Current age",
+      "yearsToRetirement": "Years until retirement",
+      "retirementYears": "Estimated years of retirement",
+      "retirementReturn": "Annual return rate in retirement",
+      "results": {
+        "valueAtRetirement": "RRSP value at retirement",
+        "annualIncome": "Estimated annual income",
+        "monthlyIncome": "Estimated monthly income",
+        "interestEarned": "Interest earned",
+        "chartTitle": "RRSP Evolution"
+      },
+      "faq": {
+        "q1": "What is the RRSP contribution limit for 2026?",
+        "a1": "For 2026, the RRSP contribution limit is 18% of your previous year's earned income, up to a maximum of $32,490.",
+        "q2": "When should I contribute to my RRSP?",
+        "a2": "You can contribute to your RRSP throughout the year and up to the 60th day of the following year for the contribution to be deductible.",
+        "q3": "RRSP or TFSA: which one to choose?",
+        "a3": "RRSP is generally preferable if your current tax rate is higher than in retirement. TFSA is advantageous if you expect a similar or higher rate.",
+        "q4": "Can I withdraw from my RRSP before retirement?",
+        "a4": "Yes, but withdrawals are taxable. Two exceptions: HBP (up to $60,000 for first home) and LLP (up to $20,000 for studies).",
+        "q5": "What happens to my RRSP at 71?",
+        "a5": "At the end of the year you turn 71, you must convert your RRSP to a RRIF, buy an annuity, or withdraw the balance."
+      }
     },
     "fhsa": {
-      "title": "FHSA Calculator",
-      "description": "Save for your first home"
-    },
-    "tax": {
-      "title": "Tax Calculator",
-      "description": "Estimate your federal and provincial taxes"
+      "title": "FHSA Savings Calculator",
+      "description": "Calculate your potential savings with the First Home Savings Account (FHSA).",
+      "seo": {
+        "title": "FHSA Calculator 2026 - First Home Savings | Finivo",
+        "description": "Calculate how much you can save with the FHSA in 2026 for your first home purchase. Check your eligibility and plan your savings.",
+        "keywords": "FHSA 2026, first home canada, tax-free savings, property purchase, FHSA calculator"
+      },
+      "whatIs": "What is the FHSA?",
+      "explanation": "The First Home Savings Account (FHSA) is a new registered plan that combines the benefits of the RRSP and TFSA. It allows you to save up to $40,000 tax-free for your first home purchase.",
+      "advantages": "FHSA Advantages",
+      "eligibilityConditions": "Eligibility Conditions",
+      "checkEligibility": "Check Your Eligibility",
+      "eligibilityIntro": "Check your eligibility to open a First Home Savings Account (FHSA).",
+      "ageQuestion": "How old are you?",
+      "residentQuestion": "Are you a Canadian resident?",
+      "firstTimeQuestion": "Are you a first-time home buyer?",
+      "eligible": "It appears you may be eligible for the FHSA.",
+      "notEligible": "Based on your answers, you don't appear to be eligible for the FHSA.",
+      "calculateSavings": "Calculate Your FHSA Savings",
+      "savingsIntro": "Tell us how you're saving and we'll help calculate your potential savings.",
+      "openingYear": "Year you opened your FHSA",
+      "startContributing": "When will you start contributing?",
+      "purchaseDate": "When do you plan to buy your home?",
+      "contributionAmount": "How much will you contribute?",
+      "annualReturn": "Annual return rate",
+      "maxAnnual": "Maximum: $8,000 per year",
+      "results": {
+        "title": "Your FHSA Savings",
+        "totalSavings": "Total savings",
+        "contributions": "Contributions",
+        "growth": "Growth",
+        "taxSavings": "Estimated tax savings",
+        "chartTitle": "FHSA Evolution"
+      },
+      "faq": {
+        "q1": "What is the annual contribution limit for the FHSA?",
+        "a1": "The annual contribution limit for the FHSA is $8,000.",
+        "q2": "Can I have an FHSA if I owned a home 5 years ago?",
+        "a2": "Yes! You're eligible if you haven't owned a home in the preceding four calendar years.",
+        "q3": "What happens if I don't buy a home?",
+        "a3": "You have 15 years to use the funds. After that, you can transfer them to your RRSP or withdraw them taxably.",
+        "q4": "Can I combine the FHSA with the HBP?",
+        "a4": "Yes! You can use both for your down payment (up to $100,000 combined).",
+        "q5": "Is the FHSA better than the RRSP for buying a home?",
+        "a5": "For first home purchase, the FHSA is generally more advantageous because withdrawals are tax-free."
+      }
     },
     "netWorth": {
-      "title": "Net Worth",
-      "description": "Calculate your total wealth"
+      "title": "Net Worth Calculator",
+      "description": "Calculate your net worth - the difference between what you own and what you owe.",
+      "seo": {
+        "title": "Net Worth Calculator | Finivo",
+        "description": "Calculate your net worth by comparing your assets and liabilities. Track your financial progress with our free calculator.",
+        "keywords": "net worth, assets, liabilities, wealth, calculator, personal finance"
+      },
+      "understanding": "Understanding Your Net Worth",
+      "explanation": "Your net worth represents your real wealth: the difference between everything you own (assets) and everything you owe (liabilities). It's the best indicator of your overall financial health.",
+      "assetsInclude": "Your assets include",
+      "liabilitiesInclude": "Your liabilities include",
+      "yourNetWorth": "Your net worth",
+      "totalAssets": "Total assets",
+      "totalLiabilities": "Total liabilities",
+      "yourAssets": "Your assets",
+      "yourLiabilities": "Your liabilities",
+      "cashEquivalents": "Cash and equivalents",
+      "checkingAccounts": "Checking account(s)",
+      "savingsAccounts": "Savings account(s)",
+      "registeredInvestments": "Registered investments",
+      "nonRegisteredInvestments": "Non-registered investments",
+      "personalProperty": "Personal property",
+      "primaryResidence": "Primary residence",
+      "vehicles": "Vehicle(s)",
+      "otherAssets": "Other assets",
+      "debts": "Debts",
+      "mortgage": "Mortgage",
+      "autoLoan": "Auto loan",
+      "studentLoan": "Student loan",
+      "creditCards": "Credit cards",
+      "otherDebts": "Other debts",
+      "assetDistribution": "Asset distribution",
+      "liabilityDistribution": "Liability distribution",
+      "faq": {
+        "q1": "What is net worth?",
+        "a1": "Net worth is the difference between what you own (assets) and what you owe (liabilities).",
+        "q2": "What should my net worth be for my age?",
+        "a2": "A general rule suggests your net worth should equal your age multiplied by your annual gross income, divided by 10.",
+        "q3": "Should I include my primary residence in my assets?",
+        "a3": "Yes, use its estimated market value. Don't forget to subtract your mortgage balance from your liabilities.",
+        "q4": "How can I increase my net worth?",
+        "a4": "Increase your assets (savings, investments) and reduce your liabilities (debt repayment).",
+        "q5": "How often should I calculate my net worth?",
+        "a5": "Calculate your net worth at least once a year, ideally at the same time each year."
+      }
     },
     "debtConsolidation": {
-      "title": "Debt Consolidation",
-      "description": "Optimize your debt repayment"
+      "title": "Debt Consolidation Calculator",
+      "description": "Debt consolidation involves combining multiple debts into one. Use this calculator to calculate your new monthly payments.",
+      "seo": {
+        "title": "Debt Consolidation Calculator | Finivo",
+        "description": "Calculate how much you can save by consolidating your debts. Compare your current payments with a consolidation loan.",
+        "keywords": "debt consolidation, repayment, credit card, loan, calculator, interest"
+      },
+      "step1": "Step 1: Information about your debts",
+      "debtName": "Debt name",
+      "amountOwed": "Amount owed",
+      "interestRate": "Annual interest rate",
+      "monthlyPayment": "Monthly payment",
+      "addDebt": "Add",
+      "debt": "Debt",
+      "summary": "Summary of your current debts",
+      "summaryText": "According to your current plan, your cumulative debt is {{totalDebt}} and you will be debt-free in {{months}} months when your monthly payment is {{monthlyPayment}}.",
+      "totalDebt": "Total outstanding debt",
+      "totalMonthlyPayment": "Monthly payment",
+      "debtFreeIn": "You will be debt-free in",
+      "distribution": "Distribution of your debts",
+      "principalVsInterest": "Principal vs Interest",
+      "principal": "Principal",
+      "interest": "Interest",
+      "totalInterest": "Total interest you will pay",
+      "considerTransfer": "Consider a balance transfer card to save on interest",
+      "understanding": "Understanding Debt Consolidation",
+      "consolidationExplanation": "Debt consolidation is a strategy that involves combining multiple debts into a single loan.",
+      "advantages": "Advantages",
+      "watchPoints": "Watch Points",
+      "faq": {
+        "q1": "What is debt consolidation?",
+        "a1": "Debt consolidation involves combining multiple debts into a single loan with a generally lower interest rate.",
+        "q2": "When should I consider debt consolidation?",
+        "a2": "Consider consolidation if you have multiple high-interest debts or have trouble keeping up with multiple payments.",
+        "q3": "What are the consolidation options in Canada?",
+        "a3": "Options include: a bank consolidation loan, a home equity line of credit, a credit card balance transfer.",
+        "q4": "Does consolidation affect my credit score?",
+        "a4": "Short-term, a loan application may slightly lower your score. Long-term, it can improve it.",
+        "q5": "What's the difference between consolidation and bankruptcy?",
+        "a5": "Consolidation is an agreement to repay your debts. Bankruptcy is a legal procedure with severe impact on your credit."
+      }
+    },
+    "tax": {
+      "title": "Canada Income Tax Calculator 2026",
+      "description": "Get a quick estimate of your after-tax income, with your refund or taxes owing.",
+      "seo": {
+        "title": "Canada Tax Calculator 2026 - All Provinces | Finivo",
+        "description": "Calculate your federal and provincial taxes for all Canadian provinces in 2026. Estimate your net income, effective and marginal tax rates.",
+        "keywords": "tax 2026, Canada tax calculator, Quebec, Ontario, Alberta, tax rate, net income"
+      },
+      "yourIncome": "Your Income",
+      "province": "Province",
+      "employmentIncome": "Employment income",
+      "selfEmploymentIncome": "Self-employment income",
+      "investmentIncome": "Investment income",
+      "deductions": "Deductions",
+      "rrspContribution": "RRSP contribution",
+      "fhsaContribution": "FHSA contribution",
+      "charityDonations": "Charity donations",
+      "studentLoanInterest": "Student loan interest",
+      "summary": "Summary",
+      "grossIncome": "Gross income",
+      "taxableIncome": "Taxable income",
+      "federalTax": "Federal tax",
+      "provincialTax": "Provincial tax",
+      "totalTax": "Total tax",
+      "socialContributions": "Social contributions",
+      "rrqCpp": "QPP/CPP",
+      "rqap": "QPIP",
+      "ei": "Employment insurance",
+      "totalContributions": "Total contributions",
+      "totalDeductions": "Total deductions",
+      "netIncome": "Net income",
+      "effectiveRate": "Effective rate",
+      "marginalRate": "Marginal rate",
+      "incomeDistribution": "Distribution of your income",
+      "federalBrackets": "Federal Brackets 2025",
+      "provincialBrackets": "Provincial Brackets 2025",
+      "rate": "Rate",
+      "faq": {
+        "q1": "What is the difference between marginal and effective tax rates?",
+        "a1": "The marginal rate is the tax percentage on your next dollar. The effective rate is the total percentage on all your income.",
+        "q2": "How can I reduce my taxes?",
+        "a2": "Main strategies include: contributing to your RRSP or FHSA, maximizing tax credits, income splitting.",
+        "q3": "When do I need to file my tax return?",
+        "a3": "The deadline is generally April 30 for individuals and June 15 for self-employed.",
+        "q4": "Do I pay provincial and federal tax?",
+        "a4": "Yes, in Canada you pay both. Quebec collects its own provincial tax (two returns to file).",
+        "q5": "What is the Quebec abatement?",
+        "a5": "Quebec residents receive a 16.5% abatement on their federal tax because Quebec administers its own social programs."
+      }
     }
+  },
+  "brokeragesTable": {
+    "platform": "Platform",
+    "stockFees": "Stock fees",
+    "freeEtf": "Free ETFs",
+    "registeredAccounts": "TFSA / RRSP",
+    "options": "Options",
+    "crypto": "Crypto",
+    "idealFor": "Ideal for",
+    "yes": "Yes",
+    "paid": "Paid"
   },
   "footer": {
     "cta": {

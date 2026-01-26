@@ -148,11 +148,93 @@
     "readTime": "min de lecture",
     "by": "Par"
   },
+  "blogPage": {
+    "badge": "Blog Finivo"
+  },
   "categories": {
     "guides": "Guides",
     "conseils": "Conseils",
     "comparatifs": "Comparatifs",
     "actualites": "Actualités"
+  },
+  "comparators": {
+    "title": "Comparateurs financiers",
+    "subtitle": "Des outils de comparaison gratuits pour vous aider à choisir les meilleurs produits financiers adaptés à vos besoins.",
+    "badge": "2 comparateurs disponibles",
+    "illustrationAlt": "Illustration comparateur financier",
+    "compareNow": "Comparer maintenant",
+    "creditCards": {
+      "title": "Cartes de crédit",
+      "description": "Comparez les meilleures cartes de crédit au Canada. Trouvez celle qui offre les meilleurs avantages selon vos habitudes de dépenses."
+    },
+    "brokerages": {
+      "title": "Plateformes de courtage",
+      "description": "Comparez les courtiers en ligne au Canada. Trouvez la meilleure plateforme pour investir selon vos besoins : frais, CELI, REER, ETF."
+    },
+    "cta": {
+      "title": "Besoin de calculer vos finances?",
+      "subtitle": "Utilisez nos calculateurs gratuits pour simuler vos investissements, planifier votre épargne et gérer vos dettes.",
+      "button": "Voir les calculateurs"
+    },
+    "seo": {
+      "title": "Comparateurs Financiers Gratuits Canada 2026 | Cartes de Crédit & Courtage | Finivo",
+      "name": "Comparateurs Financiers - Cartes de Crédit et Courtage",
+      "description": "Comparez gratuitement les meilleures cartes de crédit et plateformes de courtage au Canada en 2026. Outils de comparaison indépendants pour trouver les meilleures remises, points voyage et frais de courtage.",
+      "keywords": "comparateur cartes de crédit canada 2026, comparateur courtage en ligne, meilleure carte de crédit canada 2026, courtier en ligne canada, comparer cartes remises, wealthsimple vs questrade, meilleur cashback canada"
+    }
+  },
+  "calculatorsPage": {
+    "title": "Calculateurs financiers",
+    "subtitle": "Des outils interactifs pour simuler vos investissements, planifier votre épargne et gérer vos dettes efficacement.",
+    "badge": "8 outils gratuits",
+    "illustrationAlt": "Illustration calculateurs financiers",
+    "popular": "Populaire",
+    "useCalculator": "Utiliser le calculateur",
+    "items": {
+      "compound": {
+        "title": "Intérêts composés",
+        "description": "Calculez combien un placement peut vous rapporter au fil du temps grâce aux intérêts composés."
+      },
+      "rrsp": {
+        "title": "Épargne REER",
+        "description": "Estimez la valeur de votre REER à la retraite et le revenu annuel qu'il vous procurera."
+      },
+      "fhsa": {
+        "title": "Épargne CELIAPP",
+        "description": "Calculez vos économies potentielles avec le compte d'épargne libre d'impôt pour l'achat d'une première maison."
+      },
+      "debtConsolidation": {
+        "title": "Consolidation de dettes",
+        "description": "Combinez vos dettes en une seule. Calculez vos nouvelles mensualités et le temps pour vous libérer."
+      },
+      "netWorth": {
+        "title": "Valeur nette",
+        "description": "Calculez votre valeur nette en comparant vos actifs et vos passifs. Suivez votre progression."
+      },
+      "tax": {
+        "title": "Impôt Canada/Québec",
+        "description": "Estimez votre impôt fédéral et provincial basé sur les tranches d'imposition 2026."
+      },
+      "budget": {
+        "title": "Budget mensuel",
+        "description": "Planifiez votre budget en détaillant vos revenus et dépenses. Imprimez ou exportez en Excel."
+      },
+      "mortgage": {
+        "title": "Hypothèque",
+        "description": "Calculez vos paiements hypothécaires, le coût total et visualisez l'amortissement de votre prêt."
+      }
+    },
+    "cta": {
+      "title": "Besoin d'une carte de crédit adaptée?",
+      "subtitle": "Comparez les meilleures cartes de crédit au Canada et trouvez celle qui correspond à vos objectifs financiers.",
+      "button": "Comparer les cartes"
+    },
+    "seo": {
+      "title": "8 Calculateurs Financiers Gratuits Canada 2026 | REER, CELIAPP, CELI, Hypothèque, Budget | Finivo",
+      "name": "Calculateurs Financiers Finivo 2026",
+      "description": "Planifiez vos finances avec nos 8 calculateurs gratuits en 2026 : intérêts composés, épargne REER et CELIAPP, CELI, hypothèque avec assurance SCHL, budget mensuel exportable Excel, consolidation de dettes, valeur nette et impôts Canada/Québec.",
+      "keywords": "calculateur financier gratuit 2026, calculateur REER canada, calculateur CELIAPP 2026, calculateur CELI, calculateur hypothèque SCHL, budget mensuel excel, consolidation dettes, valeur nette, impôt canada 2026, intérêts composés, planification financière"
+    }
   },
   "creditCards": {
     "title": "Comparateur de cartes de crédit",

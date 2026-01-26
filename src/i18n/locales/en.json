@@ -27,7 +27,11 @@
     "article": "article",
     "found": "found",
     "page": "Page",
-    "of": "of"
+    "of": "of",
+    "explore": "Explore",
+    "startNow": "Start now",
+    "viewComparators": "View comparators",
+    "viewAllCalculators": "View all calculators"
   },
   "nav": {
     "creditCards": "Credit Cards",
@@ -43,12 +47,97 @@
     "debtConsolidation": "Debt Consolidation"
   },
   "hero": {
-    "badge": "#1 Comparator in Canada",
-    "title": "Find the perfect",
-    "titleHighlight": "credit card for you",
-    "subtitle": "Compare the best credit cards in Canada. Cash back, rewards, travel - find the one that fits your lifestyle.",
-    "cta": "Compare cards",
-    "ctaSecondary": "View calculators"
+    "badge": "Free financial platform",
+    "title": "Compare, calculate,",
+    "titleHighlight": "and prosper",
+    "subtitle": "The complete platform for Canadians: compare <strong>credit cards</strong> and <strong>brokerage platforms</strong>, plan with our <strong>calculators</strong>, and discover the best <strong>finance books</strong>.",
+    "cta": "View comparators",
+    "ctaSecondary": "Calculators"
+  },
+  "landing": {
+    "quickLinks": {
+      "creditCards": "Credit cards",
+      "brokerages": "Brokerage platforms",
+      "library": "Library",
+      "calculators": "Calculators"
+    },
+    "stats": {
+      "creditCards": "Credit cards",
+      "brokers": "Online brokers",
+      "books": "Recommended books",
+      "calculators": "Calculators"
+    },
+    "trust": {
+      "independent": "100% independent",
+      "upToDate": "Up-to-date data",
+      "freeForAll": "Free for everyone",
+      "madeIn": "Made in Canada 🇨🇦"
+    },
+    "pillars": {
+      "title": "Everything to manage",
+      "titleHighlight": "your finances",
+      "subtitle": "A complete suite of tools to take control of your financial health and achieve your goals.",
+      "badge": "Complete tools",
+      "cards": {
+        "title": "Credit Card Comparator",
+        "description": "Compare over 30 credit cards in Canada. Find the best one for your needs.",
+        "features": ["Cash back", "Travel cards", "No annual fee"]
+      },
+      "brokerages": {
+        "title": "Brokerage Comparator",
+        "description": "Find the best platform to invest in Canada: Wealthsimple, Questrade and more.",
+        "features": ["Zero commission", "TFSA & RRSP", "ETFs & Stocks"]
+      },
+      "calculators": {
+        "title": "Financial Calculators",
+        "description": "Plan your financial future with our free interactive tools.",
+        "features": ["Compound interest", "RRSP & FHSA", "Debt consolidation"]
+      },
+      "library": {
+        "title": "Library",
+        "description": "The best books to improve your relationship with money and invest wisely.",
+        "features": ["Personal finance", "Investment", "Mindset"]
+      },
+      "blog": {
+        "title": "Blog & Guides",
+        "description": "Expert tips, financial news and practical guides for Canada.",
+        "features": ["Practical guides", "2026 News", "Personalized tips"]
+      }
+    },
+    "calculatorsSection": {
+      "badge": "Financial calculators",
+      "title": "Plan your",
+      "titleHighlight": "financial future",
+      "subtitle": "Interactive tools to simulate your investments, savings and optimize your finances.",
+      "items": {
+        "compound": "Compound interest",
+        "rrsp": "RRSP savings",
+        "fhsa": "FHSA savings",
+        "netWorth": "Net worth",
+        "debtConsolidation": "Debt consolidation",
+        "tax": "Canada Tax",
+        "budget": "Monthly budget",
+        "mortgage": "Mortgage"
+      }
+    },
+    "trustSection": {
+      "independent": {
+        "title": "100% Independent",
+        "description": "Our comparisons and analyses are objective and transparent."
+      },
+      "realtime": {
+        "title": "Real-time data",
+        "description": "Rates and information updated automatically."
+      },
+      "free": {
+        "title": "Free forever",
+        "description": "All our tools are and will remain completely free."
+      }
+    },
+    "floatingCards": {
+      "return": "Return",
+      "fhsaSavings": "FHSA Savings"
+    }
   },
   "blog": {
     "title": "Tips and Guides",
@@ -133,19 +222,32 @@
     }
   },
   "footer": {
-    "description": "Your guide to the best financial decisions in Canada.",
-    "comparators": "Comparators",
-    "calculators": "Calculators",
-    "resources": "Resources",
+    "cta": {
+      "line1": "Take",
+      "line2": "action"
+    },
+    "description": "The Canadian platform to compare credit cards, brokerage platforms and plan your finances.",
+    "navigation": "Navigation",
+    "categories": "Categories",
+    "categoryLinks": {
+      "cashback": "Cash back",
+      "travel": "Travel cards",
+      "noFee": "No annual fee",
+      "student": "Student cards",
+      "premium": "Premium cards"
+    },
+    "contact": "Contact",
+    "location": "Montreal, Canada",
     "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Use",
-    "affiliation": "Affiliate Disclosure",
-    "copyright": "© {{year}} Finivo. All rights reserved."
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "affiliation": "Affiliation",
+    "copyright": "© {{year}} Finivo. All rights reserved. Made with ❤️ in Canada.",
+    "disclaimer": "* Rates and information displayed are provided for informational purposes only and may change without notice. Please consult the issuer's official website for the most current information. This site may receive compensation for products featured."
   },
   "seo": {
-    "homeTitle": "Finivo | Credit Card Comparator and Financial Tools Canada",
-    "homeDescription": "Compare the best credit cards, brokerages and use our free financial calculators. The #1 guide for your finances in Canada.",
+    "homeTitle": "Finivo | Free Financial Tools Canada 2026 - Comparators & Calculators",
+    "homeDescription": "Finivo is THE Canadian platform for 100% free financial tools in 2026. Compare 30+ credit cards and 10+ online brokers. Use our 8 calculators (RRSP, FHSA, TFSA, mortgage, budget, taxes). Discover our library of 20+ books on personal finance and investing. Independent and free.",
     "blogTitle": "Finivo Blog | Finance Guides, Investment & Tips Canada",
     "blogDescription": "Discover our comprehensive guides on personal finance in Canada: RRSP, FHSA, TFSA, investing, real estate, mortgages, taxes, credit cards."
   }

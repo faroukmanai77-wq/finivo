@@ -31,9 +31,12 @@
     "explore": "Explore",
     "startNow": "Start now",
     "viewComparators": "View comparators",
-    "viewAllCalculators": "View all calculators"
+    "viewAllCalculators": "View all calculators",
+    "filters": "Filters"
   },
   "nav": {
+    "home": "Home",
+    "comparators": "Comparators",
     "creditCards": "Credit Cards",
     "brokerages": "Brokerages",
     "books": "Books",
@@ -237,7 +240,10 @@
     }
   },
   "creditCards": {
-    "title": "Credit Card Comparator",
+    "title": "Credit Cards",
+    "comparator": "Credit Card Comparator",
+    "heroTitle": "Compare credit cards in Canada",
+    "heroDescription": "Find the perfect card for your needs. All rates are updated in real-time.",
     "subtitle": "Find the perfect card among the best offers in Canada",
     "annualFee": "Annual fee",
     "interestRate": "Interest rate",
@@ -247,6 +253,16 @@
     "compare": "Compare",
     "features": "Features",
     "noCards": "No cards found",
+    "noResults": "No cards found",
+    "adjustFilters": "Try adjusting the filters to see more results.",
+    "categories": {
+      "cashback": "Cash back",
+      "travel": "Travel",
+      "noFee": "No fee",
+      "student": "Students",
+      "premium": "Premium",
+      "lowInterest": "Low interest"
+    },
     "filters": {
       "issuer": "Issuer",
       "category": "Category",
@@ -331,6 +347,11 @@
     "homeTitle": "Finivo | Free Financial Tools Canada 2026 - Comparators & Calculators",
     "homeDescription": "Finivo is THE Canadian platform for 100% free financial tools in 2026. Compare 30+ credit cards and 10+ online brokers. Use our 8 calculators (RRSP, FHSA, TFSA, mortgage, budget, taxes). Discover our library of 20+ books on personal finance and investing. Independent and free.",
     "blogTitle": "Finivo Blog | Finance Guides, Investment & Tips Canada",
-    "blogDescription": "Discover our comprehensive guides on personal finance in Canada: RRSP, FHSA, TFSA, investing, real estate, mortgages, taxes, credit cards."
+    "blogDescription": "Discover our comprehensive guides on personal finance in Canada: RRSP, FHSA, TFSA, investing, real estate, mortgages, taxes, credit cards.",
+    "creditCards": {
+      "title": "Compare 30+ Credit Cards Canada 2026 | Best Rates & Rewards | Finivo",
+      "description": "Compare over 30 credit cards in Canada for free in 2026: cash back up to 5%, travel cards with Aeroplan points, no annual fee cards and student cards.",
+      "keywords": "credit card comparator canada 2026, best cashback credit card, no annual fee credit card, travel credit card aeroplan"
+    }
   }
 }

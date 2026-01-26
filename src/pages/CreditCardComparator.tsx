@@ -10,15 +10,17 @@ import { FilterState, CreditCard, CardCategory } from '@/types/creditCard';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Filter, CreditCard as CreditCardIcon, Sparkles } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { useCreditCards } from '@/hooks/useCreditCards';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
+
 const CreditCardComparator = () => {
-  const [creditCards, setCreditCards] = useState<CreditCard[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const {
-    toast
-  } = useToast();
+  const { t } = useTranslation();
+  const { getLocalizedPath, currentLanguage } = useLanguage();
+  const { data: creditCards = [], isLoading } = useCreditCards();
+  const { toast } = useToast();
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     maxAnnualFee: null,
@@ -42,114 +44,6 @@ const CreditCardComparator = () => {
     };
   }, []);
 
-  // Fetch credit cards from database
-  useEffect(() => {
-    const fetchCreditCards = async () => {
-      try {
-        const {
-          data,
-          error
-        } = await supabase.from('credit_cards').select('*').eq('is_active', true);
-        if (error) throw error;
-        const mappedCards: CreditCard[] = (data || []).map(card => ({
-          id: card.id,
-          slug: card.slug || card.id,
-          name: card.name,
-          issuer: card.issuer,
-          image: card.image_url || '',
-          annualFee: Number(card.annual_fee),
-          firstYearFreeAnnualFee: card.first_year_free || false,
-          interestRate: Number(card.interest_rate),
-          cashAdvanceRate: Number(card.cash_advance_rate),
-          rewardsRate: Number(card.rewards_rate),
-          rewardsType: card.rewards_type as 'cashback' | 'points' | 'miles',
-          welcomeBonus: card.welcome_bonus || undefined,
-          welcomeBonusValue: card.welcome_bonus_value ? Number(card.welcome_bonus_value) : undefined,
-          minIncome: card.min_income ? Number(card.min_income) : undefined,
-          features: card.features || [],
-          categories: (card.categories || []) as CardCategory[],
-          affiliateLink: card.affiliate_link,
-          rating: Number(card.rating),
-          lastUpdated: card.updated_at
-        }));
-        setCreditCards(mappedCards);
-      } catch (error) {
-        console.error('Error fetching credit cards:', error);
-        toast({
-          title: "Erreur",
-          description: "Impossible de charger les cartes de crédit",
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCreditCards();
-
-    // Subscribe to realtime updates
-    const channel = supabase.channel('credit-cards-changes').on('postgres_changes', {
-      event: '*',
-      schema: 'public',
-      table: 'credit_cards'
-    }, payload => {
-      if (payload.eventType === 'INSERT' && payload.new.is_active) {
-        const newCard = payload.new;
-        setCreditCards(prev => [...prev, {
-          id: newCard.id,
-          slug: newCard.slug || newCard.id,
-          name: newCard.name,
-          issuer: newCard.issuer,
-          image: newCard.image_url || '',
-          annualFee: Number(newCard.annual_fee),
-          firstYearFreeAnnualFee: newCard.first_year_free || false,
-          interestRate: Number(newCard.interest_rate),
-          cashAdvanceRate: Number(newCard.cash_advance_rate),
-          rewardsRate: Number(newCard.rewards_rate),
-          rewardsType: newCard.rewards_type as 'cashback' | 'points' | 'miles',
-          welcomeBonus: newCard.welcome_bonus || undefined,
-          welcomeBonusValue: newCard.welcome_bonus_value ? Number(newCard.welcome_bonus_value) : undefined,
-          minIncome: newCard.min_income ? Number(newCard.min_income) : undefined,
-          features: newCard.features || [],
-          categories: (newCard.categories || []) as CardCategory[],
-          affiliateLink: newCard.affiliate_link,
-          rating: Number(newCard.rating),
-          lastUpdated: newCard.updated_at
-        }]);
-        toast({
-          title: "Nouvelle carte ajoutée",
-          description: `${newCard.name} a été ajoutée`
-        });
-      } else if (payload.eventType === 'UPDATE') {
-        const updatedCard = payload.new;
-        setCreditCards(prev => prev.map(card => card.id === updatedCard.id ? {
-          id: updatedCard.id,
-          slug: updatedCard.slug || updatedCard.id,
-          name: updatedCard.name,
-          issuer: updatedCard.issuer,
-          image: updatedCard.image_url || '',
-          annualFee: Number(updatedCard.annual_fee),
-          firstYearFreeAnnualFee: updatedCard.first_year_free || false,
-          interestRate: Number(updatedCard.interest_rate),
-          cashAdvanceRate: Number(updatedCard.cash_advance_rate),
-          rewardsRate: Number(updatedCard.rewards_rate),
-          rewardsType: updatedCard.rewards_type as 'cashback' | 'points' | 'miles',
-          welcomeBonus: updatedCard.welcome_bonus || undefined,
-          welcomeBonusValue: updatedCard.welcome_bonus_value ? Number(updatedCard.welcome_bonus_value) : undefined,
-          minIncome: updatedCard.min_income ? Number(updatedCard.min_income) : undefined,
-          features: updatedCard.features || [],
-          categories: (updatedCard.categories || []) as CardCategory[],
-          affiliateLink: updatedCard.affiliate_link,
-          rating: Number(updatedCard.rating),
-          lastUpdated: updatedCard.updated_at
-        } : card).filter(card => card.id !== updatedCard.id || updatedCard.is_active));
-      } else if (payload.eventType === 'DELETE') {
-        setCreditCards(prev => prev.filter(card => card.id !== payload.old.id));
-      }
-    }).subscribe();
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [toast]);
   const filteredCards = useMemo(() => {
     let result = [...creditCards];
     if (filters.categories.length > 0) {
@@ -184,42 +78,49 @@ const CreditCardComparator = () => {
     return result;
   }, [filters, creditCards]);
   const breadcrumbs = [{
-    name: 'Accueil',
+    name: t('nav.home'),
     url: 'https://finivo.ca'
   }, {
-    name: 'Comparateurs',
+    name: t('nav.comparators'),
     url: 'https://finivo.ca/comparateurs'
   }, {
-    name: 'Cartes de crédit',
+    name: t('creditCards.title'),
     url: 'https://finivo.ca/comparateurs/cartes-de-credit'
   }];
+
   const categories = [{
     id: 'cashback',
-    label: 'Remises en argent',
+    label: t('creditCards.categories.cashback'),
     icon: '💰'
   }, {
     id: 'travel',
-    label: 'Voyage',
+    label: t('creditCards.categories.travel'),
     icon: '✈️'
   }, {
     id: 'no-fee',
-    label: 'Sans frais',
+    label: t('creditCards.categories.noFee'),
     icon: '🆓'
   }, {
     id: 'student',
-    label: 'Étudiants',
+    label: t('creditCards.categories.student'),
     icon: '🎓'
   }, {
     id: 'premium',
-    label: 'Premium',
+    label: t('creditCards.categories.premium'),
     icon: '⭐'
   }, {
     id: 'low-interest',
-    label: 'Faible taux',
+    label: t('creditCards.categories.lowInterest'),
     icon: '📉'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Comparateur de 30+ Cartes de Crédit Québec 2026 | Meilleurs Taux & Remises | Finivo" description="Comparez gratuitement plus de 30 cartes de crédit au Québec en 2026 : remises en argent jusqu'à 5%, cartes voyage avec points Aéroplan, cartes sans frais annuels et cartes étudiants. Filtrez par émetteur, taux d'intérêt et bonus de bienvenue. Comparaison 100% indépendante mise à jour en temps réel." keywords="comparateur carte crédit québec 2026, meilleure carte crédit remise argent, carte crédit sans frais annuels, carte crédit voyage aéroplan, carte crédit étudiant, amex cobalt, tangerine, bmo, rbc, td, scotia, desjardins, bnc" url="https://finivo.ca/comparateurs/cartes-de-credit" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+      <SEO 
+        title={t('seo.creditCards.title')} 
+        description={t('seo.creditCards.description')} 
+        keywords={t('seo.creditCards.keywords')} 
+        url="https://finivo.ca/comparateurs/cartes-de-credit" 
+        structuredData={generateBreadcrumbStructuredData(breadcrumbs)} 
+      />
       <Header />
       
       {/* Hero Section */}
@@ -227,24 +128,24 @@ const CreditCardComparator = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-            <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
+            <Link to={getLocalizedPath('/')} className="hover:text-foreground transition-colors">{t('nav.home')}</Link>
             <span>/</span>
-            <span>Comparateurs</span>
+            <span>{t('nav.comparators')}</span>
             <span>/</span>
-            <span className="text-primary">Cartes de crédit</span>
+            <span className="text-primary">{t('creditCards.title')}</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
                 <CreditCardIcon className="w-4 h-4" />
-                Comparateur de cartes de crédit     
+                {t('creditCards.comparator')}
               </div>
               <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-left text-popover-foreground">
-                Comparez les cartes de crédit au Québec
+                {t('creditCards.heroTitle')}
               </h1>
               <p className="max-w-2xl text-lg text-secondary">
-                Trouvez la carte parfaite selon vos besoins. Tous les taux sont mis à jour en temps réel.
+                {t('creditCards.heroDescription')}
               </p>
             </div>
             
@@ -279,7 +180,7 @@ const CreditCardComparator = () => {
                   <SheetTrigger asChild>
                     <Button variant="outline" className="w-full gap-2 h-12 font-semibold">
                       <Filter className="w-4 h-4" />
-                      Filtres
+                      {t('common.filters')}
                       {(filters.categories.length > 0 || filters.noAnnualFee || filters.hasWelcomeBonus) && <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
                           {filters.categories.length + (filters.noAnnualFee ? 1 : 0) + (filters.hasWelcomeBonus ? 1 : 0)}
                         </span>}
@@ -307,9 +208,9 @@ const CreditCardComparator = () => {
                       <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
                         <CreditCardIcon className="w-8 h-8 text-muted-foreground" />
                       </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">Aucune carte trouvée</h3>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">{t('creditCards.noResults')}</h3>
                       <p className="text-muted-foreground">
-                        Essayez d'ajuster les filtres pour voir plus de résultats.
+                        {t('creditCards.adjustFilters')}
                       </p>
                     </div>}
                 </div>}

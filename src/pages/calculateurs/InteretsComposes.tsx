@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TrendingUp } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
@@ -8,30 +9,11 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { useLanguage } from '@/hooks/useLanguage';
 
-const faqItems = [
-  {
-    question: "Comment fonctionnent les intérêts composés?",
-    answer: "Les intérêts composés fonctionnent en réinvestissant automatiquement vos gains. Chaque période, les intérêts sont calculés sur le capital initial plus tous les intérêts accumulés précédemment, créant un effet d'accélération exponentielle de votre épargne."
-  },
-  {
-    question: "Quelle est la différence entre intérêts simples et composés?",
-    answer: "Les intérêts simples sont calculés uniquement sur le capital initial, tandis que les intérêts composés sont calculés sur le capital plus les intérêts déjà accumulés. Sur le long terme, cette différence peut représenter des milliers de dollars."
-  },
-  {
-    question: "À quelle fréquence les intérêts devraient-ils être composés?",
-    answer: "Plus la fréquence de composition est élevée, plus vos gains seront importants. La composition mensuelle génère plus de rendement que la composition annuelle. Certains placements offrent même une composition quotidienne."
-  },
-  {
-    question: "Pourquoi commencer à investir tôt est-il si important?",
-    answer: "Le temps est le facteur le plus puissant des intérêts composés. Une personne qui investit 200$/mois de 25 à 35 ans (10 ans) aura souvent plus d'argent à 65 ans qu'une personne qui investit 200$/mois de 35 à 65 ans (30 ans)."
-  },
-  {
-    question: "Quel taux de rendement est réaliste?",
-    answer: "Historiquement, le marché boursier canadien a généré environ 7-8% par année sur le long terme. Un compte d'épargne offre 2-4%, tandis qu'un portefeuille équilibré peut viser 5-6%. Ajustez selon votre profil de risque."
-  }
-];
 const InteretsComposes = () => {
+  const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const [capitalInitial, setCapitalInitial] = useState(10000);
   const [versementRegulier, setVersementRegulier] = useState(200);
   const [frequenceVersement, setFrequenceVersement] = useState<'mensuel' | 'annuel'>('mensuel');
@@ -93,18 +75,26 @@ const InteretsComposes = () => {
   }, [capitalInitial, versementRegulier, frequenceVersement, tauxInteret, frequenceComposition, duree]);
 
   const formatMontant = (montant: number) => {
-    return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
+    return new Intl.NumberFormat(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
   };
+
+  const faqItems = [
+    { question: t('calculators.compound.faq.q1'), answer: t('calculators.compound.faq.a1') },
+    { question: t('calculators.compound.faq.q2'), answer: t('calculators.compound.faq.a2') },
+    { question: t('calculators.compound.faq.q3'), answer: t('calculators.compound.faq.a3') },
+    { question: t('calculators.compound.faq.q4'), answer: t('calculators.compound.faq.a4') },
+    { question: t('calculators.compound.faq.q5'), answer: t('calculators.compound.faq.a5') },
+  ];
 
   return (
     <CalculatorLayout
-      title="Calculatrice d'intérêts composés"
-      description="Calculez combien un placement peut vous rapporter au fil du temps grâce aux intérêts composés."
+      title={t('calculators.compound.title')}
+      description={t('calculators.compound.description')}
       icon={<TrendingUp className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice d'intérêts composés | Finivo"
-      seoDescription="Calculez la croissance de vos placements avec notre calculatrice d'intérêts composés. Visualisez l'impact du temps et des versements réguliers."
-      seoKeywords="intérêts composés, calculatrice, placement, investissement, épargne, rendement"
-      url="https://finivo.ca/calculateurs/interets-composes"
+      seoTitle={t('calculators.compound.seo.title')}
+      seoDescription={t('calculators.compound.seo.description')}
+      seoKeywords={t('calculators.compound.seo.keywords')}
+      url={`https://finivo.ca/${currentLanguage}/calculateurs/interets-composes`}
       relatedCategory="investissement"
       featuredCardType="cashback"
     >
@@ -112,28 +102,26 @@ const InteretsComposes = () => {
         {/* Section explicative */}
         <Card className="bg-muted/50">
           <CardContent className="pt-6">
-            <h2 className="text-lg font-semibold mb-3">Qu'est-ce que les intérêts composés?</h2>
+            <h2 className="text-lg font-semibold mb-3">{t('calculators.compound.whatIs')}</h2>
             <div className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                Les <strong>intérêts composés</strong> sont souvent appelés « la huitième merveille du monde ». C'est le processus par lequel vos intérêts génèrent eux-mêmes des intérêts, créant un effet boule de neige sur vos placements au fil du temps.
-              </p>
+              <p>{t('calculators.compound.explanation')}</p>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Comment ça fonctionne</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.compound.howItWorks')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Vos intérêts s'ajoutent au capital</li>
-                    <li>Le nouveau capital génère plus d'intérêts</li>
-                    <li>La croissance s'accélère avec le temps</li>
-                    <li>Plus vous commencez tôt, mieux c'est</li>
+                    <li>{currentLanguage === 'en' ? 'Your interest gets added to the capital' : 'Vos intérêts s\'ajoutent au capital'}</li>
+                    <li>{currentLanguage === 'en' ? 'New capital generates more interest' : 'Le nouveau capital génère plus d\'intérêts'}</li>
+                    <li>{currentLanguage === 'en' ? 'Growth accelerates over time' : 'La croissance s\'accélère avec le temps'}</li>
+                    <li>{currentLanguage === 'en' ? 'The earlier you start, the better' : 'Plus vous commencez tôt, mieux c\'est'}</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Facteurs clés</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.compound.keyFactors')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li><strong>Temps</strong> : le facteur le plus puissant</li>
-                    <li><strong>Taux</strong> : même 1% de plus fait une différence</li>
-                    <li><strong>Fréquence</strong> : composition mensuelle &gt; annuelle</li>
-                    <li><strong>Régularité</strong> : les versements réguliers amplifient l'effet</li>
+                    <li><strong>{currentLanguage === 'en' ? 'Time' : 'Temps'}</strong> : {currentLanguage === 'en' ? 'the most powerful factor' : 'le facteur le plus puissant'}</li>
+                    <li><strong>{currentLanguage === 'en' ? 'Rate' : 'Taux'}</strong> : {currentLanguage === 'en' ? 'even 1% more makes a difference' : 'même 1% de plus fait une différence'}</li>
+                    <li><strong>{currentLanguage === 'en' ? 'Frequency' : 'Fréquence'}</strong> : {currentLanguage === 'en' ? 'monthly > yearly' : 'mensuelle > annuelle'}</li>
+                    <li><strong>{currentLanguage === 'en' ? 'Consistency' : 'Régularité'}</strong> : {currentLanguage === 'en' ? 'regular contributions amplify the effect' : 'les versements réguliers amplifient l\'effet'}</li>
                   </ul>
                 </div>
               </div>
@@ -145,12 +133,12 @@ const InteretsComposes = () => {
         {/* Formulaire */}
         <Card>
           <CardHeader>
-            <CardTitle>Paramètres de calcul</CardTitle>
+            <CardTitle>{t('calculators.compound.params')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Capital initial */}
             <div className="space-y-3">
-              <Label htmlFor="capital">Placement initial</Label>
+              <Label htmlFor="capital">{t('calculators.compound.initialInvestment')}</Label>
               <div className="flex items-center gap-3">
                 <Input
                   id="capital"
@@ -176,7 +164,7 @@ const InteretsComposes = () => {
 
             {/* Versements réguliers */}
             <div className="space-y-3">
-              <Label htmlFor="versement">Versements réguliers</Label>
+              <Label htmlFor="versement">{t('calculators.compound.regularContributions')}</Label>
               <div className="flex items-center gap-3">
                 <Input
                   id="versement"
@@ -191,8 +179,8 @@ const InteretsComposes = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="mensuel">Par mois</SelectItem>
-                    <SelectItem value="annuel">Par année</SelectItem>
+                    <SelectItem value="mensuel">{t('calculators.compound.frequency.perMonth')}</SelectItem>
+                    <SelectItem value="annuel">{t('calculators.compound.frequency.perYear')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -207,7 +195,7 @@ const InteretsComposes = () => {
 
             {/* Taux d'intérêt */}
             <div className="space-y-3">
-              <Label htmlFor="taux">Taux de rendement annuel</Label>
+              <Label htmlFor="taux">{t('calculators.compound.annualReturnRate')}</Label>
               <div className="flex items-center gap-3">
                 <Input
                   id="taux"
@@ -234,21 +222,21 @@ const InteretsComposes = () => {
 
             {/* Fréquence de composition */}
             <div className="space-y-3">
-              <Label>Calcul des intérêts</Label>
+              <Label>{t('calculators.compound.interestCalculation')}</Label>
               <Select value={frequenceComposition} onValueChange={(v: 'mensuel' | 'annuel') => setFrequenceComposition(v)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="mensuel">Une fois par mois</SelectItem>
-                  <SelectItem value="annuel">Une fois par année</SelectItem>
+                  <SelectItem value="mensuel">{t('calculators.compound.frequency.monthly')}</SelectItem>
+                  <SelectItem value="annuel">{t('calculators.compound.frequency.yearly')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             {/* Durée */}
             <div className="space-y-3">
-              <Label htmlFor="duree">Horizon de placement</Label>
+              <Label htmlFor="duree">{t('calculators.compound.investmentHorizon')}</Label>
               <div className="flex items-center gap-3">
                 <Input
                   id="duree"
@@ -257,7 +245,7 @@ const InteretsComposes = () => {
                   onChange={(e) => setDuree(Number(e.target.value))}
                   className="w-24"
                 />
-                <span className="text-muted-foreground">années</span>
+                <span className="text-muted-foreground">{t('calculators.common.years')}</span>
               </div>
               <Slider
                 value={[duree]}
@@ -267,8 +255,8 @@ const InteretsComposes = () => {
                 step={1}
               />
               <div className="flex justify-between text-xs text-muted-foreground">
-                <span>1 an</span>
-                <span>50 ans</span>
+                <span>1 {t('calculators.common.year')}</span>
+                <span>50 {t('calculators.common.years')}</span>
               </div>
             </div>
           </CardContent>
@@ -279,16 +267,16 @@ const InteretsComposes = () => {
           <Card className="bg-primary text-primary-foreground">
             <CardContent className="pt-6">
               <div className="text-center">
-                <p className="text-sm opacity-80">Valeur finale de votre placement</p>
+                <p className="text-sm opacity-80">{t('calculators.compound.results.finalValue')}</p>
                 <p className="text-4xl font-bold mt-2">{formatMontant(resultats.montantFinal)}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div className="text-center">
-                  <p className="text-sm opacity-80">Total des contributions</p>
+                  <p className="text-sm opacity-80">{t('calculators.compound.results.totalContributions')}</p>
                   <p className="text-xl font-semibold">{formatMontant(resultats.totalContributions)}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-sm opacity-80">Intérêts gagnés</p>
+                  <p className="text-sm opacity-80">{t('calculators.compound.results.interestEarned')}</p>
                   <p className="text-xl font-semibold">{formatMontant(resultats.totalInterets)}</p>
                 </div>
               </div>
@@ -298,18 +286,18 @@ const InteretsComposes = () => {
           {/* Graphique */}
           <Card>
             <CardHeader>
-              <CardTitle>Croissance de votre placement</CardTitle>
+              <CardTitle>{t('calculators.compound.results.chartTitle')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-72">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={resultats.donnees}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="annee" tickFormatter={(v) => `${v} ans`} />
+                    <XAxis dataKey="annee" tickFormatter={(v) => `${v} ${t('calculators.common.years')}`} />
                     <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                     <Tooltip 
                       formatter={(value: number) => formatMontant(value)}
-                      labelFormatter={(label) => `Année ${label}`}
+                      labelFormatter={(label) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}`}
                     />
                     <Legend />
                     <Area 
@@ -318,7 +306,7 @@ const InteretsComposes = () => {
                       stackId="1"
                       stroke="hsl(var(--muted-foreground))" 
                       fill="hsl(var(--muted))" 
-                      name="Contributions"
+                      name={currentLanguage === 'en' ? 'Contributions' : 'Contributions'}
                     />
                     <Area 
                       type="monotone" 
@@ -326,7 +314,7 @@ const InteretsComposes = () => {
                       stackId="1"
                       stroke="hsl(var(--primary))" 
                       fill="hsl(var(--primary))" 
-                      name="Intérêts"
+                      name={currentLanguage === 'en' ? 'Interest' : 'Intérêts'}
                     />
                   </AreaChart>
                 </ResponsiveContainer>

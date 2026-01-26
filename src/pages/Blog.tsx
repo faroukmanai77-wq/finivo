@@ -55,7 +55,16 @@ const Blog = () => {
             </p>
 
             {/* Search */}
-            
+            <div className="relative max-w-md mx-auto">
+              <Input
+                type="text"
+                placeholder="Rechercher un article..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 py-3 h-12 rounded-full border-border/50 bg-background shadow-sm"
+              />
+              <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            </div>
           </div>
         </div>
       </section>

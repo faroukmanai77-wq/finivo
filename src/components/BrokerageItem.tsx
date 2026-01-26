@@ -2,6 +2,7 @@ import { BrokeragePlatform } from '@/types/brokerage';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useTranslation } from 'react-i18next';
 import { 
   Star, 
   ExternalLink, 
@@ -11,7 +12,6 @@ import {
   Globe, 
   Shield,
   TrendingUp,
-  Building2
 } from 'lucide-react';
 
 interface BrokerageItemProps {
@@ -19,19 +19,21 @@ interface BrokerageItemProps {
   index?: number;
 }
 
-const levelLabels = {
-  debutant: 'Débutant',
-  intermediaire: 'Intermédiaire',
-  avance: 'Avancé',
-};
-
-const levelColors = {
-  debutant: 'bg-green-100 text-green-700',
-  intermediaire: 'bg-amber-100 text-amber-700',
-  avance: 'bg-purple-100 text-purple-700',
-};
-
 export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
+  const { t } = useTranslation();
+
+  const levelLabels: Record<string, string> = {
+    debutant: t('brokerages.levels.beginner'),
+    intermediaire: t('brokerages.levels.intermediate'),
+    avance: t('brokerages.levels.advanced'),
+  };
+
+  const levelColors: Record<string, string> = {
+    debutant: 'bg-green-100 text-green-700',
+    intermediaire: 'bg-amber-100 text-amber-700',
+    avance: 'bg-purple-100 text-purple-700',
+  };
+
   return (
     <Card 
       className="group card-elevated overflow-hidden opacity-0 animate-slide-up bg-background" 
@@ -57,7 +59,7 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
               
               {/* Type badge */}
               <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg capitalize">
-                {platform.type === 'courtier' ? 'Courtier' : 'Robo-advisor'}
+                {platform.type === 'courtier' ? t('brokerages.types.broker') : t('brokerages.types.roboAdvisor')}
               </div>
             </div>
           </div>
@@ -78,12 +80,12 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                 </div>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge className={`text-xs font-medium px-3 py-1 border-0 ${levelColors[platform.level]}`}>
-                    {levelLabels[platform.level]}
+                  <Badge className={`text-xs font-medium px-3 py-1 border-0 ${levelColors[platform.level] || levelColors.debutant}`}>
+                    {levelLabels[platform.level] || platform.level}
                   </Badge>
                   {platform.hasFrench && (
                     <Badge variant="secondary" className="text-xs font-medium px-3 py-1 bg-blue-100 text-blue-700 border-0">
-                      🇫🇷 Français
+                      🇫🇷 {t('brokerages.french')}
                     </Badge>
                   )}
                   {platform.regulation.includes('AMF') && (
@@ -100,7 +102,7 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                     <TrendingUp className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground font-medium">Idéal pour</p>
+                    <p className="text-xs text-muted-foreground font-medium">{t('brokerages.idealFor')}</p>
                     <p className="text-sm font-semibold text-foreground">{platform.idealFor}</p>
                   </div>
                 </div>
@@ -109,12 +111,12 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
               {/* Stats Grid */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <div className="stat-card text-center">
-                  <p className="text-xs text-muted-foreground mb-1 font-medium">Actions</p>
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">{t('brokerages.stats.stocks')}</p>
                   <p className="text-lg font-bold text-foreground">{platform.transactionFeeStocks}</p>
                 </div>
 
                 <div className="stat-card text-center">
-                  <p className="text-xs text-muted-foreground mb-1 font-medium">ETF</p>
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">{t('brokerages.stats.etf')}</p>
                   <p className="text-lg font-bold">
                     {platform.transactionFeeETF === '0 $' || platform.transactionFeeETF.includes('0 $') ? (
                       <span className="text-accent">{platform.transactionFeeETF}</span>
@@ -125,30 +127,30 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                 </div>
 
                 <div className="stat-card text-center">
-                  <p className="text-xs text-muted-foreground mb-1 font-medium">Options</p>
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">{t('brokerages.stats.options')}</p>
                   <p className="text-lg font-bold">
                     {platform.hasOptions ? (
                       <span className="text-accent flex items-center justify-center gap-1">
-                        <Check className="w-4 h-4" /> Oui
+                        <Check className="w-4 h-4" /> {t('common.yes')}
                       </span>
                     ) : (
                       <span className="text-muted-foreground flex items-center justify-center gap-1">
-                        <X className="w-4 h-4" /> Non
+                        <X className="w-4 h-4" /> {t('common.no')}
                       </span>
                     )}
                   </p>
                 </div>
 
                 <div className="stat-card text-center">
-                  <p className="text-xs text-muted-foreground mb-1 font-medium">Crypto</p>
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">{t('brokerages.stats.crypto')}</p>
                   <p className="text-lg font-bold">
                     {platform.hasCrypto ? (
                       <span className="text-accent flex items-center justify-center gap-1">
-                        <Check className="w-4 h-4" /> Oui
+                        <Check className="w-4 h-4" /> {t('common.yes')}
                       </span>
                     ) : (
                       <span className="text-muted-foreground flex items-center justify-center gap-1">
-                        <X className="w-4 h-4" /> Non
+                        <X className="w-4 h-4" /> {t('common.no')}
                       </span>
                     )}
                   </p>
@@ -166,13 +168,13 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                 {platform.hasMobileApp && (
                   <span className="feature-badge">
                     <Smartphone className="w-3 h-3 text-primary" />
-                    App mobile
+                    {t('brokerages.features.mobileApp')}
                   </span>
                 )}
                 {platform.marketsAccess.includes('International') && (
                   <span className="feature-badge">
                     <Globe className="w-3 h-3 text-primary" />
-                    International
+                    {t('brokerages.features.international')}
                   </span>
                 )}
               </div>
@@ -180,7 +182,7 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
               {/* Strengths & Weaknesses */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs font-semibold text-accent mb-2">✓ Points forts</p>
+                  <p className="text-xs font-semibold text-accent mb-2">✓ {t('brokerages.strengths')}</p>
                   <ul className="space-y-1">
                     {platform.strengths.map((s, i) => (
                       <li key={i} className="text-xs text-muted-foreground">• {s}</li>
@@ -188,7 +190,7 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-destructive mb-2">✗ Points faibles</p>
+                  <p className="text-xs font-semibold text-destructive mb-2">✗ {t('brokerages.weaknesses')}</p>
                   <ul className="space-y-1">
                     {platform.weaknesses.map((w, i) => (
                       <li key={i} className="text-xs text-muted-foreground">• {w}</li>
@@ -200,12 +202,12 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
               {/* CTA Section */}
               <div className="flex flex-col sm:flex-row items-center justify-between pt-5 border-t border-border/50 gap-4">
                 <p className="text-xs text-muted-foreground">
-                  Frais mensuels: {platform.monthlyFee}
+                  {t('brokerages.monthlyFees')}: {platform.monthlyFee}
                 </p>
                 <div className="flex gap-3">
                   <Button asChild size="sm" className="btn-success font-semibold gap-2">
                     <a href={platform.affiliateLink} target="_blank" rel="noopener noreferrer">
-                      Ouvrir un compte
+                      {t('brokerages.openAccount')}
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </Button>

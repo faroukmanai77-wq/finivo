@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { BrokerageFilterSidebar } from '@/components/BrokerageFilterSidebar';
 import { BrokerageItem } from '@/components/BrokerageItem';
@@ -7,18 +8,24 @@ import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { BrokerageFilterState, BrokerageCategory } from '@/types/brokerage';
 import { useBrokeragePlatforms } from '@/hooks/useBrokeragePlatforms';
+import { useLanguage } from '@/hooks/useLanguage';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Filter, Building2, LayoutGrid, Table2, AlertCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 const BrokerageComparator = () => {
+  const { t } = useTranslation();
+  const { getLocalizedPath, currentLanguage } = useLanguage();
+  
   const {
     data: platforms = [],
     isLoading,
     error
   } = useBrokeragePlatforms();
+  
   const [filters, setFilters] = useState<BrokerageFilterState>({
     categories: [],
     hasNoFees: false,
@@ -28,6 +35,7 @@ const BrokerageComparator = () => {
     sortBy: 'rating'
   });
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+  
   const filteredPlatforms = useMemo(() => {
     let result = [...platforms];
 
@@ -89,43 +97,37 @@ const BrokerageComparator = () => {
     }
     return result;
   }, [filters, platforms]);
+
+  const baseUrl = 'https://finivo.ca';
   const breadcrumbs = [{
-    name: 'Accueil',
-    url: 'https://finivo.ca'
+    name: t('common.home'),
+    url: baseUrl
   }, {
-    name: 'Comparateurs',
-    url: 'https://finivo.ca/comparateurs'
+    name: t('nav.comparators'),
+    url: `${baseUrl}${getLocalizedPath('/comparateurs')}`
   }, {
-    name: 'Plateformes de courtage',
-    url: 'https://finivo.ca/comparateurs/courtage'
+    name: t('brokerages.title'),
+    url: `${baseUrl}${getLocalizedPath('/comparateurs/courtage')}`
   }];
-  const categories = [{
-    id: 'zero-commission',
-    label: 'Zéro commission',
-    icon: '💰'
-  }, {
-    id: 'debutant',
-    label: 'Débutant',
-    icon: '🎓'
-  }, {
-    id: 'avance',
-    label: 'Avancé',
-    icon: '📈'
-  }, {
-    id: 'comptes-enregistres',
-    label: 'CELI / REER',
-    icon: '🏦'
-  }, {
-    id: 'crypto',
-    label: 'Crypto',
-    icon: '₿'
-  }, {
-    id: 'quebec-friendly',
-    label: 'Québec friendly',
-    icon: '🍁'
-  }];
-  return <div className="min-h-screen bg-background">
-      <SEO title="Comparateur de 10+ Courtiers en Ligne Canada 2026 | Wealthsimple, Questrade, IBKR | Finivo" description="Comparez gratuitement les meilleures plateformes de courtage au Canada en 2026 : Wealthsimple Trade (0$ commission), Questrade, Interactive Brokers, Disnat et les banques (TD, RBC, BMO). Trouvez le courtier idéal pour votre CELI, REER, CELIAPP. Comparez frais, produits (ETF, actions, crypto, options) et fonctionnalités." keywords="comparateur courtier canada 2026, wealthsimple vs questrade, meilleur courtier CELI REER CELIAPP, plateforme investissement québec, courtier zéro commission, interactive brokers canada, disnat, courtier crypto canada" url="https://finivo.ca/comparateurs/courtage" structuredData={generateBreadcrumbStructuredData(breadcrumbs)} />
+
+  const categories = [
+    { id: 'zero-commission', label: t('brokerages.categories.zeroCommission'), icon: '💰' },
+    { id: 'debutant', label: t('brokerages.categories.beginner'), icon: '🎓' },
+    { id: 'avance', label: t('brokerages.categories.advanced'), icon: '📈' },
+    { id: 'comptes-enregistres', label: t('brokerages.categories.registeredAccounts'), icon: '🏦' },
+    { id: 'crypto', label: t('brokerages.categories.crypto'), icon: '₿' },
+    { id: 'quebec-friendly', label: t('brokerages.categories.quebecFriendly'), icon: '🍁' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title={t('brokerages.seo.title')}
+        description={t('brokerages.seo.description')}
+        keywords={t('brokerages.seo.keywords')}
+        url={`${baseUrl}${getLocalizedPath('/comparateurs/courtage')}`}
+        structuredData={generateBreadcrumbStructuredData(breadcrumbs)} 
+      />
       <Header />
       
       {/* Hero Section */}
@@ -133,24 +135,26 @@ const BrokerageComparator = () => {
         <div className="container mx-auto px-4 bg-secondary-foreground">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-            <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
+            <Link to={getLocalizedPath('/')} className="hover:text-foreground transition-colors">
+              {t('common.home')}
+            </Link>
             <span>/</span>
-            <span>Comparateurs</span>
+            <span>{t('nav.comparators')}</span>
             <span>/</span>
-            <span className="text-primary">Plateformes de courtage</span>
+            <span className="text-primary">{t('brokerages.title')}</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
                 <Building2 className="w-4 h-4" />
-                Comparateur de plateformes de courtage en ligne     
+                {t('brokerages.comparator')}
               </div>
               <h1 className="text-3xl lg:text-4xl font-extrabold mb-3 text-popover-foreground">
-                Comparer les plateformes de courtage en ligne au Canada
+                {t('brokerages.heroTitle')}
               </h1>
               <p className="max-w-2xl text-lg text-secondary">
-                Trouvez la meilleure plateforme pour investir selon vos besoins : frais, CELI, REER, ETF, actions, options.
+                {t('brokerages.heroDescription')}
               </p>
             </div>
           </div>
@@ -159,18 +163,30 @@ const BrokerageComparator = () => {
           <div className="mt-6 flex items-start gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 max-w-2xl">
             <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              Comparaison à titre informatif – données susceptibles de changer. Vérifiez toujours les conditions sur le site officiel du courtier.
+              {t('brokerages.disclaimer')}
             </p>
           </div>
 
           {/* Category quick filters */}
           <div className="flex flex-wrap gap-2 mt-8">
-            {categories.map(cat => <button key={cat.id} onClick={() => setFilters(prev => ({
-            ...prev,
-            categories: prev.categories.includes(cat.id as BrokerageCategory) ? prev.categories.filter(c => c !== cat.id) : [...prev.categories, cat.id as BrokerageCategory]
-          }))} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filters.categories.includes(cat.id as BrokerageCategory) ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'}`}>
+            {categories.map(cat => (
+              <button 
+                key={cat.id} 
+                onClick={() => setFilters(prev => ({
+                  ...prev,
+                  categories: prev.categories.includes(cat.id as BrokerageCategory) 
+                    ? prev.categories.filter(c => c !== cat.id) 
+                    : [...prev.categories, cat.id as BrokerageCategory]
+                }))} 
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  filters.categories.includes(cat.id as BrokerageCategory) 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-background hover:bg-muted'
+                }`}
+              >
                 {cat.icon} {cat.label}
-              </button>)}
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -192,10 +208,12 @@ const BrokerageComparator = () => {
                   <SheetTrigger asChild>
                     <Button variant="outline" className="w-full gap-2 h-12 font-semibold">
                       <Filter className="w-4 h-4" />
-                      Filtres
-                      {(filters.categories.length > 0 || filters.hasNoFees || filters.hasFrench || filters.hasCrypto || filters.hasOptions) && <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                      {t('common.filters')}
+                      {(filters.categories.length > 0 || filters.hasNoFees || filters.hasFrench || filters.hasCrypto || filters.hasOptions) && (
+                        <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
                           {filters.categories.length + (filters.hasNoFees ? 1 : 0) + (filters.hasFrench ? 1 : 0) + (filters.hasCrypto ? 1 : 0) + (filters.hasOptions ? 1 : 0)}
-                        </span>}
+                        </span>
+                      )}
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-80 p-0 overflow-y-auto">
@@ -210,19 +228,22 @@ const BrokerageComparator = () => {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <span className="text-sm text-muted-foreground">
-                    {filteredPlatforms.length} plateforme{filteredPlatforms.length > 1 ? 's' : ''} trouvée{filteredPlatforms.length > 1 ? 's' : ''}
+                    {t('brokerages.platformsFound', { count: filteredPlatforms.length })}
                   </span>
-                  <Select value={filters.sortBy} onValueChange={(value: 'rating' | 'fees' | 'name') => setFilters({
-                  ...filters,
-                  sortBy: value
-                })}>
+                  <Select 
+                    value={filters.sortBy} 
+                    onValueChange={(value: 'rating' | 'fees' | 'name') => setFilters({
+                      ...filters,
+                      sortBy: value
+                    })}
+                  >
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Trier par" />
+                      <SelectValue placeholder={t('brokerages.sort.placeholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="rating">Note</SelectItem>
-                      <SelectItem value="fees">Frais les plus bas</SelectItem>
-                      <SelectItem value="name">Nom</SelectItem>
+                      <SelectItem value="rating">{t('brokerages.sort.rating')}</SelectItem>
+                      <SelectItem value="fees">{t('brokerages.sort.lowestFees')}</SelectItem>
+                      <SelectItem value="name">{t('brokerages.sort.name')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -232,46 +253,60 @@ const BrokerageComparator = () => {
                   <TabsList>
                     <TabsTrigger value="cards" className="gap-2">
                       <LayoutGrid className="w-4 h-4" />
-                      Cartes
+                      {t('brokerages.view.cards')}
                     </TabsTrigger>
                     <TabsTrigger value="table" className="gap-2">
                       <Table2 className="w-4 h-4" />
-                      Tableau
+                      {t('brokerages.view.table')}
                     </TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
 
               {/* Content */}
-              {isLoading ? <div className="flex items-center justify-center py-20">
+              {isLoading ? (
+                <div className="flex items-center justify-center py-20">
                   <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                </div> : error ? <div className="text-center py-20 card-elevated rounded-2xl">
+                </div>
+              ) : error ? (
+                <div className="text-center py-20 card-elevated rounded-2xl">
                   <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-4">
                     <AlertCircle className="w-8 h-8 text-destructive" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Erreur de chargement</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{t('brokerages.loadingError')}</h3>
                   <p className="text-muted-foreground">
-                    Impossible de charger les plateformes. Veuillez réessayer.
+                    {t('brokerages.loadingErrorMessage')}
                   </p>
-                </div> : viewMode === 'cards' ? <div className="space-y-6">
-                  {filteredPlatforms.map((platform, index) => <BrokerageItem key={platform.id} platform={platform} index={index} />)}
+                </div>
+              ) : viewMode === 'cards' ? (
+                <div className="space-y-6">
+                  {filteredPlatforms.map((platform, index) => (
+                    <BrokerageItem key={platform.id} platform={platform} index={index} />
+                  ))}
 
-                  {filteredPlatforms.length === 0 && <div className="text-center py-20 card-elevated rounded-2xl">
+                  {filteredPlatforms.length === 0 && (
+                    <div className="text-center py-20 card-elevated rounded-2xl">
                       <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
                         <Building2 className="w-8 h-8 text-muted-foreground" />
                       </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">Aucune plateforme trouvée</h3>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">{t('brokerages.noResults')}</h3>
                       <p className="text-muted-foreground">
-                        Essayez d'ajuster les filtres pour voir plus de résultats.
+                        {t('brokerages.adjustFilters')}
                       </p>
-                    </div>}
-                </div> : <BrokerageComparisonTable platforms={filteredPlatforms} />}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <BrokerageComparisonTable platforms={filteredPlatforms} />
+              )}
             </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default BrokerageComparator;

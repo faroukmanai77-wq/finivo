@@ -1,9 +1,10 @@
-import { BrokerageCategory, BrokerageFilterState, brokerageCategoryLabels } from '@/types/brokerage';
+import { BrokerageCategory, BrokerageFilterState } from '@/types/brokerage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Filter, RotateCcw, Sparkles, Tag } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface BrokerageFilterSidebarProps {
   filters: BrokerageFilterState;
@@ -33,6 +34,19 @@ const categoryIcons: Record<BrokerageCategory, string> = {
 };
 
 export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFilterSidebarProps) => {
+  const { t } = useTranslation();
+
+  const brokerageCategoryLabels: Record<BrokerageCategory, string> = {
+    'zero-commission': t('brokerages.categories.zeroCommission'),
+    'debutant': t('brokerages.categories.beginner'),
+    'avance': t('brokerages.categories.advanced'),
+    'comptes-enregistres': t('brokerages.categories.registeredAccounts'),
+    'actions-etf': t('brokerages.categories.stocksEtf'),
+    'options': t('brokerages.categories.options'),
+    'crypto': t('brokerages.categories.crypto'),
+    'quebec-friendly': t('brokerages.categories.quebecFriendly'),
+  };
+
   const handleCategoryToggle = (category: BrokerageCategory) => {
     const newCategories = filters.categories.includes(category)
       ? filters.categories.filter((c) => c !== category)
@@ -66,7 +80,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <Filter className="w-4 h-4 text-primary" />
             </div>
-            Filtres
+            {t('common.filters')}
             {activeFiltersCount > 0 && (
               <span className="ml-2 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
                 {activeFiltersCount}
@@ -80,7 +94,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
             className="text-muted-foreground hover:text-foreground font-medium"
           >
             <RotateCcw className="w-4 h-4 mr-1" />
-            Réinitialiser
+            {t('brokerages.filters.reset')}
           </Button>
         </div>
       </CardHeader>
@@ -89,7 +103,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
         <div>
           <h4 className="font-semibold text-sm mb-4 text-foreground flex items-center gap-2">
             <Tag className="w-4 h-4 text-muted-foreground" />
-            Catégories
+            {t('brokerages.filters.categories')}
           </h4>
           <div className="space-y-2">
             {categories.map((category) => (
@@ -124,7 +138,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
         <div className="pt-4 border-t border-border/50">
           <h4 className="font-semibold text-sm mb-4 text-foreground flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-muted-foreground" />
-            Filtres rapides
+            {t('brokerages.filters.quickFilters')}
           </h4>
           <div className="space-y-2">
             <div 
@@ -144,7 +158,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
                 className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
               />
               <Label htmlFor="hasNoFees" className="text-sm cursor-pointer font-medium">
-                💰 Zéro commission
+                💰 {t('brokerages.filters.zeroCommission')}
               </Label>
             </div>
 
@@ -165,7 +179,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
                 className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
               />
               <Label htmlFor="hasFrench" className="text-sm cursor-pointer font-medium">
-                🇫🇷 Disponible en français
+                🇫🇷 {t('brokerages.filters.availableInFrench')}
               </Label>
             </div>
 
@@ -186,7 +200,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
                 className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
               />
               <Label htmlFor="hasOptions" className="text-sm cursor-pointer font-medium">
-                ⚡ Trading d'options
+                ⚡ {t('brokerages.filters.optionsTrading')}
               </Label>
             </div>
 
@@ -207,7 +221,7 @@ export const BrokerageFilterSidebar = ({ filters, onFilterChange }: BrokerageFil
                 className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
               />
               <Label htmlFor="hasCrypto" className="text-sm cursor-pointer font-medium">
-                ₿ Crypto disponible
+                ₿ {t('brokerages.filters.cryptoAvailable')}
               </Label>
             </div>
           </div>

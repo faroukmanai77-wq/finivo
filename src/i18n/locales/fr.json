@@ -910,5 +910,113 @@
       "description": "Comparez gratuitement plus de 30 cartes de crédit au Québec en 2026 : remises en argent jusqu'à 5%, cartes voyage avec points Aéroplan, cartes sans frais annuels et cartes étudiants.",
       "keywords": "comparateur carte crédit québec 2026, meilleure carte crédit remise argent, carte crédit sans frais annuels, carte crédit voyage aéroplan"
     }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "subtitle": "Votre vie privée est notre priorité. Cette politique explique comment nous collectons, utilisons et protégeons vos renseignements personnels conformément à la Loi 25 du Québec.",
+      "lastUpdated": "Dernière mise à jour : Décembre 2025",
+      "sections": {
+        "collection": {
+          "title": "Collecte de renseignements personnels",
+          "content": "Conformément à la Loi 25 sur la protection des renseignements personnels dans le secteur privé du Québec, nous collectons uniquement les renseignements nécessaires à la fourniture de nos services de comparaison de cartes de crédit.\n\nLes renseignements que nous pouvons collecter incluent :\n• Informations de navigation (pages visitées, durée des visites)\n• Adresse IP et données de localisation approximative\n• Informations fournies volontairement via nos formulaires\n• Préférences de navigation et cookies techniques"
+        },
+        "usage": {
+          "title": "Utilisation des renseignements",
+          "content": "Vos renseignements personnels sont utilisés exclusivement pour :\n• Améliorer votre expérience de navigation sur notre plateforme\n• Personnaliser les recommandations de cartes de crédit\n• Analyser l'utilisation de notre site pour l'améliorer\n• Communiquer avec vous si vous nous contactez\n• Respecter nos obligations légales\n\nNous ne vendons jamais vos renseignements personnels à des tiers."
+        },
+        "protection": {
+          "title": "Protection des données",
+          "content": "Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos renseignements personnels contre tout accès, utilisation ou divulgation non autorisés :\n• Chiffrement SSL/TLS pour toutes les communications\n• Accès limité aux données personnelles\n• Surveillance continue de nos systèmes\n• Formation de notre personnel sur la protection des données"
+        },
+        "rights": {
+          "title": "Vos droits (Loi 25)",
+          "content": "En vertu de la Loi 25 du Québec, vous disposez des droits suivants :\n• Droit d'accès à vos renseignements personnels\n• Droit de rectification de vos données\n• Droit à l'effacement de vos données\n• Droit à la portabilité de vos données\n• Droit de retirer votre consentement\n\nPour exercer ces droits, contactez-nous à : info@finivo.ca"
+        },
+        "cookies": {
+          "title": "Cookies et technologies similaires",
+          "content": "Nous utilisons des cookies pour :\n• Assurer le bon fonctionnement du site\n• Mémoriser vos préférences\n• Analyser le trafic (cookies analytiques)\n• Améliorer nos services\n\nVous pouvez gérer vos préférences de cookies à tout moment via les paramètres de votre navigateur."
+        }
+      },
+      "contact": {
+        "title": "Questions ou préoccupations ?",
+        "description": "Si vous avez des questions concernant notre politique de confidentialité ou souhaitez exercer vos droits, n'hésitez pas à nous contacter.",
+        "officer": "Responsable de la protection des renseignements personnels"
+      }
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "subtitle": "Veuillez lire attentivement ces conditions avant d'utiliser notre service de comparaison de cartes de crédit.",
+      "lastUpdated": "Dernière mise à jour : Décembre 2025",
+      "sections": {
+        "acceptance": {
+          "title": "Acceptation des conditions",
+          "content": "En accédant et en utilisant le site Finivo (finivo.ca), vous acceptez d'être lié par les présentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site.\n\nCes conditions sont régies par les lois du Québec et du Canada. Tout litige sera soumis à la compétence exclusive des tribunaux du Québec."
+        },
+        "services": {
+          "title": "Nature des services",
+          "content": "Finivo est un service de comparaison de cartes de crédit destiné aux consommateurs canadiens, particulièrement québécois.\n\nNos services incluent :\n• Comparaison objective de cartes de crédit\n• Information sur les caractéristiques des produits financiers\n• Outils de calcul et de simulation\n• Contenu éducatif sur les finances personnelles\n\nNous ne sommes pas un conseiller financier agréé et nos informations ne constituent pas des conseils financiers personnalisés."
+        },
+        "liability": {
+          "title": "Limitation de responsabilité",
+          "content": "Les informations présentées sur notre site sont fournies à titre indicatif uniquement :\n• Les taux, frais et conditions peuvent changer sans préavis\n• Nous nous efforçons de maintenir des informations exactes, mais ne garantissons pas leur exhaustivité\n• Consultez toujours le site officiel de l'émetteur avant de faire une demande\n• Nous ne sommes pas responsables des décisions prises sur la base de nos informations\n\nVotre admissibilité à une carte de crédit dépend de l'évaluation de l'émetteur."
+        },
+        "prohibited": {
+          "title": "Utilisations interdites",
+          "content": "Vous vous engagez à ne pas :\n• Utiliser notre site à des fins illégales ou frauduleuses\n• Tenter d'accéder à des zones non autorisées du site\n• Reproduire, dupliquer ou copier notre contenu sans autorisation\n• Utiliser des robots, scrapers ou outils automatisés\n• Transmettre des virus ou codes malveillants\n• Usurper l'identité d'une autre personne\n\nToute violation peut entraîner la suspension de votre accès."
+        },
+        "ip": {
+          "title": "Propriété intellectuelle",
+          "content": "Tout le contenu du site Finivo est protégé par les droits d'auteur canadiens :\n• Textes, graphiques, logos et images\n• Design et mise en page du site\n• Outils de calcul et fonctionnalités\n• Base de données de produits\n\nL'utilisation non autorisée de notre contenu est strictement interdite. Les marques de commerce des émetteurs de cartes appartiennent à leurs propriétaires respectifs."
+        },
+        "modifications": {
+          "title": "Modification des conditions",
+          "content": "Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications entrent en vigueur dès leur publication sur le site.\n\nVotre utilisation continue du site après la publication des modifications constitue votre acceptation des nouvelles conditions.\n\nNous vous encourageons à consulter régulièrement cette page pour rester informé des mises à jour."
+        }
+      },
+      "contact": {
+        "title": "Des questions ?",
+        "description": "Si vous avez des questions concernant ces conditions d'utilisation, n'hésitez pas à nous contacter."
+      }
+    },
+    "affiliate": {
+      "title": "Divulgation d'affiliation",
+      "subtitle": "La transparence est au cœur de notre mission. Découvrez comment nous finançons notre service gratuit et comment cela peut affecter nos recommandations.",
+      "lastUpdated": "Dernière mise à jour : Décembre 2025",
+      "notice": {
+        "title": "Avis important",
+        "content": "Ce site peut recevoir une compensation lorsque vous cliquez sur des liens vers des produits financiers et/ou demandez des cartes de crédit. Cela n'influence pas notre évaluation éditoriale des produits, mais peut affecter l'ordre d'affichage et les produits que nous choisissons de présenter."
+      },
+      "sections": {
+        "business": {
+          "title": "Notre modèle d'affaires",
+          "content": "Finivo est un service gratuit de comparaison de cartes de crédit. Nous générons des revenus grâce à des partenariats d'affiliation avec les émetteurs de cartes de crédit.\n\nLorsque vous cliquez sur un lien vers une carte de crédit et que vous êtes approuvé pour cette carte, nous pouvons recevoir une compensation de l'émetteur. Cette compensation nous permet de maintenir notre service gratuit et de continuer à vous offrir des outils de comparaison de qualité."
+        },
+        "impact": {
+          "title": "Impact sur nos recommandations",
+          "content": "Nous nous engageons à la transparence totale concernant nos relations d'affiliation :\n• La compensation reçue peut influencer l'ordre d'affichage des cartes\n• Certaines cartes en vedette peuvent être des partenaires rémunérés\n• Nous n'offrons pas toutes les cartes disponibles sur le marché canadien\n\nCependant, nos évaluations et descriptions de produits restent objectives et basées sur les caractéristiques réelles des cartes."
+        },
+        "objectivity": {
+          "title": "Notre engagement d'objectivité",
+          "content": "Malgré nos relations d'affiliation, nous nous engageons à :\n• Fournir des informations exactes et à jour sur chaque carte\n• Présenter les avantages ET les inconvénients de chaque produit\n• Permettre des comparaisons basées sur vos besoins réels\n• Ne jamais recommander un produit inadapté pour des raisons financières\n• Mettre à jour régulièrement nos évaluations\n\nVotre confiance est notre priorité absolue."
+        },
+        "compensation": {
+          "title": "Types de compensations",
+          "content": "Nous pouvons recevoir différents types de compensations :\n• Commission fixe par approbation de demande\n• Commission basée sur le montant des premiers achats\n• Paiement pour le placement en vedette\n• Bonus pour certaines promotions\n\nCes compensations proviennent des émetteurs de cartes, jamais des utilisateurs. Nos services restent entièrement gratuits pour vous."
+        },
+        "unchanged": {
+          "title": "Ce qui ne change jamais",
+          "content": "Quelle que soit notre relation avec les émetteurs :\n• Les taux d'intérêt affichés sont toujours exacts\n• Les frais annuels sont clairement indiqués\n• Les avantages et conditions sont fidèlement rapportés\n• Vos demandes vont directement aux émetteurs\n• Nous ne partageons jamais vos données avec des tiers non autorisés\n\nNous croyons qu'un service transparent génère la confiance et les meilleures décisions pour nos utilisateurs."
+        },
+        "howToChoose": {
+          "title": "Comment choisir la bonne carte",
+          "content": "Notre conseil : ne vous fiez pas uniquement à l'ordre d'affichage. Utilisez nos filtres et outils de comparaison pour trouver la carte qui correspond vraiment à vos besoins :\n• Évaluez vos habitudes de dépenses\n• Considérez les frais annuels vs les avantages\n• Vérifiez les taux d'intérêt si vous prévoyez un solde\n• Lisez les conditions sur le site de l'émetteur\n\nEn cas de doute, consultez un conseiller financier agréé."
+        }
+      },
+      "contact": {
+        "title": "Questions sur nos partenariats ?",
+        "description": "Si vous avez des questions concernant nos relations d'affiliation ou nos méthodes de recommandation, n'hésitez pas à nous contacter."
+      }
+    }
   }
 }

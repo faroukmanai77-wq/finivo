@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { PiggyBank } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
@@ -9,30 +10,11 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import InvestmentPathIllustration from '@/assets/illustrations/investment-path.svg';
+import { useLanguage } from '@/hooks/useLanguage';
 
-const faqItems = [
-  {
-    question: "Quelle est la limite de cotisation REER pour 2026?",
-    answer: "Pour 2026, la limite de cotisation REER est de 18% de votre revenu gagné de l'année précédente, jusqu'à un maximum de 32 490 $. Vos droits de cotisation inutilisés des années précédentes s'accumulent et sont reportés."
-  },
-  {
-    question: "Quand dois-je cotiser à mon REER?",
-    answer: "Vous pouvez cotiser à votre REER tout au long de l'année et jusqu'au 60e jour de l'année suivante pour que la cotisation soit déductible de vos revenus de l'année précédente. Par exemple, pour l'année d'imposition 2024, vous avez jusqu'au 1er mars 2025."
-  },
-  {
-    question: "REER ou CELI : lequel choisir?",
-    answer: "Le REER est généralement préférable si votre taux d'imposition actuel est plus élevé qu'à la retraite, car il offre une déduction immédiate. Le CELI est avantageux si vous prévoyez un taux d'imposition similaire ou plus élevé à la retraite, ou si vous voulez plus de flexibilité pour les retraits."
-  },
-  {
-    question: "Puis-je retirer de mon REER avant la retraite?",
-    answer: "Oui, mais les retraits sont imposables comme revenu ordinaire. Deux exceptions : le Régime d'accession à la propriété (RAP) permet de retirer jusqu'à 60 000 $ pour une première maison, et le Régime d'encouragement à l'éducation permanente (REEP) permet de retirer jusqu'à 20 000 $ pour les études."
-  },
-  {
-    question: "Que se passe-t-il avec mon REER à 71 ans?",
-    answer: "À la fin de l'année où vous atteignez 71 ans, vous devez convertir votre REER en FERR (Fonds enregistré de revenu de retraite), acheter une rente, ou retirer le solde. Le FERR vous oblige à effectuer des retraits minimums annuels."
-  }
-];
 const EpargneREER = () => {
+  const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const [soldeActuel, setSoldeActuel] = useState(25000);
   const [cotisationAnnuelle, setCotisationAnnuelle] = useState(6000);
   const [frequenceCotisation, setFrequenceCotisation] = useState<'mensuel' | 'annuel'>('annuel');
@@ -100,18 +82,26 @@ const EpargneREER = () => {
   }, [soldeActuel, cotisationAnnuelle, frequenceCotisation, tauxRendementTravail, ageActuel, anneesAvantRetraite, anneesRetraite, tauxRendementRetraite]);
 
   const formatMontant = (montant: number) => {
-    return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
+    return new Intl.NumberFormat(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
   };
+
+  const faqItems = [
+    { question: t('calculators.rrsp.faq.q1'), answer: t('calculators.rrsp.faq.a1') },
+    { question: t('calculators.rrsp.faq.q2'), answer: t('calculators.rrsp.faq.a2') },
+    { question: t('calculators.rrsp.faq.q3'), answer: t('calculators.rrsp.faq.a3') },
+    { question: t('calculators.rrsp.faq.q4'), answer: t('calculators.rrsp.faq.a4') },
+    { question: t('calculators.rrsp.faq.q5'), answer: t('calculators.rrsp.faq.a5') },
+  ];
 
   return (
     <CalculatorLayout
-      title="Calculatrice d'épargne REER"
-      description="Déterminez quelle sera la valeur de votre régime enregistré d'épargne-retraite (REER) quand vous prendrez votre retraite, et le revenu annuel que vous en tirerez."
+      title={t('calculators.rrsp.title')}
+      description={t('calculators.rrsp.description')}
       icon={<PiggyBank className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice REER 2026 - Épargne-retraite Québec | Finivo"
-      seoDescription="Calculez la valeur future de votre REER en 2026 et estimez votre revenu de retraite. Planifiez votre épargne-retraite avec notre calculatrice REER gratuite. Plafond 2026 : 32 490$."
-      seoKeywords="REER 2026, épargne-retraite québec, calculatrice REER gratuit, retraite investissement, plafond cotisation REER, RAP 60000"
-      url="https://finivo.ca/calculateurs/epargne-reer"
+      seoTitle={t('calculators.rrsp.seo.title')}
+      seoDescription={t('calculators.rrsp.seo.description')}
+      seoKeywords={t('calculators.rrsp.seo.keywords')}
+      url={`https://finivo.ca/${currentLanguage}/calculateurs/epargne-reer`}
       relatedCategory="epargne"
       featuredCardType="cashback"
       illustration={InvestmentPathIllustration}
@@ -120,28 +110,26 @@ const EpargneREER = () => {
         {/* Section explicative */}
         <Card className="bg-muted/50">
           <CardContent className="pt-6">
-            <h2 className="text-lg font-semibold mb-3">Qu'est-ce qu'un REER?</h2>
+            <h2 className="text-lg font-semibold mb-3">{t('calculators.rrsp.whatIs')}</h2>
             <div className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                Le <strong>Régime enregistré d'épargne-retraite (REER)</strong> est un compte d'épargne à l'abri de l'impôt conçu pour vous aider à épargner pour la retraite. Les cotisations que vous faites à votre REER sont déductibles de votre revenu imposable, ce qui réduit l'impôt que vous payez cette année-là.
-              </p>
+              <p>{t('calculators.rrsp.explanation')}</p>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Avantages du REER</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.rrsp.advantages')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Cotisations déductibles d'impôt</li>
-                    <li>Croissance à l'abri de l'impôt</li>
-                    <li>Report d'impôt jusqu'au retrait</li>
-                    <li>Peut réduire votre taux d'imposition</li>
+                    <li>{currentLanguage === 'en' ? 'Tax-deductible contributions' : 'Cotisations déductibles d\'impôt'}</li>
+                    <li>{currentLanguage === 'en' ? 'Tax-sheltered growth' : 'Croissance à l\'abri de l\'impôt'}</li>
+                    <li>{currentLanguage === 'en' ? 'Tax deferral until withdrawal' : 'Report d\'impôt jusqu\'au retrait'}</li>
+                    <li>{currentLanguage === 'en' ? 'Can reduce your tax rate' : 'Peut réduire votre taux d\'imposition'}</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Règles importantes</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.rrsp.rules')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Limite de cotisation : 18% du revenu (max ~31 560 $ en 2024)</li>
-                    <li>Les droits inutilisés sont reportés</li>
-                    <li>Retraits imposables à votre taux marginal</li>
-                    <li>À convertir en FERR avant 71 ans</li>
+                    <li>{currentLanguage === 'en' ? 'Contribution limit: 18% of income (max ~$32,490 in 2026)' : 'Limite de cotisation : 18% du revenu (max ~32 490 $ en 2026)'}</li>
+                    <li>{currentLanguage === 'en' ? 'Unused room carries forward' : 'Les droits inutilisés sont reportés'}</li>
+                    <li>{currentLanguage === 'en' ? 'Withdrawals taxable at marginal rate' : 'Retraits imposables à votre taux marginal'}</li>
+                    <li>{currentLanguage === 'en' ? 'Must convert to RRIF before age 71' : 'À convertir en FERR avant 71 ans'}</li>
                   </ul>
                 </div>
               </div>
@@ -153,16 +141,15 @@ const EpargneREER = () => {
           {/* Phase travail */}
           <Card>
             <CardHeader>
-              <CardTitle>Lorsque vous travaillez</CardTitle>
+              <CardTitle>{t('calculators.rrsp.whileWorking')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-sm text-muted-foreground">
-                Lorsque vous travaillez encore, vous pouvez prendre plus de risques quand vous investissez 
-                parce que votre salaire peut compenser vos pertes.
+                {t('calculators.rrsp.workingExplanation')}
               </p>
 
               <div className="space-y-3">
-                <Label htmlFor="solde">Valeur actuelle de votre REER</Label>
+                <Label htmlFor="solde">{t('calculators.rrsp.currentValue')}</Label>
                 <div className="flex items-center gap-3">
                   <Input
                     id="solde"
@@ -176,7 +163,7 @@ const EpargneREER = () => {
               </div>
 
               <div className="space-y-3">
-                <Label htmlFor="taux-travail">Taux de rendement annuel pendant que vous travaillez</Label>
+                <Label htmlFor="taux-travail">{t('calculators.rrsp.annualReturn')}</Label>
                 <div className="flex items-center gap-3">
                   <Input
                     id="taux-travail"
@@ -191,7 +178,7 @@ const EpargneREER = () => {
               </div>
 
               <div className="space-y-3">
-                <Label>Montant et fréquence de vos cotisations</Label>
+                <Label>{t('calculators.rrsp.contributionAmount')}</Label>
                 <div className="flex items-center gap-3">
                   <Input
                     type="number"
@@ -205,15 +192,15 @@ const EpargneREER = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="mensuel">Par mois</SelectItem>
-                      <SelectItem value="annuel">Par année</SelectItem>
+                      <SelectItem value="mensuel">{t('calculators.common.perMonth')}</SelectItem>
+                      <SelectItem value="annuel">{t('calculators.common.perYear')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <Label>Âge actuel</Label>
+                <Label>{t('calculators.rrsp.currentAge')}</Label>
                 <div className="flex items-center gap-4">
                   <Input
                     type="number"
@@ -237,7 +224,7 @@ const EpargneREER = () => {
               </div>
 
               <div className="space-y-3">
-                <Label>Nombre d'années avant votre retraite</Label>
+                <Label>{t('calculators.rrsp.yearsToRetirement')}</Label>
                 <div className="flex items-center gap-4">
                   <Input
                     type="number"
@@ -265,16 +252,15 @@ const EpargneREER = () => {
           {/* Phase retraite */}
           <Card>
             <CardHeader>
-              <CardTitle>Lorsque vous êtes à la retraite</CardTitle>
+              <CardTitle>{t('calculators.rrsp.atRetirement')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-sm text-muted-foreground">
-                Une fois à la retraite, vous pouvez prendre moins de risques quand vous investissez 
-                parce que votre salaire ne peut plus compenser vos pertes.
+                {t('calculators.rrsp.retirementExplanation')}
               </p>
 
               <div className="space-y-3">
-                <Label>Estimation du nombre d'années de votre retraite</Label>
+                <Label>{t('calculators.rrsp.retirementYears')}</Label>
                 <div className="flex items-center gap-4">
                   <Input
                     type="number"
@@ -298,7 +284,7 @@ const EpargneREER = () => {
               </div>
 
               <div className="space-y-3">
-                <Label htmlFor="taux-retraite">Taux de rendement annuel à la retraite</Label>
+                <Label htmlFor="taux-retraite">{t('calculators.rrsp.retirementReturn')}</Label>
                 <div className="flex items-center gap-3">
                   <Input
                     id="taux-retraite"
@@ -320,19 +306,19 @@ const EpargneREER = () => {
           <CardContent className="pt-6">
             <div className="grid md:grid-cols-4 gap-6 text-center">
               <div>
-                <p className="text-sm opacity-80">Valeur du REER à la retraite</p>
+                <p className="text-sm opacity-80">{t('calculators.rrsp.results.valueAtRetirement')}</p>
                 <p className="text-3xl font-bold mt-1">{formatMontant(resultats.soldeRetraite)}</p>
               </div>
               <div>
-                <p className="text-sm opacity-80">Revenu annuel estimé</p>
+                <p className="text-sm opacity-80">{t('calculators.rrsp.results.annualIncome')}</p>
                 <p className="text-3xl font-bold mt-1">{formatMontant(resultats.retraitAnnuel)}</p>
               </div>
               <div>
-                <p className="text-sm opacity-80">Revenu mensuel estimé</p>
+                <p className="text-sm opacity-80">{t('calculators.rrsp.results.monthlyIncome')}</p>
                 <p className="text-3xl font-bold mt-1">{formatMontant(resultats.retraitMensuel)}</p>
               </div>
               <div>
-                <p className="text-sm opacity-80">Intérêts gagnés</p>
+                <p className="text-sm opacity-80">{t('calculators.rrsp.results.interestEarned')}</p>
                 <p className="text-3xl font-bold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
               </div>
             </div>
@@ -342,7 +328,7 @@ const EpargneREER = () => {
         {/* Graphique */}
         <Card>
           <CardHeader>
-            <CardTitle>Évolution de votre REER</CardTitle>
+            <CardTitle>{t('calculators.rrsp.results.chartTitle')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -356,7 +342,7 @@ const EpargneREER = () => {
                   <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                   <Tooltip 
                     formatter={(value: number) => formatMontant(value)}
-                    labelFormatter={(label) => label <= anneesAvantRetraite ? `Année ${label}` : `Retraite +${label - anneesAvantRetraite} ans`}
+                    labelFormatter={(label) => label <= anneesAvantRetraite ? `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}` : `${currentLanguage === 'en' ? 'Retirement' : 'Retraite'} +${label - anneesAvantRetraite} ${t('calculators.common.years')}`}
                   />
                   <Legend />
                   <Area 
@@ -365,7 +351,7 @@ const EpargneREER = () => {
                     stroke="hsl(var(--primary))" 
                     fill="hsl(var(--primary))" 
                     fillOpacity={0.6}
-                    name="Solde REER"
+                    name={currentLanguage === 'en' ? 'RRSP Balance' : 'Solde REER'}
                   />
                 </AreaChart>
               </ResponsiveContainer>

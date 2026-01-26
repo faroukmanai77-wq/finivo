@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CreditCard, Plus, Trash2 } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
@@ -9,29 +10,7 @@ import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
-
-const faqItems = [
-  {
-    question: "Qu'est-ce que la consolidation de dettes?",
-    answer: "La consolidation de dettes consiste à regrouper plusieurs dettes (cartes de crédit, prêts personnels, etc.) en un seul prêt avec un taux d'intérêt généralement plus bas. Cela simplifie vos paiements et peut réduire le montant total des intérêts payés."
-  },
-  {
-    question: "Quand devrais-je considérer la consolidation de dettes?",
-    answer: "Considérez la consolidation si vous avez plusieurs dettes à taux d'intérêt élevé, si vous avez du mal à suivre vos paiements multiples, ou si vous pouvez obtenir un taux d'intérêt inférieur à la moyenne de vos dettes actuelles."
-  },
-  {
-    question: "Quelles sont les options de consolidation au Canada?",
-    answer: "Les options incluent : un prêt de consolidation bancaire (5-12%), une marge de crédit hypothécaire (taux hypothécaire + prime), un transfert de solde sur carte de crédit (0-3% promotionnel), ou un prêt personnel d'une coopérative de crédit."
-  },
-  {
-    question: "La consolidation affecte-t-elle ma cote de crédit?",
-    answer: "À court terme, une demande de prêt peut légèrement réduire votre cote. Cependant, à long terme, la consolidation peut améliorer votre cote en réduisant votre ratio d'utilisation du crédit et en vous aidant à effectuer des paiements réguliers."
-  },
-  {
-    question: "Quelle est la différence entre consolidation et faillite?",
-    answer: "La consolidation est un accord volontaire pour rembourser vos dettes intégralement à un taux réduit. La faillite est une procédure légale qui peut éliminer certaines dettes mais a un impact sévère sur votre crédit pendant 6-7 ans."
-  }
-];
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface Dette {
   id: string;
@@ -40,26 +19,32 @@ interface Dette {
   tauxInteret: number;
   paiementMensuel: number;
 }
+
 const ConsolidationDettes = () => {
+  const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
+  
   const [dettes, setDettes] = useState<Dette[]>([{
     id: '1',
-    nom: 'Carte de crédit 1',
+    nom: currentLanguage === 'en' ? 'Credit card 1' : 'Carte de crédit 1',
     montant: 5000,
     tauxInteret: 19.99,
     paiementMensuel: 150
   }]);
   const [activeTab, setActiveTab] = useState('1');
+
   const ajouterDette = () => {
     const newId = (dettes.length + 1).toString();
     setDettes([...dettes, {
       id: newId,
-      nom: `Carte de crédit ${newId}`,
+      nom: `${currentLanguage === 'en' ? 'Credit card' : 'Carte de crédit'} ${newId}`,
       montant: 0,
       tauxInteret: 19.99,
       paiementMensuel: 50
     }]);
     setActiveTab(newId);
   };
+
   const supprimerDette = (id: string) => {
     if (dettes.length > 1) {
       const newDettes = dettes.filter(d => d.id !== id);
@@ -69,12 +54,11 @@ const ConsolidationDettes = () => {
       }
     }
   };
+
   const updateDette = (id: string, field: keyof Dette, value: string | number) => {
-    setDettes(dettes.map(d => d.id === id ? {
-      ...d,
-      [field]: value
-    } : d));
+    setDettes(dettes.map(d => d.id === id ? { ...d, [field]: value } : d));
   };
+
   const resultats = useMemo(() => {
     let totalDette = 0;
     let totalPaiementMensuel = 0;
@@ -86,18 +70,17 @@ const ConsolidationDettes = () => {
       interets: number;
       mois: number;
     }> = [];
+
     dettes.forEach(dette => {
       if (dette.montant <= 0 || dette.paiementMensuel <= 0) return;
       totalDette += dette.montant;
       totalPaiementMensuel += dette.paiementMensuel;
 
-      // Calcul du temps de remboursement et intérêts
       const tauxMensuel = dette.tauxInteret / 100 / 12;
       let solde = dette.montant;
       let mois = 0;
       let interetsPaies = 0;
       while (solde > 0 && mois < 600) {
-        // Max 50 ans
         const interetMois = solde * tauxMensuel;
         interetsPaies += interetMois;
         solde = solde + interetMois - dette.paiementMensuel;
@@ -117,8 +100,7 @@ const ConsolidationDettes = () => {
       });
     });
 
-    // Données pour le graphique
-    const donneesPie = dettes.filter(d => d.montant > 0).map((dette, index) => ({
+    const donneesPie = dettes.filter(d => d.montant > 0).map((dette) => ({
       name: dette.nom,
       value: dette.montant
     }));
@@ -127,6 +109,7 @@ const ConsolidationDettes = () => {
       principal: d.montant,
       interets: d.interets
     }));
+
     return {
       totalDette,
       totalPaiementMensuel,
@@ -137,53 +120,100 @@ const ConsolidationDettes = () => {
       donneesBar
     };
   }, [dettes]);
+
   const formatMontant = (montant: number) => {
-    return new Intl.NumberFormat('fr-CA', {
+    return new Intl.NumberFormat(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', {
       style: 'currency',
       currency: 'CAD',
       maximumFractionDigits: 0
     }).format(montant);
   };
+
   const COLORS = ['hsl(var(--primary))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))', 'hsl(var(--chart-5))'];
-  return <CalculatorLayout title="Calculatrice de consolidation de dettes" description="La consolidation de dettes consiste à combiner plusieurs dettes en une seule. Utilisez cette calculatrice pour calculer le montant de vos nouvelles mensualités et le délai de remboursement." icon={<CreditCard className="w-8 h-8 text-primary" />} seoTitle="Calculatrice de consolidation de dettes | Finivo" seoDescription="Calculez combien vous pouvez économiser en consolidant vos dettes. Comparez vos paiements actuels avec un prêt de consolidation." seoKeywords="consolidation dettes, remboursement, carte de crédit, prêt, calculatrice, intérêts" url="https://finivo.ca/calculateurs/consolidation-dettes" relatedCategory="dettes" featuredCardType="transfer">
+
+  const faqItems = [
+    { question: t('calculators.debtConsolidation.faq.q1'), answer: t('calculators.debtConsolidation.faq.a1') },
+    { question: t('calculators.debtConsolidation.faq.q2'), answer: t('calculators.debtConsolidation.faq.a2') },
+    { question: t('calculators.debtConsolidation.faq.q3'), answer: t('calculators.debtConsolidation.faq.a3') },
+    { question: t('calculators.debtConsolidation.faq.q4'), answer: t('calculators.debtConsolidation.faq.a4') },
+    { question: t('calculators.debtConsolidation.faq.q5'), answer: t('calculators.debtConsolidation.faq.a5') },
+  ];
+
+  return (
+    <CalculatorLayout 
+      title={t('calculators.debtConsolidation.title')} 
+      description={t('calculators.debtConsolidation.description')} 
+      icon={<CreditCard className="w-8 h-8 text-primary" />} 
+      seoTitle={t('calculators.debtConsolidation.seo.title')} 
+      seoDescription={t('calculators.debtConsolidation.seo.description')} 
+      seoKeywords={t('calculators.debtConsolidation.seo.keywords')} 
+      url={`https://finivo.ca/${currentLanguage}/calculateurs/consolidation-dettes`}
+      relatedCategory="dettes" 
+      featuredCardType="transfer"
+    >
       <div className="space-y-8">
         {/* Formulaire dettes */}
         <Card>
           <CardHeader>
-            <CardTitle>Étape 1 : Renseignements concernant vos dettes</CardTitle>
+            <CardTitle>{t('calculators.debtConsolidation.step1')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <div className="flex items-center gap-2 mb-6">
                 <TabsList>
-                  {dettes.map(dette => <TabsTrigger key={dette.id} value={dette.id}>
-                      Dette {dette.id}
-                    </TabsTrigger>)}
+                  {dettes.map(dette => (
+                    <TabsTrigger key={dette.id} value={dette.id}>
+                      {t('calculators.debtConsolidation.debt')} {dette.id}
+                    </TabsTrigger>
+                  ))}
                 </TabsList>
                 <Button variant="outline" size="sm" onClick={ajouterDette}>
                   <Plus className="w-4 h-4 mr-1" />
-                  Ajouter
+                  {t('calculators.debtConsolidation.addDebt')}
                 </Button>
               </div>
 
-              {dettes.map(dette => <TabsContent key={dette.id} value={dette.id} className="space-y-6">
+              {dettes.map(dette => (
+                <TabsContent key={dette.id} value={dette.id} className="space-y-6">
                   <div className="flex justify-between items-start">
                     <div className="space-y-3 flex-1">
-                      <Label>Nom de la dette</Label>
-                      <Input value={dette.nom} onChange={e => updateDette(dette.id, 'nom', e.target.value)} className="max-w-xs" />
+                      <Label>{t('calculators.debtConsolidation.debtName')}</Label>
+                      <Input 
+                        value={dette.nom} 
+                        onChange={e => updateDette(dette.id, 'nom', e.target.value)} 
+                        className="max-w-xs" 
+                      />
                     </div>
-                    {dettes.length > 1 && <Button variant="ghost" size="sm" onClick={() => supprimerDette(dette.id)} className="text-destructive hover:text-destructive">
+                    {dettes.length > 1 && (
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => supprimerDette(dette.id)} 
+                        className="text-destructive hover:text-destructive"
+                      >
                         <Trash2 className="w-4 h-4" />
-                      </Button>}
+                      </Button>
+                    )}
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Montant que vous devez</Label>
+                    <Label>{t('calculators.debtConsolidation.amountOwed')}</Label>
                     <div className="flex items-center gap-3">
-                      <Input type="number" value={dette.montant} onChange={e => updateDette(dette.id, 'montant', Number(e.target.value))} className="w-32" />
+                      <Input 
+                        type="number" 
+                        value={dette.montant} 
+                        onChange={e => updateDette(dette.id, 'montant', Number(e.target.value))} 
+                        className="w-32" 
+                      />
                       <span className="text-muted-foreground">$</span>
                     </div>
-                    <Slider value={[dette.montant]} onValueChange={v => updateDette(dette.id, 'montant', v[0])} min={0} max={100000} step={100} />
+                    <Slider 
+                      value={[dette.montant]} 
+                      onValueChange={v => updateDette(dette.id, 'montant', v[0])} 
+                      min={0} 
+                      max={100000} 
+                      step={100} 
+                    />
                     <div className="flex justify-between text-xs text-muted-foreground">
                       <span>0 $</span>
                       <span>100 000 $</span>
@@ -191,12 +221,24 @@ const ConsolidationDettes = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Taux d'intérêt annuel</Label>
+                    <Label>{t('calculators.debtConsolidation.interestRate')}</Label>
                     <div className="flex items-center gap-3">
-                      <Input type="number" step="0.01" value={dette.tauxInteret} onChange={e => updateDette(dette.id, 'tauxInteret', Number(e.target.value))} className="w-24" />
+                      <Input 
+                        type="number" 
+                        step="0.01" 
+                        value={dette.tauxInteret} 
+                        onChange={e => updateDette(dette.id, 'tauxInteret', Number(e.target.value))} 
+                        className="w-24" 
+                      />
                       <span className="text-muted-foreground">%</span>
                     </div>
-                    <Slider value={[dette.tauxInteret]} onValueChange={v => updateDette(dette.id, 'tauxInteret', v[0])} min={0} max={30} step={0.1} />
+                    <Slider 
+                      value={[dette.tauxInteret]} 
+                      onValueChange={v => updateDette(dette.id, 'tauxInteret', v[0])} 
+                      min={0} 
+                      max={30} 
+                      step={0.1} 
+                    />
                     <div className="flex justify-between text-xs text-muted-foreground">
                       <span>0%</span>
                       <span>30%</span>
@@ -204,15 +246,27 @@ const ConsolidationDettes = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Paiement mensuel</Label>
+                    <Label>{t('calculators.debtConsolidation.monthlyPayment')}</Label>
                     <div className="flex items-center gap-3">
-                      <Input type="number" value={dette.paiementMensuel} onChange={e => updateDette(dette.id, 'paiementMensuel', Number(e.target.value))} className="w-32" />
+                      <Input 
+                        type="number" 
+                        value={dette.paiementMensuel} 
+                        onChange={e => updateDette(dette.id, 'paiementMensuel', Number(e.target.value))} 
+                        className="w-32" 
+                      />
                       <span className="text-muted-foreground">$</span>
                     </div>
-                    <Slider value={[dette.paiementMensuel]} onValueChange={v => updateDette(dette.id, 'paiementMensuel', v[0])} min={1} max={5000} step={10} />
-                    <p className="text-xs text-muted-foreground">Entrez un minimum de 1 $</p>
+                    <Slider 
+                      value={[dette.paiementMensuel]} 
+                      onValueChange={v => updateDette(dette.id, 'paiementMensuel', v[0])} 
+                      min={1} 
+                      max={5000} 
+                      step={10} 
+                    />
+                    <p className="text-xs text-muted-foreground">{currentLanguage === 'en' ? 'Enter a minimum of $1' : 'Entrez un minimum de 1 $'}</p>
                   </div>
-                </TabsContent>)}
+                </TabsContent>
+              ))}
             </Tabs>
           </CardContent>
         </Card>
@@ -220,28 +274,30 @@ const ConsolidationDettes = () => {
         {/* Résumé */}
         <Card>
           <CardHeader>
-            <CardTitle>Résumé de vos dettes actuelles</CardTitle>
+            <CardTitle>{t('calculators.debtConsolidation.summary')}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-6">
-              Selon votre plan actuel, votre dette cumulée est de {formatMontant(resultats.totalDette)} et vous serez 
-              quitte de dettes dans {resultats.moisRemboursement === -1 ? '∞' : resultats.moisRemboursement} mois 
-              lorsque votre paiement mensuel sera de {formatMontant(resultats.totalPaiementMensuel)}.
+              {t('calculators.debtConsolidation.summaryText', {
+                totalDebt: formatMontant(resultats.totalDette),
+                months: resultats.moisRemboursement === -1 ? '∞' : resultats.moisRemboursement,
+                monthlyPayment: formatMontant(resultats.totalPaiementMensuel)
+              })}
             </p>
 
             <div className="grid md:grid-cols-3 gap-6">
               <div className="rounded-lg p-4 bg-muted">
-                <p className="text-sm text-muted-foreground">Total de la dette en cours :</p>
+                <p className="text-sm text-muted-foreground">{t('calculators.debtConsolidation.totalDebt')}</p>
                 <p className="text-3xl font-bold text-primary">{formatMontant(resultats.totalDette)}</p>
               </div>
               <div className="rounded-lg p-4 bg-muted">
-                <p className="text-sm text-muted-foreground">Paiement mensuel</p>
+                <p className="text-sm text-muted-foreground">{t('calculators.debtConsolidation.totalMonthlyPayment')}</p>
                 <p className="text-3xl font-bold text-primary">{formatMontant(resultats.totalPaiementMensuel)}</p>
               </div>
               <div className="rounded-lg p-4 bg-muted">
-                <p className="text-sm text-muted-foreground">Vous serez quitte de dettes dans :</p>
+                <p className="text-sm text-muted-foreground">{t('calculators.debtConsolidation.debtFreeIn')}</p>
                 <p className="text-3xl font-bold text-primary">
-                  {resultats.moisRemboursement === -1 ? '∞' : resultats.moisRemboursement} mois
+                  {resultats.moisRemboursement === -1 ? '∞' : resultats.moisRemboursement} {t('calculators.common.months')}
                 </p>
               </div>
             </div>
@@ -249,20 +305,28 @@ const ConsolidationDettes = () => {
         </Card>
 
         {/* Graphiques */}
-        {resultats.donneesBar.length > 0 && <div className="grid lg:grid-cols-2 gap-6">
+        {resultats.donneesBar.length > 0 && (
+          <div className="grid lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Répartition de vos dettes</CardTitle>
+                <CardTitle>{t('calculators.debtConsolidation.distribution')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie data={resultats.donneesPie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({
-                    name,
-                    percent
-                  }) => `${name} (${(percent * 100).toFixed(0)}%)`}>
-                        {resultats.donneesPie.map((_, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                      <Pie 
+                        data={resultats.donneesPie} 
+                        dataKey="value" 
+                        nameKey="name" 
+                        cx="50%" 
+                        cy="50%" 
+                        outerRadius={80} 
+                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                      >
+                        {resultats.donneesPie.map((_, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
                       </Pie>
                       <Tooltip formatter={(value: number) => formatMontant(value)} />
                     </PieChart>
@@ -273,7 +337,7 @@ const ConsolidationDettes = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle>Principal vs Intérêts</CardTitle>
+                <CardTitle>{t('calculators.debtConsolidation.principalVsInterest')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-64">
@@ -284,23 +348,24 @@ const ConsolidationDettes = () => {
                       <YAxis tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
                       <Tooltip formatter={(value: number) => formatMontant(value)} />
                       <Legend />
-                      <Bar dataKey="principal" name="Principal" fill="hsl(var(--primary))" />
-                      <Bar dataKey="interets" name="Intérêts" fill="hsl(var(--destructive))" />
+                      <Bar dataKey="principal" name={t('calculators.debtConsolidation.principal')} fill="hsl(var(--primary))" />
+                      <Bar dataKey="interets" name={t('calculators.debtConsolidation.interest')} fill="hsl(var(--destructive))" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
-          </div>}
+          </div>
+        )}
 
         {/* Intérêts totaux */}
         <Card className="bg-destructive/10 border-destructive">
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-muted-foreground">Total des intérêts que vous paierez</p>
+              <p className="text-muted-foreground">{t('calculators.debtConsolidation.totalInterest')}</p>
               <p className="text-4xl font-bold text-destructive">{formatMontant(resultats.totalInterets)}</p>
               <p className="text-sm text-muted-foreground mt-2">
-                Considérez une carte de transfert de solde pour économiser sur les intérêts
+                {t('calculators.debtConsolidation.considerTransfer')}
               </p>
             </div>
           </CardContent>
@@ -309,28 +374,26 @@ const ConsolidationDettes = () => {
         {/* Section explicative */}
         <Card className="bg-muted/50">
           <CardContent className="pt-6">
-            <h2 className="text-lg font-semibold mb-3">Comprendre la consolidation de dettes</h2>
+            <h2 className="text-lg font-semibold mb-3">{t('calculators.debtConsolidation.understanding')}</h2>
             <div className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                La <strong>consolidation de dettes</strong> est une stratégie qui consiste à regrouper plusieurs dettes en un seul prêt. L'objectif est d'obtenir un taux d'intérêt plus bas et de simplifier la gestion de vos finances.
-              </p>
+              <p>{t('calculators.debtConsolidation.consolidationExplanation')}</p>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Avantages</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.debtConsolidation.advantages')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Un seul paiement mensuel à gérer</li>
-                    <li>Taux d'intérêt potentiellement plus bas</li>
-                    <li>Économies sur les intérêts totaux</li>
-                    <li>Meilleure visibilité sur le remboursement</li>
+                    <li>{currentLanguage === 'en' ? 'A single monthly payment to manage' : 'Un seul paiement mensuel à gérer'}</li>
+                    <li>{currentLanguage === 'en' ? 'Potentially lower interest rate' : 'Taux d\'intérêt potentiellement plus bas'}</li>
+                    <li>{currentLanguage === 'en' ? 'Savings on total interest' : 'Économies sur les intérêts totaux'}</li>
+                    <li>{currentLanguage === 'en' ? 'Better visibility on repayment' : 'Meilleure visibilité sur le remboursement'}</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Points d'attention</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.debtConsolidation.watchPoints')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Évitez d'accumuler de nouvelles dettes</li>
-                    <li>Comparez les frais de dossier</li>
-                    <li>Vérifiez les pénalités de remboursement anticipé</li>
-                    <li>Assurez-vous que le nouveau paiement est abordable</li>
+                    <li>{currentLanguage === 'en' ? 'Avoid accumulating new debts' : 'Évitez d\'accumuler de nouvelles dettes'}</li>
+                    <li>{currentLanguage === 'en' ? 'Compare application fees' : 'Comparez les frais de dossier'}</li>
+                    <li>{currentLanguage === 'en' ? 'Check prepayment penalties' : 'Vérifiez les pénalités de remboursement anticipé'}</li>
+                    <li>{currentLanguage === 'en' ? 'Ensure the new payment is affordable' : 'Assurez-vous que le nouveau paiement est abordable'}</li>
                   </ul>
                 </div>
               </div>
@@ -340,6 +403,8 @@ const ConsolidationDettes = () => {
 
         <CalculatorFAQ items={faqItems} />
       </div>
-    </CalculatorLayout>;
+    </CalculatorLayout>
+  );
 };
+
 export default ConsolidationDettes;

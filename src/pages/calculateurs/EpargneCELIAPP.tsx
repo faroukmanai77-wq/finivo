@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Home, CheckCircle2, XCircle } from 'lucide-react';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
@@ -11,30 +12,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import InvestmentPathIllustration from '@/assets/illustrations/investment-path.svg';
+import { useLanguage } from '@/hooks/useLanguage';
 
-const faqItems = [
-  {
-    question: "Quelle est la limite de cotisation annuelle au CELIAPP?",
-    answer: "La limite de cotisation annuelle au CELIAPP est de 8 000 $. Contrairement au REER, vous ne pouvez pas reporter les droits de cotisation inutilisés à l'année suivante, sauf à partir de 2024 où vous pouvez reporter jusqu'à 8 000 $ de droits inutilisés."
-  },
-  {
-    question: "Puis-je avoir un CELIAPP si j'ai été propriétaire il y a 5 ans?",
-    answer: "Oui! Vous êtes admissible si vous n'avez pas été propriétaire d'une habitation au cours de l'année d'ouverture du compte ni au cours des quatre années civiles précédentes. Si vous étiez propriétaire il y a 5 ans ou plus, vous êtes admissible."
-  },
-  {
-    question: "Que se passe-t-il si je n'achète pas de maison?",
-    answer: "Vous avez 15 ans après l'ouverture du compte pour utiliser les fonds. Après ce délai, ou si vous décidez de ne pas acheter, vous pouvez transférer les fonds dans votre REER sans affecter vos droits de cotisation, ou retirer les fonds de façon imposable."
-  },
-  {
-    question: "Puis-je combiner le CELIAPP avec le RAP?",
-    answer: "Oui! Vous pouvez utiliser à la fois le CELIAPP et le Régime d'accession à la propriété (RAP) pour votre mise de fonds. Cela vous donne accès à jusqu'à 100 000 $ (40 000 $ CELIAPP + 60 000 $ RAP) pour votre première propriété."
-  },
-  {
-    question: "Le CELIAPP est-il mieux que le REER pour acheter une maison?",
-    answer: "Pour l'achat d'une première propriété, le CELIAPP est généralement plus avantageux car les retraits sont non imposables, contrairement au RAP où vous devez rembourser votre REER sur 15 ans. Les cotisations CELIAPP sont aussi déductibles d'impôt."
-  }
-];
 const EpargneCELIAPP = () => {
+  const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const [age, setAge] = useState(28);
   const [estResident, setEstResident] = useState(true);
   const [premierAchat, setPremierAchat] = useState(true);
@@ -48,6 +30,10 @@ const EpargneCELIAPP = () => {
   const [tauxRendement, setTauxRendement] = useState(4);
 
   const estAdmissible = age >= 18 && age <= 71 && estResident && premierAchat;
+
+  const moisFr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  const moisEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const mois = currentLanguage === 'en' ? moisEn : moisFr;
 
   const resultats = useMemo(() => {
     if (!estAdmissible) {
@@ -63,7 +49,10 @@ const EpargneCELIAPP = () => {
     const moisIndex: Record<string, number> = {
       'janvier': 0, 'février': 1, 'mars': 2, 'avril': 3,
       'mai': 4, 'juin': 5, 'juillet': 6, 'août': 7,
-      'septembre': 8, 'octobre': 9, 'novembre': 10, 'décembre': 11
+      'septembre': 8, 'octobre': 9, 'novembre': 10, 'décembre': 11,
+      'January': 0, 'February': 1, 'March': 2, 'April': 3,
+      'May': 4, 'June': 5, 'July': 6, 'August': 7,
+      'September': 8, 'October': 9, 'November': 10, 'December': 11
     };
 
     const dateDebut = new Date(anneeDebut, moisIndex[moisDebut]);
@@ -96,23 +85,21 @@ const EpargneCELIAPP = () => {
     let totalCotisations = 0;
     const donnees = [];
     
-    for (let mois = 0; mois <= moisTotal; mois++) {
-      if (mois > 0) {
+    for (let moisNum = 0; moisNum <= moisTotal; moisNum++) {
+      if (moisNum > 0) {
         solde = solde * (1 + tauxMensuel) + cotisationEffective;
         totalCotisations += cotisationEffective;
       }
       
-      // Ajouter un point de données chaque année
-      if (mois % 12 === 0) {
+      if (moisNum % 12 === 0) {
         donnees.push({
-          annee: Math.floor(mois / 12),
+          annee: Math.floor(moisNum / 12),
           solde: Math.round(solde),
           cotisations: Math.round(totalCotisations),
         });
       }
     }
 
-    // S'assurer d'avoir le dernier point
     if (moisTotal % 12 !== 0) {
       donnees.push({
         annee: Math.ceil(moisTotal / 12),
@@ -121,7 +108,6 @@ const EpargneCELIAPP = () => {
       });
     }
 
-    // Estimation économies d'impôt (environ 30% en moyenne)
     const economiesImpot = Math.round(totalCotisations * 0.30);
 
     return {
@@ -134,21 +120,28 @@ const EpargneCELIAPP = () => {
   }, [estAdmissible, anneeDebut, moisDebut, anneeAchat, moisAchat, cotisationAnnuelle, frequenceCotisation, tauxRendement]);
 
   const formatMontant = (montant: number) => {
-    return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
+    return new Intl.NumberFormat(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(montant);
   };
 
-  const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
   const annees = Array.from({ length: 20 }, (_, i) => 2023 + i);
+
+  const faqItems = [
+    { question: t('calculators.fhsa.faq.q1'), answer: t('calculators.fhsa.faq.a1') },
+    { question: t('calculators.fhsa.faq.q2'), answer: t('calculators.fhsa.faq.a2') },
+    { question: t('calculators.fhsa.faq.q3'), answer: t('calculators.fhsa.faq.a3') },
+    { question: t('calculators.fhsa.faq.q4'), answer: t('calculators.fhsa.faq.a4') },
+    { question: t('calculators.fhsa.faq.q5'), answer: t('calculators.fhsa.faq.a5') },
+  ];
 
   return (
     <CalculatorLayout
-      title="Calculatrice d'épargne CELIAPP"
-      description="Calculez vos économies potentielles avec le Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP)."
+      title={t('calculators.fhsa.title')}
+      description={t('calculators.fhsa.description')}
       icon={<Home className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice CELIAPP 2026 - Épargne première propriété | Finivo"
-      seoDescription="Calculez combien vous pouvez économiser avec le CELIAPP en 2026 pour l'achat de votre première maison. Vérifiez votre admissibilité et planifiez votre épargne jusqu'à 40 000$."
-      seoKeywords="CELIAPP 2026, première maison québec, épargne libre impôt, achat propriété, calculatrice CELIAPP, mise de fonds"
-      url="https://finivo.ca/calculateurs/epargne-celiapp"
+      seoTitle={t('calculators.fhsa.seo.title')}
+      seoDescription={t('calculators.fhsa.seo.description')}
+      seoKeywords={t('calculators.fhsa.seo.keywords')}
+      url={`https://finivo.ca/${currentLanguage}/calculateurs/epargne-celiapp`}
       relatedCategory="epargne"
       featuredCardType="cashback"
       illustration={InvestmentPathIllustration}
@@ -157,28 +150,26 @@ const EpargneCELIAPP = () => {
         {/* Section explicative */}
         <Card className="bg-muted/50">
           <CardContent className="pt-6">
-            <h2 className="text-lg font-semibold mb-3">Qu'est-ce que le CELIAPP?</h2>
+            <h2 className="text-lg font-semibold mb-3">{t('calculators.fhsa.whatIs')}</h2>
             <div className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                Le <strong>Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP)</strong> est un nouveau régime enregistré qui combine les avantages du REER et du CELI. Il vous permet d'économiser jusqu'à 40 000 $ à l'abri de l'impôt pour l'achat de votre première maison.
-              </p>
+              <p>{t('calculators.fhsa.explanation')}</p>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Avantages du CELIAPP</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.fhsa.advantages')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Cotisations déductibles d'impôt (comme le REER)</li>
-                    <li>Retraits non imposables pour achat (comme le CELI)</li>
-                    <li>Maximum de 8 000 $ par année</li>
-                    <li>Plafond à vie de 40 000 $</li>
+                    <li>{currentLanguage === 'en' ? 'Tax-deductible contributions (like RRSP)' : 'Cotisations déductibles d\'impôt (comme le REER)'}</li>
+                    <li>{currentLanguage === 'en' ? 'Tax-free withdrawals for purchase (like TFSA)' : 'Retraits non imposables pour achat (comme le CELI)'}</li>
+                    <li>{currentLanguage === 'en' ? 'Maximum $8,000 per year' : 'Maximum de 8 000 $ par année'}</li>
+                    <li>{currentLanguage === 'en' ? 'Lifetime limit of $40,000' : 'Plafond à vie de 40 000 $'}</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-foreground mb-2">Conditions d'admissibilité</h3>
+                  <h3 className="font-medium text-foreground mb-2">{t('calculators.fhsa.eligibilityConditions')}</h3>
                   <ul className="list-disc list-inside space-y-1">
-                    <li>Être âgé de 18 à 71 ans</li>
-                    <li>Être résident canadien</li>
-                    <li>Ne pas avoir été propriétaire dans les 4 dernières années</li>
-                    <li>Utiliser les fonds dans les 15 ans</li>
+                    <li>{currentLanguage === 'en' ? 'Be aged 18 to 71' : 'Être âgé de 18 à 71 ans'}</li>
+                    <li>{currentLanguage === 'en' ? 'Be a Canadian resident' : 'Être résident canadien'}</li>
+                    <li>{currentLanguage === 'en' ? 'Not have been a homeowner in the last 4 years' : 'Ne pas avoir été propriétaire dans les 4 dernières années'}</li>
+                    <li>{currentLanguage === 'en' ? 'Use funds within 15 years' : 'Utiliser les fonds dans les 15 ans'}</li>
                   </ul>
                 </div>
               </div>
@@ -189,16 +180,14 @@ const EpargneCELIAPP = () => {
         {/* Vérification admissibilité */}
         <Card>
           <CardHeader>
-            <CardTitle>Vérifiez votre admissibilité</CardTitle>
+            <CardTitle>{t('calculators.fhsa.checkEligibility')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <p className="text-sm text-muted-foreground">
-              Vérifiez votre admissibilité à ouvrir un compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP).
-            </p>
+            <p className="text-sm text-muted-foreground">{t('calculators.fhsa.eligibilityIntro')}</p>
 
             <div className="space-y-4">
               <div className="space-y-3">
-                <Label>1. Quel âge avez-vous?</Label>
+                <Label>1. {t('calculators.fhsa.ageQuestion')}</Label>
                 <Input
                   type="number"
                   value={age}
@@ -208,7 +197,7 @@ const EpargneCELIAPP = () => {
               </div>
 
               <div className="space-y-3">
-                <Label>2. Êtes-vous un résident au Canada?</Label>
+                <Label>2. {t('calculators.fhsa.residentQuestion')}</Label>
                 <RadioGroup 
                   value={estResident ? 'oui' : 'non'} 
                   onValueChange={(v) => setEstResident(v === 'oui')}
@@ -216,17 +205,17 @@ const EpargneCELIAPP = () => {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="oui" id="resident-oui" />
-                    <Label htmlFor="resident-oui">Oui</Label>
+                    <Label htmlFor="resident-oui">{t('common.yes')}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="non" id="resident-non" />
-                    <Label htmlFor="resident-non">Non</Label>
+                    <Label htmlFor="resident-non">{t('common.no')}</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               <div className="space-y-3">
-                <Label>3. Êtes-vous propriétaire pour la première fois?</Label>
+                <Label>3. {t('calculators.fhsa.firstTimeQuestion')}</Label>
                 <RadioGroup 
                   value={premierAchat ? 'oui' : 'non'} 
                   onValueChange={(v) => setPremierAchat(v === 'oui')}
@@ -234,11 +223,11 @@ const EpargneCELIAPP = () => {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="oui" id="premier-oui" />
-                    <Label htmlFor="premier-oui">Oui</Label>
+                    <Label htmlFor="premier-oui">{t('common.yes')}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="non" id="premier-non" />
-                    <Label htmlFor="premier-non">Non</Label>
+                    <Label htmlFor="premier-non">{t('common.no')}</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -251,9 +240,7 @@ const EpargneCELIAPP = () => {
                 <XCircle className="h-4 w-4 text-destructive" />
               )}
               <AlertDescription className={estAdmissible ? 'text-green-800' : 'text-destructive'}>
-                {estAdmissible 
-                  ? "Il semble que vous puissiez être admissible au CELIAPP."
-                  : "Selon vos réponses, vous ne semblez pas admissible au CELIAPP."}
+                {estAdmissible ? t('calculators.fhsa.eligible') : t('calculators.fhsa.notEligible')}
               </AlertDescription>
             </Alert>
           </CardContent>
@@ -264,16 +251,14 @@ const EpargneCELIAPP = () => {
           <>
             <Card>
               <CardHeader>
-                <CardTitle>Calculez vos économies CELIAPP</CardTitle>
+                <CardTitle>{t('calculators.fhsa.calculateSavings')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <p className="text-sm text-muted-foreground">
-                  Parlez-nous de la façon dont vous économisez et nous vous aiderons à calculer vos économies potentielles.
-                </p>
+                <p className="text-sm text-muted-foreground">{t('calculators.fhsa.savingsIntro')}</p>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3">
-                    <Label>Année d'ouverture de votre CELIAPP</Label>
+                    <Label>{t('calculators.fhsa.openingYear')}</Label>
                     <Select value={anneeOuverture.toString()} onValueChange={(v) => setAnneeOuverture(Number(v))}>
                       <SelectTrigger>
                         <SelectValue />
@@ -287,7 +272,7 @@ const EpargneCELIAPP = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Quand allez-vous commencer à cotiser?</Label>
+                    <Label>{t('calculators.fhsa.startContributing')}</Label>
                     <div className="flex gap-2">
                       <Select value={moisDebut} onValueChange={setMoisDebut}>
                         <SelectTrigger className="flex-1">
@@ -313,7 +298,7 @@ const EpargneCELIAPP = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Quand prévoyez-vous acheter votre maison?</Label>
+                    <Label>{t('calculators.fhsa.purchaseDate')}</Label>
                     <div className="flex gap-2">
                       <Select value={moisAchat} onValueChange={setMoisAchat}>
                         <SelectTrigger className="flex-1">
@@ -339,7 +324,7 @@ const EpargneCELIAPP = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Combien allez-vous cotiser?</Label>
+                    <Label>{t('calculators.fhsa.contributionAmount')}</Label>
                     <div className="flex items-center gap-2">
                       <Input
                         type="number"
@@ -355,19 +340,19 @@ const EpargneCELIAPP = () => {
                       >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="annuel" id="freq-annuel" />
-                          <Label htmlFor="freq-annuel">Année</Label>
+                          <Label htmlFor="freq-annuel">{currentLanguage === 'en' ? 'Year' : 'Année'}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="mensuel" id="freq-mensuel" />
-                          <Label htmlFor="freq-mensuel">Mois</Label>
+                          <Label htmlFor="freq-mensuel">{currentLanguage === 'en' ? 'Month' : 'Mois'}</Label>
                         </div>
                       </RadioGroup>
                     </div>
-                    <p className="text-xs text-muted-foreground">Maximum: 8 000 $ par année</p>
+                    <p className="text-xs text-muted-foreground">{t('calculators.fhsa.maxAnnual')}</p>
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Taux de rendement annuel</Label>
+                    <Label>{t('calculators.fhsa.annualReturn')}</Label>
                     <div className="flex items-center gap-3">
                       <Input
                         type="number"
@@ -395,19 +380,19 @@ const EpargneCELIAPP = () => {
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-4 gap-6 text-center">
                   <div>
-                    <p className="text-sm opacity-80">Montant disponible pour votre mise de fonds</p>
+                    <p className="text-sm opacity-80">{t('calculators.fhsa.results.totalSavings')}</p>
                     <p className="text-3xl font-bold mt-1">{formatMontant(resultats.montantFinal)}</p>
                   </div>
                   <div>
-                    <p className="text-sm opacity-80">Total des cotisations</p>
+                    <p className="text-sm opacity-80">{t('calculators.fhsa.results.contributions')}</p>
                     <p className="text-3xl font-bold mt-1">{formatMontant(resultats.totalCotisations)}</p>
                   </div>
                   <div>
-                    <p className="text-sm opacity-80">Rendement généré</p>
+                    <p className="text-sm opacity-80">{t('calculators.fhsa.results.growth')}</p>
                     <p className="text-3xl font-bold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
                   </div>
                   <div>
-                    <p className="text-sm opacity-80">Économies d'impôt estimées</p>
+                    <p className="text-sm opacity-80">{t('calculators.fhsa.results.taxSavings')}</p>
                     <p className="text-3xl font-bold mt-1">{formatMontant(resultats.economiesImpot)}</p>
                   </div>
                 </div>
@@ -418,18 +403,18 @@ const EpargneCELIAPP = () => {
             {resultats.donnees.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Croissance de votre CELIAPP</CardTitle>
+                  <CardTitle>{t('calculators.fhsa.results.chartTitle')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="h-72">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={resultats.donnees}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="annee" tickFormatter={(v) => `Année ${v}`} />
+                        <XAxis dataKey="annee" tickFormatter={(v) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${v}`} />
                         <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                         <Tooltip 
                           formatter={(value: number) => formatMontant(value)}
-                          labelFormatter={(label) => `Année ${label}`}
+                          labelFormatter={(label) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}`}
                         />
                         <Legend />
                         <Area 
@@ -438,7 +423,7 @@ const EpargneCELIAPP = () => {
                           stackId="1"
                           stroke="hsl(var(--muted-foreground))" 
                           fill="hsl(var(--muted))" 
-                          name="Cotisations"
+                          name={currentLanguage === 'en' ? 'Contributions' : 'Cotisations'}
                         />
                         <Area 
                           type="monotone" 
@@ -446,7 +431,7 @@ const EpargneCELIAPP = () => {
                           stroke="hsl(var(--primary))" 
                           fill="hsl(var(--primary))" 
                           fillOpacity={0.6}
-                          name="Solde total"
+                          name={currentLanguage === 'en' ? 'Total balance' : 'Solde total'}
                         />
                       </AreaChart>
                     </ResponsiveContainer>

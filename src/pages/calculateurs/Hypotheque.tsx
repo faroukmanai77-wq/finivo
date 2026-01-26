@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CalculatorLayout } from '@/components/calculators/CalculatorLayout';
 import { CalculatorFAQ } from '@/components/calculators/CalculatorFAQ';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,9 +7,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Home, DollarSign, Percent, Calendar, TrendingUp, PiggyBank, AlertTriangle } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, AreaChart, Area } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Hypotheque = () => {
+  const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const [prixMaison, setPrixMaison] = useState<number>(400000);
   const [miseDeFonds, setMiseDeFonds] = useState<number>(80000);
   const [tauxInteret, setTauxInteret] = useState<number>(5.5);
@@ -16,9 +20,9 @@ const Hypotheque = () => {
   const [frequence, setFrequence] = useState<string>('mensuel');
 
   const frequences = [
-    { value: 'mensuel', label: 'Mensuel', periodesParAn: 12 },
-    { value: 'bimensuel', label: 'Aux deux semaines', periodesParAn: 26 },
-    { value: 'hebdomadaire', label: 'Hebdomadaire', periodesParAn: 52 },
+    { value: 'mensuel', label: t('calculators.mortgage.frequencies.monthly'), periodesParAn: 12 },
+    { value: 'bimensuel', label: t('calculators.mortgage.frequencies.biweekly'), periodesParAn: 26 },
+    { value: 'hebdomadaire', label: t('calculators.mortgage.frequencies.weekly'), periodesParAn: 52 },
   ];
 
   const calculations = useMemo(() => {
@@ -87,10 +91,10 @@ const Hypotheque = () => {
       chartData,
       frequenceLabel: freqData.label.toLowerCase(),
     };
-  }, [prixMaison, miseDeFonds, tauxInteret, amortissement, frequence]);
+  }, [prixMaison, miseDeFonds, tauxInteret, amortissement, frequence, frequences]);
 
   const formatCurrency = (value: number) => {
-    return value.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
+    return value.toLocaleString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
   };
 
   const handleInputChange = (setter: (value: number) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,36 +104,36 @@ const Hypotheque = () => {
 
   const faqItems = [
     {
-      question: "Qu'est-ce que l'assurance prêt hypothécaire (SCHL)?",
-      answer: "L'assurance prêt hypothécaire est obligatoire au Canada si votre mise de fonds est inférieure à 20%. Elle protège le prêteur en cas de défaut de paiement. Les primes varient de 2,8% à 4% du montant emprunté selon votre mise de fonds."
+      question: t('calculators.mortgage.faq.q1'),
+      answer: t('calculators.mortgage.faq.a1')
     },
     {
-      question: "Quelle mise de fonds minimum pour acheter une maison?",
-      answer: "Au Canada, la mise de fonds minimum est de 5% pour les propriétés jusqu'à 500 000$. Entre 500 000$ et 1 million$, c'est 5% sur les premiers 500 000$ et 10% sur le reste. Au-delà de 1 million$, c'est 20% minimum."
+      question: t('calculators.mortgage.faq.q2'),
+      answer: t('calculators.mortgage.faq.a2')
     },
     {
-      question: "Quelle est la différence entre taux fixe et variable?",
-      answer: "Un taux fixe reste constant pendant tout le terme (ex: 5 ans). Un taux variable fluctue selon le taux directeur de la Banque du Canada. Le variable est souvent plus bas initialement mais comporte plus de risque."
+      question: t('calculators.mortgage.faq.q3'),
+      answer: t('calculators.mortgage.faq.a3')
     },
     {
-      question: "Qu'est-ce que l'amortissement?",
-      answer: "L'amortissement est la durée totale prévue pour rembourser l'hypothèque. Le maximum est 25 ans avec assurance SCHL, ou 30 ans sans assurance. Un amortissement plus court = paiements plus élevés mais moins d'intérêts au total."
+      question: t('calculators.mortgage.faq.q4'),
+      answer: t('calculators.mortgage.faq.a4')
     },
     {
-      question: "Comment réduire mes paiements hypothécaires?",
-      answer: "Vous pouvez augmenter votre mise de fonds, choisir un amortissement plus long, magasiner les taux entre plusieurs prêteurs, ou opter pour des paiements accélérés aux deux semaines pour économiser des intérêts."
+      question: t('calculators.mortgage.faq.q5'),
+      answer: t('calculators.mortgage.faq.a5')
     }
   ];
 
   return (
     <CalculatorLayout
-      title="Calculateur d'hypothèque"
-      description="Estimez vos paiements hypothécaires mensuels, le coût total de votre prêt et visualisez l'amortissement de votre hypothèque."
+      title={t('calculators.mortgage.title')}
+      description={t('calculators.mortgage.description')}
       icon={<Home className="w-8 h-8 text-primary" />}
-      seoTitle="Calculateur Hypothèque Gratuit 2026 | Paiement Mensuel Maison Québec | Finivo"
-      seoDescription="Calculez vos paiements hypothécaires au Québec en 2026. Estimez le coût total, l'assurance SCHL, les taux actuels et visualisez l'amortissement. Outil gratuit pour planifier l'achat de votre maison."
-      seoKeywords="calculateur hypothèque 2026, paiement hypothécaire québec, calculateur maison, prêt immobilier québec, assurance SCHL, amortissement hypothèque, taux hypothécaire 2026"
-      url="https://finivo.ca/calculateurs/hypotheque"
+      seoTitle={t('calculators.mortgage.seo.title')}
+      seoDescription={t('calculators.mortgage.seo.description')}
+      seoKeywords={t('calculators.mortgage.seo.keywords')}
+      url={`https://finivo.ca/${currentLanguage}/calculateurs/hypotheque`}
       relatedCategory="epargne"
       featuredCardType="cashback"
     >
@@ -139,13 +143,13 @@ const Hypotheque = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-lg">
               <Home className="w-5 h-5 text-primary" />
-              Paramètres de l'hypothèque
+              {t('calculators.mortgage.params')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="prixMaison">Prix de la propriété</Label>
+                <Label htmlFor="prixMaison">{t('calculators.mortgage.propertyPrice')}</Label>
                 <div className="relative">
                   <Input
                     id="prixMaison"
@@ -161,7 +165,7 @@ const Hypotheque = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="miseDeFonds">Mise de fonds</Label>
+                <Label htmlFor="miseDeFonds">{t('calculators.mortgage.downPayment')}</Label>
                 <div className="relative">
                   <Input
                     id="miseDeFonds"
@@ -175,12 +179,12 @@ const Hypotheque = () => {
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {calculations.pourcentageMiseDeFonds.toFixed(1)}% du prix
+                  {calculations.pourcentageMiseDeFonds.toFixed(1)}% {t('calculators.mortgage.ofPrice')}
                 </p>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="tauxInteret">Taux d'intérêt annuel</Label>
+                <Label htmlFor="tauxInteret">{t('calculators.mortgage.interestRate')}</Label>
                 <div className="relative">
                   <Input
                     id="tauxInteret"
@@ -196,7 +200,7 @@ const Hypotheque = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="amortissement">Période d'amortissement</Label>
+                <Label htmlFor="amortissement">{t('calculators.mortgage.amortization')}</Label>
                 <Select value={amortissement.toString()} onValueChange={(v) => setAmortissement(parseInt(v))}>
                   <SelectTrigger>
                     <SelectValue />
@@ -204,7 +208,7 @@ const Hypotheque = () => {
                   <SelectContent>
                     {[15, 20, 25, 30].map((years) => (
                       <SelectItem key={years} value={years.toString()}>
-                        {years} ans
+                        {years} {t('calculators.common.years')}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -212,7 +216,7 @@ const Hypotheque = () => {
               </div>
               
               <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="frequence">Fréquence des paiements</Label>
+                <Label htmlFor="frequence">{t('calculators.mortgage.paymentFrequency')}</Label>
                 <Select value={frequence} onValueChange={setFrequence}>
                   <SelectTrigger>
                     <SelectValue />
@@ -237,9 +241,9 @@ const Hypotheque = () => {
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-warning shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-foreground">Assurance hypothécaire requise (SCHL)</p>
+                  <p className="font-semibold text-foreground">{t('calculators.mortgage.schlAlert.title')}</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Votre mise de fonds est inférieure à 20%. Une assurance de {formatCurrency(calculations.assuranceSCHL)} sera ajoutée à votre hypothèque.
+                    {t('calculators.mortgage.schlAlert.message', { amount: formatCurrency(calculations.assuranceSCHL) })}
                   </p>
                 </div>
               </div>
@@ -253,7 +257,7 @@ const Hypotheque = () => {
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 text-primary mb-2">
                 <DollarSign className="w-5 h-5" />
-                <span className="text-sm font-medium">Paiement {calculations.frequenceLabel}</span>
+                <span className="text-sm font-medium">{t('calculators.mortgage.results.payment')}</span>
               </div>
               <p className="text-2xl font-bold text-foreground">
                 {formatCurrency(calculations.paiement)}
@@ -265,7 +269,7 @@ const Hypotheque = () => {
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 text-muted-foreground mb-2">
                 <Home className="w-5 h-5" />
-                <span className="text-sm font-medium">Montant emprunté</span>
+                <span className="text-sm font-medium">{t('calculators.mortgage.results.amountBorrowed')}</span>
               </div>
               <p className="text-2xl font-bold text-foreground">
                 {formatCurrency(calculations.montantTotal)}
@@ -277,7 +281,7 @@ const Hypotheque = () => {
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 text-destructive mb-2">
                 <Percent className="w-5 h-5" />
-                <span className="text-sm font-medium">Total des intérêts</span>
+                <span className="text-sm font-medium">{t('calculators.mortgage.results.totalInterest')}</span>
               </div>
               <p className="text-2xl font-bold text-foreground">
                 {formatCurrency(calculations.totalInterets)}
@@ -289,7 +293,7 @@ const Hypotheque = () => {
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 text-muted-foreground mb-2">
                 <TrendingUp className="w-5 h-5" />
-                <span className="text-sm font-medium">Coût total</span>
+                <span className="text-sm font-medium">{t('calculators.mortgage.results.totalCost')}</span>
               </div>
               <p className="text-2xl font-bold text-foreground">
                 {formatCurrency(calculations.totalPaiements + miseDeFonds)}
@@ -303,7 +307,7 @@ const Hypotheque = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-lg">
               <Calendar className="w-5 h-5 text-primary" />
-              Évolution du solde hypothécaire
+              {t('calculators.mortgage.chart.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -313,7 +317,7 @@ const Hypotheque = () => {
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis 
                     dataKey="annee" 
-                    tickFormatter={(value) => `${value} ans`}
+                    tickFormatter={(value) => `${value} ${t('calculators.common.years')}`}
                     className="text-xs"
                   />
                   <YAxis 
@@ -323,9 +327,9 @@ const Hypotheque = () => {
                   <Tooltip 
                     formatter={(value: number, name: string) => [
                       formatCurrency(value),
-                      name === 'solde' ? 'Solde restant' : 'Capital remboursé'
+                      name === 'solde' ? t('calculators.mortgage.chart.remainingBalance') : t('calculators.mortgage.chart.principalPaid')
                     ]}
-                    labelFormatter={(label) => `Année ${label}`}
+                    labelFormatter={(label) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}`}
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))', 
                       border: '1px solid hsl(var(--border))',
@@ -336,7 +340,7 @@ const Hypotheque = () => {
                   <Area 
                     type="monotone" 
                     dataKey="solde" 
-                    name="Solde restant"
+                    name={t('calculators.mortgage.chart.remainingBalance')}
                     stroke="hsl(var(--destructive))" 
                     fill="hsl(var(--destructive))"
                     fillOpacity={0.2}
@@ -344,7 +348,7 @@ const Hypotheque = () => {
                   <Area 
                     type="monotone" 
                     dataKey="capitalRembourse" 
-                    name="Capital remboursé"
+                    name={t('calculators.mortgage.chart.principalPaid')}
                     stroke="hsl(var(--success))" 
                     fill="hsl(var(--success))"
                     fillOpacity={0.2}
@@ -360,39 +364,39 @@ const Hypotheque = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-lg">
               <PiggyBank className="w-5 h-5 text-success" />
-              Résumé de votre hypothèque
+              {t('calculators.mortgage.summary.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground">Prix de la propriété</span>
+                <span className="text-muted-foreground">{t('calculators.mortgage.summary.propertyPrice')}</span>
                 <span className="font-medium">{formatCurrency(prixMaison)}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground">Mise de fonds ({calculations.pourcentageMiseDeFonds.toFixed(1)}%)</span>
+                <span className="text-muted-foreground">{t('calculators.mortgage.summary.downPayment')} ({calculations.pourcentageMiseDeFonds.toFixed(1)}%)</span>
                 <span className="font-medium">- {formatCurrency(miseDeFonds)}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground">Montant de l'hypothèque</span>
+                <span className="text-muted-foreground">{t('calculators.mortgage.summary.mortgageAmount')}</span>
                 <span className="font-medium">{formatCurrency(calculations.montantHypotheque)}</span>
               </div>
               {calculations.assuranceSCHL > 0 && (
                 <div className="flex justify-between py-2 border-b border-border">
-                  <span className="text-muted-foreground">Assurance SCHL</span>
+                  <span className="text-muted-foreground">{t('calculators.mortgage.summary.schlInsurance')}</span>
                   <span className="font-medium text-warning">+ {formatCurrency(calculations.assuranceSCHL)}</span>
                 </div>
               )}
               <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground">Montant total financé</span>
+                <span className="text-muted-foreground">{t('calculators.mortgage.summary.totalFinanced')}</span>
                 <span className="font-bold">{formatCurrency(calculations.montantTotal)}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground">Total des intérêts sur {amortissement} ans</span>
+                <span className="text-muted-foreground">{t('calculators.mortgage.summary.totalInterestYears', { years: amortissement })}</span>
                 <span className="font-medium text-destructive">{formatCurrency(calculations.totalInterets)}</span>
               </div>
               <div className="flex justify-between py-3 bg-muted/50 rounded-lg px-3 -mx-3">
-                <span className="font-semibold">Coût total de la propriété</span>
+                <span className="font-semibold">{t('calculators.mortgage.summary.totalPayments')}</span>
                 <span className="font-bold text-lg">{formatCurrency(calculations.totalPaiements + miseDeFonds)}</span>
               </div>
             </div>

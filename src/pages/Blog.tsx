@@ -9,10 +9,14 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { blogCategoryLabels, BlogCategory } from '@/types/blogPost';
-import { BookOpen, Calendar, Clock, User, ArrowRight } from 'lucide-react';
+import { BookOpen, Calendar, Clock, User, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const ARTICLES_PER_PAGE = 9;
+
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const {
     data: blogPosts = [],
     isLoading
@@ -28,6 +32,24 @@ const Blog = () => {
     }
     return result;
   }, [blogPosts, searchQuery, selectedCategory]);
+
+  // Reset to page 1 when filters change
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (category: BlogCategory | null) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  // Pagination
+  const totalPages = Math.ceil(filteredPosts.length / ARTICLES_PER_PAGE);
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+    return filteredPosts.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
+  }, [filteredPosts, currentPage]);
   const categories: BlogCategory[] = ['guides', 'conseils', 'comparatifs', 'actualites'];
   const breadcrumbs = [{
     name: 'Accueil',
@@ -60,7 +82,7 @@ const Blog = () => {
                 type="text"
                 placeholder="Rechercher un article..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="pl-10 pr-4 py-3 h-12 rounded-full border-border/50 bg-background shadow-sm"
               />
               <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -73,10 +95,10 @@ const Blog = () => {
       <section className="py-8 border-b border-border/50">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button variant={selectedCategory === null ? 'default' : 'outline'} size="sm" onClick={() => setSelectedCategory(null)} className="rounded-full">
+            <Button variant={selectedCategory === null ? 'default' : 'outline'} size="sm" onClick={() => handleCategoryChange(null)} className="rounded-full">
               Tous
             </Button>
-            {categories.map(category => <Button key={category} variant={selectedCategory === category ? 'default' : 'outline'} size="sm" onClick={() => setSelectedCategory(category)} className="rounded-full">
+            {categories.map(category => <Button key={category} variant={selectedCategory === category ? 'default' : 'outline'} size="sm" onClick={() => handleCategoryChange(category)} className="rounded-full">
                 {blogCategoryLabels[category]}
               </Button>)}
           </div>
@@ -96,8 +118,8 @@ const Blog = () => {
                     <Skeleton className="h-4 w-24" />
                   </div>
                 </div>)}
-            </div> : filteredPosts.length > 0 ? <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => <Link key={post.id} to={`/blog/${post.slug}`} className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in" style={{
+            </div> : paginatedPosts.length > 0 ? <><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {paginatedPosts.map((post, index) => <Link key={post.id} to={`/blog/${post.slug}`} className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in" style={{
             animationDelay: `${index * 50}ms`
           }}>
                   <div className="relative h-48 overflow-hidden">
@@ -140,7 +162,69 @@ const Blog = () => {
                     </div>
                   </div>
                 </Link>)}
-            </div> : <div className="text-center py-20 card-elevated rounded-2xl">
+            </div>
+            
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-12">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="gap-1"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Précédent
+                </Button>
+                
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
+                    // Show first, last, current, and adjacent pages
+                    if (
+                      page === 1 ||
+                      page === totalPages ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <Button
+                          key={page}
+                          variant={currentPage === page ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setCurrentPage(page)}
+                          className="w-10"
+                        >
+                          {page}
+                        </Button>
+                      );
+                    }
+                    // Show ellipsis
+                    if (page === currentPage - 2 || page === currentPage + 2) {
+                      return <span key={page} className="px-2 text-muted-foreground">...</span>;
+                    }
+                    return null;
+                  })}
+                </div>
+                
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="gap-1"
+                >
+                  Suivant
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
+            
+            {/* Results count */}
+            <p className="text-center text-sm text-muted-foreground mt-4">
+              {filteredPosts.length} article{filteredPosts.length > 1 ? 's' : ''} trouvé{filteredPosts.length > 1 ? 's' : ''}
+              {totalPages > 1 && ` • Page ${currentPage} sur ${totalPages}`}
+            </p>
+          </> : <div className="text-center py-20 card-elevated rounded-2xl">
               <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="w-8 h-8 text-muted-foreground" />
               </div>

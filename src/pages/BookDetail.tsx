@@ -8,6 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, ExternalLink, ArrowLeft, BookOpen, User, Target, Quote, AlertCircle, Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const levelColors: Record<string, string> = {
   beginner: 'bg-accent/10 text-accent border-accent/20',
@@ -17,6 +19,8 @@ const levelColors: Record<string, string> = {
 
 const BookDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { t } = useTranslation();
+  const { getLocalizedPath, currentLanguage } = useLanguage();
   const { data: book, isLoading, error } = useBook(slug || '');
 
   if (isLoading) {
@@ -40,14 +44,14 @@ const BookDetail = () => {
             <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-4">
               <AlertCircle className="w-8 h-8 text-destructive" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground mb-2">Livre non trouvé</h1>
+            <h1 className="text-2xl font-bold text-foreground mb-2">{t('bookDetail.notFound')}</h1>
             <p className="text-muted-foreground mb-6">
-              Ce livre n'existe pas ou a été retiré de notre bibliothèque.
+              {t('bookDetail.notFoundDescription')}
             </p>
             <Button asChild>
-              <Link to="/bibliotheque">
+              <Link to={getLocalizedPath('/bibliotheque')}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Retour à la bibliothèque
+                {t('bookDetail.backToLibrary')}
               </Link>
             </Button>
           </div>
@@ -58,17 +62,17 @@ const BookDetail = () => {
   }
 
   const breadcrumbs = [
-    { name: 'Accueil', url: 'https://finivo.ca' },
-    { name: 'Bibliothèque', url: 'https://finivo.ca/bibliotheque' },
+    { name: t('nav.home'), url: 'https://finivo.ca' },
+    { name: t('common.library'), url: 'https://finivo.ca/bibliotheque' },
     { name: book.title, url: `https://finivo.ca/bibliotheque/${book.slug}` },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title={`${book.title} par ${book.author} | Finivo`}
+        title={`${book.title} ${t('bookDetail.by')} ${book.author} | Finivo`}
         description={book.shortDescription}
-        keywords={`${book.title}, ${book.author}, livre finance, ${book.themes.join(', ')}`}
+        keywords={`${book.title}, ${book.author}, ${t('bookDetail.financeBook')}, ${book.themes.join(', ')}`}
         url={`https://finivo.ca/bibliotheque/${book.slug}`}
         structuredData={generateBreadcrumbStructuredData(breadcrumbs)}
       />
@@ -78,18 +82,18 @@ const BookDetail = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-            <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
+            <Link to={getLocalizedPath('/')} className="hover:text-foreground transition-colors">{t('nav.home')}</Link>
             <span>/</span>
-            <Link to="/bibliotheque" className="hover:text-foreground transition-colors">Bibliothèque</Link>
+            <Link to={getLocalizedPath('/bibliotheque')} className="hover:text-foreground transition-colors">{t('common.library')}</Link>
             <span>/</span>
             <span className="text-muted truncate max-w-[200px]">{book.title}</span>
           </nav>
 
           {/* Back Button */}
           <Button asChild variant="ghost" className="mb-6 -ml-2">
-            <Link to="/bibliotheque">
+            <Link to={getLocalizedPath('/bibliotheque')}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour à la bibliothèque
+              {t('bookDetail.backToLibrary')}
             </Link>
           </Button>
 
@@ -103,7 +107,7 @@ const BookDetail = () => {
                     {book.coverImageUrl ? (
                       <img
                         src={book.coverImageUrl}
-                        alt={`Couverture de ${book.title}`}
+                        alt={`${t('bookDetail.coverOf')} ${book.title}`}
                         className="w-48 h-72 object-cover rounded-xl shadow-lg mx-auto"
                       />
                     ) : (
@@ -134,20 +138,20 @@ const BookDetail = () => {
                   <Button asChild className="btn-gradient w-full gap-2 h-12 text-base mb-3">
                     <a href={book.affiliateLink} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-5 h-5" />
-                      Acheter le livre
+                      {t('bookDetail.buyBook')}
                     </a>
                   </Button>
 
                   <p className="text-xs text-muted-foreground">
-                    Via {book.affiliatePlatform === 'amazon' ? 'Amazon' : book.affiliatePlatform}
+                    {t('bookDetail.via')} {book.affiliatePlatform === 'amazon' ? 'Amazon' : book.affiliatePlatform}
                   </p>
 
                   {/* Affiliate Notice */}
                   <div className="mt-4 p-3 bg-muted/50 rounded-lg">
                     <p className="text-xs text-muted-foreground">
-                      Ce lien est affilié. Voir notre{' '}
-                      <Link to="/divulgation-affiliation" className="underline hover:no-underline">
-                        divulgation
+                      {t('bookDetail.affiliateNotice')}{' '}
+                      <Link to={getLocalizedPath('/divulgation-affiliation')} className="underline hover:no-underline">
+                        {t('bookDetail.disclosure')}
                       </Link>.
                     </p>
                   </div>
@@ -172,7 +176,7 @@ const BookDetail = () => {
                   {book.isFeatured && (
                     <Badge className="bg-accent text-accent-foreground">
                       <Star className="w-3 h-3 mr-1" />
-                      Recommandé
+                      {t('bookDetail.recommended')}
                     </Badge>
                   )}
                 </div>
@@ -188,7 +192,7 @@ const BookDetail = () => {
                 <CardContent className="p-6">
                   <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                     <BookOpen className="w-5 h-5 text-primary" />
-                    Description
+                    {t('bookDetail.description')}
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
                     {book.fullDescription || book.shortDescription}
@@ -202,7 +206,7 @@ const BookDetail = () => {
                   <CardContent className="p-6">
                     <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                       <Target className="w-5 h-5 text-primary" />
-                      Pourquoi lire ce livre
+                      {t('bookDetail.whyRead')}
                     </h2>
                     <p className="text-muted-foreground leading-relaxed">
                       {book.whyReadThisBook}
@@ -217,7 +221,7 @@ const BookDetail = () => {
                   <CardContent className="p-6">
                     <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                       <User className="w-5 h-5 text-primary" />
-                      Pour quel profil de lecteur
+                      {t('bookDetail.readerProfile')}
                     </h2>
                     <p className="text-muted-foreground leading-relaxed">
                       {book.readerProfile}
@@ -231,7 +235,7 @@ const BookDetail = () => {
                 <Card className="card-elevated">
                   <CardContent className="p-6">
                     <h2 className="text-lg font-bold text-foreground mb-4">
-                      Thèmes abordés
+                      {t('bookDetail.themes')}
                     </h2>
                     <div className="flex flex-wrap gap-2">
                       {book.themes.map((theme) => (

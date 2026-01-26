@@ -272,6 +272,59 @@
       "withFee": "With fee"
     }
   },
+  "cardDetail": {
+    "breadcrumb": "Breadcrumb",
+    "by": "By",
+    "cardAlt": "Credit card",
+    "visualRepresentation": "Visual representation of the card",
+    "keyInfo": "Key Information",
+    "free": "Free",
+    "firstYearFree": "First year free",
+    "maxRewards": "Max rewards",
+    "cashAdvance": "Cash advance",
+    "featuresAndBenefits": "Features and Benefits",
+    "eligibilityRequirements": "Eligibility Requirements",
+    "minIncome": "Minimum annual income",
+    "bonusValue": "Bonus value",
+    "applyNow": "Apply Now",
+    "redirectNotice": "You will be redirected to the official {{issuer}} website",
+    "secureApplication": "Secure application",
+    "notFound": "Card not found",
+    "notFoundDescription": "The card you are looking for does not exist or is no longer available.",
+    "loadingDescription": "Loading credit card details.",
+    "categories": {
+      "rewards": "Rewards",
+      "business": "Business",
+      "grocery": "Grocery"
+    }
+  },
+  "bookDetail": {
+    "by": "by",
+    "financeBook": "finance book",
+    "notFound": "Book not found",
+    "notFoundDescription": "This book does not exist or has been removed from our library.",
+    "backToLibrary": "Back to library",
+    "coverOf": "Cover of",
+    "buyBook": "Buy the book",
+    "via": "Via",
+    "affiliateNotice": "This is an affiliate link. See our",
+    "disclosure": "disclosure",
+    "recommended": "Recommended",
+    "description": "Description",
+    "whyRead": "Why read this book",
+    "readerProfile": "For which reader profile",
+    "themes": "Topics covered"
+  },
+  "blogPost": {
+    "notFound": "Article not found",
+    "notFoundDescription": "The article you are looking for does not exist or has been moved.",
+    "backToBlog": "Back to blog",
+    "blogTitle": "Finivo Blog",
+    "ctaTitle": "Ready to find your ideal card?",
+    "ctaDescription": "Use our comparator to discover the best offers available.",
+    "ctaButton": "Compare cards",
+    "relatedArticles": "Related articles"
+  },
   "brokerages": {
     "title": "Brokerage Comparator",
     "subtitle": "Find the best broker to invest in Canada",

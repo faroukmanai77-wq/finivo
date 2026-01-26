@@ -10,10 +10,14 @@ import { blogCategoryLabels } from '@/types/blogPost';
 import { ArrowLeft, Calendar, Clock, User, BookOpen, ArrowRight } from 'lucide-react';
 import { BlogArticleContent } from '@/components/BlogArticleContent';
 import { SocialShareMenu } from '@/components/SocialShareMenu';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { getLocalizedPath, currentLanguage } = useLanguage();
   
   const { data: post, isLoading } = useBlogPost(slug || '');
   const { data: relatedPosts = [] } = useRelatedBlogPosts(post?.category || 'conseils', slug || '', 2);
@@ -39,8 +43,8 @@ const BlogPost = () => {
     return (
       <div className="min-h-screen bg-background">
         <SEO 
-          title="Article non trouvé | Finivo"
-          description="L'article que vous recherchez n'existe pas ou a été déplacé."
+          title={`${t('blogPost.notFound')} | Finivo`}
+          description={t('blogPost.notFoundDescription')}
           noindex
         />
         <Header />
@@ -49,12 +53,12 @@ const BlogPost = () => {
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
               <BookOpen className="w-7 h-7 sm:w-8 sm:h-8 text-muted-foreground" />
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Article non trouvé</h1>
-            <p className="text-sm sm:text-base text-muted-foreground mb-6">L'article que vous recherchez n'existe pas.</p>
-            <Link to="/blog">
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">{t('blogPost.notFound')}</h1>
+            <p className="text-sm sm:text-base text-muted-foreground mb-6">{t('blogPost.notFoundDescription')}</p>
+            <Link to={getLocalizedPath('/blog')}>
               <Button className="gap-2">
                 <ArrowLeft className="w-4 h-4" />
-                Retour au blog
+                {t('blogPost.backToBlog')}
               </Button>
             </Link>
           </div>
@@ -65,8 +69,8 @@ const BlogPost = () => {
   }
 
   const breadcrumbs = [
-    { name: 'Accueil', url: 'https://finivo.ca' },
-    { name: 'Blog', url: 'https://finivo.ca/blog' },
+    { name: t('nav.home'), url: 'https://finivo.ca' },
+    { name: t('common.blog'), url: 'https://finivo.ca/blog' },
     { name: post.title, url: `https://finivo.ca/blog/${post.slug}` }
   ];
 
@@ -99,7 +103,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title={`${post.title} | Blog Finivo`}
+        title={`${post.title} | ${t('blogPost.blogTitle')}`}
         description={post.excerpt}
         keywords={post.tags.join(', ')}
         image={post.cover_image_url || undefined}
@@ -116,11 +120,11 @@ const BlogPost = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <button 
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate(getLocalizedPath('/blog'))}
               className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors mb-4 sm:mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
-              Retour au blog
+              {t('blogPost.backToBlog')}
             </button>
 
             <Badge variant="secondary" className="mb-3 sm:mb-4 text-xs sm:text-sm">
@@ -143,14 +147,14 @@ const BlogPost = () => {
               <span className="flex items-center gap-1.5 sm:gap-2">
                 <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="hidden xs:inline">
-                  {new Date(post.published_at).toLocaleDateString('fr-CA', { 
+                  {new Date(post.published_at).toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { 
                     day: 'numeric', 
                     month: 'long', 
                     year: 'numeric' 
                   })}
                 </span>
                 <span className="xs:hidden">
-                  {new Date(post.published_at).toLocaleDateString('fr-CA', { 
+                  {new Date(post.published_at).toLocaleDateString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA', { 
                     day: 'numeric', 
                     month: 'short', 
                     year: 'numeric' 
@@ -159,7 +163,7 @@ const BlogPost = () => {
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2">
                 <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                {post.read_time} min
+                {post.read_time} {t('common.min')}
               </span>
               <SocialShareMenu title={post.title} />
             </div>
@@ -200,14 +204,14 @@ const BlogPost = () => {
             {/* CTA */}
             <div className="mt-8 sm:mt-10 p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-r from-primary/10 to-accent/10 text-center">
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-3">
-                Prêt à trouver votre carte idéale?
+                {t('blogPost.ctaTitle')}
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-                Utilisez notre comparateur pour découvrir les meilleures offres du moment.
+                {t('blogPost.ctaDescription')}
               </p>
-              <Link to="/#comparer">
+              <Link to={getLocalizedPath('/comparateurs/cartes-de-credit')}>
                 <Button size="default" className="btn-gradient gap-2 sm:text-base">
-                  Comparer les cartes
+                  {t('blogPost.ctaButton')}
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
@@ -221,12 +225,12 @@ const BlogPost = () => {
         <section className="py-12 sm:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Articles similaires</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">{t('blogPost.relatedArticles')}</h2>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 {relatedPosts.map(relatedPost => (
                   <Link 
                     key={relatedPost.id} 
-                    to={`/blog/${relatedPost.slug}`}
+                    to={getLocalizedPath(`/blog/${relatedPost.slug}`)}
                     className="group card-elevated rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
                   >
                     <div className="relative h-32 sm:h-40 overflow-hidden">

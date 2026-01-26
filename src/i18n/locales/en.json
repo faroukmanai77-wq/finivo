@@ -1,5 +1,7 @@
 {
   "common": {
+    "yes": "Yes",
+    "no": "No",
     "home": "Home",
     "blog": "Blog",
     "comparators": "Comparators",
@@ -255,13 +257,17 @@
     "noCards": "No cards found",
     "noResults": "No cards found",
     "adjustFilters": "Try adjusting the filters to see more results.",
+    "cardsFound": "cards found",
+    "cardsFound_one": "card found",
     "categories": {
       "cashback": "Cash back",
       "travel": "Travel",
+      "rewards": "Rewards",
       "noFee": "No fee",
       "student": "Students",
       "premium": "Premium",
-      "lowInterest": "Low interest"
+      "lowInterest": "Low interest",
+      "business": "Business"
     },
     "filters": {
       "issuer": "Issuer",
@@ -269,7 +275,22 @@
       "rewardsType": "Rewards type",
       "annualFee": "Annual fee",
       "noFee": "No fee",
-      "withFee": "With fee"
+      "withFee": "With fee",
+      "reset": "Reset",
+      "categories": "Categories",
+      "quickFilters": "Quick filters",
+      "noAnnualFee": "No annual fee",
+      "withWelcomeBonus": "With welcome bonus",
+      "maxAnnualFee": "Max annual fee",
+      "minCashback": "Minimum rewards",
+      "all": "All"
+    },
+    "sort": {
+      "placeholder": "Sort by",
+      "bestRating": "Best rating",
+      "annualFeeAsc": "Annual fee (ascending)",
+      "rewardsRateDesc": "Rewards rate (descending)",
+      "interestRateAsc": "Interest rate (ascending)"
     }
   },
   "cardDetail": {
@@ -326,15 +347,80 @@
     "relatedArticles": "Related articles"
   },
   "brokerages": {
-    "title": "Brokerage Comparator",
+    "title": "Brokerage Platforms",
+    "comparator": "Online Brokerage Platform Comparator",
+    "heroTitle": "Compare online brokerage platforms in Canada",
+    "heroDescription": "Find the best platform to invest based on your needs: fees, TFSA, RRSP, ETFs, stocks, options.",
     "subtitle": "Find the best broker to invest in Canada",
+    "disclaimer": "Comparison for informational purposes – data subject to change. Always verify conditions on the broker's official website.",
+    "platformsFound": "{{count}} platform found",
+    "platformsFound_other": "{{count}} platforms found",
     "transactionFee": "Transaction fee",
-    "monthlyFee": "Monthly fee",
+    "monthlyFees": "Monthly fees",
     "accounts": "Available accounts",
     "products": "Products",
     "openAccount": "Open account",
     "strengths": "Strengths",
-    "weaknesses": "Weaknesses"
+    "weaknesses": "Weaknesses",
+    "idealFor": "Ideal for",
+    "french": "French",
+    "noResults": "No platform found",
+    "adjustFilters": "Try adjusting the filters to see more results.",
+    "loadingError": "Loading error",
+    "loadingErrorMessage": "Unable to load platforms. Please try again.",
+    "categories": {
+      "zeroCommission": "Zero commission",
+      "beginner": "Beginner",
+      "advanced": "Advanced",
+      "registeredAccounts": "TFSA / RRSP",
+      "stocksEtf": "Stocks & ETFs",
+      "options": "Options",
+      "crypto": "Crypto",
+      "quebecFriendly": "Quebec friendly"
+    },
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "types": {
+      "broker": "Broker",
+      "roboAdvisor": "Robo-advisor"
+    },
+    "stats": {
+      "stocks": "Stocks",
+      "etf": "ETF",
+      "options": "Options",
+      "crypto": "Crypto"
+    },
+    "features": {
+      "mobileApp": "Mobile app",
+      "international": "International"
+    },
+    "filters": {
+      "reset": "Reset",
+      "categories": "Categories",
+      "quickFilters": "Quick filters",
+      "zeroCommission": "Zero commission",
+      "availableInFrench": "Available in French",
+      "optionsTrading": "Options trading",
+      "cryptoAvailable": "Crypto available"
+    },
+    "sort": {
+      "placeholder": "Sort by",
+      "rating": "Rating",
+      "lowestFees": "Lowest fees",
+      "name": "Name"
+    },
+    "view": {
+      "cards": "Cards",
+      "table": "Table"
+    },
+    "seo": {
+      "title": "Compare 10+ Online Brokers Canada 2026 | Wealthsimple, Questrade, IBKR | Finivo",
+      "description": "Compare the best brokerage platforms in Canada for free in 2026: Wealthsimple Trade ($0 commission), Questrade, Interactive Brokers, Disnat and banks.",
+      "keywords": "broker comparator canada 2026, wealthsimple vs questrade, best broker TFSA RRSP FHSA"
+    }
   },
   "calculators": {
     "title": "Financial Calculators",

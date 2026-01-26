@@ -1,11 +1,11 @@
 import { CardCategory, FilterState } from '@/types/creditCard';
-import { categoryLabels } from '@/data/creditCards';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Filter, RotateCcw, Sparkles, Gift, Tag } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface FilterSidebarProps {
   filters: FilterState;
@@ -33,6 +33,19 @@ const categoryIcons: Record<string, string> = {
 };
 
 export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) => {
+  const { t } = useTranslation();
+  
+  const categoryLabels: Record<CardCategory, string> = {
+    'cashback': t('creditCards.categories.cashback'),
+    'travel': t('creditCards.categories.travel'),
+    'rewards': t('creditCards.categories.rewards'),
+    'no-fee': t('creditCards.categories.noFee'),
+    'low-interest': t('creditCards.categories.lowInterest'),
+    'student': t('creditCards.categories.student'),
+    'business': t('creditCards.categories.business'),
+    'premium': t('creditCards.categories.premium'),
+  };
+
   const handleCategoryToggle = (category: CardCategory) => {
     const newCategories = filters.categories.includes(category)
       ? filters.categories.filter((c) => c !== category)
@@ -65,7 +78,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <Filter className="w-4 h-4 text-primary" />
             </div>
-            Filtres
+            {t('common.filters')}
             {activeFiltersCount > 0 && (
               <span className="ml-2 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
                 {activeFiltersCount}
@@ -79,7 +92,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
             className="text-muted-foreground hover:text-foreground font-medium"
           >
             <RotateCcw className="w-4 h-4 mr-1" />
-            Réinitialiser
+            {t('creditCards.filters.reset')}
           </Button>
         </div>
       </CardHeader>
@@ -88,7 +101,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
         <div>
           <h4 className="font-semibold text-sm mb-4 text-foreground flex items-center gap-2">
             <Tag className="w-4 h-4 text-muted-foreground" />
-            Catégories
+            {t('creditCards.filters.categories')}
           </h4>
           <div className="space-y-2">
             {categories.map((category) => (
@@ -123,7 +136,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
         <div className="pt-4 border-t border-border/50">
           <h4 className="font-semibold text-sm mb-4 text-foreground flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-muted-foreground" />
-            Filtres rapides
+            {t('creditCards.filters.quickFilters')}
           </h4>
           <div className="space-y-2">
             <div 
@@ -143,7 +156,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
                 className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
               />
               <Label htmlFor="noAnnualFee" className="text-sm cursor-pointer font-medium">
-                🆓 Sans frais annuels
+                🆓 {t('creditCards.filters.noAnnualFee')}
               </Label>
             </div>
             <div 
@@ -164,7 +177,7 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
               />
               <Label htmlFor="hasWelcomeBonus" className="text-sm cursor-pointer flex items-center gap-2 font-medium">
                 <Gift className="w-4 h-4 text-accent" />
-                Avec bonus de bienvenue
+                {t('creditCards.filters.withWelcomeBonus')}
               </Label>
             </div>
           </div>
@@ -173,10 +186,10 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
         {/* Max Annual Fee */}
         <div className="pt-4 border-t border-border/50">
           <h4 className="font-semibold text-sm mb-2 text-foreground">
-            Frais annuels max
+            {t('creditCards.filters.maxAnnualFee')}
           </h4>
           <p className="text-2xl font-bold text-primary mb-4">
-            {filters.maxAnnualFee !== null ? `${filters.maxAnnualFee}$` : 'Tous'}
+            {filters.maxAnnualFee !== null ? `${filters.maxAnnualFee}$` : t('creditCards.filters.all')}
           </p>
           <Slider
             value={[filters.maxAnnualFee ?? 200]}
@@ -196,10 +209,10 @@ export const FilterSidebar = ({ filters, onFilterChange }: FilterSidebarProps) =
         {/* Min Cashback */}
         <div className="pt-4 border-t border-border/50">
           <h4 className="font-semibold text-sm mb-2 text-foreground">
-            Remise minimum
+            {t('creditCards.filters.minCashback')}
           </h4>
           <p className="text-2xl font-bold text-primary mb-4">
-            {filters.minCashback !== null ? `${filters.minCashback}%` : 'Tous'}
+            {filters.minCashback !== null ? `${filters.minCashback}%` : t('creditCards.filters.all')}
           </p>
           <Slider
             value={[filters.minCashback ?? 0]}

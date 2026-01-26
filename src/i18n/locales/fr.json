@@ -1,5 +1,7 @@
 {
   "common": {
+    "yes": "Oui",
+    "no": "Non",
     "home": "Accueil",
     "blog": "Blog",
     "comparators": "Comparateurs",
@@ -255,13 +257,17 @@
     "noCards": "Aucune carte trouvée",
     "noResults": "Aucune carte trouvée",
     "adjustFilters": "Essayez d'ajuster les filtres pour voir plus de résultats.",
+    "cardsFound": "cartes trouvées",
+    "cardsFound_one": "carte trouvée",
     "categories": {
       "cashback": "Remises en argent",
       "travel": "Voyage",
+      "rewards": "Récompenses",
       "noFee": "Sans frais",
       "student": "Étudiants",
       "premium": "Premium",
-      "lowInterest": "Faible taux"
+      "lowInterest": "Faible taux",
+      "business": "Affaires"
     },
     "filters": {
       "issuer": "Émetteur",
@@ -269,7 +275,22 @@
       "rewardsType": "Type de récompenses",
       "annualFee": "Frais annuels",
       "noFee": "Sans frais",
-      "withFee": "Avec frais"
+      "withFee": "Avec frais",
+      "reset": "Réinitialiser",
+      "categories": "Catégories",
+      "quickFilters": "Filtres rapides",
+      "noAnnualFee": "Sans frais annuels",
+      "withWelcomeBonus": "Avec bonus de bienvenue",
+      "maxAnnualFee": "Frais annuels max",
+      "minCashback": "Remise minimum",
+      "all": "Tous"
+    },
+    "sort": {
+      "placeholder": "Trier par",
+      "bestRating": "Meilleure note",
+      "annualFeeAsc": "Frais annuels (croissant)",
+      "rewardsRateDesc": "Taux de remise (décroissant)",
+      "interestRateAsc": "Taux d'intérêt (croissant)"
     }
   },
   "cardDetail": {
@@ -326,15 +347,80 @@
     "relatedArticles": "Articles similaires"
   },
   "brokerages": {
-    "title": "Comparateur de courtiers",
+    "title": "Plateformes de courtage",
+    "comparator": "Comparateur de plateformes de courtage en ligne",
+    "heroTitle": "Comparer les plateformes de courtage en ligne au Canada",
+    "heroDescription": "Trouvez la meilleure plateforme pour investir selon vos besoins : frais, CELI, REER, ETF, actions, options.",
     "subtitle": "Trouvez le meilleur courtier pour investir au Canada",
+    "disclaimer": "Comparaison à titre informatif – données susceptibles de changer. Vérifiez toujours les conditions sur le site officiel du courtier.",
+    "platformsFound": "{{count}} plateforme trouvée",
+    "platformsFound_other": "{{count}} plateformes trouvées",
     "transactionFee": "Frais de transaction",
-    "monthlyFee": "Frais mensuels",
+    "monthlyFees": "Frais mensuels",
     "accounts": "Comptes disponibles",
     "products": "Produits",
     "openAccount": "Ouvrir un compte",
     "strengths": "Points forts",
-    "weaknesses": "Points faibles"
+    "weaknesses": "Points faibles",
+    "idealFor": "Idéal pour",
+    "french": "Français",
+    "noResults": "Aucune plateforme trouvée",
+    "adjustFilters": "Essayez d'ajuster les filtres pour voir plus de résultats.",
+    "loadingError": "Erreur de chargement",
+    "loadingErrorMessage": "Impossible de charger les plateformes. Veuillez réessayer.",
+    "categories": {
+      "zeroCommission": "Zéro commission",
+      "beginner": "Débutant",
+      "advanced": "Avancé",
+      "registeredAccounts": "CELI / REER",
+      "stocksEtf": "Actions & ETF",
+      "options": "Options",
+      "crypto": "Crypto",
+      "quebecFriendly": "Québec friendly"
+    },
+    "levels": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "types": {
+      "broker": "Courtier",
+      "roboAdvisor": "Robo-advisor"
+    },
+    "stats": {
+      "stocks": "Actions",
+      "etf": "ETF",
+      "options": "Options",
+      "crypto": "Crypto"
+    },
+    "features": {
+      "mobileApp": "App mobile",
+      "international": "International"
+    },
+    "filters": {
+      "reset": "Réinitialiser",
+      "categories": "Catégories",
+      "quickFilters": "Filtres rapides",
+      "zeroCommission": "Zéro commission",
+      "availableInFrench": "Disponible en français",
+      "optionsTrading": "Trading d'options",
+      "cryptoAvailable": "Crypto disponible"
+    },
+    "sort": {
+      "placeholder": "Trier par",
+      "rating": "Note",
+      "lowestFees": "Frais les plus bas",
+      "name": "Nom"
+    },
+    "view": {
+      "cards": "Cartes",
+      "table": "Tableau"
+    },
+    "seo": {
+      "title": "Comparateur de 10+ Courtiers en Ligne Canada 2026 | Wealthsimple, Questrade, IBKR | Finivo",
+      "description": "Comparez gratuitement les meilleures plateformes de courtage au Canada en 2026 : Wealthsimple Trade (0$ commission), Questrade, Interactive Brokers, Disnat et les banques.",
+      "keywords": "comparateur courtier canada 2026, wealthsimple vs questrade, meilleur courtier CELI REER CELIAPP"
+    }
   },
   "calculators": {
     "title": "Calculateurs financiers",

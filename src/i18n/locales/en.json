@@ -148,11 +148,93 @@
     "readTime": "min read",
     "by": "By"
   },
+  "blogPage": {
+    "badge": "Finivo Blog"
+  },
   "categories": {
     "guides": "Guides",
     "conseils": "Tips",
     "comparatifs": "Comparisons",
     "actualites": "News"
+  },
+  "comparators": {
+    "title": "Financial Comparators",
+    "subtitle": "Free comparison tools to help you choose the best financial products for your needs.",
+    "badge": "2 comparators available",
+    "illustrationAlt": "Financial comparator illustration",
+    "compareNow": "Compare now",
+    "creditCards": {
+      "title": "Credit Cards",
+      "description": "Compare the best credit cards in Canada. Find the one that offers the best benefits based on your spending habits."
+    },
+    "brokerages": {
+      "title": "Brokerage Platforms",
+      "description": "Compare online brokers in Canada. Find the best platform to invest based on your needs: fees, TFSA, RRSP, ETFs."
+    },
+    "cta": {
+      "title": "Need to calculate your finances?",
+      "subtitle": "Use our free calculators to simulate your investments, plan your savings and manage your debts.",
+      "button": "View calculators"
+    },
+    "seo": {
+      "title": "Free Financial Comparators Canada 2026 | Credit Cards & Brokerages | Finivo",
+      "name": "Financial Comparators - Credit Cards and Brokerages",
+      "description": "Compare the best credit cards and brokerage platforms in Canada for free in 2026. Independent comparison tools to find the best rewards, travel points and brokerage fees.",
+      "keywords": "credit card comparator canada 2026, online brokerage comparator, best credit card canada 2026, online broker canada, compare rewards cards, wealthsimple vs questrade, best cashback canada"
+    }
+  },
+  "calculatorsPage": {
+    "title": "Financial Calculators",
+    "subtitle": "Interactive tools to simulate your investments, plan your savings and manage your debts effectively.",
+    "badge": "8 free tools",
+    "illustrationAlt": "Financial calculators illustration",
+    "popular": "Popular",
+    "useCalculator": "Use calculator",
+    "items": {
+      "compound": {
+        "title": "Compound Interest",
+        "description": "Calculate how much an investment can earn you over time through compound interest."
+      },
+      "rrsp": {
+        "title": "RRSP Savings",
+        "description": "Estimate the value of your RRSP at retirement and the annual income it will provide."
+      },
+      "fhsa": {
+        "title": "FHSA Savings",
+        "description": "Calculate your potential savings with the tax-free first home savings account."
+      },
+      "debtConsolidation": {
+        "title": "Debt Consolidation",
+        "description": "Combine your debts into one. Calculate your new monthly payments and time to become debt-free."
+      },
+      "netWorth": {
+        "title": "Net Worth",
+        "description": "Calculate your net worth by comparing your assets and liabilities. Track your progress."
+      },
+      "tax": {
+        "title": "Canada Tax",
+        "description": "Estimate your federal and provincial tax based on 2026 tax brackets."
+      },
+      "budget": {
+        "title": "Monthly Budget",
+        "description": "Plan your budget by detailing your income and expenses. Print or export to Excel."
+      },
+      "mortgage": {
+        "title": "Mortgage",
+        "description": "Calculate your mortgage payments, total cost and visualize your loan amortization."
+      }
+    },
+    "cta": {
+      "title": "Need a suitable credit card?",
+      "subtitle": "Compare the best credit cards in Canada and find the one that matches your financial goals.",
+      "button": "Compare cards"
+    },
+    "seo": {
+      "title": "8 Free Financial Calculators Canada 2026 | RRSP, FHSA, TFSA, Mortgage, Budget | Finivo",
+      "name": "Finivo Financial Calculators 2026",
+      "description": "Plan your finances with our 8 free calculators in 2026: compound interest, RRSP and FHSA savings, TFSA, mortgage with CMHC insurance, Excel-exportable monthly budget, debt consolidation, net worth and Canada taxes.",
+      "keywords": "free financial calculator 2026, RRSP calculator canada, FHSA calculator 2026, TFSA calculator, mortgage calculator CMHC, monthly budget excel, debt consolidation, net worth, canada tax 2026, compound interest, financial planning"
+    }
   },
   "creditCards": {
     "title": "Credit Card Comparator",

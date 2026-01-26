@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
   Accordion,
   AccordionContent,
@@ -16,11 +17,14 @@ interface CalculatorFAQProps {
   items: FAQItem[];
 }
 
-export const CalculatorFAQ = ({ title = "Questions fréquentes", items }: CalculatorFAQProps) => {
+export const CalculatorFAQ = ({ title, items }: CalculatorFAQProps) => {
+  const { t } = useTranslation();
+  const faqTitle = title || t('calculators.common.faq');
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>{faqTitle}</CardTitle>
       </CardHeader>
       <CardContent>
         <Accordion type="single" collapsible className="w-full">

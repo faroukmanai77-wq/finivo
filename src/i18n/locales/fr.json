@@ -425,38 +425,452 @@
   "calculators": {
     "title": "Calculateurs financiers",
     "subtitle": "Outils gratuits pour planifier vos finances",
+    "common": {
+      "faq": "Questions fréquentes",
+      "years": "ans",
+      "year": "an",
+      "months": "mois",
+      "perMonth": "par mois",
+      "perYear": "par année",
+      "total": "Total",
+      "reset": "Réinitialiser",
+      "print": "Imprimer",
+      "export": "Exporter Excel",
+      "add": "Ajouter"
+    },
     "budget": {
-      "title": "Calculateur de budget",
-      "description": "Gérez vos revenus et dépenses mensuels"
+      "title": "Calculateur de budget mensuel",
+      "description": "Planifiez votre budget en détaillant vos revenus et dépenses mensuels. Imprimez ou exportez en Excel.",
+      "seo": {
+        "title": "Calculateur Budget Mensuel Gratuit 2026 | Imprimable & Excel | Finivo",
+        "description": "Planifiez votre budget mensuel gratuitement en 2026. Détaillez revenus et dépenses, visualisez avec graphiques, imprimez ou exportez en Excel.",
+        "keywords": "calculateur budget mensuel, budget personnel, gestion finances, excel budget, planification financière"
+      },
+      "sections": {
+        "income": "Revenus mensuels",
+        "fixedExpenses": "Dépenses fixes mensuelles",
+        "variableExpenses": "Dépenses variables mensuelles"
+      },
+      "incomeItems": {
+        "netSalary": "Salaire net",
+        "investments": "Placements (intérêts, dividendes)",
+        "alimonyReceived": "Pension alimentaire reçue",
+        "benefits": "Prestations gouvernementales",
+        "pensions": "Rentes",
+        "otherIncome": "Autres revenus (locatif, pourboires, etc.)"
+      },
+      "fixedExpenseItems": {
+        "rentMortgage": "Loyer / Hypothèque",
+        "electricity": "Électricité / Chauffage",
+        "cable": "Câble / Canaux spécialisés",
+        "phone": "Téléphone / Internet / Cellulaire",
+        "taxes": "Taxes municipales, scolaires, etc.",
+        "lifeInsurance": "Assurance vie / Invalidité",
+        "homeInsurance": "Assurance habitation",
+        "autoInsurance": "Assurance automobile / Immatriculation / Permis",
+        "autoLoan": "Emprunt automobile",
+        "creditCardDebt": "Emprunt (cartes de crédit)",
+        "lineOfCredit": "Emprunt (marge de crédit)",
+        "otherLoans": "Emprunts autres",
+        "daycare": "Garderie",
+        "bankFees": "Frais de services bancaires",
+        "savings": "Épargne (REER, CELI, CELIAPP, etc.)",
+        "otherFixed": "Autres (pension versée, etc.)"
+      },
+      "variableExpenseItems": {
+        "groceries": "Alimentation (épicerie)",
+        "convenience": "Alimentation (dépanneur)",
+        "restaurant": "Alimentation (restaurant / livraison)",
+        "workMeals": "Alimentation (repas école / travail)",
+        "tobacco": "Tabac / Alcool / Cannabis",
+        "clothing": "Vêtements, accessoires et chaussures",
+        "transit": "Transport en commun / Taxi / Covoiturage",
+        "gas": "Essence et entretien auto",
+        "health": "Santé / Beauté / Hygiène",
+        "leisure": "Loisirs et sorties",
+        "pets": "Achat et soins des animaux",
+        "home": "Maison (entretien / articles divers)",
+        "subscriptions": "Abonnements (streaming, magazines, etc.)",
+        "sports": "Sports / Gym / Clubs",
+        "pocketMoney": "Argent de poche / Loterie",
+        "gifts": "Cadeaux / Dons",
+        "vacation": "Vacances / Voyages",
+        "otherVariable": "Autres dépenses"
+      },
+      "summary": {
+        "title": "Résumé de votre budget",
+        "totalIncome": "Total des revenus",
+        "totalFixedExpenses": "Total des dépenses fixes",
+        "totalVariableExpenses": "Total des dépenses variables",
+        "totalExpenses": "Total des dépenses",
+        "monthlyBalance": "Solde mensuel",
+        "balanced": "Félicitations! Votre budget est équilibré.",
+        "deficit": "Attention: Vos dépenses dépassent vos revenus.",
+        "chartTitle": "Répartition des dépenses"
+      },
+      "chartCategories": {
+        "housing": "Logement",
+        "transport": "Transport",
+        "food": "Alimentation",
+        "insurance": "Assurances",
+        "services": "Services",
+        "debt": "Dettes",
+        "savings": "Épargne",
+        "leisure": "Loisirs",
+        "other": "Autres"
+      },
+      "faq": {
+        "q1": "Comment utiliser ce calculateur de budget?",
+        "a1": "Entrez vos revenus mensuels nets dans la première section, puis vos dépenses fixes (loyer, assurances, etc.) et variables (épicerie, loisirs, etc.). Le calculateur affichera automatiquement votre solde mensuel.",
+        "q2": "Quelle est la différence entre dépenses fixes et variables?",
+        "a2": "Les dépenses fixes sont des montants récurrents qui ne changent pas d'un mois à l'autre (loyer, assurances, abonnements). Les dépenses variables fluctuent selon vos habitudes (épicerie, essence, sorties).",
+        "q3": "Comment exporter mon budget en Excel?",
+        "a3": "Cliquez sur le bouton « Exporter Excel » pour télécharger un fichier contenant trois feuilles : Résumé, Détails et Répartition par catégorie."
+      }
     },
     "mortgage": {
-      "title": "Calculateur hypothécaire",
-      "description": "Estimez vos paiements hypothécaires"
+      "title": "Calculateur d'hypothèque",
+      "description": "Estimez vos paiements hypothécaires mensuels, le coût total de votre prêt et visualisez l'amortissement de votre hypothèque.",
+      "seo": {
+        "title": "Calculateur Hypothèque Gratuit 2026 | Paiement Mensuel Maison Québec | Finivo",
+        "description": "Calculez vos paiements hypothécaires au Québec en 2026. Estimez le coût total, l'assurance SCHL, les taux actuels et visualisez l'amortissement.",
+        "keywords": "calculateur hypothèque 2026, paiement hypothécaire québec, calculateur maison, prêt immobilier québec, assurance SCHL"
+      },
+      "params": "Paramètres de l'hypothèque",
+      "propertyPrice": "Prix de la propriété",
+      "downPayment": "Mise de fonds",
+      "ofPrice": "du prix",
+      "interestRate": "Taux d'intérêt annuel",
+      "amortization": "Période d'amortissement",
+      "paymentFrequency": "Fréquence des paiements",
+      "frequencies": {
+        "monthly": "Mensuel",
+        "biweekly": "Aux deux semaines",
+        "weekly": "Hebdomadaire"
+      },
+      "schlAlert": {
+        "title": "Assurance hypothécaire requise (SCHL)",
+        "message": "Votre mise de fonds est inférieure à 20%. Une assurance de {{amount}} sera ajoutée à votre hypothèque."
+      },
+      "results": {
+        "payment": "Paiement",
+        "amountBorrowed": "Montant emprunté",
+        "totalInterest": "Total des intérêts",
+        "totalCost": "Coût total"
+      },
+      "chart": {
+        "title": "Évolution du solde hypothécaire",
+        "remainingBalance": "Solde restant",
+        "principalPaid": "Capital remboursé"
+      },
+      "summary": {
+        "title": "Résumé de votre hypothèque",
+        "propertyPrice": "Prix de la propriété",
+        "downPayment": "Mise de fonds",
+        "mortgageAmount": "Montant de l'hypothèque",
+        "schlInsurance": "Assurance SCHL",
+        "totalFinanced": "Montant total financé",
+        "totalInterestYears": "Total des intérêts sur {{years}} ans",
+        "totalPayments": "Total des paiements"
+      },
+      "faq": {
+        "q1": "Qu'est-ce que l'assurance prêt hypothécaire (SCHL)?",
+        "a1": "L'assurance prêt hypothécaire est obligatoire au Canada si votre mise de fonds est inférieure à 20%. Elle protège le prêteur en cas de défaut de paiement.",
+        "q2": "Quelle mise de fonds minimum pour acheter une maison?",
+        "a2": "Au Canada, la mise de fonds minimum est de 5% pour les propriétés jusqu'à 500 000$. Entre 500 000$ et 1 million$, c'est 5% sur les premiers 500 000$ et 10% sur le reste.",
+        "q3": "Quelle est la différence entre taux fixe et variable?",
+        "a3": "Un taux fixe reste constant pendant tout le terme. Un taux variable fluctue selon le taux directeur de la Banque du Canada.",
+        "q4": "Qu'est-ce que l'amortissement?",
+        "a4": "L'amortissement est la durée totale prévue pour rembourser l'hypothèque. Le maximum est 25 ans avec assurance SCHL, ou 30 ans sans assurance.",
+        "q5": "Comment réduire mes paiements hypothécaires?",
+        "a5": "Vous pouvez augmenter votre mise de fonds, choisir un amortissement plus long, magasiner les taux entre plusieurs prêteurs, ou opter pour des paiements accélérés."
+      }
     },
     "compound": {
-      "title": "Intérêts composés",
-      "description": "Calculez la croissance de vos investissements"
+      "title": "Calculatrice d'intérêts composés",
+      "description": "Calculez combien un placement peut vous rapporter au fil du temps grâce aux intérêts composés.",
+      "seo": {
+        "title": "Calculatrice d'intérêts composés | Finivo",
+        "description": "Calculez la croissance de vos placements avec notre calculatrice d'intérêts composés. Visualisez l'impact du temps et des versements réguliers.",
+        "keywords": "intérêts composés, calculatrice, placement, investissement, épargne, rendement"
+      },
+      "whatIs": "Qu'est-ce que les intérêts composés?",
+      "explanation": "Les intérêts composés sont souvent appelés « la huitième merveille du monde ». C'est le processus par lequel vos intérêts génèrent eux-mêmes des intérêts, créant un effet boule de neige sur vos placements au fil du temps.",
+      "howItWorks": "Comment ça fonctionne",
+      "keyFactors": "Facteurs clés",
+      "params": "Paramètres de calcul",
+      "initialInvestment": "Placement initial",
+      "regularContributions": "Versements réguliers",
+      "annualReturnRate": "Taux de rendement annuel",
+      "interestCalculation": "Calcul des intérêts",
+      "investmentHorizon": "Horizon de placement",
+      "frequency": {
+        "monthly": "Une fois par mois",
+        "yearly": "Une fois par année",
+        "perMonth": "Par mois",
+        "perYear": "Par année"
+      },
+      "results": {
+        "finalValue": "Valeur finale de votre placement",
+        "totalContributions": "Total des contributions",
+        "interestEarned": "Intérêts gagnés",
+        "chartTitle": "Croissance de votre placement"
+      },
+      "faq": {
+        "q1": "Comment fonctionnent les intérêts composés?",
+        "a1": "Les intérêts composés fonctionnent en réinvestissant automatiquement vos gains. Chaque période, les intérêts sont calculés sur le capital initial plus tous les intérêts accumulés précédemment.",
+        "q2": "Quelle est la différence entre intérêts simples et composés?",
+        "a2": "Les intérêts simples sont calculés uniquement sur le capital initial, tandis que les intérêts composés sont calculés sur le capital plus les intérêts déjà accumulés.",
+        "q3": "À quelle fréquence les intérêts devraient-ils être composés?",
+        "a3": "Plus la fréquence de composition est élevée, plus vos gains seront importants. La composition mensuelle génère plus de rendement que la composition annuelle.",
+        "q4": "Pourquoi commencer à investir tôt est-il si important?",
+        "a4": "Le temps est le facteur le plus puissant des intérêts composés. Une personne qui investit tôt peut accumuler plus qu'une personne qui investit plus longtemps mais commence tard.",
+        "q5": "Quel taux de rendement est réaliste?",
+        "a5": "Historiquement, le marché boursier canadien a généré environ 7-8% par année sur le long terme. Un compte d'épargne offre 2-4%, un portefeuille équilibré 5-6%."
+      }
     },
     "rrsp": {
-      "title": "Calculateur REER",
-      "description": "Planifiez votre épargne-retraite"
+      "title": "Calculatrice d'épargne REER",
+      "description": "Déterminez quelle sera la valeur de votre régime enregistré d'épargne-retraite (REER) quand vous prendrez votre retraite, et le revenu annuel que vous en tirerez.",
+      "seo": {
+        "title": "Calculatrice REER 2026 - Épargne-retraite Québec | Finivo",
+        "description": "Calculez la valeur future de votre REER en 2026 et estimez votre revenu de retraite. Planifiez votre épargne-retraite avec notre calculatrice REER gratuite.",
+        "keywords": "REER 2026, épargne-retraite québec, calculatrice REER gratuit, retraite investissement, plafond cotisation REER"
+      },
+      "whatIs": "Qu'est-ce qu'un REER?",
+      "explanation": "Le Régime enregistré d'épargne-retraite (REER) est un compte d'épargne à l'abri de l'impôt conçu pour vous aider à épargner pour la retraite. Les cotisations que vous faites à votre REER sont déductibles de votre revenu imposable.",
+      "advantages": "Avantages du REER",
+      "rules": "Règles importantes",
+      "whileWorking": "Lorsque vous travaillez",
+      "workingExplanation": "Lorsque vous travaillez encore, vous pouvez prendre plus de risques quand vous investissez parce que votre salaire peut compenser vos pertes.",
+      "atRetirement": "Lorsque vous êtes à la retraite",
+      "retirementExplanation": "Une fois à la retraite, vous pouvez prendre moins de risques quand vous investissez parce que votre salaire ne peut plus compenser vos pertes.",
+      "currentValue": "Valeur actuelle de votre REER",
+      "annualReturn": "Taux de rendement annuel pendant que vous travaillez",
+      "contributionAmount": "Montant et fréquence de vos cotisations",
+      "currentAge": "Âge actuel",
+      "yearsToRetirement": "Nombre d'années avant votre retraite",
+      "retirementYears": "Estimation du nombre d'années de votre retraite",
+      "retirementReturn": "Taux de rendement annuel à la retraite",
+      "results": {
+        "valueAtRetirement": "Valeur du REER à la retraite",
+        "annualIncome": "Revenu annuel estimé",
+        "monthlyIncome": "Revenu mensuel estimé",
+        "interestEarned": "Intérêts gagnés",
+        "chartTitle": "Évolution de votre REER"
+      },
+      "faq": {
+        "q1": "Quelle est la limite de cotisation REER pour 2026?",
+        "a1": "Pour 2026, la limite de cotisation REER est de 18% de votre revenu gagné de l'année précédente, jusqu'à un maximum de 32 490 $.",
+        "q2": "Quand dois-je cotiser à mon REER?",
+        "a2": "Vous pouvez cotiser à votre REER tout au long de l'année et jusqu'au 60e jour de l'année suivante pour que la cotisation soit déductible.",
+        "q3": "REER ou CELI : lequel choisir?",
+        "a3": "Le REER est généralement préférable si votre taux d'imposition actuel est plus élevé qu'à la retraite. Le CELI est avantageux si vous prévoyez un taux similaire ou plus élevé.",
+        "q4": "Puis-je retirer de mon REER avant la retraite?",
+        "a4": "Oui, mais les retraits sont imposables. Deux exceptions : le RAP (jusqu'à 60 000 $ pour une première maison) et le REEP (jusqu'à 20 000 $ pour les études).",
+        "q5": "Que se passe-t-il avec mon REER à 71 ans?",
+        "a5": "À la fin de l'année où vous atteignez 71 ans, vous devez convertir votre REER en FERR, acheter une rente, ou retirer le solde."
+      }
     },
     "fhsa": {
-      "title": "Calculateur CELIAPP",
-      "description": "Épargne pour votre première maison"
-    },
-    "tax": {
-      "title": "Calculateur d'impôts",
-      "description": "Estimez vos impôts fédéraux et provinciaux"
+      "title": "Calculatrice d'épargne CELIAPP",
+      "description": "Calculez vos économies potentielles avec le Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP).",
+      "seo": {
+        "title": "Calculatrice CELIAPP 2026 - Épargne première propriété | Finivo",
+        "description": "Calculez combien vous pouvez économiser avec le CELIAPP en 2026 pour l'achat de votre première maison. Vérifiez votre admissibilité et planifiez votre épargne.",
+        "keywords": "CELIAPP 2026, première maison québec, épargne libre impôt, achat propriété, calculatrice CELIAPP"
+      },
+      "whatIs": "Qu'est-ce que le CELIAPP?",
+      "explanation": "Le Compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP) est un nouveau régime enregistré qui combine les avantages du REER et du CELI. Il vous permet d'économiser jusqu'à 40 000 $ à l'abri de l'impôt pour l'achat de votre première maison.",
+      "advantages": "Avantages du CELIAPP",
+      "eligibilityConditions": "Conditions d'admissibilité",
+      "checkEligibility": "Vérifiez votre admissibilité",
+      "eligibilityIntro": "Vérifiez votre admissibilité à ouvrir un compte d'épargne libre d'impôt pour l'achat d'une première propriété (CELIAPP).",
+      "ageQuestion": "Quel âge avez-vous?",
+      "residentQuestion": "Êtes-vous un résident au Canada?",
+      "firstTimeQuestion": "Êtes-vous propriétaire pour la première fois?",
+      "eligible": "Il semble que vous puissiez être admissible au CELIAPP.",
+      "notEligible": "Selon vos réponses, vous ne semblez pas admissible au CELIAPP.",
+      "calculateSavings": "Calculez vos économies CELIAPP",
+      "savingsIntro": "Parlez-nous de la façon dont vous économisez et nous vous aiderons à calculer vos économies potentielles.",
+      "openingYear": "Année d'ouverture de votre CELIAPP",
+      "startContributing": "Quand allez-vous commencer à cotiser?",
+      "purchaseDate": "Quand prévoyez-vous acheter votre maison?",
+      "contributionAmount": "Combien allez-vous cotiser?",
+      "annualReturn": "Taux de rendement annuel",
+      "maxAnnual": "Maximum: 8 000 $ par année",
+      "results": {
+        "title": "Vos économies CELIAPP",
+        "totalSavings": "Épargne totale",
+        "contributions": "Cotisations",
+        "growth": "Croissance",
+        "taxSavings": "Économies d'impôt estimées",
+        "chartTitle": "Évolution de votre CELIAPP"
+      },
+      "faq": {
+        "q1": "Quelle est la limite de cotisation annuelle au CELIAPP?",
+        "a1": "La limite de cotisation annuelle au CELIAPP est de 8 000 $.",
+        "q2": "Puis-je avoir un CELIAPP si j'ai été propriétaire il y a 5 ans?",
+        "a2": "Oui! Vous êtes admissible si vous n'avez pas été propriétaire au cours des quatre années civiles précédentes.",
+        "q3": "Que se passe-t-il si je n'achète pas de maison?",
+        "a3": "Vous avez 15 ans pour utiliser les fonds. Après, vous pouvez les transférer dans votre REER ou les retirer de façon imposable.",
+        "q4": "Puis-je combiner le CELIAPP avec le RAP?",
+        "a4": "Oui! Vous pouvez utiliser les deux pour votre mise de fonds (jusqu'à 100 000 $ combinés).",
+        "q5": "Le CELIAPP est-il mieux que le REER pour acheter une maison?",
+        "a5": "Pour l'achat d'une première propriété, le CELIAPP est généralement plus avantageux car les retraits sont non imposables."
+      }
     },
     "netWorth": {
-      "title": "Valeur nette",
-      "description": "Calculez votre patrimoine total"
+      "title": "Calculatrice de valeur nette",
+      "description": "Calculez votre valeur nette - c'est-à-dire la différence entre ce que vous possédez et ce que vous devez.",
+      "seo": {
+        "title": "Calculatrice de valeur nette | Finivo",
+        "description": "Calculez votre valeur nette en comparant vos actifs et vos passifs. Suivez votre progression financière avec notre calculatrice gratuite.",
+        "keywords": "valeur nette, actifs, passifs, patrimoine, calculatrice, finances personnelles"
+      },
+      "understanding": "Comprendre votre valeur nette",
+      "explanation": "Votre valeur nette représente votre richesse réelle : la différence entre tout ce que vous possédez (actifs) et tout ce que vous devez (passifs). C'est le meilleur indicateur de votre santé financière globale.",
+      "assetsInclude": "Vos actifs incluent",
+      "liabilitiesInclude": "Vos passifs incluent",
+      "yourNetWorth": "Votre valeur nette",
+      "totalAssets": "Total des actifs",
+      "totalLiabilities": "Total des passifs",
+      "yourAssets": "Vos actifs",
+      "yourLiabilities": "Vos passifs",
+      "cashEquivalents": "Argent comptant et équivalents",
+      "checkingAccounts": "Compte(s) de chèques",
+      "savingsAccounts": "Compte(s) d'épargne",
+      "registeredInvestments": "Placements enregistrés",
+      "nonRegisteredInvestments": "Placements non enregistrés",
+      "personalProperty": "Biens personnels",
+      "primaryResidence": "Résidence principale",
+      "vehicles": "Véhicule(s)",
+      "otherAssets": "Autres biens",
+      "debts": "Dettes",
+      "mortgage": "Hypothèque",
+      "autoLoan": "Prêt auto",
+      "studentLoan": "Prêt étudiant",
+      "creditCards": "Cartes de crédit",
+      "otherDebts": "Autres dettes",
+      "assetDistribution": "Répartition des actifs",
+      "liabilityDistribution": "Répartition des passifs",
+      "faq": {
+        "q1": "Qu'est-ce que la valeur nette?",
+        "a1": "La valeur nette est la différence entre ce que vous possédez (actifs) et ce que vous devez (passifs).",
+        "q2": "Quelle devrait être ma valeur nette selon mon âge?",
+        "a2": "Une règle générale suggère que votre valeur nette devrait être égale à votre âge multiplié par votre revenu annuel brut, divisé par 10.",
+        "q3": "Devrais-je inclure ma résidence principale dans mes actifs?",
+        "a3": "Oui, utilisez sa valeur marchande estimée. N'oubliez pas de soustraire le solde de votre hypothèque dans vos passifs.",
+        "q4": "Comment puis-je augmenter ma valeur nette?",
+        "a4": "Augmentez vos actifs (épargne, investissements) et réduisez vos passifs (remboursement des dettes).",
+        "q5": "À quelle fréquence devrais-je calculer ma valeur nette?",
+        "a5": "Calculez votre valeur nette au moins une fois par an, idéalement au même moment chaque année."
+      }
     },
     "debtConsolidation": {
-      "title": "Consolidation de dettes",
-      "description": "Optimisez le remboursement de vos dettes"
+      "title": "Calculatrice de consolidation de dettes",
+      "description": "La consolidation de dettes consiste à combiner plusieurs dettes en une seule. Utilisez cette calculatrice pour calculer le montant de vos nouvelles mensualités.",
+      "seo": {
+        "title": "Calculatrice de consolidation de dettes | Finivo",
+        "description": "Calculez combien vous pouvez économiser en consolidant vos dettes. Comparez vos paiements actuels avec un prêt de consolidation.",
+        "keywords": "consolidation dettes, remboursement, carte de crédit, prêt, calculatrice, intérêts"
+      },
+      "step1": "Étape 1 : Renseignements concernant vos dettes",
+      "debtName": "Nom de la dette",
+      "amountOwed": "Montant que vous devez",
+      "interestRate": "Taux d'intérêt annuel",
+      "monthlyPayment": "Paiement mensuel",
+      "addDebt": "Ajouter",
+      "debt": "Dette",
+      "summary": "Résumé de vos dettes actuelles",
+      "summaryText": "Selon votre plan actuel, votre dette cumulée est de {{totalDebt}} et vous serez quitte de dettes dans {{months}} mois lorsque votre paiement mensuel sera de {{monthlyPayment}}.",
+      "totalDebt": "Total de la dette en cours",
+      "totalMonthlyPayment": "Paiement mensuel",
+      "debtFreeIn": "Vous serez quitte de dettes dans",
+      "distribution": "Répartition de vos dettes",
+      "principalVsInterest": "Principal vs Intérêts",
+      "principal": "Principal",
+      "interest": "Intérêts",
+      "totalInterest": "Total des intérêts que vous paierez",
+      "considerTransfer": "Considérez une carte de transfert de solde pour économiser sur les intérêts",
+      "understanding": "Comprendre la consolidation de dettes",
+      "consolidationExplanation": "La consolidation de dettes est une stratégie qui consiste à regrouper plusieurs dettes en un seul prêt.",
+      "advantages": "Avantages",
+      "watchPoints": "Points d'attention",
+      "faq": {
+        "q1": "Qu'est-ce que la consolidation de dettes?",
+        "a1": "La consolidation de dettes consiste à regrouper plusieurs dettes en un seul prêt avec un taux d'intérêt généralement plus bas.",
+        "q2": "Quand devrais-je considérer la consolidation de dettes?",
+        "a2": "Considérez la consolidation si vous avez plusieurs dettes à taux élevé ou si vous avez du mal à suivre vos paiements multiples.",
+        "q3": "Quelles sont les options de consolidation au Canada?",
+        "a3": "Les options incluent : un prêt de consolidation bancaire, une marge de crédit hypothécaire, un transfert de solde sur carte de crédit.",
+        "q4": "La consolidation affecte-t-elle ma cote de crédit?",
+        "a4": "À court terme, une demande de prêt peut légèrement réduire votre cote. À long terme, elle peut l'améliorer.",
+        "q5": "Quelle est la différence entre consolidation et faillite?",
+        "a5": "La consolidation est un accord pour rembourser vos dettes. La faillite est une procédure légale qui a un impact sévère sur votre crédit."
+      }
+    },
+    "tax": {
+      "title": "Calculatrice d'impôt sur le revenu du Canada 2026",
+      "description": "Obtenez une estimation rapide de votre revenu après impôt, avec votre remboursement ou votre solde d'impôt à payer.",
+      "seo": {
+        "title": "Calculatrice d'impôt Canada 2026 - Toutes les provinces | Finivo",
+        "description": "Calculez votre impôt fédéral et provincial pour toutes les provinces canadiennes en 2026. Estimez votre revenu net, votre taux d'imposition effectif et marginal.",
+        "keywords": "impôt 2026, calculatrice impôt Canada, Québec, Ontario, Alberta, taux d'imposition, revenu net"
+      },
+      "yourIncome": "Vos revenus",
+      "province": "Province",
+      "employmentIncome": "Revenu d'emploi",
+      "selfEmploymentIncome": "Revenu de travail autonome",
+      "investmentIncome": "Revenu de placements",
+      "deductions": "Déductions",
+      "rrspContribution": "Cotisation REER",
+      "fhsaContribution": "Cotisation CELIAPP",
+      "charityDonations": "Dons de charité",
+      "studentLoanInterest": "Intérêts sur prêt étudiant",
+      "summary": "Résumé",
+      "grossIncome": "Revenu brut",
+      "taxableIncome": "Revenu imposable",
+      "federalTax": "Impôt fédéral",
+      "provincialTax": "Impôt provincial",
+      "totalTax": "Impôt total",
+      "socialContributions": "Cotisations sociales",
+      "rrqCpp": "RRQ/RPC",
+      "rqap": "RQAP",
+      "ei": "Assurance-emploi",
+      "totalContributions": "Total des cotisations",
+      "totalDeductions": "Total des retenues",
+      "netIncome": "Revenu net",
+      "effectiveRate": "Taux effectif",
+      "marginalRate": "Taux marginal",
+      "incomeDistribution": "Répartition de votre revenu",
+      "federalBrackets": "Tranches fédérales 2025",
+      "provincialBrackets": "Tranches provinciales 2025",
+      "rate": "Taux",
+      "faq": {
+        "q1": "Quelle est la différence entre le taux marginal et le taux effectif?",
+        "a1": "Le taux marginal est le pourcentage d'impôt sur votre prochain dollar. Le taux effectif est le pourcentage total sur l'ensemble de vos revenus.",
+        "q2": "Comment puis-je réduire mon impôt à payer?",
+        "a2": "Les principales stratégies incluent : cotiser à votre REER ou CELIAPP, maximiser vos crédits d'impôt, fractionner le revenu.",
+        "q3": "Quand dois-je produire ma déclaration d'impôt?",
+        "a3": "La date limite est généralement le 30 avril pour les particuliers et le 15 juin pour les travailleurs autonomes.",
+        "q4": "Dois-je payer de l'impôt provincial et fédéral?",
+        "a4": "Oui, au Canada vous payez les deux. Le Québec perçoit son propre impôt provincial (deux déclarations à produire).",
+        "q5": "Qu'est-ce que l'abattement du Québec?",
+        "a5": "Les résidents du Québec reçoivent un abattement de 16,5% sur leur impôt fédéral parce que le Québec administre ses propres programmes sociaux."
+      }
     }
+  },
+  "brokeragesTable": {
+    "platform": "Plateforme",
+    "stockFees": "Frais actions",
+    "freeEtf": "ETF gratuits",
+    "registeredAccounts": "CELI / REER",
+    "options": "Options",
+    "crypto": "Crypto",
+    "idealFor": "Idéal pour",
+    "yes": "Oui",
+    "paid": "Payant"
   },
   "footer": {
     "cta": {

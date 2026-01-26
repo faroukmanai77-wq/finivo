@@ -1,11 +1,13 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
 import { ArrowRight, Calculator } from 'lucide-react';
 import { RecommendedArticles } from './RecommendedArticles';
 import { FeaturedCard } from './FeaturedCard';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface CalculatorLayoutProps {
   title: string;
@@ -20,6 +22,7 @@ interface CalculatorLayoutProps {
   featuredCardType?: 'transfer' | 'cashback' | 'savings';
   illustration?: string;
 }
+
 export const CalculatorLayout = ({
   title,
   description,
@@ -33,16 +36,20 @@ export const CalculatorLayout = ({
   featuredCardType,
   illustration
 }: CalculatorLayoutProps) => {
+  const { t } = useTranslation();
+  const { getLocalizedPath } = useLanguage();
+
   const breadcrumbs = [{
-    name: 'Accueil',
+    name: t('common.home'),
     url: 'https://finivo.ca'
   }, {
-    name: 'Calculateurs',
+    name: t('common.calculators'),
     url: 'https://finivo.ca/calculateurs'
   }, {
     name: title,
     url
   }];
+
   const calculatorStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -62,10 +69,18 @@ export const CalculatorLayout = ({
       url: 'https://finivo.ca'
     }
   };
-  return <div className="min-h-screen bg-background">
-      <SEO title={seoTitle} description={seoDescription} keywords={seoKeywords} url={url} structuredData={{
-      '@graph': [calculatorStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
-    }} />
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title={seoTitle} 
+        description={seoDescription} 
+        keywords={seoKeywords} 
+        url={url} 
+        structuredData={{
+          '@graph': [calculatorStructuredData, generateBreadcrumbStructuredData(breadcrumbs)]
+        }} 
+      />
       <Header />
       
       {/* Hero Section */}
@@ -77,9 +92,9 @@ export const CalculatorLayout = ({
         <div className="container mx-auto px-4 relative z-10">
           {/* Breadcrumbs */}
           <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-            <Link to="/" className="hover:text-foreground transition-colors">Accueil</Link>
+            <Link to={getLocalizedPath('/')} className="hover:text-foreground transition-colors">{t('common.home')}</Link>
             <span>/</span>
-            <Link to="/calculateurs" className="hover:text-foreground transition-colors">Calculateurs</Link>
+            <Link to={getLocalizedPath('/calculateurs')} className="hover:text-foreground transition-colors">{t('common.calculators')}</Link>
             <span>/</span>
             <span className="text-primary">{title}</span>
           </nav>
@@ -120,9 +135,11 @@ export const CalculatorLayout = ({
           </div>
 
           {/* Featured Product Widget */}
-          {featuredCardType && <div className="max-w-4xl mx-auto mt-12">
+          {featuredCardType && (
+            <div className="max-w-4xl mx-auto mt-12">
               <FeaturedCard type={featuredCardType} />
-            </div>}
+            </div>
+          )}
         </div>
       </section>
 
@@ -134,5 +151,6 @@ export const CalculatorLayout = ({
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };

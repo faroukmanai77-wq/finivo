@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BrokeragePlatform } from '@/types/brokerage';
 import {
   Table,
@@ -15,18 +16,20 @@ interface BrokerageComparisonTableProps {
 }
 
 export const BrokerageComparisonTable = ({ platforms }: BrokerageComparisonTableProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full overflow-x-auto rounded-xl border border-border bg-card">
       <Table>
         <TableHeader>
           <TableRow className="bg-muted/50">
-            <TableHead className="font-bold text-foreground min-w-[160px]">Plateforme</TableHead>
-            <TableHead className="font-bold text-foreground text-center">Frais actions</TableHead>
-            <TableHead className="font-bold text-foreground text-center">ETF gratuits</TableHead>
-            <TableHead className="font-bold text-foreground text-center">CELI / REER</TableHead>
-            <TableHead className="font-bold text-foreground text-center">Options</TableHead>
-            <TableHead className="font-bold text-foreground text-center">Crypto</TableHead>
-            <TableHead className="font-bold text-foreground min-w-[120px]">Idéal pour</TableHead>
+            <TableHead className="font-bold text-foreground min-w-[160px]">{t('brokeragesTable.platform')}</TableHead>
+            <TableHead className="font-bold text-foreground text-center">{t('brokeragesTable.stockFees')}</TableHead>
+            <TableHead className="font-bold text-foreground text-center">{t('brokeragesTable.freeEtf')}</TableHead>
+            <TableHead className="font-bold text-foreground text-center">{t('brokeragesTable.registeredAccounts')}</TableHead>
+            <TableHead className="font-bold text-foreground text-center">{t('brokeragesTable.options')}</TableHead>
+            <TableHead className="font-bold text-foreground text-center">{t('brokeragesTable.crypto')}</TableHead>
+            <TableHead className="font-bold text-foreground min-w-[120px]">{t('brokeragesTable.idealFor')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,11 +47,11 @@ export const BrokerageComparisonTable = ({ platforms }: BrokerageComparisonTable
                 {platform.transactionFeeETF.includes('0 $') || platform.transactionFeeETF === '0 $' ? (
                   <Badge className="bg-accent/10 text-accent border-0">
                     <Check className="w-3 h-3 mr-1" />
-                    Oui
+                    {t('brokeragesTable.yes')}
                   </Badge>
                 ) : (
                   <Badge variant="secondary" className="bg-muted text-muted-foreground border-0">
-                    Payant
+                    {t('brokeragesTable.paid')}
                   </Badge>
                 )}
               </TableCell>

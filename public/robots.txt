@@ -1,14 +1,36 @@
 # Finivo - Robots.txt
 # https://finivo.ca
+# Dernière mise à jour: Janvier 2026
 
+# Autoriser tous les robots à indexer le site
+User-agent: *
+Allow: /
+
+# Moteurs de recherche principaux
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
 
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Réseaux sociaux
 User-agent: Twitterbot
 Allow: /
 
@@ -18,13 +40,18 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
-User-agent: *
+User-agent: Pinterest
 Allow: /
+
+# Bloquer les chemins privés/techniques
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /private/
 
 # Sitemaps
 Sitemap: https://finivo.ca/sitemap.xml
 
-# Block admin/private paths (if any)
-Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
+# Host préféré
+Host: https://finivo.ca

@@ -395,12 +395,12 @@ const ImpotCanada = () => {
 
   return (
     <CalculatorLayout
-      title="Calculatrice d'impôt sur le revenu du Canada 2025"
+      title="Calculatrice d'impôt sur le revenu du Canada 2026"
       description="Obtenez une estimation rapide de votre revenu après impôt, avec votre remboursement ou votre solde d'impôt à payer."
       icon={<Receipt className="w-8 h-8 text-primary" />}
-      seoTitle="Calculatrice d'impôt Canada 2025 - Toutes les provinces | Finivo"
-      seoDescription="Calculez votre impôt fédéral et provincial pour toutes les provinces canadiennes. Estimez votre revenu net, votre taux d'imposition effectif et marginal pour 2025."
-      seoKeywords="impôt, calculatrice, Canada, Québec, Ontario, Alberta, taux d'imposition, revenu net, déclaration 2025"
+      seoTitle="Calculatrice d'impôt Canada 2026 - Toutes les provinces | Finivo"
+      seoDescription="Calculez votre impôt fédéral et provincial pour toutes les provinces canadiennes en 2026. Estimez votre revenu net, votre taux d'imposition effectif et marginal. Inclut les nouvelles règles fiscales 2026."
+      seoKeywords="impôt 2026, calculatrice impôt Canada, Québec, Ontario, Alberta, taux d'imposition, revenu net, déclaration 2026, gain capital"
       url="https://finivo.ca/calculateurs/impot"
       relatedCategory="impot"
       featuredCardType="cashback"

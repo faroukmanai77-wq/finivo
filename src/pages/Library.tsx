@@ -112,9 +112,9 @@ const Library = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="20+ Meilleurs Livres Finance Personnelle & Investissement 2025 | Bibliothèque Finivo" 
-        description="Découvrez notre sélection de 20+ livres essentiels pour maîtriser vos finances : Père Riche Père Pauvre, L'investisseur intelligent, La semaine de 4 heures et plus. Livres en français et anglais classés par niveau (débutant à expert). Parfaits pour apprendre à investir, budgéter et atteindre la liberté financière." 
-        keywords="meilleurs livres finance personnelle, livres investissement débutant, père riche père pauvre, liberté financière, livres budget épargne, livres REER CELI, warren buffett, robert kiyosaki" 
+        title="20+ Meilleurs Livres Finance Personnelle & Investissement 2026 | Bibliothèque Finivo" 
+        description="Découvrez notre sélection de 20+ livres essentiels pour maîtriser vos finances en 2026 : Père Riche Père Pauvre, L'investisseur intelligent, Liberté 45, La semaine de 4 heures et plus. Livres en français et anglais classés par niveau (débutant à expert). Parfaits pour apprendre à investir, budgéter et atteindre la liberté financière." 
+        keywords="meilleurs livres finance personnelle 2026, livres investissement débutant, père riche père pauvre, liberté financière, livres budget épargne, livres REER CELI CELIAPP, warren buffett, robert kiyosaki, liberté 45" 
         url="https://finivo.ca/bibliotheque" 
         structuredData={generateBreadcrumbStructuredData(breadcrumbs)} 
       />

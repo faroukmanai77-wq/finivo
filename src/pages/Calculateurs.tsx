@@ -43,7 +43,7 @@ const Calculateurs = () => {
   }, {
     icon: Building,
     title: 'Impôt Canada/Québec',
-    description: 'Estimez votre impôt fédéral et provincial basé sur les tranches d\'imposition 2025.',
+    description: 'Estimez votre impôt fédéral et provincial basé sur les tranches d\'imposition 2026.',
     href: '/calculateurs/impot',
     color: 'bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400',
     popular: false
@@ -67,8 +67,8 @@ const Calculateurs = () => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Calculateurs Financiers Finivo',
-    description: '8 calculateurs financiers gratuits pour les Québécois : REER, CELIAPP, hypothèque, budget, intérêts composés et plus.',
+    name: 'Calculateurs Financiers Finivo 2026',
+    description: '8 calculateurs financiers gratuits pour les Québécois en 2026 : REER, CELIAPP, CELI, hypothèque, budget, intérêts composés, impôt et plus.',
     url: 'https://finivo.ca/calculateurs',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Web',
@@ -82,9 +82,9 @@ const Calculateurs = () => {
 
   return <div className="min-h-screen bg-background">
       <SEO 
-        title="8 Calculateurs Financiers Gratuits Québec 2025 | REER, CELIAPP, Hypothèque, Budget | Finivo" 
-        description="Planifiez vos finances avec nos 8 calculateurs gratuits : intérêts composés, épargne REER et CELIAPP, hypothèque avec assurance SCHL, budget mensuel, consolidation de dettes, valeur nette et impôts Canada/Québec. Outils interactifs pour les Québécois." 
-        keywords="calculateur financier gratuit, calculateur REER québec, calculateur CELIAPP 2025, calculateur hypothèque SCHL, budget mensuel excel, consolidation dettes, valeur nette, impôt québec canada, intérêts composés, planification financière" 
+        title="8 Calculateurs Financiers Gratuits Québec 2026 | REER, CELIAPP, CELI, Hypothèque, Budget | Finivo" 
+        description="Planifiez vos finances avec nos 8 calculateurs gratuits en 2026 : intérêts composés, épargne REER et CELIAPP, CELI, hypothèque avec assurance SCHL, budget mensuel exportable Excel, consolidation de dettes, valeur nette et impôts Canada/Québec. Outils interactifs pour les Québécois." 
+        keywords="calculateur financier gratuit 2026, calculateur REER québec, calculateur CELIAPP 2026, calculateur CELI, calculateur hypothèque SCHL, budget mensuel excel, consolidation dettes, valeur nette, impôt québec canada 2026, intérêts composés, planification financière" 
         url="https://finivo.ca/calculateurs"
         structuredData={structuredData}
       />

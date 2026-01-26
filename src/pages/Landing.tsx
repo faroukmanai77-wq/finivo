@@ -42,7 +42,7 @@ const Landing = () => {
     description: 'Conseils d\'experts, actualités financières et guides pratiques pour le Québec.',
     href: '/blog',
     color: 'bg-success/10 text-success',
-    features: ['Guides pratiques', 'Actualités 2025', 'Conseils personnalisés']
+    features: ['Guides pratiques', 'Actualités 2026', 'Conseils personnalisés']
   }];
   const calculators = [{
     icon: TrendingUp,
@@ -108,7 +108,7 @@ const Landing = () => {
     href: '/calculateurs'
   }];
   return <div className="min-h-screen bg-background">
-      <SEO title="Finivo | Outils Financiers Gratuits pour Québécois - Comparateurs & Calculateurs 2025" description="Finivo est LA plateforme québécoise d'outils financiers 100% gratuits. Comparez 30+ cartes de crédit et 10+ courtiers en ligne. Utilisez nos 8 calculateurs (REER, CELIAPP, hypothèque, budget, impôts). Découvrez notre bibliothèque de 20+ livres sur la finance personnelle. Indépendant et sans frais." keywords="finivo, outils financiers gratuits québec, comparateur carte crédit québec, meilleur courtier canada, calculateur REER CELIAPP, calculateur hypothèque québec, budget mensuel, impôt québec canada, finances personnelles, liberté financière" url="https://finivo.ca" structuredData={generateOrganizationStructuredData()} />
+      <SEO title="Finivo | Outils Financiers Gratuits Québec 2026 - Comparateurs & Calculateurs" description="Finivo est LA plateforme québécoise d'outils financiers 100% gratuits en 2026. Comparez 30+ cartes de crédit et 10+ courtiers en ligne. Utilisez nos 8 calculateurs (REER, CELIAPP, CELI, hypothèque, budget, impôts). Découvrez notre bibliothèque de 20+ livres sur la finance personnelle et investissement. Indépendant et sans frais." keywords="finivo, outils financiers gratuits québec 2026, comparateur carte crédit québec, meilleur courtier canada, calculateur REER CELIAPP CELI, calculateur hypothèque québec, budget mensuel, impôt québec canada 2026, finances personnelles, liberté financière, investissement débutant" url="https://finivo.ca" structuredData={generateOrganizationStructuredData()} />
       <Header />
       
       {/* Hero Section - MindMarket Style */}

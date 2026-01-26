@@ -51,9 +51,9 @@ const Comparateurs = () => {
 
   return <div className="min-h-screen bg-background">
       <SEO 
-        title="Comparateurs Financiers Gratuits Canada 2025 | Cartes de Crédit & Courtage | Finivo" 
-        description="Comparez gratuitement les meilleures cartes de crédit et plateformes de courtage au Canada. Outils de comparaison indépendants pour faire les meilleurs choix financiers en 2025." 
-        keywords="comparateur cartes de crédit canada, comparateur courtage en ligne, meilleure carte de crédit québec 2025, courtier en ligne canada, comparer cartes remises, wealthsimple vs questrade" 
+        title="Comparateurs Financiers Gratuits Canada 2026 | Cartes de Crédit & Courtage | Finivo" 
+        description="Comparez gratuitement les meilleures cartes de crédit et plateformes de courtage au Canada en 2026. Outils de comparaison indépendants pour trouver les meilleures remises, points voyage et frais de courtage." 
+        keywords="comparateur cartes de crédit canada 2026, comparateur courtage en ligne, meilleure carte de crédit québec 2026, courtier en ligne canada, comparer cartes remises, wealthsimple vs questrade, meilleur cashback canada" 
         url="https://finivo.ca/comparateurs"
         structuredData={structuredData}
       />

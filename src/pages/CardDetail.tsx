@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -6,7 +5,9 @@ import { SEO, generateCreditCardStructuredData, generateBreadcrumbStructuredData
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { supabase } from '@/integrations/supabase/client';
+import { useCreditCard } from '@/hooks/useCreditCards';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { 
   ArrowLeft, 
   Star, 
@@ -26,84 +27,33 @@ import {
   Info
 } from 'lucide-react';
 
-interface CardDetail {
-  id: string;
-  slug: string;
-  name: string;
-  issuer: string;
-  image_url: string | null;
-  annual_fee: number;
-  first_year_free: boolean;
-  interest_rate: number;
-  cash_advance_rate: number;
-  rewards_rate: number;
-  rewards_type: string;
-  welcome_bonus: string | null;
-  welcome_bonus_value: number | null;
-  min_income: number | null;
-  features: string[] | null;
-  categories: string[];
-  affiliate_link: string;
-  rating: number;
-}
-
-const categoryConfig: Record<string, { label: string; icon: React.ElementType; color: string }> = {
-  travel: { label: 'Voyage', icon: Plane, color: 'bg-blue-500/10 text-blue-500' },
-  cashback: { label: 'Remises', icon: DollarSign, color: 'bg-green-500/10 text-green-500' },
-  rewards: { label: 'Récompenses', icon: Gift, color: 'bg-purple-500/10 text-purple-500' },
-  'no-fee': { label: 'Sans frais', icon: CreditCardIcon, color: 'bg-slate-500/10 text-slate-500' },
-  student: { label: 'Étudiant', icon: GraduationCap, color: 'bg-orange-500/10 text-orange-500' },
-  premium: { label: 'Premium', icon: Sparkles, color: 'bg-amber-500/10 text-amber-500' },
-  business: { label: 'Affaires', icon: Building2, color: 'bg-indigo-500/10 text-indigo-500' },
-  grocery: { label: 'Épicerie', icon: ShoppingCart, color: 'bg-emerald-500/10 text-emerald-500' },
-};
-
-const issuerGradients: Record<string, string> = {
-  TD: 'from-green-600 to-green-400',
-  BMO: 'from-blue-700 to-blue-500',
-  RBC: 'from-blue-600 to-blue-400',
-  CIBC: 'from-red-600 to-red-400',
-  Scotiabank: 'from-red-700 to-red-500',
-  Desjardins: 'from-green-700 to-teal-500',
-  Tangerine: 'from-orange-500 to-orange-400',
-  default: 'from-primary to-blue-400'
-};
-
 const CardDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [card, setCard] = useState<CardDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
+  const { getLocalizedPath, currentLanguage } = useLanguage();
+  const { data: card, isLoading, error } = useCreditCard(slug || '');
 
-  useEffect(() => {
-    const fetchCard = async () => {
-      if (!slug) return;
-      
-      try {
-        const { data, error } = await supabase
-          .from('credit_cards')
-          .select('*')
-          .eq('slug', slug)
-          .eq('is_active', true)
-          .maybeSingle();
+  const categoryConfig: Record<string, { label: string; icon: React.ElementType; color: string }> = {
+    travel: { label: t('creditCards.categories.travel'), icon: Plane, color: 'bg-blue-500/10 text-blue-500' },
+    cashback: { label: t('creditCards.categories.cashback'), icon: DollarSign, color: 'bg-green-500/10 text-green-500' },
+    rewards: { label: t('cardDetail.categories.rewards'), icon: Gift, color: 'bg-purple-500/10 text-purple-500' },
+    'no-fee': { label: t('creditCards.categories.noFee'), icon: CreditCardIcon, color: 'bg-slate-500/10 text-slate-500' },
+    student: { label: t('creditCards.categories.student'), icon: GraduationCap, color: 'bg-orange-500/10 text-orange-500' },
+    premium: { label: t('creditCards.categories.premium'), icon: Sparkles, color: 'bg-amber-500/10 text-amber-500' },
+    business: { label: t('cardDetail.categories.business'), icon: Building2, color: 'bg-indigo-500/10 text-indigo-500' },
+    grocery: { label: t('cardDetail.categories.grocery'), icon: ShoppingCart, color: 'bg-emerald-500/10 text-emerald-500' },
+  };
 
-        if (error) throw error;
-        
-        if (!data) {
-          setError('Carte non trouvée');
-        } else {
-          setCard(data as unknown as CardDetail);
-        }
-      } catch (err) {
-        console.error('Error fetching card:', err);
-        setError('Erreur lors du chargement de la carte');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchCard();
-  }, [slug]);
+  const issuerGradients: Record<string, string> = {
+    TD: 'from-green-600 to-green-400',
+    BMO: 'from-blue-700 to-blue-500',
+    RBC: 'from-blue-600 to-blue-400',
+    CIBC: 'from-red-600 to-red-400',
+    Scotiabank: 'from-red-700 to-red-500',
+    Desjardins: 'from-green-700 to-teal-500',
+    Tangerine: 'from-orange-500 to-orange-400',
+    default: 'from-primary to-blue-400'
+  };
 
   const gradient = card ? (issuerGradients[card.issuer] || issuerGradients.default) : issuerGradients.default;
 
@@ -116,9 +66,13 @@ const CardDetail = () => {
       .filter(Boolean)
       .join(', ');
 
-    const title = `${card.name} - ${card.issuer} | Avis et détails`;
-    const description = `Découvrez la ${card.name} par ${card.issuer}. ${card.annual_fee === 0 ? 'Sans frais annuels.' : `Frais annuels: ${card.annual_fee}$.`} ${card.rewards_rate}% de remise. ${card.welcome_bonus ? `Bonus: ${card.welcome_bonus}.` : ''} Comparez maintenant!`;
-    const keywords = `${card.name}, ${card.issuer}, carte de crédit, ${categoryLabels}, Canada, Québec, ${card.rewards_type === 'cashback' ? 'remise en argent' : card.rewards_type === 'points' ? 'points récompenses' : 'milles aériens'}`;
+    const title = currentLanguage === 'en' 
+      ? `${card.name} - ${card.issuer} | Review and Details`
+      : `${card.name} - ${card.issuer} | Avis et détails`;
+    const description = currentLanguage === 'en'
+      ? `Discover the ${card.name} by ${card.issuer}. ${card.annualFee === 0 ? 'No annual fee.' : `Annual fee: $${card.annualFee}.`} ${card.rewardsRate}% rewards. ${card.welcomeBonus ? `Bonus: ${card.welcomeBonus}.` : ''} Compare now!`
+      : `Découvrez la ${card.name} par ${card.issuer}. ${card.annualFee === 0 ? 'Sans frais annuels.' : `Frais annuels: ${card.annualFee}$.`} ${card.rewardsRate}% de remise. ${card.welcomeBonus ? `Bonus: ${card.welcomeBonus}.` : ''} Comparez maintenant!`;
+    const keywords = `${card.name}, ${card.issuer}, ${currentLanguage === 'en' ? 'credit card' : 'carte de crédit'}, ${categoryLabels}, Canada`;
 
     return { title, description, keywords };
   };
@@ -130,16 +84,16 @@ const CardDetail = () => {
       name: card.name,
       issuer: card.issuer,
       description: seoData?.description,
-      image: card.image_url || undefined,
+      image: card.image || undefined,
       rating: card.rating,
-      annualFee: card.annual_fee,
-      slug: card.slug,
+      annualFee: card.annualFee,
+      slug: card.slug || '',
     }),
   } : undefined;
 
   const breadcrumbData = card ? generateBreadcrumbStructuredData([
-    { name: 'Accueil', url: 'https://finivo.ca' },
-    { name: 'Cartes de crédit', url: 'https://finivo.ca/#comparer' },
+    { name: t('nav.home'), url: 'https://finivo.ca' },
+    { name: t('creditCards.title'), url: 'https://finivo.ca/comparateurs/cartes-de-credit' },
     { name: card.name, url: `https://finivo.ca/carte/${card.slug}` },
   ]) : undefined;
 
@@ -147,8 +101,8 @@ const CardDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <SEO 
-          title="Chargement de la carte..."
-          description="Chargement des détails de la carte de crédit."
+          title={t('common.loading')}
+          description={t('cardDetail.loadingDescription')}
           noindex
         />
         <Header />
@@ -173,8 +127,8 @@ const CardDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <SEO 
-          title="Carte non trouvée"
-          description="La carte de crédit que vous recherchez n'existe pas ou n'est plus disponible."
+          title={t('cardDetail.notFound')}
+          description={t('cardDetail.notFoundDescription')}
           noindex
         />
         <Header />
@@ -183,14 +137,14 @@ const CardDetail = () => {
             <div className="w-20 h-20 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-6">
               <CreditCardIcon className="w-10 h-10 text-muted-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground mb-4">{error || 'Carte non trouvée'}</h1>
+            <h1 className="text-2xl font-bold text-foreground mb-4">{t('cardDetail.notFound')}</h1>
             <p className="text-muted-foreground mb-8">
-              La carte que vous recherchez n'existe pas ou n'est plus disponible.
+              {t('cardDetail.notFoundDescription')}
             </p>
-            <Link to="/">
+            <Link to={getLocalizedPath('/')}>
               <Button className="gap-2">
                 <ArrowLeft className="w-4 h-4" />
-                Retour à l'accueil
+                {t('common.backToHome')}
               </Button>
             </Link>
           </div>
@@ -206,7 +160,7 @@ const CardDetail = () => {
         title={seoData?.title}
         description={seoData?.description}
         keywords={seoData?.keywords}
-        image={card.image_url || undefined}
+        image={card.image || undefined}
         url={`https://finivo.ca/carte/${card.slug}`}
         type="product"
         structuredData={{ 
@@ -225,17 +179,17 @@ const CardDetail = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Breadcrumb */}
-          <nav aria-label="Fil d'Ariane" className="mb-8">
+          <nav aria-label={t('cardDetail.breadcrumb')} className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-secondary-foreground/70">
               <li>
-                <Link to="/" className="hover:text-secondary-foreground transition-colors">
-                  Accueil
+                <Link to={getLocalizedPath('/')} className="hover:text-secondary-foreground transition-colors">
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>/</li>
               <li>
-                <Link to="/#comparer" className="hover:text-secondary-foreground transition-colors">
-                  Cartes
+                <Link to={getLocalizedPath('/comparateurs/cartes-de-credit')} className="hover:text-secondary-foreground transition-colors">
+                  {t('creditCards.title')}
                 </Link>
               </li>
               <li>/</li>
@@ -267,7 +221,7 @@ const CardDetail = () => {
               </h1>
               
               <p className="text-xl text-secondary-foreground/70 mb-6">
-                Par {card.issuer}
+                {t('cardDetail.by')} {card.issuer}
               </p>
               
               <div className="flex items-center gap-4 mb-8">
@@ -282,12 +236,12 @@ const CardDetail = () => {
                 <span className="text-lg font-semibold text-secondary-foreground">{card.rating.toFixed(1)}</span>
               </div>
               
-              {card.welcome_bonus && (
+              {card.welcomeBonus && (
                 <div className="inline-flex items-center gap-3 bg-accent/20 backdrop-blur-sm px-5 py-3 rounded-xl border border-accent/30">
                   <Gift className="w-5 h-5 text-accent" />
                   <div>
-                    <p className="text-sm text-secondary-foreground/70">Bonus de bienvenue</p>
-                    <p className="font-semibold text-secondary-foreground">{card.welcome_bonus}</p>
+                    <p className="text-sm text-secondary-foreground/70">{t('creditCards.welcomeBonus')}</p>
+                    <p className="font-semibold text-secondary-foreground">{card.welcomeBonus}</p>
                   </div>
                 </div>
               )}
@@ -297,10 +251,10 @@ const CardDetail = () => {
             <div className="flex justify-center lg:justify-end">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-[40px] scale-90" />
-                {card.image_url ? (
+                {card.image ? (
                   <img 
-                    src={card.image_url} 
-                    alt={`Carte de crédit ${card.name} par ${card.issuer}`}
+                    src={card.image} 
+                    alt={`${t('cardDetail.cardAlt')} ${card.name} ${t('cardDetail.by')} ${card.issuer}`}
                     className="relative w-80 h-auto max-h-64 object-contain rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
                     loading="eager"
                   />
@@ -308,7 +262,7 @@ const CardDetail = () => {
                   <div 
                     className={`relative w-80 h-48 rounded-2xl bg-gradient-to-br ${gradient} shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500`}
                     role="img"
-                    aria-label={`Représentation visuelle de la carte ${card.name}`}
+                    aria-label={`${t('cardDetail.visualRepresentation')} ${card.name}`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
                     
@@ -341,38 +295,38 @@ const CardDetail = () => {
               <article className="card-elevated rounded-2xl p-6">
                 <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-primary" />
-                  Informations clés
+                  {t('cardDetail.keyInfo')}
                 </h2>
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center p-4 rounded-xl bg-muted/30">
                     <DollarSign className="w-6 h-6 text-primary mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground mb-1">Frais annuels</p>
+                    <p className="text-xs text-muted-foreground mb-1">{t('creditCards.annualFee')}</p>
                     <p className="text-xl font-bold text-foreground">
-                      {card.annual_fee === 0 ? 'Gratuit' : `${card.annual_fee}$`}
+                      {card.annualFee === 0 ? t('cardDetail.free') : `${card.annualFee}$`}
                     </p>
-                    {card.first_year_free && card.annual_fee > 0 && (
-                      <p className="text-xs text-accent font-medium mt-1">1ère année gratuite</p>
+                    {card.firstYearFreeAnnualFee && card.annualFee > 0 && (
+                      <p className="text-xs text-accent font-medium mt-1">{t('cardDetail.firstYearFree')}</p>
                     )}
                   </div>
                   
                   <div className="text-center p-4 rounded-xl bg-muted/30">
                     <Percent className="w-6 h-6 text-accent mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground mb-1">Remise max</p>
-                    <p className="text-xl font-bold text-foreground">{card.rewards_rate}%</p>
-                    <p className="text-xs text-muted-foreground mt-1">{card.rewards_type}</p>
+                    <p className="text-xs text-muted-foreground mb-1">{t('cardDetail.maxRewards')}</p>
+                    <p className="text-xl font-bold text-foreground">{card.rewardsRate}%</p>
+                    <p className="text-xs text-muted-foreground mt-1">{card.rewardsType}</p>
                   </div>
                   
                   <div className="text-center p-4 rounded-xl bg-muted/30">
                     <CreditCardIcon className="w-6 h-6 text-warning mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground mb-1">Taux d'intérêt</p>
-                    <p className="text-xl font-bold text-foreground">{card.interest_rate}%</p>
+                    <p className="text-xs text-muted-foreground mb-1">{t('creditCards.interestRate')}</p>
+                    <p className="text-xl font-bold text-foreground">{card.interestRate}%</p>
                   </div>
                   
                   <div className="text-center p-4 rounded-xl bg-muted/30">
                     <Info className="w-6 h-6 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground mb-1">Avance de fonds</p>
-                    <p className="text-xl font-bold text-foreground">{card.cash_advance_rate}%</p>
+                    <p className="text-xs text-muted-foreground mb-1">{t('cardDetail.cashAdvance')}</p>
+                    <p className="text-xl font-bold text-foreground">{card.cashAdvanceRate}%</p>
                   </div>
                 </div>
               </article>
@@ -382,7 +336,7 @@ const CardDetail = () => {
                 <article className="card-elevated rounded-2xl p-6">
                   <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                     <Shield className="w-5 h-5 text-primary" />
-                    Avantages et caractéristiques
+                    {t('cardDetail.featuresAndBenefits')}
                   </h2>
                   
                   <ul className="grid md:grid-cols-2 gap-4">
@@ -399,11 +353,11 @@ const CardDetail = () => {
               )}
               
               {/* Requirements */}
-              {card.min_income && (
+              {card.minIncome && (
                 <article className="card-elevated rounded-2xl p-6">
                   <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                     <Info className="w-5 h-5 text-primary" />
-                    Conditions d'admissibilité
+                    {t('cardDetail.eligibilityRequirements')}
                   </h2>
                   
                   <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/20">
@@ -411,8 +365,8 @@ const CardDetail = () => {
                       <DollarSign className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Revenu annuel minimum</p>
-                      <p className="text-xl font-bold text-foreground">{card.min_income.toLocaleString('fr-CA')} $</p>
+                      <p className="text-sm text-muted-foreground">{t('cardDetail.minIncome')}</p>
+                      <p className="text-xl font-bold text-foreground">{card.minIncome.toLocaleString(currentLanguage === 'en' ? 'en-CA' : 'fr-CA')} $</p>
                     </div>
                   </div>
                 </article>
@@ -423,45 +377,45 @@ const CardDetail = () => {
             <aside className="lg:col-span-1">
               <div className="card-elevated rounded-2xl p-6 sticky top-24">
                 <div className="text-center mb-6">
-                  <p className="text-sm text-muted-foreground mb-1">Frais annuels</p>
+                  <p className="text-sm text-muted-foreground mb-1">{t('creditCards.annualFee')}</p>
                   <p className="text-4xl font-extrabold text-foreground">
-                    {card.annual_fee === 0 ? 'Gratuit' : `${card.annual_fee}$`}
+                    {card.annualFee === 0 ? t('cardDetail.free') : `${card.annualFee}$`}
                   </p>
-                  {card.first_year_free && card.annual_fee > 0 && (
+                  {card.firstYearFreeAnnualFee && card.annualFee > 0 && (
                     <Badge className="mt-2 bg-accent/10 text-accent border-accent/30">
-                      1ère année gratuite
+                      {t('cardDetail.firstYearFree')}
                     </Badge>
                   )}
                 </div>
                 
-                {card.welcome_bonus_value && (
+                {card.welcomeBonusValue && (
                   <div className="bg-accent/10 rounded-xl p-4 mb-6 text-center">
                     <Gift className="w-8 h-8 text-accent mx-auto mb-2" />
-                    <p className="text-sm text-muted-foreground">Valeur du bonus</p>
-                    <p className="text-2xl font-bold text-accent">{card.welcome_bonus_value}$</p>
+                    <p className="text-sm text-muted-foreground">{t('cardDetail.bonusValue')}</p>
+                    <p className="text-2xl font-bold text-accent">{card.welcomeBonusValue}$</p>
                   </div>
                 )}
                 
                 <a 
-                  href={card.affiliate_link} 
+                  href={card.affiliateLink} 
                   target="_blank" 
                   rel="noopener noreferrer sponsored"
                   className="block"
                 >
                   <Button className="w-full btn-gradient h-14 text-lg font-semibold gap-2">
-                    Faire une demande
+                    {t('cardDetail.applyNow')}
                     <ExternalLink className="w-5 h-5" />
                   </Button>
                 </a>
                 
                 <p className="text-xs text-muted-foreground text-center mt-4">
-                  Vous serez redirigé vers le site officiel de {card.issuer}
+                  {t('cardDetail.redirectNotice', { issuer: card.issuer })}
                 </p>
                 
                 <div className="border-t border-border mt-6 pt-6">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Shield className="w-4 h-4" />
-                    <span>Demande sécurisée</span>
+                    <span>{t('cardDetail.secureApplication')}</span>
                   </div>
                 </div>
               </div>

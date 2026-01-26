@@ -272,6 +272,59 @@
       "withFee": "Avec frais"
     }
   },
+  "cardDetail": {
+    "breadcrumb": "Fil d'Ariane",
+    "by": "Par",
+    "cardAlt": "Carte de crédit",
+    "visualRepresentation": "Représentation visuelle de la carte",
+    "keyInfo": "Informations clés",
+    "free": "Gratuit",
+    "firstYearFree": "1ère année gratuite",
+    "maxRewards": "Remise max",
+    "cashAdvance": "Avance de fonds",
+    "featuresAndBenefits": "Avantages et caractéristiques",
+    "eligibilityRequirements": "Conditions d'admissibilité",
+    "minIncome": "Revenu annuel minimum",
+    "bonusValue": "Valeur du bonus",
+    "applyNow": "Faire une demande",
+    "redirectNotice": "Vous serez redirigé vers le site officiel de {{issuer}}",
+    "secureApplication": "Demande sécurisée",
+    "notFound": "Carte non trouvée",
+    "notFoundDescription": "La carte que vous recherchez n'existe pas ou n'est plus disponible.",
+    "loadingDescription": "Chargement des détails de la carte de crédit.",
+    "categories": {
+      "rewards": "Récompenses",
+      "business": "Affaires",
+      "grocery": "Épicerie"
+    }
+  },
+  "bookDetail": {
+    "by": "par",
+    "financeBook": "livre finance",
+    "notFound": "Livre non trouvé",
+    "notFoundDescription": "Ce livre n'existe pas ou a été retiré de notre bibliothèque.",
+    "backToLibrary": "Retour à la bibliothèque",
+    "coverOf": "Couverture de",
+    "buyBook": "Acheter le livre",
+    "via": "Via",
+    "affiliateNotice": "Ce lien est affilié. Voir notre",
+    "disclosure": "divulgation",
+    "recommended": "Recommandé",
+    "description": "Description",
+    "whyRead": "Pourquoi lire ce livre",
+    "readerProfile": "Pour quel profil de lecteur",
+    "themes": "Thèmes abordés"
+  },
+  "blogPost": {
+    "notFound": "Article non trouvé",
+    "notFoundDescription": "L'article que vous recherchez n'existe pas ou a été déplacé.",
+    "backToBlog": "Retour au blog",
+    "blogTitle": "Blog Finivo",
+    "ctaTitle": "Prêt à trouver votre carte idéale?",
+    "ctaDescription": "Utilisez notre comparateur pour découvrir les meilleures offres du moment.",
+    "ctaButton": "Comparer les cartes",
+    "relatedArticles": "Articles similaires"
+  },
   "brokerages": {
     "title": "Comparateur de courtiers",
     "subtitle": "Trouvez le meilleur courtier pour investir au Canada",

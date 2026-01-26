@@ -1,35 +1,29 @@
 import { Mail, MapPin, Shield, FileText, DollarSign, ArrowRight, CreditCard, Calculator, Library, BookOpen } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FinivoLogoWithText } from './FinivoLogo';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const Footer = () => {
-  const navigate = useNavigate();
-
-  const handleCategoryClick = (category: string) => {
-    navigate('/');
-    setTimeout(() => {
-      window.dispatchEvent(new CustomEvent('setCategoryFilter', { detail: category }));
-      const comparerSection = document.getElementById('comparer');
-      if (comparerSection) {
-        comparerSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
+  const { t } = useTranslation();
+  const { getLocalizedPath } = useLanguage();
 
   const categoryLinks = [
-    { label: 'Remise en argent', category: 'cashback' },
-    { label: 'Cartes voyage', category: 'travel' },
-    { label: 'Sans frais annuels', category: 'no-fee' },
-    { label: 'Cartes étudiants', category: 'student' },
-    { label: 'Cartes premium', category: 'premium' }
+    { labelKey: 'footer.categoryLinks.cashback', category: 'cashback' },
+    { labelKey: 'footer.categoryLinks.travel', category: 'travel' },
+    { labelKey: 'footer.categoryLinks.noFee', category: 'no-fee' },
+    { labelKey: 'footer.categoryLinks.student', category: 'student' },
+    { labelKey: 'footer.categoryLinks.premium', category: 'premium' }
   ];
 
   const quickLinks = [
-    { label: 'Comparateurs', href: '/comparateurs', icon: CreditCard },
-    { label: 'Calculateurs', href: '/calculateurs', icon: Calculator },
-    { label: 'Bibliothèque', href: '/bibliotheque', icon: Library },
-    { label: 'Blog', href: '/blog', icon: BookOpen }
+    { labelKey: 'common.comparators', href: '/comparateurs', icon: CreditCard },
+    { labelKey: 'common.calculators', href: '/calculateurs', icon: Calculator },
+    { labelKey: 'common.library', href: '/bibliotheque', icon: Library },
+    { labelKey: 'common.blog', href: '/blog', icon: BookOpen }
   ];
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-warning text-warning-foreground">
@@ -39,10 +33,10 @@ export const Footer = () => {
           <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-5xl lg:text-6xl font-display text-warning-foreground mb-2 leading-tight">
-                Passez à
+                {t('footer.cta.line1')}
               </h3>
               <h3 className="text-5xl lg:text-6xl font-display text-warning-foreground leading-tight relative inline-block">
-                l'action
+                {t('footer.cta.line2')}
                 <svg className="absolute -bottom-2 left-0 w-full h-4" viewBox="0 0 200 16" fill="none" preserveAspectRatio="none">
                   <path d="M2 8C40 2 80 14 120 8C160 2 190 10 198 6" stroke="hsl(var(--primary))" strokeWidth="4" strokeLinecap="round" />
                 </svg>
@@ -50,10 +44,10 @@ export const Footer = () => {
             </div>
             <div className="flex justify-start lg:justify-end">
               <Link 
-                to="/comparateurs" 
+                to={getLocalizedPath('/comparateurs')}
                 className="inline-flex items-center gap-3 bg-card text-foreground px-6 py-4 rounded-full font-semibold hover:shadow-xl transition-all group"
               >
-                Commencer maintenant
+                {t('common.startNow')}
                 <span className="w-10 h-10 rounded-full bg-warning flex items-center justify-center group-hover:bg-primary transition-colors">
                   <ArrowRight className="w-5 h-5 text-warning-foreground group-hover:text-primary-foreground" />
                 </span>
@@ -66,26 +60,26 @@ export const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-block mb-5 hover:opacity-80 transition-opacity">
+            <Link to={getLocalizedPath('/')} className="inline-block mb-5 hover:opacity-80 transition-opacity">
               <FinivoLogoWithText size="md" />
             </Link>
             <p className="text-warning-foreground/70 text-sm leading-relaxed">
-              La plateforme québécoise pour comparer les cartes de crédit, plateformes de courtage et planifier vos finances.
+              {t('footer.description')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-warning-foreground mb-5">Navigation</h4>
+            <h4 className="font-bold text-warning-foreground mb-5">{t('footer.navigation')}</h4>
             <ul className="space-y-3">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link 
-                    to={link.href} 
+                    to={getLocalizedPath(link.href)}
                     className="flex items-center gap-2 text-warning-foreground/70 hover:text-warning-foreground transition-colors text-sm"
                   >
                     <link.icon className="w-4 h-4" />
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -94,16 +88,16 @@ export const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h4 className="font-bold text-warning-foreground mb-5">Catégories</h4>
+            <h4 className="font-bold text-warning-foreground mb-5">{t('footer.categories')}</h4>
             <ul className="space-y-3">
               {categoryLinks.map(link => (
                 <li key={link.category}>
-                  <button 
-                    onClick={() => handleCategoryClick(link.category)} 
+                  <Link 
+                    to={getLocalizedPath(`/comparateurs/cartes-de-credit?category=${link.category}`)}
                     className="text-warning-foreground/70 hover:text-warning-foreground transition-colors text-sm text-left"
                   >
-                    {link.label}
-                  </button>
+                    {t(link.labelKey)}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -111,7 +105,7 @@ export const Footer = () => {
 
           {/* Contact & Legal */}
           <div>
-            <h4 className="font-bold text-warning-foreground mb-5">Contact</h4>
+            <h4 className="font-bold text-warning-foreground mb-5">{t('footer.contact')}</h4>
             <ul className="space-y-3 text-sm">
               <li>
                 <a 
@@ -124,37 +118,37 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-warning-foreground/70">
                 <MapPin className="w-4 h-4" />
-                Montréal, Québec
+                {t('footer.location')}
               </li>
             </ul>
 
-            <h4 className="font-bold text-warning-foreground mt-6 mb-4">Légal</h4>
+            <h4 className="font-bold text-warning-foreground mt-6 mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
-                  to="/politique-confidentialite" 
+                  to={getLocalizedPath('/politique-confidentialite')}
                   className="flex items-center gap-2 text-warning-foreground/70 hover:text-warning-foreground transition-colors"
                 >
                   <Shield className="w-4 h-4" />
-                  Confidentialité
+                  {t('footer.privacy')}
                 </Link>
               </li>
               <li>
                 <Link 
-                  to="/conditions-utilisation" 
+                  to={getLocalizedPath('/conditions-utilisation')}
                   className="flex items-center gap-2 text-warning-foreground/70 hover:text-warning-foreground transition-colors"
                 >
                   <FileText className="w-4 h-4" />
-                  Conditions
+                  {t('footer.terms')}
                 </Link>
               </li>
               <li>
                 <Link 
-                  to="/divulgation-affiliation" 
+                  to={getLocalizedPath('/divulgation-affiliation')}
                   className="flex items-center gap-2 text-warning-foreground/70 hover:text-warning-foreground transition-colors"
                 >
                   <DollarSign className="w-4 h-4" />
-                  Affiliation
+                  {t('footer.affiliation')}
                 </Link>
               </li>
             </ul>
@@ -165,21 +159,16 @@ export const Footer = () => {
         <div className="border-t border-warning-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-warning-foreground/60">
-              © 2025 Finivo. Tous droits réservés. Fait avec ❤️ au Québec.
+              {t('footer.copyright', { year: currentYear })}
             </p>
             <div className="flex items-center gap-4">
               <span className="text-xs text-warning-foreground/50 px-3 py-1 rounded-full bg-warning-foreground/10">
                 🇨🇦 Canada
               </span>
-              <span className="text-xs text-warning-foreground/50 px-3 py-1 rounded-full bg-warning-foreground/10">
-                🍁 Québec
-              </span>
             </div>
           </div>
           <p className="text-xs text-warning-foreground/50 mt-6 text-center max-w-3xl mx-auto">
-            * Les taux et informations affichés sont fournis à titre indicatif et peuvent changer sans préavis. 
-            Veuillez consulter le site officiel de l'émetteur pour les informations les plus récentes.
-            Ce site peut recevoir une compensation pour les produits présentés.
+            {t('footer.disclaimer')}
           </p>
         </div>
       </div>

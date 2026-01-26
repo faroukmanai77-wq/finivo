@@ -18,10 +18,13 @@ export type Database = {
         Row: {
           author: string
           category: string
+          category_en: string | null
           content: string
+          content_en: string | null
           cover_image_url: string | null
           created_at: string
           excerpt: string
+          excerpt_en: string | null
           id: string
           is_active: boolean
           is_featured: boolean
@@ -29,16 +32,21 @@ export type Database = {
           read_time: number
           slug: string
           tags: string[]
+          tags_en: string[] | null
           title: string
+          title_en: string | null
           updated_at: string
         }
         Insert: {
           author?: string
           category?: string
+          category_en?: string | null
           content: string
+          content_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           excerpt: string
+          excerpt_en?: string | null
           id?: string
           is_active?: boolean
           is_featured?: boolean
@@ -46,16 +54,21 @@ export type Database = {
           read_time?: number
           slug: string
           tags?: string[]
+          tags_en?: string[] | null
           title: string
+          title_en?: string | null
           updated_at?: string
         }
         Update: {
           author?: string
           category?: string
+          category_en?: string | null
           content?: string
+          content_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           excerpt?: string
+          excerpt_en?: string | null
           id?: string
           is_active?: boolean
           is_featured?: boolean
@@ -63,7 +76,9 @@ export type Database = {
           read_time?: number
           slug?: string
           tags?: string[]
+          tags_en?: string[] | null
           title?: string
+          title_en?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -74,72 +89,99 @@ export type Database = {
           affiliate_platform: string | null
           author: string
           category: string
+          category_en: string | null
           cover_image_url: string | null
           created_at: string
           full_description: string | null
+          full_description_en: string | null
           id: string
           is_active: boolean | null
           is_featured: boolean
           language: string
           level: string
           quote: string | null
+          quote_en: string | null
           rating: number | null
           reader_profile: string | null
+          reader_profile_en: string | null
           short_description: string
+          short_description_en: string | null
           slug: string
           sub_categories: string[]
+          sub_categories_en: string[] | null
           themes: string[]
+          themes_en: string[] | null
           title: string
+          title_en: string | null
           updated_at: string
           why_read_this_book: string | null
+          why_read_this_book_en: string | null
         }
         Insert: {
           affiliate_link?: string
           affiliate_platform?: string | null
           author: string
           category: string
+          category_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           full_description?: string | null
+          full_description_en?: string | null
           id?: string
           is_active?: boolean | null
           is_featured?: boolean
           language?: string
           level?: string
           quote?: string | null
+          quote_en?: string | null
           rating?: number | null
           reader_profile?: string | null
+          reader_profile_en?: string | null
           short_description: string
+          short_description_en?: string | null
           slug: string
           sub_categories?: string[]
+          sub_categories_en?: string[] | null
           themes?: string[]
+          themes_en?: string[] | null
           title: string
+          title_en?: string | null
           updated_at?: string
           why_read_this_book?: string | null
+          why_read_this_book_en?: string | null
         }
         Update: {
           affiliate_link?: string
           affiliate_platform?: string | null
           author?: string
           category?: string
+          category_en?: string | null
           cover_image_url?: string | null
           created_at?: string
           full_description?: string | null
+          full_description_en?: string | null
           id?: string
           is_active?: boolean | null
           is_featured?: boolean
           language?: string
           level?: string
           quote?: string | null
+          quote_en?: string | null
           rating?: number | null
           reader_profile?: string | null
+          reader_profile_en?: string | null
           short_description?: string
+          short_description_en?: string | null
           slug?: string
           sub_categories?: string[]
+          sub_categories_en?: string[] | null
           themes?: string[]
+          themes_en?: string[] | null
           title?: string
+          title_en?: string | null
           updated_at?: string
           why_read_this_book?: string | null
+          why_read_this_book_en?: string | null
         }
         Relationships: []
       }
@@ -154,8 +196,10 @@ export type Database = {
           has_options: boolean
           id: string
           ideal_for: string
+          ideal_for_en: string | null
           is_active: boolean | null
           level: string
+          level_en: string | null
           logo: string | null
           markets_access: string[]
           monthly_fee: string
@@ -165,11 +209,14 @@ export type Database = {
           regulation: string[]
           slug: string
           strengths: string[]
+          strengths_en: string[] | null
           transaction_fee_etf: string
           transaction_fee_stocks: string
           type: string
+          type_en: string | null
           updated_at: string
           weaknesses: string[]
+          weaknesses_en: string[] | null
         }
         Insert: {
           accounts?: string[]
@@ -181,8 +228,10 @@ export type Database = {
           has_options?: boolean
           id?: string
           ideal_for: string
+          ideal_for_en?: string | null
           is_active?: boolean | null
           level?: string
+          level_en?: string | null
           logo?: string | null
           markets_access?: string[]
           monthly_fee: string
@@ -192,11 +241,14 @@ export type Database = {
           regulation?: string[]
           slug: string
           strengths?: string[]
+          strengths_en?: string[] | null
           transaction_fee_etf: string
           transaction_fee_stocks: string
           type?: string
+          type_en?: string | null
           updated_at?: string
           weaknesses?: string[]
+          weaknesses_en?: string[] | null
         }
         Update: {
           accounts?: string[]
@@ -208,8 +260,10 @@ export type Database = {
           has_options?: boolean
           id?: string
           ideal_for?: string
+          ideal_for_en?: string | null
           is_active?: boolean | null
           level?: string
+          level_en?: string | null
           logo?: string | null
           markets_access?: string[]
           monthly_fee?: string
@@ -219,11 +273,14 @@ export type Database = {
           regulation?: string[]
           slug?: string
           strengths?: string[]
+          strengths_en?: string[] | null
           transaction_fee_etf?: string
           transaction_fee_stocks?: string
           type?: string
+          type_en?: string | null
           updated_at?: string
           weaknesses?: string[]
+          weaknesses_en?: string[] | null
         }
         Relationships: []
       }
@@ -235,6 +292,7 @@ export type Database = {
           categories: string[]
           created_at: string
           features: string[] | null
+          features_en: string[] | null
           first_year_free: boolean | null
           id: string
           image_url: string | null
@@ -243,12 +301,15 @@ export type Database = {
           issuer: string
           min_income: number | null
           name: string
+          name_en: string | null
           rating: number
           rewards_rate: number
           rewards_type: string
+          rewards_type_en: string | null
           slug: string
           updated_at: string
           welcome_bonus: string | null
+          welcome_bonus_en: string | null
           welcome_bonus_value: number | null
         }
         Insert: {
@@ -258,6 +319,7 @@ export type Database = {
           categories?: string[]
           created_at?: string
           features?: string[] | null
+          features_en?: string[] | null
           first_year_free?: boolean | null
           id?: string
           image_url?: string | null
@@ -266,12 +328,15 @@ export type Database = {
           issuer: string
           min_income?: number | null
           name: string
+          name_en?: string | null
           rating?: number
           rewards_rate?: number
           rewards_type: string
+          rewards_type_en?: string | null
           slug: string
           updated_at?: string
           welcome_bonus?: string | null
+          welcome_bonus_en?: string | null
           welcome_bonus_value?: number | null
         }
         Update: {
@@ -281,6 +346,7 @@ export type Database = {
           categories?: string[]
           created_at?: string
           features?: string[] | null
+          features_en?: string[] | null
           first_year_free?: boolean | null
           id?: string
           image_url?: string | null
@@ -289,12 +355,15 @@ export type Database = {
           issuer?: string
           min_income?: number | null
           name?: string
+          name_en?: string | null
           rating?: number
           rewards_rate?: number
           rewards_type?: string
+          rewards_type_en?: string | null
           slug?: string
           updated_at?: string
           welcome_bonus?: string | null
+          welcome_bonus_en?: string | null
           welcome_bonus_value?: number | null
         }
         Relationships: []

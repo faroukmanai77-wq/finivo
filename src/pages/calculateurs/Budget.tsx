@@ -253,7 +253,7 @@ const Budget = () => {
     }
   };
 
-  const handleExportExcel = () => {
+  const handleExportExcel = async () => {
     const summaryData: any[][] = [
       [t('calculators.budget.title').toUpperCase() + ' - FINIVO'],
       [''],
@@ -314,21 +314,31 @@ const Budget = () => {
     repartitionData.push(['']);
     repartitionData.push([t('calculators.common.total').toUpperCase(), totalDepenses, '100%', totalRevenus > 0 ? `${((totalDepenses / totalRevenus) * 100).toFixed(1)}%` : '0%']);
 
-    const wb = XLSX.utils.book_new();
-    
-    const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
-    const wsDetails = XLSX.utils.aoa_to_sheet(detailsData);
-    const wsRepartition = XLSX.utils.aoa_to_sheet(repartitionData);
-    
-    wsSummary['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }];
-    wsDetails['!cols'] = [{ wch: 45 }, { wch: 15 }];
-    wsRepartition['!cols'] = [{ wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
-    
-    XLSX.utils.book_append_sheet(wb, wsSummary, t('calculators.budget.summary.title'));
-    XLSX.utils.book_append_sheet(wb, wsDetails, 'Details');
-    XLSX.utils.book_append_sheet(wb, wsRepartition, 'Distribution');
-    
-    XLSX.writeFile(wb, `budget-${new Date().toISOString().split('T')[0]}.xlsx`);
+    const wb = new ExcelJS.Workbook();
+
+    const addSheet = (name: string, rows: any[][], widths: number[]) => {
+      // Excel sheet names cannot exceed 31 chars or contain : \ / ? * [ ]
+      const safeName = name.replace(/[:\\/?*[\]]/g, '-').slice(0, 31) || 'Sheet';
+      const ws = wb.addWorksheet(safeName);
+      ws.columns = widths.map(width => ({ width }));
+      rows.forEach(row => ws.addRow(row));
+      return ws;
+    };
+
+    addSheet(t('calculators.budget.summary.title'), summaryData, [25, 15, 15]);
+    addSheet('Details', detailsData, [45, 15]);
+    addSheet('Distribution', repartitionData, [20, 15, 15, 15]);
+
+    const buffer = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `budget-${new Date().toISOString().split('T')[0]}.xlsx`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   const handleReset = () => {

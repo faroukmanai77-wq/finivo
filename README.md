@@ -1,4 +1,4 @@
-# 💳  Finivo | Comparateur de Cartes de Crédit au Canada
+# 💳  Finivo | Comparateur de Cartes de Crédit au Canada :)
 
 Bienvenue sur le dépôt de **Finivo**, une plateforme moderne et intuitive conçue pour aider les résidents canadiens (et particulièrement québécois) à trouver la carte de crédit idéale selon leurs habitudes de consommation.
 

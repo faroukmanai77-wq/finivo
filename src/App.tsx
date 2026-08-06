@@ -127,10 +127,18 @@ const LocalizedRoutes = () => (
   </LanguageSync>
 );
 
+const LangGuard = () => {
+  const { lang } = useParams<{ lang: string }>();
+  if (!supportedLanguages.includes(lang as SupportedLanguage)) {
+    return <LanguageRedirect />;
+  }
+  return <LocalizedRoutes />;
+};
+
 const AppRoutes = () => (
   <Routes>
     {/* Language prefixed routes */}
-    <Route path="/:lang/*" element={<LocalizedRoutes />} />
+    <Route path="/:lang/*" element={<LangGuard />} />
     
     {/* Redirect root and non-prefixed paths to detected language */}
     <Route path="*" element={<LanguageRedirect />} />

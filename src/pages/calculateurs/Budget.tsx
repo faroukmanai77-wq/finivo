@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Wallet, Printer, FileSpreadsheet, TrendingUp, TrendingDown, DollarSign, AlertTriangle, CheckCircle, PieChart } from 'lucide-react';
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import SmartBudgetingIllustration from '@/assets/illustrations/smart-budgeting.svg';
 import { useLanguage } from '@/hooks/useLanguage';
 

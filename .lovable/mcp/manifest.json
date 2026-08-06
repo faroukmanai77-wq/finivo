@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "finivo",
+      "version": "0.1.0",
+      "title": "Finivo"
+    },
+    "tools": [
+      {
+        "name": "search_credit_cards",
+        "title": "Search credit cards",
+        "description": "Search Finivo's Canadian credit card comparison data by name, issuer, category, annual fee or rewards.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free-text match on card name or issuer."
+            },
+            "category": {
+              "type": "string",
+              "description": "Category filter, e.g. cashback, voyage, etudiant."
+            },
+            "max_annual_fee": {
+              "type": "number",
+              "description": "Only cards with an annual fee at or below this amount."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max number of cards to return (default 10, max 50)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_brokerages",
+        "title": "Search brokerage platforms",
+        "description": "Search Finivo's comparison of Canadian brokerage and investing platforms.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free-text match on platform name."
+            },
+            "level": {
+              "type": "string",
+              "description": "Investor level, e.g. debutant, intermediaire, avance."
+            },
+            "has_crypto": {
+              "type": "boolean",
+              "description": "Only platforms offering crypto trading."
+            },
+            "has_options": {
+              "type": "boolean",
+              "description": "Only platforms offering options trading."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results (default 10, max 50)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_books",
+        "title": "Search finance books",
+        "description": "Search Finivo's curated library of personal finance and investing books.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free-text match on title or author."
+            },
+            "category": {
+              "type": "string",
+              "description": "Book category filter."
+            },
+            "level": {
+              "type": "string",
+              "description": "Reader level, e.g. beginner, intermediate, advanced."
+            },
+            "language": {
+              "type": "string",
+              "description": "Book language code, e.g. FR or EN."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results (default 10, max 50)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_blog_posts",
+        "title": "List blog posts",
+        "description": "List published Finivo blog articles with title, slug, excerpt and category.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free-text match on title or excerpt."
+            },
+            "category": {
+              "type": "string",
+              "description": "Article category filter."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results (default 10, max 50)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_blog_post",
+        "title": "Get blog post",
+        "description": "Get the full content of one published Finivo blog article by its slug.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The article slug, from list_blog_posts."
+            },
+            "language": {
+              "type": "string",
+              "enum": [
+                "fr",
+                "en"
+              ],
+              "description": "Preferred language (default fr)."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

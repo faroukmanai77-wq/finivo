@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Lockfile is regenerated on install (avoids stale registry URLs breaking
+# fresh clones/deploys); each environment resolves its own from package.json.
+package-lock.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

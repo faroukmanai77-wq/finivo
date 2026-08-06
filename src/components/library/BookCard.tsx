@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, ExternalLink, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface BookCardProps {
   book: Book;
@@ -17,6 +18,7 @@ const levelColors: Record<string, string> = {
 };
 
 export const BookCard = ({ book, index = 0 }: BookCardProps) => {
+  const { getLocalizedPath } = useLanguage();
   return (
     <Card 
       className="card-elevated overflow-hidden group animate-slide-up hover:shadow-2xl hover:-translate-y-1 hover:border-primary/30 transition-all duration-300"
@@ -91,7 +93,7 @@ export const BookCard = ({ book, index = 0 }: BookCardProps) => {
             {/* Actions */}
             <div className="flex flex-wrap gap-3 mt-auto">
               <Button asChild variant="outline" className="flex-1 sm:flex-none">
-                <Link to={`/bibliotheque/${book.slug}`}>
+                <Link to={getLocalizedPath(`/bibliotheque/${book.slug}`)}>
                   Voir les détails
                 </Link>
               </Button>

@@ -2,7 +2,7 @@
 
 Bienvenue sur le dépôt de **Finivo**, une plateforme moderne et intuitive conçue pour aider les résidents canadiens (et particulièrement québécois) à trouver la carte de crédit idéale selon leurs habitudes de consommation.
 
-**🌐 Site en direct :** [finivo.ca](https://finivo.ca) (ou https://finivo.pages.dev)
+**🌐 Site en direct :** [finivo.ca](https://finivo.ca) 
 
 ---
 

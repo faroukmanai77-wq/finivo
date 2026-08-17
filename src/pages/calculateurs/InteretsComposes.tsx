@@ -145,7 +145,8 @@ const InteretsComposes = () => {
                   type="number"
                   value={capitalInitial}
                   onChange={(e) => setCapitalInitial(Number(e.target.value))}
-                  className="w-32"
+                  min={0}
+                  className="w-40"
                 />
                 <span className="text-muted-foreground">$</span>
               </div>
@@ -153,12 +154,12 @@ const InteretsComposes = () => {
                 value={[capitalInitial]}
                 onValueChange={(v) => setCapitalInitial(v[0])}
                 min={0}
-                max={500000}
+                max={Math.max(500000, capitalInitial)}
                 step={1000}
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>0 $</span>
-                <span>500 000 $</span>
+                <span>{formatMontant(Math.max(500000, capitalInitial))}</span>
               </div>
             </div>
 

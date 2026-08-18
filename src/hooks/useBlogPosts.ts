@@ -12,7 +12,7 @@ const mapBlogPost = (post: any, t: (def: string, en: string | null) => string, t
   cover_image_url: post.cover_image_url,
   author: post.author,
   published_at: post.published_at,
-  category: t(post.category, post.category_en) as BlogCategory,
+  category: post.category as BlogCategory,
   read_time: post.read_time,
   tags: tArray(post.tags || [], post.tags_en),
   is_active: post.is_active,

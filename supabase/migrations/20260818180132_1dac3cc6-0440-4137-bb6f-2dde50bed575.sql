@@ -1,0 +1,1 @@
+UPDATE public.blog_posts SET category_en = CASE category WHEN 'guides' THEN 'guides' WHEN 'conseils' THEN 'tips' WHEN 'comparatifs' THEN 'comparisons' WHEN 'actualites' THEN 'news' ELSE category END WHERE category_en IS NULL OR category_en = '';

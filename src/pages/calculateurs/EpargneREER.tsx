@@ -304,22 +304,22 @@ const EpargneREER = () => {
         {/* Résultats */}
         <Card className="bg-primary text-primary-foreground">
           <CardContent className="pt-6">
-            <div className="grid md:grid-cols-4 gap-6 text-center">
-              <div>
-                <p className="text-sm opacity-80">{t('calculators.rrsp.results.valueAtRetirement')}</p>
-                <p className="text-3xl font-bold mt-1">{formatMontant(resultats.soldeRetraite)}</p>
-              </div>
+            <div className="text-center mb-6">
+              <p className="text-sm opacity-80">{t('calculators.rrsp.results.valueAtRetirement')}</p>
+              <p className="text-4xl md:text-5xl font-bold mt-2">{formatMontant(resultats.soldeRetraite)}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
               <div>
                 <p className="text-sm opacity-80">{t('calculators.rrsp.results.annualIncome')}</p>
-                <p className="text-3xl font-bold mt-1">{formatMontant(resultats.retraitAnnuel)}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.retraitAnnuel)}</p>
               </div>
               <div>
                 <p className="text-sm opacity-80">{t('calculators.rrsp.results.monthlyIncome')}</p>
-                <p className="text-3xl font-bold mt-1">{formatMontant(resultats.retraitMensuel)}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.retraitMensuel)}</p>
               </div>
               <div>
                 <p className="text-sm opacity-80">{t('calculators.rrsp.results.interestEarned')}</p>
-                <p className="text-3xl font-bold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
               </div>
             </div>
           </CardContent>
@@ -340,9 +340,14 @@ const EpargneREER = () => {
                     tickFormatter={(v) => v <= anneesAvantRetraite ? `${v}` : `R+${v - anneesAvantRetraite}`} 
                   />
                   <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                  <Tooltip 
+                  <Tooltip
                     formatter={(value: number) => formatMontant(value)}
                     labelFormatter={(label) => label <= anneesAvantRetraite ? `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}` : `${currentLanguage === 'en' ? 'Retirement' : 'Retraite'} +${label - anneesAvantRetraite} ${t('calculators.common.years')}`}
+                    contentStyle={{
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px'
+                    }}
                   />
                   <Legend />
                   <Area 

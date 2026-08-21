@@ -398,6 +398,10 @@ const ImpotCanada = () => {
                   max={500000}
                   step={1000}
                 />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>0 $</span>
+                  <span>{formatMontant(500000)}</span>
+                </div>
               </div>
 
               <div className="space-y-3">
@@ -483,24 +487,24 @@ const ImpotCanada = () => {
           <CardContent className="pt-6">
             <div className="text-center mb-6">
               <p className="text-sm opacity-80">{t('calculators.tax.netIncome')}</p>
-              <p className="text-5xl font-bold mt-2">{formatMontant(resultats.revenuNet)}</p>
+              <p className="text-4xl md:text-5xl font-bold mt-2">{formatMontant(resultats.revenuNet)}</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
                 <p className="text-sm opacity-80">{t('calculators.tax.grossIncome')}</p>
-                <p className="text-xl font-semibold">{formatMontant(resultats.revenuBrut)}</p>
+                <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.revenuBrut)}</p>
               </div>
               <div className="text-center">
                 <p className="text-sm opacity-80">{t('calculators.tax.totalDeductions')}</p>
-                <p className="text-xl font-semibold">{formatMontant(resultats.totalRetenues)}</p>
+                <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.totalRetenues)}</p>
               </div>
               <div className="text-center">
                 <p className="text-sm opacity-80">{t('calculators.tax.effectiveRate')}</p>
-                <p className="text-xl font-semibold">{resultats.tauxEffectif} %</p>
+                <p className="text-xl md:text-2xl font-semibold">{resultats.tauxEffectif} %</p>
               </div>
               <div className="text-center">
                 <p className="text-sm opacity-80">{t('calculators.tax.marginalRate')}</p>
-                <p className="text-xl font-semibold">{resultats.tauxMarginal} %</p>
+                <p className="text-xl md:text-2xl font-semibold">{resultats.tauxMarginal} %</p>
               </div>
             </div>
           </CardContent>
@@ -581,7 +585,7 @@ const ImpotCanada = () => {
                     cy="50%"
                     labelLine={false}
                     outerRadius={100}
-                    fill="#8884d8"
+                    fill="hsl(var(--primary))"
                     dataKey="value"
                     label={({ name, value, percent }) => `${name}: ${formatMontant(value)} (${(percent * 100).toFixed(0)}%)`}
                   >
@@ -589,7 +593,14 @@ const ImpotCanada = () => {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value: number) => formatMontant(value)} />
+                  <Tooltip
+                    formatter={(value: number) => formatMontant(value)}
+                    contentStyle={{
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px'
+                    }}
+                  />
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>

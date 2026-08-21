@@ -40,18 +40,20 @@ export const BlogSection = () => {
             ))
           ) : (
             featuredPosts.map((post, index) => (
-              <Link 
-                key={post.id} 
+              <Link
+                key={post.id}
                 to={`/blog/${post.slug}`}
-                className={`group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 ${
+                className={`group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   index === 0 ? 'animate-fade-in' : ''
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
+                <div className="relative h-48 overflow-hidden bg-muted">
+                  <img
+                    src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'}
                     alt={post.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">

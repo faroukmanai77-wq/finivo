@@ -160,10 +160,10 @@ const Landing = () => {
 
               <div className="flex flex-wrap gap-2 mb-8">
                 {quickLinks.map((link, i) => (
-                  <Link 
-                    key={i} 
+                  <Link
+                    key={i}
                     to={getLocalizedPath(link.href)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/5 text-foreground text-sm font-medium transition-all hover:scale-105 shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/5 text-foreground text-sm font-medium transition-all duration-200 hover:scale-105 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     <link.icon className="w-4 h-4 text-primary" />
                     {t(link.labelKey)}
@@ -286,10 +286,10 @@ const Landing = () => {
             {pillars.map((pillar, index) => {
               const features = t(pillar.featuresKey, { returnObjects: true }) as string[];
               return (
-                <Link 
-                  key={index} 
+                <Link
+                  key={index}
                   to={getLocalizedPath(pillar.href)}
-                  className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className={`w-14 h-14 rounded-2xl ${pillar.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                     <pillar.icon className="w-7 h-7" />
@@ -304,7 +304,7 @@ const Landing = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all duration-200">
                     {t('common.explore')}
                     <ArrowRight className="w-4 h-4" />
                   </div>
@@ -346,15 +346,15 @@ const Landing = () => {
 
               <div className="grid sm:grid-cols-2 gap-3 mb-8">
                 {calculators.slice(0, 6).map((calc, index) => (
-                  <Link 
-                    key={index} 
+                  <Link
+                    key={index}
                     to={getLocalizedPath(calc.href)}
-                    className="flex items-center gap-3 p-3 bg-card rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all group"
+                    className="flex items-center gap-3 p-3 bg-card rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all duration-200 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-200 flex-shrink-0">
                       <calc.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <span className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
+                    <span className="font-medium text-foreground text-sm group-hover:text-primary transition-colors duration-200">
                       {t(calc.nameKey)}
                     </span>
                   </Link>
@@ -373,7 +373,7 @@ const Landing = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20">
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">

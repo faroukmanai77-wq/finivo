@@ -88,7 +88,7 @@ const Blog = () => {
       <section className="py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/25 text-primary">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-primary/10 text-primary">
               <BookOpen className="w-4 h-4" />
               {t('blogPage.badge')}
             </div>
@@ -162,17 +162,19 @@ const Blog = () => {
             <>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {paginatedPosts.map((post, index) => (
-                  <Link 
-                    key={post.id} 
+                  <Link
+                    key={post.id}
                     to={getLocalizedPath(`/blog/${post.slug}`)}
-                    className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+                    className="group card-elevated rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-fade-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
-                        alt={post.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                    <div className="relative h-48 overflow-hidden bg-muted">
+                      <img
+                        src={post.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'}
+                        alt={post.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute top-4 left-4">
                         <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground ml-2">

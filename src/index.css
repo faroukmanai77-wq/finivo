@@ -193,7 +193,7 @@
   }
 
   .stat-card {
-    @apply relative overflow-hidden bg-card rounded-2xl p-5 border border-border/30 shadow-[var(--shadow-card)];
+    @apply relative overflow-hidden bg-card rounded-2xl p-5 border border-border/30 shadow-[var(--shadow-card)] flex flex-col items-center justify-center;
   }
 
   .stat-card::before {

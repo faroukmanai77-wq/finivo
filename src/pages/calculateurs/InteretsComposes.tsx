@@ -192,6 +192,10 @@ const InteretsComposes = () => {
                 max={5000}
                 step={50}
               />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>0 $</span>
+                <span>{formatMontant(5000)}</span>
+              </div>
             </div>
 
             {/* Taux d'intérêt */}
@@ -269,16 +273,16 @@ const InteretsComposes = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <p className="text-sm opacity-80">{t('calculators.compound.results.finalValue')}</p>
-                <p className="text-4xl font-bold mt-2">{formatMontant(resultats.montantFinal)}</p>
+                <p className="text-4xl md:text-5xl font-bold mt-2">{formatMontant(resultats.montantFinal)}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div className="text-center">
                   <p className="text-sm opacity-80">{t('calculators.compound.results.totalContributions')}</p>
-                  <p className="text-xl font-semibold">{formatMontant(resultats.totalContributions)}</p>
+                  <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.totalContributions)}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-sm opacity-80">{t('calculators.compound.results.interestEarned')}</p>
-                  <p className="text-xl font-semibold">{formatMontant(resultats.totalInterets)}</p>
+                  <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.totalInterets)}</p>
                 </div>
               </div>
             </CardContent>
@@ -296,9 +300,14 @@ const InteretsComposes = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="annee" tickFormatter={(v) => `${v} ${t('calculators.common.years')}`} />
                     <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                    <Tooltip 
+                    <Tooltip
                       formatter={(value: number) => formatMontant(value)}
                       labelFormatter={(label) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}`}
+                      contentStyle={{
+                        backgroundColor: 'hsl(var(--card))',
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px'
+                      }}
                     />
                     <Legend />
                     <Area 

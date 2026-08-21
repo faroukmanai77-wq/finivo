@@ -127,9 +127,9 @@ const BlogPost = () => {
       <section className="py-8 sm:py-12 lg:py-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <button 
+            <button
               onClick={() => navigate(getLocalizedPath('/blog'))}
-              className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors mb-4 sm:mb-6"
+              className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded transition-colors mb-4 sm:mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
               {t('blogPost.backToBlog')}
@@ -236,15 +236,17 @@ const BlogPost = () => {
               <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">{t('blogPost.relatedArticles')}</h2>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 {relatedPosts.map(relatedPost => (
-                  <Link 
-                    key={relatedPost.id} 
+                  <Link
+                    key={relatedPost.id}
                     to={getLocalizedPath(`/blog/${relatedPost.slug}`)}
-                    className="group card-elevated rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+                    className="group card-elevated rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
-                    <div className="relative h-32 sm:h-40 overflow-hidden">
-                      <img 
-                        src={relatedPost.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'} 
+                    <div className="relative h-32 sm:h-40 overflow-hidden bg-muted">
+                      <img
+                        src={relatedPost.cover_image_url || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop'}
                         alt={relatedPost.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>

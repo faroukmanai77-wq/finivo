@@ -83,21 +83,24 @@ export const Header = () => {
         : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-18 py-3">
+        <div className="flex items-center justify-between h-[4.5rem] py-3">
           {/* Logo */}
-          <Link to={getLocalizedPath('/')} className="group hover:opacity-90 transition-opacity">
+          <Link
+            to={getLocalizedPath('/')}
+            className="group hover:opacity-90 transition-opacity duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             <FinivoLogoWithText size="md" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map(link => (
-              <button 
-                key={link.href} 
-                onClick={() => handleNavClick(link.href, link.isRoute)} 
-                className={`px-4 py-2.5 rounded-full transition-all font-medium text-sm ${
-                  isActive(link.href) 
-                    ? 'text-primary bg-primary/10' 
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href, link.isRoute)}
+                className={`px-4 py-2.5 rounded-full transition-all duration-200 font-medium text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                  isActive(link.href)
+                    ? 'text-primary bg-primary/10'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
@@ -116,12 +119,12 @@ export const Header = () => {
               className="gap-1.5 text-muted-foreground hover:text-foreground"
               aria-label={`Switch to ${otherLanguage === 'fr' ? 'French' : 'English'}`}
             >
-              <Globe className="h-4 w-4" />
+              <Globe className="w-4 h-4" />
               <span className="font-medium">{languageLabels[otherLanguage]}</span>
             </Button>
 
             {/* CTA Button */}
-            <Button 
+            <Button
               onClick={() => navigate(getLocalizedPath('/bibliotheque'))}
               className="bg-warning hover:bg-warning/90 text-warning-foreground rounded-full font-semibold gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
             >
@@ -131,9 +134,9 @@ export const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2.5 hover:bg-muted/50 rounded-xl transition-colors active:scale-95" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+          <button
+            className="md:hidden p-2.5 hover:bg-muted/50 rounded-xl transition-colors duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
@@ -158,12 +161,12 @@ export const Header = () => {
             {navLinks.map(link => {
               const Icon = link.icon;
               return (
-                <button 
-                  key={link.href} 
-                  onClick={() => handleNavClick(link.href, link.isRoute)} 
-                  className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-left active:scale-[0.98] ${
-                    isActive(link.href) 
-                      ? 'text-primary bg-primary/10' 
+                <button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href, link.isRoute)}
+                  className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium text-left active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    isActive(link.href)
+                      ? 'text-primary bg-primary/10'
                       : 'text-foreground hover:bg-muted/50'
                   }`}
                 >
@@ -172,14 +175,14 @@ export const Header = () => {
                 </button>
               );
             })}
-            
+
             {/* Language Switcher Mobile */}
-            <button 
+            <button
               onClick={() => {
                 switchLanguage(otherLanguage);
                 setIsMenuOpen(false);
               }}
-              className="flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-left active:scale-[0.98] text-foreground hover:bg-muted/50"
+              className="flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium text-left active:scale-[0.98] text-foreground hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Globe className="w-5 h-5" />
               {otherLanguage === 'en' ? 'English' : 'Français'}

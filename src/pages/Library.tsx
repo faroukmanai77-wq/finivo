@@ -10,7 +10,7 @@ import { BookFilterState, BookCategory, BookLevel, BookLanguage } from '@/types/
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Filter, BookOpen, AlertCircle, Loader2 } from 'lucide-react';
+import { Filter, BookOpen, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import WealthBuildingIllustration from '@/assets/illustrations/wealth-building.svg';
@@ -161,8 +161,9 @@ const Library = () => {
                     }))} 
                     className={cn(
                       "px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all",
-                      filters.categories.includes(cat.id) 
-                        ? "bg-primary text-primary-foreground" 
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                      filters.categories.includes(cat.id)
+                        ? "bg-primary text-primary-foreground"
                         : "bg-card border border-border hover:border-primary/50 text-muted-foreground"
                     )}
                   >
@@ -238,8 +239,18 @@ const Library = () => {
               </div>
 
               {/* Content */}
-              {isLoading ? <div className="flex items-center justify-center py-20">
-                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              {isLoading ? <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="card-elevated rounded-2xl overflow-hidden">
+                      <div className="w-full aspect-[2/3] bg-muted animate-pulse" />
+                      <div className="p-5 space-y-3">
+                        <div className="h-5 w-24 bg-muted rounded-full animate-pulse" />
+                        <div className="h-5 w-full bg-muted rounded animate-pulse" />
+                        <div className="h-4 w-2/3 bg-muted rounded animate-pulse" />
+                        <div className="h-9 w-full bg-muted rounded-md animate-pulse" />
+                      </div>
+                    </div>
+                  ))}
                 </div> : error ? <div className="text-center py-20 card-elevated rounded-2xl">
                   <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-4">
                     <AlertCircle className="w-8 h-8 text-destructive" />
@@ -248,10 +259,10 @@ const Library = () => {
                   <p className="text-muted-foreground">
                     Impossible de charger les livres. Veuillez réessayer.
                   </p>
-                </div> : <div className="space-y-6">
+                </div> : <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                   {filteredBooks.map((book, index) => <BookCard key={book.id} book={book} index={index} />)}
 
-                  {filteredBooks.length === 0 && <div className="text-center py-20 card-elevated rounded-2xl">
+                  {filteredBooks.length === 0 && <div className="sm:col-span-2 lg:col-span-3 text-center py-20 card-elevated rounded-2xl">
                       <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
                         <BookOpen className="w-8 h-8 text-muted-foreground" />
                       </div>

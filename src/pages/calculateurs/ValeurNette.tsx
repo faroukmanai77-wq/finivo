@@ -209,19 +209,19 @@ const ValeurNette = () => {
         </Card>
 
         {/* Résultat principal */}
-        <Card className={`${resultats.valeurNette >= 0 ? 'bg-primary' : 'bg-destructive'} text-primary-foreground`}>
+        <Card className={resultats.valeurNette >= 0 ? 'bg-primary text-primary-foreground' : 'bg-destructive text-destructive-foreground'}>
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-sm opacity-80">{t('calculators.netWorth.yourNetWorth')}</p>
-              <p className="text-5xl font-bold mt-2">{formatMontant(resultats.valeurNette)}</p>
+              <p className="text-4xl md:text-5xl font-bold mt-2">{formatMontant(resultats.valeurNette)}</p>
               <div className="grid grid-cols-2 gap-8 mt-6 max-w-md mx-auto">
                 <div>
                   <p className="text-sm opacity-80">{t('calculators.netWorth.totalAssets')}</p>
-                  <p className="text-2xl font-semibold">{formatMontant(resultats.totalActifs)}</p>
+                  <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.totalActifs)}</p>
                 </div>
                 <div>
                   <p className="text-sm opacity-80">{t('calculators.netWorth.totalLiabilities')}</p>
-                  <p className="text-2xl font-semibold">{formatMontant(resultats.totalPassifs)}</p>
+                  <p className="text-xl md:text-2xl font-semibold">{formatMontant(resultats.totalPassifs)}</p>
                 </div>
               </div>
             </div>
@@ -469,7 +469,14 @@ const ValeurNette = () => {
                             <Cell key={`cell-${index}`} fill={COLORS_ACTIFS[index % COLORS_ACTIFS.length]} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value: number) => formatMontant(value)} />
+                        <Tooltip
+                          formatter={(value: number) => formatMontant(value)}
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>
@@ -500,7 +507,14 @@ const ValeurNette = () => {
                             <Cell key={`cell-${index}`} fill={COLORS_PASSIFS[index % COLORS_PASSIFS.length]} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value: number) => formatMontant(value)} />
+                        <Tooltip
+                          formatter={(value: number) => formatMontant(value)}
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>

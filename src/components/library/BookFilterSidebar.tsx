@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { RotateCcw, BookOpen, GraduationCap, Globe } from 'lucide-react';
 
 interface BookFilterSidebarProps {
@@ -79,20 +80,35 @@ export const BookFilterSidebar = ({ filters, onFilterChange }: BookFilterSidebar
             <BookOpen className="w-4 h-4" />
             Catégories
           </h4>
-          <div className="space-y-2">
-            {categories.map(category => (
-              <div key={category} className="flex items-center gap-2">
-                <Checkbox
-                  id={`cat-${category}`}
-                  checked={filters.categories.includes(category)}
-                  onCheckedChange={() => handleCategoryToggle(category)}
-                />
-                <Label htmlFor={`cat-${category}`} className="text-sm cursor-pointer flex items-center gap-2">
-                  <span>{categoryIcons[category]}</span>
-                  {categoryLabels[category]}
-                </Label>
-              </div>
-            ))}
+          <div className="space-y-1">
+            {categories.map(category => {
+              const active = filters.categories.includes(category);
+              return (
+                <div
+                  key={category}
+                  className={cn(
+                    'flex items-center gap-2 rounded-lg px-2 py-1.5 border border-transparent transition-colors',
+                    active ? 'bg-primary/10 border-primary/20' : 'hover:bg-muted/50'
+                  )}
+                >
+                  <Checkbox
+                    id={`cat-${category}`}
+                    checked={active}
+                    onCheckedChange={() => handleCategoryToggle(category)}
+                  />
+                  <Label
+                    htmlFor={`cat-${category}`}
+                    className={cn(
+                      'text-sm cursor-pointer flex items-center gap-2 flex-1',
+                      active && 'text-primary font-medium'
+                    )}
+                  >
+                    <span>{categoryIcons[category]}</span>
+                    {categoryLabels[category]}
+                  </Label>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -102,19 +118,31 @@ export const BookFilterSidebar = ({ filters, onFilterChange }: BookFilterSidebar
             <GraduationCap className="w-4 h-4" />
             Niveau
           </h4>
-          <div className="space-y-2">
-            {levels.map(level => (
-              <div key={level} className="flex items-center gap-2">
-                <Checkbox
-                  id={`level-${level}`}
-                  checked={filters.levels.includes(level)}
-                  onCheckedChange={() => handleLevelToggle(level)}
-                />
-                <Label htmlFor={`level-${level}`} className="text-sm cursor-pointer">
-                  {levelLabels[level]}
-                </Label>
-              </div>
-            ))}
+          <div className="space-y-1">
+            {levels.map(level => {
+              const active = filters.levels.includes(level);
+              return (
+                <div
+                  key={level}
+                  className={cn(
+                    'flex items-center gap-2 rounded-lg px-2 py-1.5 border border-transparent transition-colors',
+                    active ? 'bg-primary/10 border-primary/20' : 'hover:bg-muted/50'
+                  )}
+                >
+                  <Checkbox
+                    id={`level-${level}`}
+                    checked={active}
+                    onCheckedChange={() => handleLevelToggle(level)}
+                  />
+                  <Label
+                    htmlFor={`level-${level}`}
+                    className={cn('text-sm cursor-pointer flex-1', active && 'text-primary font-medium')}
+                  >
+                    {levelLabels[level]}
+                  </Label>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -124,19 +152,31 @@ export const BookFilterSidebar = ({ filters, onFilterChange }: BookFilterSidebar
             <Globe className="w-4 h-4" />
             Langue
           </h4>
-          <div className="space-y-2">
-            {languages.map(language => (
-              <div key={language} className="flex items-center gap-2">
-                <Checkbox
-                  id={`lang-${language}`}
-                  checked={filters.languages.includes(language)}
-                  onCheckedChange={() => handleLanguageToggle(language)}
-                />
-                <Label htmlFor={`lang-${language}`} className="text-sm cursor-pointer">
-                  {languageLabels[language]}
-                </Label>
-              </div>
-            ))}
+          <div className="space-y-1">
+            {languages.map(language => {
+              const active = filters.languages.includes(language);
+              return (
+                <div
+                  key={language}
+                  className={cn(
+                    'flex items-center gap-2 rounded-lg px-2 py-1.5 border border-transparent transition-colors',
+                    active ? 'bg-primary/10 border-primary/20' : 'hover:bg-muted/50'
+                  )}
+                >
+                  <Checkbox
+                    id={`lang-${language}`}
+                    checked={active}
+                    onCheckedChange={() => handleLanguageToggle(language)}
+                  />
+                  <Label
+                    htmlFor={`lang-${language}`}
+                    className={cn('text-sm cursor-pointer flex-1', active && 'text-primary font-medium')}
+                  >
+                    {languageLabels[language]}
+                  </Label>
+                </div>
+              );
+            })}
           </div>
         </div>
       </CardContent>

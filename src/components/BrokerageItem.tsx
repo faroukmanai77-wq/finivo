@@ -29,9 +29,9 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
   };
 
   const levelColors: Record<string, string> = {
-    debutant: 'bg-green-100 text-green-700',
-    intermediaire: 'bg-amber-100 text-amber-700',
-    avance: 'bg-purple-100 text-purple-700',
+    debutant: 'bg-primary/10 text-primary',
+    intermediaire: 'bg-warning/15 text-warning',
+    avance: 'bg-accent/10 text-accent',
   };
 
   return (
@@ -73,9 +73,9 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                   <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
                     {platform.name}
                   </h3>
-                  <div className="flex items-center gap-1.5 bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full shrink-0">
-                    <Star className="w-4 h-4 fill-current" />
-                    <span className="text-sm font-bold">{platform.rating}</span>
+                  <div className="flex items-center gap-1.5 bg-warning/15 px-2.5 py-1 rounded-full shrink-0">
+                    <Star className="w-4 h-4 fill-warning text-warning" />
+                    <span className="text-sm font-bold text-foreground">{platform.rating}</span>
                   </div>
                 </div>
                 
@@ -84,12 +84,12 @@ export const BrokerageItem = ({ platform, index = 0 }: BrokerageItemProps) => {
                     {levelLabels[platform.level] || platform.level}
                   </Badge>
                   {platform.hasFrench && (
-                    <Badge variant="secondary" className="text-xs font-medium px-3 py-1 bg-blue-100 text-blue-700 border-0">
+                    <Badge variant="secondary" className="text-xs font-medium px-3 py-1 bg-accent/10 text-accent border-0">
                       🇫🇷 {t('brokerages.french')}
                     </Badge>
                   )}
                   {platform.regulation.includes('AMF') && (
-                    <Badge variant="secondary" className="text-xs font-medium px-3 py-1 bg-green-100 text-green-700 border-0">
+                    <Badge variant="secondary" className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary border-0">
                       <Shield className="w-3 h-3 mr-1" />
                       AMF
                     </Badge>

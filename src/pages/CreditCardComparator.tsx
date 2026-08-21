@@ -137,7 +137,7 @@ const CreditCardComparator = () => {
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-primary/15 text-primary">
                 <CreditCardIcon className="w-4 h-4" />
                 {t('creditCards.comparator')}
               </div>
@@ -156,7 +156,7 @@ const CreditCardComparator = () => {
             {categories.map(cat => <button key={cat.id} onClick={() => setFilters(prev => ({
             ...prev,
             categories: prev.categories.includes(cat.id as CardCategory) ? prev.categories.filter(c => c !== cat.id) : [...prev.categories, cat.id as CardCategory]
-          }))} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filters.categories.includes(cat.id as CardCategory) ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'}`}>
+          }))} className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${filters.categories.includes(cat.id as CardCategory) ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'}`}>
                 {cat.icon} {cat.label}
               </button>)}
           </div>

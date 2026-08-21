@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Home, DollarSign, Percent, Calendar, TrendingUp, PiggyBank, AlertTriangle } from 'lucide-react';
+import { Home, DollarSign, Calendar, PiggyBank, AlertTriangle } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -252,55 +252,31 @@ const Hypotheque = () => {
         )}
 
         {/* Résultats */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="bg-primary/5 border-primary/20">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 text-primary mb-2">
-                <DollarSign className="w-5 h-5" />
-                <span className="text-sm font-medium">{t('calculators.mortgage.results.payment')}</span>
-              </div>
-              <p className="text-2xl font-bold text-foreground">
-                {formatCurrency(calculations.paiement)}
+        <Card className="bg-primary text-primary-foreground">
+          <CardContent className="pt-6">
+            <div className="text-center mb-6">
+              <p className="text-sm opacity-80 flex items-center justify-center gap-1.5">
+                <DollarSign className="w-4 h-4" />
+                {t('calculators.mortgage.results.payment')} ({calculations.frequenceLabel})
               </p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <Home className="w-5 h-5" />
-                <span className="text-sm font-medium">{t('calculators.mortgage.results.amountBorrowed')}</span>
+              <p className="text-4xl md:text-5xl font-bold mt-2">{formatCurrency(calculations.paiement)}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-sm opacity-80">{t('calculators.mortgage.results.amountBorrowed')}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatCurrency(calculations.montantTotal)}</p>
               </div>
-              <p className="text-2xl font-bold text-foreground">
-                {formatCurrency(calculations.montantTotal)}
-              </p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 text-destructive mb-2">
-                <Percent className="w-5 h-5" />
-                <span className="text-sm font-medium">{t('calculators.mortgage.results.totalInterest')}</span>
+              <div>
+                <p className="text-sm opacity-80">{t('calculators.mortgage.results.totalInterest')}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatCurrency(calculations.totalInterets)}</p>
               </div>
-              <p className="text-2xl font-bold text-foreground">
-                {formatCurrency(calculations.totalInterets)}
-              </p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <TrendingUp className="w-5 h-5" />
-                <span className="text-sm font-medium">{t('calculators.mortgage.results.totalCost')}</span>
+              <div>
+                <p className="text-sm opacity-80">{t('calculators.mortgage.results.totalCost')}</p>
+                <p className="text-xl md:text-2xl font-semibold mt-1">{formatCurrency(calculations.totalPaiements + miseDeFonds)}</p>
               </div>
-              <p className="text-2xl font-bold text-foreground">
-                {formatCurrency(calculations.totalPaiements + miseDeFonds)}
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Graphique d'amortissement */}
         <Card>

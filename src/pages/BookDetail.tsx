@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -22,6 +23,7 @@ const BookDetail = () => {
   const { t } = useTranslation();
   const { getLocalizedPath, currentLanguage } = useLanguage();
   const { data: book, isLoading, error } = useBook(slug || '');
+  const [imageError, setImageError] = useState(false);
 
   if (isLoading) {
     return (
@@ -82,9 +84,9 @@ const BookDetail = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-            <Link to={getLocalizedPath('/')} className="hover:text-foreground transition-colors">{t('nav.home')}</Link>
+            <Link to={getLocalizedPath('/')} className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded transition-colors">{t('nav.home')}</Link>
             <span>/</span>
-            <Link to={getLocalizedPath('/bibliotheque')} className="hover:text-foreground transition-colors">{t('common.library')}</Link>
+            <Link to={getLocalizedPath('/bibliotheque')} className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded transition-colors">{t('common.library')}</Link>
             <span>/</span>
             <span className="text-muted truncate max-w-[200px]">{book.title}</span>
           </nav>
@@ -104,10 +106,12 @@ const BookDetail = () => {
                 <CardContent className="p-6 text-center">
                   {/* Cover Image */}
                   <div className="mb-6">
-                    {book.coverImageUrl ? (
+                    {book.coverImageUrl && !imageError ? (
                       <img
                         src={book.coverImageUrl}
                         alt={`${t('bookDetail.coverOf')} ${book.title}`}
+                        decoding="async"
+                        onError={() => setImageError(true)}
                         className="w-48 h-72 object-cover rounded-xl shadow-lg mx-auto"
                       />
                     ) : (

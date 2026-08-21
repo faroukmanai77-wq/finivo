@@ -233,13 +233,13 @@ const EpargneCELIAPP = () => {
               </div>
             </div>
 
-            <Alert className={estAdmissible ? 'border-green-500 bg-green-50' : 'border-destructive bg-destructive/10'}>
+            <Alert className={estAdmissible ? 'border-success/50 bg-success/10' : 'border-destructive bg-destructive/10'}>
               {estAdmissible ? (
-                <CheckCircle2 className="h-4 w-4 text-green-600" />
+                <CheckCircle2 className="h-4 w-4 text-success" />
               ) : (
                 <XCircle className="h-4 w-4 text-destructive" />
               )}
-              <AlertDescription className={estAdmissible ? 'text-green-800' : 'text-destructive'}>
+              <AlertDescription className={estAdmissible ? 'text-success' : 'text-destructive'}>
                 {estAdmissible ? t('calculators.fhsa.eligible') : t('calculators.fhsa.notEligible')}
               </AlertDescription>
             </Alert>
@@ -370,6 +370,10 @@ const EpargneCELIAPP = () => {
                       max={10}
                       step={0.1}
                     />
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>0%</span>
+                      <span>10%</span>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -378,22 +382,22 @@ const EpargneCELIAPP = () => {
             {/* Résultats */}
             <Card className="bg-primary text-primary-foreground">
               <CardContent className="pt-6">
-                <div className="grid md:grid-cols-4 gap-6 text-center">
-                  <div>
-                    <p className="text-sm opacity-80">{t('calculators.fhsa.results.totalSavings')}</p>
-                    <p className="text-3xl font-bold mt-1">{formatMontant(resultats.montantFinal)}</p>
-                  </div>
+                <div className="text-center mb-6">
+                  <p className="text-sm opacity-80">{t('calculators.fhsa.results.totalSavings')}</p>
+                  <p className="text-4xl md:text-5xl font-bold mt-2">{formatMontant(resultats.montantFinal)}</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div>
                     <p className="text-sm opacity-80">{t('calculators.fhsa.results.contributions')}</p>
-                    <p className="text-3xl font-bold mt-1">{formatMontant(resultats.totalCotisations)}</p>
+                    <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.totalCotisations)}</p>
                   </div>
                   <div>
                     <p className="text-sm opacity-80">{t('calculators.fhsa.results.growth')}</p>
-                    <p className="text-3xl font-bold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
+                    <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.interetsGagnes)}</p>
                   </div>
                   <div>
                     <p className="text-sm opacity-80">{t('calculators.fhsa.results.taxSavings')}</p>
-                    <p className="text-3xl font-bold mt-1">{formatMontant(resultats.economiesImpot)}</p>
+                    <p className="text-xl md:text-2xl font-semibold mt-1">{formatMontant(resultats.economiesImpot)}</p>
                   </div>
                 </div>
               </CardContent>
@@ -412,9 +416,14 @@ const EpargneCELIAPP = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="annee" tickFormatter={(v) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${v}`} />
                         <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                        <Tooltip 
+                        <Tooltip
                           formatter={(value: number) => formatMontant(value)}
                           labelFormatter={(label) => `${currentLanguage === 'en' ? 'Year' : 'Année'} ${label}`}
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
                         />
                         <Legend />
                         <Area 

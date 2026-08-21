@@ -41,7 +41,7 @@ export const CreditCardItem = ({
                 </div>}
               
               {/* Bonus badge */}
-              {card.welcomeBonus && <div className="absolute -top-3 -right-3 bg-gradient-to-r from-accent to-emerald-500 text-accent-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1.5 animate-pulse-slow">
+              {card.welcomeBonus && <div className="absolute -top-3 -right-3 bg-accent text-accent-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1.5 animate-pulse-slow">
                   <Gift className="w-3.5 h-3.5" />
                   Bonus
                 </div>}
@@ -57,9 +57,9 @@ export const CreditCardItem = ({
                   <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
                     {card.name}
                   </h3>
-                  <div className="flex items-center gap-1.5 bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full shrink-0">
-                    <Star className="w-4 h-4 fill-current" />
-                    <span className="text-sm font-bold">{card.rating}</span>
+                  <div className="flex items-center gap-1.5 bg-warning/15 px-2.5 py-1 rounded-full shrink-0">
+                    <Star className="w-4 h-4 fill-warning text-warning" />
+                    <span className="text-sm font-bold text-foreground">{card.rating}</span>
                   </div>
                 </div>
                 
@@ -69,7 +69,7 @@ export const CreditCardItem = ({
                     </Badge>)}
                 </div>
 
-                {card.welcomeBonus && <div className="bg-gradient-to-r from-accent/10 to-emerald-500/10 border border-accent/20 text-foreground px-4 py-3 rounded-xl mb-4 flex items-center gap-3">
+                {card.welcomeBonus && <div className="bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20 text-foreground px-4 py-3 rounded-xl mb-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
                       <Gift className="w-5 h-5 text-accent" />
                     </div>

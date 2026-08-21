@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { BrokerageFilterSidebar } from '@/components/BrokerageFilterSidebar';
 import { BrokerageItem } from '@/components/BrokerageItem';
+import { BrokerageSkeleton } from '@/components/BrokerageSkeleton';
 import { BrokerageComparisonTable } from '@/components/BrokerageComparisonTable';
 import { Footer } from '@/components/Footer';
 import { SEO, generateBreadcrumbStructuredData } from '@/components/SEO';
@@ -12,7 +13,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Filter, Building2, LayoutGrid, Table2, AlertCircle, Loader2 } from 'lucide-react';
+import { Filter, Building2, LayoutGrid, Table2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -146,7 +147,7 @@ const BrokerageComparator = () => {
 
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-[#28bd4d]/[0.23] text-primary">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 bg-primary/15 text-primary">
                 <Building2 className="w-4 h-4" />
                 {t('brokerages.comparator')}
               </div>
@@ -160,9 +161,9 @@ const BrokerageComparator = () => {
           </div>
 
           {/* Disclaimer */}
-          <div className="mt-6 flex items-start gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 max-w-2xl">
-            <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-            <p className="text-sm text-amber-800 dark:text-amber-200">
+          <div className="mt-6 flex items-start gap-3 bg-warning/10 border border-warning/30 rounded-xl p-4 max-w-2xl">
+            <AlertCircle className="w-5 h-5 text-warning shrink-0 mt-0.5" />
+            <p className="text-sm text-foreground/80">
               {t('brokerages.disclaimer')}
             </p>
           </div>
@@ -178,9 +179,9 @@ const BrokerageComparator = () => {
                     ? prev.categories.filter(c => c !== cat.id) 
                     : [...prev.categories, cat.id as BrokerageCategory]
                 }))} 
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  filters.categories.includes(cat.id as BrokerageCategory) 
-                    ? 'bg-primary text-primary-foreground' 
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                  filters.categories.includes(cat.id as BrokerageCategory)
+                    ? 'bg-primary text-primary-foreground'
                     : 'bg-background hover:bg-muted'
                 }`}
               >
@@ -265,8 +266,8 @@ const BrokerageComparator = () => {
 
               {/* Content */}
               {isLoading ? (
-                <div className="flex items-center justify-center py-20">
-                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                <div className="space-y-6">
+                  {[...Array(3)].map((_, i) => <BrokerageSkeleton key={i} />)}
                 </div>
               ) : error ? (
                 <div className="text-center py-20 card-elevated rounded-2xl">

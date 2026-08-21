@@ -93,17 +93,16 @@ const Budget = () => {
   const solde = totalRevenus - totalDepenses;
 
   // Données pour le graphique circulaire
+  // Note: --chart-1/2/3 share the same HSL values as --primary/--accent/--warning
+  // by design, so we list each distinct hue only once to avoid repeated colors
+  // across categories before the palette actually needs to cycle.
   const CHART_COLORS = [
-    'hsl(var(--primary))',
-    'hsl(var(--accent))',
-    'hsl(var(--warning))',
-    'hsl(var(--success))',
-    'hsl(var(--destructive))',
     'hsl(var(--chart-1))',
     'hsl(var(--chart-2))',
     'hsl(var(--chart-3))',
     'hsl(var(--chart-4))',
     'hsl(var(--chart-5))',
+    'hsl(var(--destructive))',
   ];
 
   const pieChartData = useMemo(() => {
@@ -435,7 +434,7 @@ const Budget = () => {
                       labelLine={false}
                       label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                       outerRadius={120}
-                      fill="#8884d8"
+                      fill="hsl(var(--primary))"
                       dataKey="value"
                     >
                       {pieChartData.map((entry, index) => (
@@ -492,7 +491,7 @@ const Budget = () => {
               </div>
               <div className="flex flex-col items-center justify-center p-6 rounded-xl bg-background">
                 <span className="text-sm text-muted-foreground mb-2">{t('calculators.budget.summary.monthlyBalance')}</span>
-                <span className={`text-3xl font-bold ${solde >= 0 ? 'text-success' : 'text-destructive'}`}>
+                <span className={`text-4xl md:text-5xl font-bold ${solde >= 0 ? 'text-success' : 'text-destructive'}`}>
                   {formatCurrency(solde)}
                 </span>
                 <span className="text-xs text-muted-foreground mt-2">
